@@ -33,7 +33,8 @@ public class CommonProxy {
             CommonModManagement.BLOCK, CommonModManagement.BLOCKFLUID,
             CommonModManagement.EVENT, CommonModManagement.EVENTBUS,
             CommonModManagement.FLUID,
-            CommonModManagement.ITEM,
+            CommonModManagement.ITEM, CommonModManagement.FOOD,
+            CommonModManagement.VEGETABLE, CommonModManagement.MEAT,
             CommonModManagement.OBJPREINIT, CommonModManagement.OBJINIT, CommonModManagement.OBJPOSTINIT,
             CommonModManagement.TILEENTITY
     );

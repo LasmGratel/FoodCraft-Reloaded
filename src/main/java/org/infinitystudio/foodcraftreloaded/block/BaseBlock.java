@@ -20,16 +20,13 @@
 package org.infinitystudio.foodcraftreloaded.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
-public abstract class BaseBlock extends Block {
+public class BaseBlock extends Block {
 
-    public BaseBlock(Material materialIn) {
-        super(materialIn);
-    }
-
-    public BaseBlock(Material p_i46399_1_, MapColor p_i46399_2_) {
-        super(p_i46399_1_, p_i46399_2_);
+    public BaseBlock() {
+        super(Material.iron);
+        setCreativeTab(FoodCraftRegistration.FcTabBase);
     }
 }

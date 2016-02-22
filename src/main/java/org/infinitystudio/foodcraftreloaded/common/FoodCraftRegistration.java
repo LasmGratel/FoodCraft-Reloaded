@@ -21,44 +21,74 @@ package org.infinitystudio.foodcraftreloaded.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
+import org.infinitystudio.foodcraftreloaded.block.VegetableBlock;
 import org.infinitystudio.foodcraftreloaded.item.VegetableItem;
+import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.ModBlock;
+import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.ModVegetable;
+import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.ModVegetableBlock;
 
 public class FoodCraftRegistration {
+    /**
+     * 基础 Base
+     */
     public static final CreativeTabs FcTabBase = new CreativeTabs("creativetabs.base") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
+    /**
+     * 植物&种子 Plants & Seeds
+     */
     public static final CreativeTabs FcTabPlant = new CreativeTabs("creativetabs.plant") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
+    /**
+     * 饮品 Drinks
+     */
     public static final CreativeTabs FcTabDrink = new CreativeTabs("creativetabs.drink") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
+    /**
+     * 主食 Staple
+     */
     public static final CreativeTabs FcTabStaple = new CreativeTabs("creativetabs.staple") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
+    /**
+     * 食材 Ingredient
+     */
     public static final CreativeTabs FcTabIngredient = new CreativeTabs("creativetabs.ingredient") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
+    /**
+     * 小吃 Snack
+     */
     public static final CreativeTabs FcTabSnack = new CreativeTabs("creativetabs.snack") {
         public Item getTabIconItem() {
             return carrot;
         }
     };
 
-    public static final VegetableItem carrot = new VegetableItem("carrot", 2.5f, false, "cropCarrot");
+    @ModBlock(name = "blockRice")
+    public static BaseBlock blockRice;
+
+    @ModVegetableBlock(name = "blockCarrot", seedName = "carrot", cropName = "carrot")
+    public static VegetableBlock blockCarrot;
+
+    @ModVegetable(name = "carrot", satuation = 2.5f, oredicts = {"cropCarrot"}, seedBlockName = "blockCarrot")
+    public static VegetableItem carrot;
 }

@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ModFood {
+public @interface ModVegetable {
     /**
      * @return Name of the food
      */
@@ -42,10 +42,17 @@ public @interface ModFood {
      */
     float satuation();
 
+    String seedBlockName();
+
     /**
      * @return true if this food has random effect
      */
     boolean hasEffect() default false;
+
+    /**
+     * @return true if this vegetable can be planted
+     */
+    boolean canPlant() default true;
 
     /**
      * @return true if item should be rendered

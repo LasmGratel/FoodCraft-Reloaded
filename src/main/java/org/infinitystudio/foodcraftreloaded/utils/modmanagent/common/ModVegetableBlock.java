@@ -1,3 +1,5 @@
+package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+
 /**
  * FoodCraft Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
@@ -17,35 +19,15 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModFood {
+public @interface ModVegetableBlock {
     /**
      * @return Name of the food
      */
     String name();
 
-    /**
-     * @return OreDictionary name array
-     */
-    String[] oredicts();
+    String seedName();
 
-    /**
-     * @return food's satuation
-     */
-    float satuation();
-
-    /**
-     * @return true if this food has random effect
-     */
-    boolean hasEffect() default false;
+    String cropName();
 
     /**
      * @return true if item should be rendered

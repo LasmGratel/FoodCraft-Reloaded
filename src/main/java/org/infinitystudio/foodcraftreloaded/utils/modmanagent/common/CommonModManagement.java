@@ -39,9 +39,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
+import org.infinitystudio.foodcraftreloaded.block.VegetableBlock;
+import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 import org.infinitystudio.foodcraftreloaded.item.BaseItem;
+import org.infinitystudio.foodcraftreloaded.item.FoodItem;
+import org.infinitystudio.foodcraftreloaded.item.MeatItem;
+import org.infinitystudio.foodcraftreloaded.item.VegetableItem;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.IModManagement;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.ModManagement;
+
+import java.lang.reflect.Constructor;
 
 /**
  * Pre Defined Mod Managers
@@ -149,6 +156,113 @@ public class CommonModManagement {
         }
     };
 
+    public final static ModManagement<ModFood> FOOD = new ModManagement<ModFood>(ModFood.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModFood annotation, Class<?> clazz) throws Exception {
+            Class<?>[] types = {
+                String.class, float.class, boolean.class, String[].class
+            };
+            Constructor<FoodItem> constructor = FoodItem.class.getConstructor(types);
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect(), annotation.oredicts());
+        }
+
+        @Override
+        public void register(String modid, ModFood annotation, Object instance) throws Exception {
+            GameRegistry.registerItem((Item) instance, annotation.name());
+            ((FoodItem) instance).setUnlocalizedName(annotation.name());
+            ((FoodItem) instance).setCreativeTab(FoodCraftRegistration.FcTabBase);
+        }
+
+        @Override
+        public void registerClient(String modid, ModFood annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModVegetable> VEGETABLE = new ModManagement<ModVegetable>(ModVegetable.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModVegetable annotation, Class<?> clazz) throws Exception {
+            Class<?>[] types = {
+                    String.class, float.class, String.class, boolean.class, boolean.class, String[].class
+            };
+            Constructor<VegetableItem> constructor = VegetableItem.class.getConstructor(types);
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.seedBlockName(), annotation.hasEffect(), annotation.canPlant(), annotation.oredicts());
+        }
+
+        @Override
+        public void register(String modid, ModVegetable annotation, Object instance) throws Exception {
+            GameRegistry.registerItem((Item) instance, annotation.name());
+            ((FoodItem) instance).setUnlocalizedName(annotation.name());
+            ((FoodItem) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+        }
+
+        @Override
+        public void registerClient(String modid, ModVegetable annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModVegetableBlock> VEGETABLEBLOCK = new ModManagement<ModVegetableBlock>(ModVegetableBlock.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModVegetableBlock annotation, Class<?> clazz) throws Exception {
+            Class<?>[] types = {
+                    String.class, String.class, String.class
+            };
+            Constructor<VegetableBlock> constructor = VegetableBlock.class.getConstructor(types);
+            return constructor.newInstance(annotation.seedName(), annotation.cropName(), annotation.name());
+        }
+
+        @Override
+        public void register(String modid, ModVegetableBlock annotation, Object instance) throws Exception {
+            GameRegistry.registerBlock((Block) instance, annotation.name());
+        }
+
+        @Override
+        public void registerClient(String modid, ModVegetableBlock annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+            }
+        }
+    };
+    
+    public final static ModManagement<ModMeat> MEAT = new ModManagement<ModMeat>(ModMeat.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModMeat annotation, Class<?> clazz) throws Exception {
+            Class<?>[] types = {
+                    String.class, float.class, boolean.class, String[].class
+            };
+            Constructor<MeatItem> constructor = MeatItem.class.getConstructor(types);
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect(), annotation.oredicts());
+        }
+
+        @Override
+        public void register(String modid, ModMeat annotation, Object instance) throws Exception {
+            GameRegistry.registerItem((Item) instance, annotation.name());
+            ((MeatItem) instance).setUnlocalizedName(annotation.name());
+            ((MeatItem) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+        }
+
+        @Override
+        public void registerClient(String modid, ModMeat annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+    
     public final static ModManagement<ModFluid> FLUID = new ModManagement<ModFluid>(ModFluid.class, IModManagement.Stage.PREINIT) {
         @Override
         public void register(String modid, ModFluid annotation, Object instance) throws Exception {

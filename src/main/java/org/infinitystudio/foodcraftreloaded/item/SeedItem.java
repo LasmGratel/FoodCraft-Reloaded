@@ -17,38 +17,13 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+package org.infinitystudio.foodcraftreloaded.item;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemSeeds;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModFood {
-    /**
-     * @return Name of the food
-     */
-    String name();
-
-    /**
-     * @return OreDictionary name array
-     */
-    String[] oredicts();
-
-    /**
-     * @return food's satuation
-     */
-    float satuation();
-
-    /**
-     * @return true if this food has random effect
-     */
-    boolean hasEffect() default false;
-
-    /**
-     * @return true if item should be rendered
-     */
-    boolean itemRender() default true;
+public class SeedItem extends ItemSeeds {
+    public SeedItem(Block crops, Block soil) {
+        super(crops, soil);
+    }
 }

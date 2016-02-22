@@ -17,38 +17,31 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+package org.infinitystudio.foodcraftreloaded.block;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.item.Item;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModFood {
-    /**
-     * @return Name of the food
-     */
-    String name();
+public class VegetableBlock extends BlockCrops {
+    private String crop;
+    private String seed;
 
-    /**
-     * @return OreDictionary name array
-     */
-    String[] oredicts();
+    public VegetableBlock(String seed, String crop, String name) {
+        this.seed = seed;
+        this.crop = crop;
+        this.setUnlocalizedName(name);
+        this.setHarvestLevel("pickaxe", -1);
+        this.setStepSound(Block.soundTypeGrass);
+    }
 
-    /**
-     * @return food's satuation
-     */
-    float satuation();
+    @Override
+    public Item getSeed() {
+        return Item.getByNameOrId(seed);
+    }
 
-    /**
-     * @return true if this food has random effect
-     */
-    boolean hasEffect() default false;
-
-    /**
-     * @return true if item should be rendered
-     */
-    boolean itemRender() default true;
+    @Override
+    public Item getCrop() {
+        return Item.getByNameOrId(crop);
+    }
 }

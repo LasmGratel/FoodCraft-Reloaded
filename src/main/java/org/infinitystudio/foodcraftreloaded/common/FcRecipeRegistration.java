@@ -17,38 +17,18 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+package org.infinitystudio.foodcraftreloaded.common;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModFood {
-    /**
-     * @return Name of the food
-     */
-    String name();
+import static org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration.*;
 
-    /**
-     * @return OreDictionary name array
-     */
-    String[] oredicts();
-
-    /**
-     * @return food's satuation
-     */
-    float satuation();
-
-    /**
-     * @return true if this food has random effect
-     */
-    boolean hasEffect() default false;
-
-    /**
-     * @return true if item should be rendered
-     */
-    boolean itemRender() default true;
+public class FcRecipeRegistration {
+    public static void register() {
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(carrot, 2),
+                "cropCarrot", "cropCarrot"
+                ));
+    }
 }
