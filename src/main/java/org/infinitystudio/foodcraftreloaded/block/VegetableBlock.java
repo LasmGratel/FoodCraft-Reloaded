@@ -27,12 +27,17 @@ public class VegetableBlock extends BlockCrops {
     private String crop;
     private String seed;
 
-    public VegetableBlock(String seed, String crop, String name) {
-        this.seed = seed;
-        this.crop = crop;
-        this.setUnlocalizedName(name);
+    public VegetableBlock() {
         this.setHarvestLevel("pickaxe", -1);
         this.setStepSound(Block.soundTypeGrass);
+    }
+
+    public void setCrop(String crop) {
+        this.crop = crop;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
     }
 
     @Override

@@ -29,19 +29,23 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.MinecraftForge;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
 public class VegetableItem extends FoodItem implements IPlantable {
+    public VegetableItem(String name, float saturation, boolean hasEffect, String[] oredicts) {
+        super(name, saturation, hasEffect, oredicts);
+    }
+
     protected boolean canPlant = false;
+
     private Block seedblock;
 
-    public VegetableItem(String name, float saturation, String seedBlock, boolean hasEffect, boolean canPlant, String[] oredicts) {
-        super(name, saturation, hasEffect, oredicts);
-        setCreativeTab(FoodCraftRegistration.FcTabPlant);
+    public void setCanPlant(boolean canPlant) {
         this.canPlant = canPlant;
-        MinecraftForge.addGrassSeed(new ItemStack(this), 2);
-        this.seedblock = Block.getBlockFromName(seedBlock);
+    }
+
+    public void setSeedblock(Block seedblock) {
+        this.seedblock = seedblock;
     }
 
     @Override

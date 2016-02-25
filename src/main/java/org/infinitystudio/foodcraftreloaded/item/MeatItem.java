@@ -19,11 +19,8 @@
  */
 package org.infinitystudio.foodcraftreloaded.item;
 
-import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
-
 public class MeatItem extends FoodItem {
     public MeatItem(String name, float saturation, boolean hasEffect, String... oredicts) {
         super(name, saturation, hasEffect, oredicts);
-        setCreativeTab(FoodCraftRegistration.FcTabStaple);
     }
 }

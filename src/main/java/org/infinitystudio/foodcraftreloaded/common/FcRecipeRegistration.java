@@ -23,12 +23,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import static org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration.*;
+import static org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration.carrot;
 
 public class FcRecipeRegistration {
     public static void register() {
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(carrot, 2),
                 "cropCarrot", "cropCarrot"
-                ));
+        ));
     }
 }

@@ -33,6 +33,7 @@ public class FoodCraftRegistration {
      * 基础 Base
      */
     public static final CreativeTabs FcTabBase = new CreativeTabs("creativetabs.base") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -42,6 +43,7 @@ public class FoodCraftRegistration {
      * 植物&种子 Plants & Seeds
      */
     public static final CreativeTabs FcTabPlant = new CreativeTabs("creativetabs.plant") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -51,6 +53,7 @@ public class FoodCraftRegistration {
      * 饮品 Drinks
      */
     public static final CreativeTabs FcTabDrink = new CreativeTabs("creativetabs.drink") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -60,6 +63,7 @@ public class FoodCraftRegistration {
      * 主食 Staple
      */
     public static final CreativeTabs FcTabStaple = new CreativeTabs("creativetabs.staple") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -69,6 +73,7 @@ public class FoodCraftRegistration {
      * 食材 Ingredient
      */
     public static final CreativeTabs FcTabIngredient = new CreativeTabs("creativetabs.ingredient") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -78,6 +83,7 @@ public class FoodCraftRegistration {
      * 小吃 Snack
      */
     public static final CreativeTabs FcTabSnack = new CreativeTabs("creativetabs.snack") {
+        @Override
         public Item getTabIconItem() {
             return carrot;
         }
@@ -86,9 +92,11 @@ public class FoodCraftRegistration {
     @ModBlock(name = "blockRice")
     public static BaseBlock blockRice;
 
+    @ModBlock(name = "blockCarrot")
     @ModVegetableBlock(name = "blockCarrot", seedName = "carrot", cropName = "carrot")
     public static VegetableBlock blockCarrot;
 
+    @ModBlock(name = "carrot")
     @ModVegetable(name = "carrot", satuation = 2.5f, oredicts = {"cropCarrot"}, seedBlockName = "blockCarrot")
     public static VegetableItem carrot;
 }
