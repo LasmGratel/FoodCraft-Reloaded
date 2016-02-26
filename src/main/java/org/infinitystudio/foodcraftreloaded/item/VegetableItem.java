@@ -66,6 +66,6 @@ public class VegetableItem extends FoodItem implements IPlantable {
 
     @Override
     public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return FoodCraftRegistration.blockRice.getDefaultState();
+        return FoodCraftRegistration.blockCarrot.getDefaultState();
     }
 }
