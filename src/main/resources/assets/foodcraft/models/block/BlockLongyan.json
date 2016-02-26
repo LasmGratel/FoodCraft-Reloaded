@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+		"particle": "foodcraft:blocks/BlockLongyan",
+        "down":  "foodcraft:blocks/FCLeaves",
+        "up":    "foodcraft:blocks/FCLeaves",
+        "north": "foodcraft:blocks/BlockLongyan",
+        "south": "foodcraft:blocks/BlockLongyan",
+        "west":  "foodcraft:blocks/BlockLongyan",
+        "east":  "foodcraft:blocks/BlockLongyan"
+    }
+}

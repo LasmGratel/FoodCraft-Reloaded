@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "foodcraft:blocks/douzi_3"
+    }
+}

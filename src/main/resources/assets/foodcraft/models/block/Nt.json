@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "blocks/planks_oak",
+        "front": "foodcraft:blocks/nt_side",
+		"down": "blocks/planks_oak",
+        "side": "foodcraft:blocks/nt_side"
+    }
+}

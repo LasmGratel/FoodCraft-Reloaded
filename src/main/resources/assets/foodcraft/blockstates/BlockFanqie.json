@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "foodcraft:fanqie_0" },
+        "age=1": { "model": "foodcraft:fanqie_1" },
+        "age=2": { "model": "foodcraft:fanqie_2" },
+        "age=3": { "model": "foodcraft:fanqie_2" },
+        "age=4": { "model": "foodcraft:fanqie_3" },
+		"age=5": { "model": "foodcraft:fanqie_3" },
+		"age=6": { "model": "foodcraft:fanqie_3" },
+		"age=7": { "model": "foodcraft:fanqie_4" }
+    }
+}

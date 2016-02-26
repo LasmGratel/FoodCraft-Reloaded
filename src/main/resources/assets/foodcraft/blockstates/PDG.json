@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "foodcraft:PDG" },
+        "facing=south": { "model": "foodcraft:PDG", "y": 180 },
+        "facing=west":  { "model": "foodcraft:PDG", "y": 270 },
+        "facing=east":  { "model": "foodcraft:PDG", "y": 90 }
+    }
+}

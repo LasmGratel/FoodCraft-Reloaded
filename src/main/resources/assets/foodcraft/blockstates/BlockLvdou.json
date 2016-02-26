@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "foodcraft:lvdou_0" },
+        "age=1": { "model": "foodcraft:lvdou_1" },
+        "age=2": { "model": "foodcraft:lvdou_2" },
+        "age=3": { "model": "foodcraft:lvdou_2" },
+        "age=4": { "model": "foodcraft:lvdou_3" },
+		"age=5": { "model": "foodcraft:lvdou_3" },
+		"age=6": { "model": "foodcraft:lvdou_3" },
+		"age=7": { "model": "foodcraft:lvdou_4" }
+    }
+}

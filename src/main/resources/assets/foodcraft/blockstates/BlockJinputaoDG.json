@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "bites=0": { "model": "foodcraft:cake_uneaten_JPT" },
+        "bites=1": { "model": "foodcraft:cake_slice1_JPT" },
+        "bites=2": { "model": "foodcraft:cake_slice2_JPT" },
+        "bites=3": { "model": "foodcraft:cake_slice3_JPT" },
+        "bites=4": { "model": "foodcraft:cake_slice4_JPT" },
+        "bites=5": { "model": "foodcraft:cake_slice5_JPT" },
+        "bites=6": { "model": "foodcraft:cake_slice6_JPT" }
+    }
+}

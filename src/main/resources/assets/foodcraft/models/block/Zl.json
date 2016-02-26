@@ -1,0 +1,9 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "foodcraft:blocks/zl_top",
+        "front": "foodcraft:blocks/zl_side",
+		"down": "foodcraft:blocks/zl_down",
+        "side": "foodcraft:blocks/zl_side"
+    }
+}

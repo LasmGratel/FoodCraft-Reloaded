@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+	    "particle": "foodcraft:blocks/BlockTaozi",
+        "down":  "foodcraft:blocks/FCLeaves",
+        "up":    "foodcraft:blocks/FCLeaves",
+        "north": "foodcraft:blocks/BlockTaozi",
+        "south": "foodcraft:blocks/BlockTaozi",
+        "west":  "foodcraft:blocks/BlockTaozi",
+        "east":  "foodcraft:blocks/BlockTaozi"
+    }
+}
