@@ -66,7 +66,13 @@ public abstract class ModManagement<T extends Annotation> implements IModManagem
 
     @Override
     public Object init(String modid, T annotation, Class<?> clazz) throws Exception {
-        return clazz.newInstance();
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException e) {
+            return null;
+        } catch (IllegalAccessException e) {
+            return null;
+        }
     }
 
     @Override

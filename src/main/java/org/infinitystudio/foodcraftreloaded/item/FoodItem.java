@@ -31,8 +31,8 @@ public class FoodItem extends ItemFood {
     public boolean hasEffect = false;
 
     public FoodItem(String name, float saturation, boolean hasEffect, String... oredicts) {
-        super((int)saturation, saturation, false);
-        for(String s : oredicts) {
+        super((int) saturation, saturation, false);
+        for (String s : oredicts) {
             OreDictionary.registerOre(s, this);
         }
         setUnlocalizedName(name);
@@ -43,33 +43,33 @@ public class FoodItem extends ItemFood {
     }
 
     protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
-        if(hasEffect) {
+        if (hasEffect) {
             int o;
-            if(!w.isRemote) {
+            if (!w.isRemote) {
                 o = w.rand.nextInt(7);
 
-                switch(o) {
-                    case 0:
-                        ep.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 600, 1));
-                        break;
-                    case 1:
-                        ep.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 600, 1));
-                        break;
-                    case 2:
-                        ep.addPotionEffect(new PotionEffect(Potion.invisibility.id, 600, 1));
-                        break;
-                    case 3:
-                        ep.addPotionEffect(new PotionEffect(Potion.jump.id, 600, 1));
-                        break;
-                    case 4:
-                        ep.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 600, 1));
-                        break;
-                    case 5:
-                        ep.addPotionEffect(new PotionEffect(Potion.nightVision.id, 600, 1));
-                        break;
-                    case 6:
-                        ep.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 600, 1));
-                        break;
+                switch (o) {
+                case 0:
+                    ep.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 600, 1));
+                    break;
+                case 1:
+                    ep.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 600, 1));
+                    break;
+                case 2:
+                    ep.addPotionEffect(new PotionEffect(Potion.invisibility.id, 600, 1));
+                    break;
+                case 3:
+                    ep.addPotionEffect(new PotionEffect(Potion.jump.id, 600, 1));
+                    break;
+                case 4:
+                    ep.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 600, 1));
+                    break;
+                case 5:
+                    ep.addPotionEffect(new PotionEffect(Potion.nightVision.id, 600, 1));
+                    break;
+                case 6:
+                    ep.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 600, 1));
+                    break;
                 }
             }
         }
