@@ -19,16 +19,45 @@
  */
 package org.infinitystudio.foodcraftreloaded.common;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.ModFruit;
 
 import static org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration.carrot;
 
 public class FcRecipeRegistration {
     public static void register() {
+        ////////////////////////////////////////////////////////////////
+        // Block Crafting
+        // 物品合成
+        ////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////
+        // Item Crafting
+        // 物品合成
+        ////////////////////////////////////////////////////////////////
+
+        // Food Crafting
+        // 食物合成
+
+        // Vegetable Crafting
+        // 蔬菜合成
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(carrot, 2),
                 "cropCarrot", "cropCarrot"
         ));
+
+        // Fruit Crafting
+        // 水果合成
+
+        // Juice Crafting
+        // 果汁合成
+        for(ModFruit.FruitType fruitType : ModFruit.FruitType.values()) {
+            String fruitName = fruitType.name();
+            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Item.getByNameOrId("itemFruit" + fruitName + "Icecream")),
+                    "food" + fruitName + "juice", "itemBaseIceCream"
+                    ));
+        }
     }
 }

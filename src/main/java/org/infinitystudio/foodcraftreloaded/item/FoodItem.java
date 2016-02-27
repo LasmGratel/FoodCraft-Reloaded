@@ -25,16 +25,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class FoodItem extends ItemFood {
     public boolean hasEffect = false;
 
-    public FoodItem(String name, float saturation, boolean hasEffect, String... oredicts) {
+    public FoodItem(String name, float saturation, boolean hasEffect) {
         super((int) saturation, saturation, false);
-        for (String s : oredicts) {
-            OreDictionary.registerOre(s, this);
-        }
+        this.hasEffect = hasEffect;
         setUnlocalizedName(name);
     }
 

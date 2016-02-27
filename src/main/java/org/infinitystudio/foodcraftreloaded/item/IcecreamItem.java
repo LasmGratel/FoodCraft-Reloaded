@@ -19,8 +19,8 @@
  */
 package org.infinitystudio.foodcraftreloaded.item;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
+public class IcecreamItem extends FoodItem {
+    public IcecreamItem(String name) {
+        super(name, 5.0f, false);
     }
 }

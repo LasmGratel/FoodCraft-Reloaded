@@ -17,10 +17,43 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ModBean {
+    enum BeanType {
+        /**
+         * Red Beans
+         * 红豆
+         */
+        Red,
+
+        /**
+         * Black Beans
+         * 黑豆
+         */
+        Black,
+
+        /**
+         * Red Beans
+         * 绿豆
+         */
+        Green,
+
+        /**
+         * Soy Beans
+         * 黄豆
+         */
+        Soy
     }
+
+    BeanType type();
+
+    boolean itemRender() default true;
 }

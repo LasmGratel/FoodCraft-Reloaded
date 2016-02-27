@@ -17,10 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.block;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
-    }
+import net.minecraft.block.BlockLog;
+
+public class FruitTreeBlock extends BlockLog {
 }

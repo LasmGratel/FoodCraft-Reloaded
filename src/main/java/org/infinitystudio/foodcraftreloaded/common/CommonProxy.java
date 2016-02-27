@@ -34,6 +34,8 @@ public class CommonProxy {
             CommonModManagement.EVENT, CommonModManagement.EVENTBUS,
             CommonModManagement.FLUID,
             CommonModManagement.ITEM, CommonModManagement.FOOD,
+            CommonModManagement.BEAN, CommonModManagement.SPROUTS, CommonModManagement.BEANBLOCK,
+            CommonModManagement.FRUIT, CommonModManagement.JUICE, CommonModManagement.FRUITICECREAM,
             CommonModManagement.VEGETABLE, CommonModManagement.MEAT,
             CommonModManagement.OBJPREINIT, CommonModManagement.OBJINIT, CommonModManagement.OBJPOSTINIT,
             CommonModManagement.TILEENTITY

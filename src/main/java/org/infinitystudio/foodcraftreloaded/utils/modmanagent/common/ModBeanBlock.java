@@ -17,10 +17,27 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
-    }
+import net.minecraft.item.ItemBlock;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ModBeanBlock {
+    ModBean.BeanType type();
+
+    /**
+     * @return true if item should be rendered
+     */
+    boolean itemRender() default true;
+
+    /**
+     * @return ItemBlock Class
+     */
+    Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
 }

@@ -38,11 +38,11 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
+import org.infinitystudio.foodcraftreloaded.block.BeanBlock;
 import org.infinitystudio.foodcraftreloaded.block.VegetableBlock;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
-import org.infinitystudio.foodcraftreloaded.item.FoodItem;
-import org.infinitystudio.foodcraftreloaded.item.MeatItem;
-import org.infinitystudio.foodcraftreloaded.item.VegetableItem;
+import org.infinitystudio.foodcraftreloaded.item.*;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.IModManagement;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.ModManagement;
 
@@ -155,13 +155,195 @@ public class CommonModManagement {
         }
     };
 
+    public final static ModManagement<ModBeanBlock> BEANBLOCK = new ModManagement<ModBeanBlock>(ModBeanBlock.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public void register(String modid, ModBeanBlock annotation, Object instance) throws Exception {
+            String sproutsName = "item" + annotation.type().name() + "BeanSprouts";;
+            String seedName = "item" + annotation.type().name() + "Bean";
+            String name = "block" + annotation.type().name() + "Bean";
+
+            ((BeanBlock) instance).setUnlocalizedName(name);
+            ((BeanBlock) instance).setSeed(seedName);
+            ((BeanBlock) instance).setCrop(seedName);
+            ((BeanBlock) instance).setSprouts(sproutsName);
+
+            GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), ((Block) instance).getUnlocalizedName());
+        }
+
+        @Override
+        public void registerClient(String modid, ModBeanBlock annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Block) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModFruit> FRUIT = new ModManagement<ModFruit>(ModFruit.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModFruit annotation, Class<?> clazz) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name();
+            Class[] typeName = new Class[]{
+                    String.class
+            };
+            return FruitItem.class.getConstructor(typeName).newInstance(fruitName);
+        }
+
+        @Override
+        public void register(String modid, ModFruit annotation, Object instance) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name();
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+            ((Item) instance).setUnlocalizedName(fruitName);
+            GameRegistry.registerItem((Item) instance, fruitName);
+            OreDictionary.registerOre("listAllfruit", (Item) instance);
+            OreDictionary.registerOre("crop" + annotation.type().name(), (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModFruit annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModJuice> JUICE = new ModManagement<ModJuice>(ModJuice.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModJuice annotation, Class<?> clazz) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Drink";
+            Class[] typeName = new Class[]{
+                    String.class
+            };
+            return FruitDrinkItem.class.getConstructor(typeName).newInstance(fruitName);
+        }
+
+        @Override
+        public void register(String modid, ModJuice annotation, Object instance) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Drink";
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
+            ((Item) instance).setUnlocalizedName(fruitName);
+            GameRegistry.registerItem((Item) instance, fruitName);
+            OreDictionary.registerOre("listAlljuice", (Item) instance);
+            OreDictionary.registerOre("food" + annotation.type().name() + "juice", (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModJuice annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModIcecream> FRUITICECREAM = new ModManagement<ModIcecream>(ModIcecream.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModIcecream annotation, Class<?> clazz) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
+            Class[] typeName = new Class[]{
+                    String.class
+            };
+            return IcecreamItem.class.getConstructor(typeName).newInstance(fruitName);
+        }
+
+        @Override
+        public void register(String modid, ModIcecream annotation, Object instance) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabIcecream);
+            ((Item) instance).setUnlocalizedName(fruitName);
+            GameRegistry.registerItem((Item) instance, fruitName);
+            OreDictionary.registerOre("listAllicecream", (Item) instance);
+            OreDictionary.registerOre("food" + annotation.type().name() + "icecream", (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModIcecream annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModSprouts> SPROUTS = new ModManagement<ModSprouts>(ModSprouts.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModSprouts annotation, Class<?> clazz) throws Exception {
+            Class[] typeName = new Class[]{
+                    String.class
+            };
+
+            String beanName = "item" + annotation.type().name() + "BeanSprouts";
+            return SproutsItem.class.getConstructor(typeName).newInstance(beanName);
+        }
+
+        @Override
+        public void register(String modid, ModSprouts annotation, Object instance) throws Exception {
+            ((Item) instance).setUnlocalizedName("item" + annotation.type().name() + "BeanSprouts");
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+
+            GameRegistry.registerItem((Item) instance, ((Item) instance).getUnlocalizedName());
+            OreDictionary.registerOre("crop" + annotation.type().name() + "beansprout", (Item) instance);
+            OreDictionary.registerOre("seed" + annotation.type().name() + "beansprout", (Item) instance);
+            OreDictionary.registerOre("listAllseed", (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModSprouts annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
+    public final static ModManagement<ModBean> BEAN = new ModManagement<ModBean>(ModBean.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModBean annotation, Class<?> clazz) throws Exception {
+            Class[] typeName = new Class[]{
+                    String.class
+            };
+
+            String beanName = "item" + annotation.type().name() + "Bean";
+
+            return BeanItem.class.getConstructor(typeName).newInstance(beanName);
+        }
+
+        @Override
+        public void register(String modid, ModBean annotation, Object instance) throws Exception {
+            ((Item) instance).setUnlocalizedName("item" + annotation.type().name() + "Bean");
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+
+            GameRegistry.registerItem((Item) instance, ((Item) instance).getUnlocalizedName());
+            OreDictionary.registerOre("listAllseed", (Item) instance);
+            OreDictionary.registerOre("crop" + annotation.type().name() + "bean", (Item) instance);
+            OreDictionary.registerOre("seed" + annotation.type().name() + "bean", (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModBean annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
     public final static ModManagement<ModFood> FOOD = new ModManagement<ModFood>(ModFood.class, IModManagement.Stage.PREINIT) {
         @Override
         public Object init(String modid, ModFood annotation, Class<?> clazz) throws Exception {
             Class<?>[] types = {
-                    String.class, float.class, boolean.class, String[].class
+                    String.class, float.class, boolean.class
             };
             Constructor<FoodItem> constructor = FoodItem.class.getConstructor(types);
+            System.out.println("Test");
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect(), annotation.oredicts());
         }
 
@@ -185,7 +367,11 @@ public class CommonModManagement {
     public final static ModManagement<ModVegetable> VEGETABLE = new ModManagement<ModVegetable>(ModVegetable.class, IModManagement.Stage.PREINIT) {
         @Override
         public Object init(String modid, ModVegetable annotation, Class<?> clazz) throws Exception {
-            return null;
+            Class[] type = new Class[]{
+                String.class, float.class, boolean.class
+            };
+            Constructor<VegetableItem> constructor = VegetableItem.class.getConstructor(type);
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override
@@ -194,6 +380,9 @@ public class CommonModManagement {
             ((VegetableItem) instance).setCanPlant(annotation.canPlant());
             ((VegetableItem) instance).setSeedblock(Block.getBlockFromName(annotation.seedBlockName()));
             MinecraftForge.addGrassSeed(new ItemStack((VegetableItem) instance), 2);
+            for(String oreDictName : annotation.oredicts()) {
+                OreDictionary.registerOre(oreDictName, (Item) instance);
+            }
         }
     };
 
@@ -213,7 +402,11 @@ public class CommonModManagement {
     public final static ModManagement<ModMeat> MEAT = new ModManagement<ModMeat>(ModMeat.class, IModManagement.Stage.PREINIT) {
         @Override
         public Object init(String modid, ModMeat annotation, Class<?> clazz) throws Exception {
-            return null;
+            Class[] type = new Class[]{
+                    String.class, float.class, boolean.class
+            };
+            Constructor<MeatItem> constructor = MeatItem.class.getConstructor(type);
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override

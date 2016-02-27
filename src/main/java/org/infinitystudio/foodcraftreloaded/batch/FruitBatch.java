@@ -17,10 +17,11 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.batch;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
-    }
+/**
+ * Batch to use fruits.
+ */
+public class FruitBatch implements IBatch {
+
 }

@@ -17,10 +17,11 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.utils.opengl;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
-    }
+/**
+ * Helper of Masking Textures.
+ */
+public class MaskHelper {
+
 }

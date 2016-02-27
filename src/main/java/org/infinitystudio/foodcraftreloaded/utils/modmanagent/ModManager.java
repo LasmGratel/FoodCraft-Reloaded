@@ -91,11 +91,7 @@ public class ModManager {
                     if (field.get(null) == null) {
                         field.set(null, management.init(this.modid, annotation, field.getType()));
                     }
-                }
-                if (field.get(null) != null) {
-                    for (IModManagement management : mPreInit.get(annotation.annotationType())) {
-                        management.register(this.modid, annotation, field.get(null));
-                    }
+                    management.register(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"

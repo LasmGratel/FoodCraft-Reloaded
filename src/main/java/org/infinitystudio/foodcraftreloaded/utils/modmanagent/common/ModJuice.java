@@ -17,10 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(String name, float saturation, boolean hasEffect) {
-        super(name, saturation, hasEffect);
-    }
+public @interface ModJuice {
+    ModFruit.FruitType type();
+    boolean itemRender() default true;
 }
