@@ -166,13 +166,14 @@ public class CommonModManagement {
             ((BeanBlock) instance).setCrop(seedName);
             ((BeanBlock) instance).setSprouts(sproutsName);
 
-            GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), ((Block) instance).getUnlocalizedName());
+            GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), name);
         }
 
         @Override
         public void registerClient(String modid, ModBeanBlock annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Block) instance).getUnlocalizedName();
+                String name = "block" + annotation.type().name() + "Bean";
+                String location = modid + ":" + name;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
                         .register(Item.getItemFromBlock((Block) instance), 0, mrl);
@@ -203,7 +204,8 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModFruit annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                String fruitName = "itemFruit" + annotation.type().name();
+                String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
             }
@@ -233,7 +235,8 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModJuice annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                String fruitName = "itemFruit" + annotation.type().name() + "Drink";
+                String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
             }
@@ -263,7 +266,8 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModIcecream annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
+                String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
             }
@@ -295,7 +299,8 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModSprouts annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                String beanName = "item" + annotation.type().name() + "BeanSprouts";
+                String location = modid + ":" + beanName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
             }
@@ -328,7 +333,8 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModBean annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String location = modid + ":" + ((Item) instance).getUnlocalizedName();
+                String beanName = "item" + annotation.type().name() + "Bean";
+                String location = modid + ":" + beanName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
             }
@@ -385,18 +391,32 @@ public class CommonModManagement {
                 OreDictionary.registerOre(oreDictName, (Item) instance);
             }
         }
+
+        @Override
+        public void registerClient(String modid, ModVegetable annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
     };
 
     public final static ModManagement<ModVegetableBlock> VEGETABLEBLOCK = new ModManagement<ModVegetableBlock>(ModVegetableBlock.class, IModManagement.Stage.PREINIT) {
         @Override
-        public Object init(String modid, ModVegetableBlock annotation, Class<?> clazz) throws Exception {
-            return null;
-        }
-
-        @Override
         public void register(String modid, ModVegetableBlock annotation, Object instance) throws Exception {
             ((VegetableBlock) instance).setCrop(annotation.cropName());
             ((VegetableBlock) instance).setSeed(annotation.seedName());
+        }
+
+        @Override
+        public void registerClient(String modid, ModVegetableBlock annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+            }
         }
     };
 
@@ -414,6 +434,15 @@ public class CommonModManagement {
         public void register(String modid, ModMeat annotation, Object instance) throws Exception {
             ((MeatItem) instance).setUnlocalizedName(annotation.name());
             ((MeatItem) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+        }
+
+        @Override
+        public void registerClient(String modid, ModMeat annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String location = modid + ":" + annotation.name();
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
         }
     };
 

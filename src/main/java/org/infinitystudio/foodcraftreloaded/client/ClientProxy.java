@@ -19,24 +19,27 @@
  */
 package org.infinitystudio.foodcraftreloaded.client;
 
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
-//    @Override
-//    public void preInit(FMLPreInitializationEvent event) {
-//        super.preInit(event);
-//        manager.preInitClient();
-//    }
-//
-//    @Override
-//    public void init(FMLInitializationEvent event) {
-//        super.init(event);
-//        manager.initClient();
-//    }
-//
-//    @Override
-//    public void postInit(FMLPostInitializationEvent event) {
-//        super.postInit(event);
-//        manager.postInitClient();
-//    }
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+        manager.preInitClient();
+    }
+
+    @Override
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
+        manager.initClient();
+    }
+
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+        super.postInit(event);
+        manager.postInitClient();
+    }
 }

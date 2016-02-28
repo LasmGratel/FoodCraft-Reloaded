@@ -27,6 +27,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModVegetable {
+
+    enum VegetableType {
+        //TODO Vegetable Type
+    }
+
     /**
      * @return Name of the food
      */
