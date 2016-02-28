@@ -225,49 +225,49 @@ public class FoodCraftRegistration {
 
     // Juice Registry
     // 果汁注册
-    @ModJuice(type = ModFruit.FruitType.Pear, color=0xe5db3b)
+    @ModJuice(type = ModFruit.FruitType.Pear, color = ModFruit.COlOR_PEAR)
     public static FruitDrinkItem itemFruitPearDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Litchi)
+    @ModJuice(type = ModFruit.FruitType.Litchi, color = ModFruit.COlOR_LITCHI)
     public static FruitDrinkItem itemFruitLitchiDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Peach)
+    @ModJuice(type = ModFruit.FruitType.Peach, color = ModFruit.COlOR_PEACH)
     public static FruitDrinkItem itemFruitPeachDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Orange)
+    @ModJuice(type = ModFruit.FruitType.Orange, color = ModFruit.COlOR_ORANGE)
     public static FruitDrinkItem itemFruitOrangeDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Mango)
+    @ModJuice(type = ModFruit.FruitType.Mango, color = ModFruit.COlOR_MANGO)
     public static FruitDrinkItem itemFruitMangoDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Lemon)
+    @ModJuice(type = ModFruit.FruitType.Lemon, color = ModFruit.COlOR_LEMON)
     public static FruitDrinkItem itemFruitLemonDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Grapefruit)
+    @ModJuice(type = ModFruit.FruitType.Grapefruit, color = ModFruit.COlOR_GRAPEFRUIT)
     public static FruitDrinkItem itemFruitGrapefruitDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Persimmon)
+    @ModJuice(type = ModFruit.FruitType.Persimmon, color = ModFruit.COlOR_PERSIMMON)
     public static FruitDrinkItem itemFruitPersimmonDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Papaya)
+    @ModJuice(type = ModFruit.FruitType.Papaya, color = ModFruit.COlOR_PAPAYA)
     public static FruitDrinkItem itemFruitPapayaDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Hawthorn)
+    @ModJuice(type = ModFruit.FruitType.Hawthorn, color = ModFruit.COlOR_HAWTHORN)
     public static FruitDrinkItem itemFruitHawthornDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Pomegranate)
+    @ModJuice(type = ModFruit.FruitType.Pomegranate, color = ModFruit.COlOR_POMEGRANATE)
     public static FruitDrinkItem itemFruitPomegranateDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Date)
+    @ModJuice(type = ModFruit.FruitType.Date, color = ModFruit.COlOR_DATE)
     public static FruitDrinkItem itemFruitDateDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Cherry)
+    @ModJuice(type = ModFruit.FruitType.Cherry, color = ModFruit.COlOR_CHERRY)
     public static FruitDrinkItem itemFruitCherryDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Coconut)
+    @ModJuice(type = ModFruit.FruitType.Coconut, color = ModFruit.COlOR_COCONUT)
     public static FruitDrinkItem itemFruitCoconutDrink;
 
-    @ModJuice(type = ModFruit.FruitType.Banana)
+    @ModJuice(type = ModFruit.FruitType.Banana, color = ModFruit.COlOR_BANANA)
     public static FruitDrinkItem itemFruitBananaDrink;
 
     // Ice-cream Registry

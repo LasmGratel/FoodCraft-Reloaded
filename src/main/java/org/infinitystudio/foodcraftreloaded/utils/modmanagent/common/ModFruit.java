@@ -28,6 +28,22 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModFruit {
+    public final int COlOR_PEAR = 0xe5db3b;
+    public final int COlOR_LITCHI = 0xf6edd0;
+    public final int COlOR_PEACH = 0xf6cc24;
+    public final int COlOR_ORANGE = 0xf6ae24;
+    public final int COlOR_MANGO = 0xffd986;
+    public final int COlOR_LEMON = 0xfcf393;
+    public final int COlOR_GRAPEFRUIT = 0xece382;
+    public final int COlOR_PERSIMMON = 0xeb8c30;
+    public final int COlOR_PAPAYA = 0xf18a25;
+    public final int COlOR_HAWTHORN = 0xea7b0e;
+    public final int COlOR_POMEGRANATE = 0xf46c30;
+    public final int COlOR_DATE = 0xb57c63;
+    public final int COlOR_CHERRY = 0xfd6d0d;
+    public final int COlOR_COCONUT = 0xfcf4d6;
+    public final int COlOR_BANANA = 0xf7eb6a;
+
     enum FruitType {
         /**
          * Pear
