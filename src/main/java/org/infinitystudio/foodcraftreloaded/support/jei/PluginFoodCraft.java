@@ -17,26 +17,24 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.client;
+package org.infinitystudio.foodcraftreloaded.support.jei;
 
-import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
+import mezz.jei.api.BlankModPlugin;
+import mezz.jei.api.IJeiRuntime;
+import mezz.jei.api.IModRegistry;
+import mezz.jei.api.JEIPlugin;
 
-public class ClientProxy extends CommonProxy {
-//    @Override
-//    public void preInit(FMLPreInitializationEvent event) {
-//        super.preInit(event);
-//        manager.preInitClient();
-//    }
-//
-//    @Override
-//    public void init(FMLInitializationEvent event) {
-//        super.init(event);
-//        manager.initClient();
-//    }
-//
-//    @Override
-//    public void postInit(FMLPostInitializationEvent event) {
-//        super.postInit(event);
-//        manager.postInitClient();
-//    }
+import javax.annotation.Nonnull;
+
+@JEIPlugin
+public class PluginFoodCraft extends BlankModPlugin {
+    @Override
+    public void register(@Nonnull IModRegistry registry) {
+        super.register(registry);
+    }
+
+    @Override
+    public void onRuntimeAvailable(@Nonnull IJeiRuntime jeiRuntime) {
+        super.onRuntimeAvailable(jeiRuntime);
+    }
 }

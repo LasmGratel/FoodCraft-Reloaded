@@ -17,26 +17,17 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.client;
+package org.infinitystudio.foodcraftreloaded.support.jei;
 
-import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
+import org.apache.logging.log4j.LogManager;
 
-public class ClientProxy extends CommonProxy {
-//    @Override
-//    public void preInit(FMLPreInitializationEvent event) {
-//        super.preInit(event);
-//        manager.preInitClient();
-//    }
-//
-//    @Override
-//    public void init(FMLInitializationEvent event) {
-//        super.init(event);
-//        manager.initClient();
-//    }
-//
-//    @Override
-//    public void postInit(FMLPostInitializationEvent event) {
-//        super.postInit(event);
-//        manager.postInitClient();
-//    }
+public class JEISupportChecker {
+    public static void supportJEI() {
+        try {
+            Class.forName("mezz.jei.JeiRuntime");
+
+        } catch (Exception ex) {
+            LogManager.getLogger().warn("Cannot Find JEI Support, disabled!", ex);
+        }
+    }
 }

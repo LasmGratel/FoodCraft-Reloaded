@@ -111,11 +111,7 @@ public class ModManager {
                     if (field.get(null) == null) {
                         field.set(null, management.init(this.modid, annotation, field.getType()));
                     }
-                }
-                if (field.get(null) != null) {
-                    for (IModManagement management : mInit.get(annotation.annotationType())) {
-                        management.register(this.modid, annotation, field.get(null));
-                    }
+                    management.register(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
@@ -135,11 +131,7 @@ public class ModManager {
                     if (field.get(null) == null) {
                         field.set(null, management.init(this.modid, annotation, field.getType()));
                     }
-                }
-                if (field.get(null) != null) {
-                    for (IModManagement management : mPostInit.get(annotation.annotationType())) {
-                        management.register(this.modid, annotation, field.get(null));
-                    }
+                    management.register(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
@@ -155,10 +147,8 @@ public class ModManager {
             Annotation annotation = entry.getValue();
             Field field = entry.getKey();
             try {
-                if (field.get(null) != null) {
-                    for (IModManagement management : mPreInitClient.get(annotation.annotationType())) {
-                        management.registerClient(this.modid, annotation, field.get(null));
-                    }
+                for (IModManagement management : mPreInitClient.get(annotation.annotationType())) {
+                    management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
@@ -174,10 +164,8 @@ public class ModManager {
             Annotation annotation = entry.getValue();
             Field field = entry.getKey();
             try {
-                if (field.get(null) != null) {
-                    for (IModManagement management : mInitClient.get(annotation.annotationType())) {
-                        management.registerClient(this.modid, annotation, field.get(null));
-                    }
+                for (IModManagement management : mInitClient.get(annotation.annotationType())) {
+                    management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
@@ -193,10 +181,8 @@ public class ModManager {
             Annotation annotation = entry.getValue();
             Field field = entry.getKey();
             try {
-                if (field.get(null) != null) {
-                    for (IModManagement management : mPostInitClient.get(annotation.annotationType())) {
-                        management.registerClient(this.modid, annotation, field.get(null));
-                    }
+                for (IModManagement management : mPostInitClient.get(annotation.annotationType())) {
+                    management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"

@@ -62,7 +62,7 @@ public class FoodCraftRegistration {
     public static final CreativeTabs FcTabStaple = new CreativeTabs("creativetabs.staple") {
         @Override
         public Item getTabIconItem() {
-            return carrot;
+            return itemBlackBean;
         }
     };
 
@@ -72,7 +72,7 @@ public class FoodCraftRegistration {
     public static final CreativeTabs FcTabIngredient = new CreativeTabs("creativetabs.ingredient") {
         @Override
         public Item getTabIconItem() {
-            return carrot;
+            return itemBlackBean;
         }
     };
 
@@ -82,7 +82,7 @@ public class FoodCraftRegistration {
     public static final CreativeTabs FcTabSnack = new CreativeTabs("creativetabs.snack") {
         @Override
         public Item getTabIconItem() {
-            return carrot;
+            return itemBlackBean;
         }
     };
 
@@ -235,100 +235,99 @@ public class FoodCraftRegistration {
     // Juice Registry
     // 果汁注册
     @ModJuice(type = ModFruit.FruitType.Pear)
-    public static FruitItem itemFruitPearDrink;
+    public static FruitDrinkItem itemFruitPearDrink;
 
     @ModJuice(type = ModFruit.FruitType.Litchi)
-    public static FruitItem itemFruitLitchiDrink;
+    public static FruitDrinkItem itemFruitLitchiDrink;
 
     @ModJuice(type = ModFruit.FruitType.Peach)
-    public static FruitItem itemFruitPeachDrink;
+    public static FruitDrinkItem itemFruitPeachDrink;
 
     @ModJuice(type = ModFruit.FruitType.Orange)
-    public static FruitItem itemFruitOrangeDrink;
+    public static FruitDrinkItem itemFruitOrangeDrink;
 
     @ModJuice(type = ModFruit.FruitType.Mango)
-    public static FruitItem itemFruitMangoDrink;
+    public static FruitDrinkItem itemFruitMangoDrink;
 
     @ModJuice(type = ModFruit.FruitType.Lemon)
-    public static FruitItem itemFruitLemonDrink;
+    public static FruitDrinkItem itemFruitLemonDrink;
 
     @ModJuice(type = ModFruit.FruitType.Grapefruit)
-    public static FruitItem itemFruitGrapefruitDrink;
+    public static FruitDrinkItem itemFruitGrapefruitDrink;
 
     @ModJuice(type = ModFruit.FruitType.Persimmon)
-    public static FruitItem itemFruitPersimmonDrink;
+    public static FruitDrinkItem itemFruitPersimmonDrink;
 
     @ModJuice(type = ModFruit.FruitType.Papaya)
-    public static FruitItem itemFruitPapayaDrink;
+    public static FruitDrinkItem itemFruitPapayaDrink;
 
     @ModJuice(type = ModFruit.FruitType.Hawthorn)
-    public static FruitItem itemFruitHawthornDrink;
+    public static FruitDrinkItem itemFruitHawthornDrink;
 
     @ModJuice(type = ModFruit.FruitType.Pomegranate)
-    public static FruitItem itemFruitPomegranateDrink;
+    public static FruitDrinkItem itemFruitPomegranateDrink;
 
     @ModJuice(type = ModFruit.FruitType.Date)
-    public static FruitItem itemFruitDateDrink;
+    public static FruitDrinkItem itemFruitDateDrink;
 
     @ModJuice(type = ModFruit.FruitType.Cherry)
-    public static FruitItem itemFruitCherryDrink;
+    public static FruitDrinkItem itemFruitCherryDrink;
 
     @ModJuice(type = ModFruit.FruitType.Coconut)
-    public static FruitItem itemFruitCoconutDrink;
+    public static FruitDrinkItem itemFruitCoconutDrink;
 
     @ModJuice(type = ModFruit.FruitType.Banana)
-    public static FruitItem itemFruitBananaDrink;
+    public static FruitDrinkItem itemFruitBananaDrink;
 
     // Ice-cream Registry
     // 冰激凌注册
-    @ModBlock(name = "itemBaseIceCream")
     @ModFood(name = "itemBaseIceCream", satuation = 2.0f, oredicts = {"foodIcecream", "listAllicecream"})
     public static FoodItem baseIceCream;
 
     @ModIcecream(type = ModFruit.FruitType.Pear)
-    public static FruitItem itemFruitPearIcecream;
+    public static IcecreamItem itemFruitPearIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Litchi)
-    public static FruitItem itemFruitLitchiIcecream;
+    public static IcecreamItem itemFruitLitchiIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Peach)
-    public static FruitItem itemFruitPeachIcecream;
+    public static IcecreamItem itemFruitPeachIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Orange)
-    public static FruitItem itemFruitOrangeIcecream;
+    public static IcecreamItem itemFruitOrangeIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Mango)
-    public static FruitItem itemFruitMangoIcecream;
+    public static IcecreamItem itemFruitMangoIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Lemon)
-    public static FruitItem itemFruitLemonIcecream;
+    public static IcecreamItem itemFruitLemonIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Grapefruit)
-    public static FruitItem itemFruitGrapefruitIcecream;
+    public static IcecreamItem itemFruitGrapefruitIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Persimmon)
-    public static FruitItem itemFruitPersimmonIcecream;
+    public static IcecreamItem itemFruitPersimmonIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Papaya)
-    public static FruitItem itemFruitPapayaIcecream;
+    public static IcecreamItem itemFruitPapayaIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Hawthorn)
-    public static FruitItem itemFruitHawthornIcecream;
+    public static IcecreamItem itemFruitHawthornIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Pomegranate)
-    public static FruitItem itemFruitPomegranateIcecream;
+    public static IcecreamItem itemFruitPomegranateIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Date)
-    public static FruitItem itemFruitDateIcecream;
+    public static IcecreamItem itemFruitDateIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Cherry)
-    public static FruitItem itemFruitCherryIcecream;
+    public static IcecreamItem itemFruitCherryIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Coconut)
-    public static FruitItem itemFruitCoconutIcecream;
+    public static IcecreamItem itemFruitCoconutIcecream;
 
     @ModIcecream(type = ModFruit.FruitType.Banana)
-    public static FruitItem itemFruitBananaIcecream;
+    public static IcecreamItem itemFruitBananaIcecream;
 
 
 

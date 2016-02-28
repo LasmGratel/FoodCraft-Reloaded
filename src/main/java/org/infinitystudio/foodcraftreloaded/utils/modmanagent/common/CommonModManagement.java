@@ -91,7 +91,6 @@ public class CommonModManagement {
         @Override
         public void register(String modid, ModBlock annotation, Object instance) throws Exception {
             GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), annotation.name());
-            System.out.println(((Block) instance).getUnlocalizedName());
             ((Block) instance).setUnlocalizedName(annotation.name());
 
         }
@@ -211,7 +210,7 @@ public class CommonModManagement {
         }
     };
 
-    public final static ModManagement<ModJuice> JUICE = new ModManagement<ModJuice>(ModJuice.class, IModManagement.Stage.PREINIT) {
+    public final static ModManagement<ModJuice> JUICE = new ModManagement<ModJuice>(ModJuice.class, IModManagement.Stage.INIT) {
         @Override
         public Object init(String modid, ModJuice annotation, Class<?> clazz) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Drink";
@@ -241,7 +240,7 @@ public class CommonModManagement {
         }
     };
 
-    public final static ModManagement<ModIcecream> FRUITICECREAM = new ModManagement<ModIcecream>(ModIcecream.class, IModManagement.Stage.PREINIT) {
+    public final static ModManagement<ModIcecream> FRUITICECREAM = new ModManagement<ModIcecream>(ModIcecream.class, IModManagement.Stage.INIT) {
         @Override
         public Object init(String modid, ModIcecream annotation, Class<?> clazz) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
@@ -343,15 +342,17 @@ public class CommonModManagement {
                     String.class, float.class, boolean.class
             };
             Constructor<FoodItem> constructor = FoodItem.class.getConstructor(types);
-            System.out.println("Test");
-            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect(), annotation.oredicts());
+            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override
         public void register(String modid, ModFood annotation, Object instance) throws Exception {
-            GameRegistry.registerItem((Item) instance, annotation.name());
             ((FoodItem) instance).setUnlocalizedName(annotation.name());
             ((FoodItem) instance).setCreativeTab(FoodCraftRegistration.FcTabBase);
+            GameRegistry.registerItem((Item) instance, annotation.name());
+            for(String oreDictName : annotation.oredicts()) {
+                OreDictionary.registerOre(oreDictName, (Item) instance);
+            }
         }
 
         @Override

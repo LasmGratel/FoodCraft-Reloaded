@@ -1,5 +1,10 @@
 package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * FoodCraft Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
@@ -19,6 +24,8 @@ package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
  *
  * @license GPLv3
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
 public @interface ModVegetableBlock {
     /**
      * @return Name of the food

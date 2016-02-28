@@ -69,5 +69,6 @@ public class CommonProxy {
     }
 
     public void loadComplete(FMLLoadCompleteEvent event) {
+        FcRecipeRegistration.register();
     }
 }
