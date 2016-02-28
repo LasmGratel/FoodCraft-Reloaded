@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "foodcraft:Caiban" },
-        "facing=south": { "model": "foodcraft:Caiban", "y": 180 },
-        "facing=west":  { "model": "foodcraft:Caiban", "y": 270 },
-        "facing=east":  { "model": "foodcraft:Caiban", "y": 90 }
-    }
-}

@@ -215,9 +215,9 @@ public class CommonModManagement {
         public Object init(String modid, ModJuice annotation, Class<?> clazz) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Drink";
             Class[] typeName = new Class[]{
-                    String.class
+                    String.class, int.class
             };
-            return FruitDrinkItem.class.getConstructor(typeName).newInstance(fruitName);
+            return FruitDrinkItem.class.getConstructor(typeName).newInstance(fruitName,annotation.color());
         }
 
         @Override
@@ -253,7 +253,7 @@ public class CommonModManagement {
         @Override
         public void register(String modid, ModIcecream annotation, Object instance) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
-            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabIcecream);
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
             ((Item) instance).setUnlocalizedName(fruitName);
             GameRegistry.registerItem((Item) instance, fruitName);
             OreDictionary.registerOre("listAllicecream", (Item) instance);

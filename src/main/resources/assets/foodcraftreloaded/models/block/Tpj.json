@@ -1,8 +1,0 @@
-{
-    "parent": "block/orientable",
-    "textures": {
-        "top": "foodcraft:blocks/nmj_top",
-        "front": "foodcraft:blocks/tpj_tpj_off",
-        "side": "foodcraft:blocks/nmj_side"
-    }
-}

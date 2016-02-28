@@ -86,15 +86,6 @@ public class FoodCraftRegistration {
         }
     };
 
-    /**
-     * 冰激凌 Ice-cream
-     */
-    public static final CreativeTabs FcTabIcecream = new CreativeTabs("creativetabs.icecream") {
-        @Override
-        public Item getTabIconItem() {
-            return baseIceCream;
-        }
-    };
 
     ////////////////////////////////////////////////////////////////
     // Block Registry
@@ -234,7 +225,7 @@ public class FoodCraftRegistration {
 
     // Juice Registry
     // 果汁注册
-    @ModJuice(type = ModFruit.FruitType.Pear)
+    @ModJuice(type = ModFruit.FruitType.Pear, color=0xe5db3b)
     public static FruitDrinkItem itemFruitPearDrink;
 
     @ModJuice(type = ModFruit.FruitType.Litchi)

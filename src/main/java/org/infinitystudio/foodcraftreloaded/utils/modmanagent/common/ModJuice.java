@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModJuice {
-    ModFruit.FruitType type();
+	int color() default 16777215;
+	ModFruit.FruitType type();
     boolean itemRender() default true;
 }
