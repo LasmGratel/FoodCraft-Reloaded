@@ -222,7 +222,7 @@ public class CommonModManagement {
             Class[] typeName = new Class[]{
                     String.class, int.class
             };
-            return FruitDrinkItem.class.getConstructor(typeName).newInstance(fruitName,annotation.color());
+            return FruitDrinkItem.class.getConstructor(typeName).newInstance(fruitName,annotation.type().getcolor());
         }
 
         @Override
@@ -251,9 +251,9 @@ public class CommonModManagement {
         public Object init(String modid, ModIcecream annotation, Class<?> clazz) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
             Class[] typeName = new Class[]{
-                    String.class
+                    String.class, int.class
             };
-            return IcecreamItem.class.getConstructor(typeName).newInstance(fruitName);
+            return IcecreamItem.class.getConstructor(typeName).newInstance(fruitName,annotation.type().getcolor());
         }
 
         @Override

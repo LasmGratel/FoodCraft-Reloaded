@@ -28,7 +28,7 @@ public class FruitDrinkItem extends FoodItem {
 	public int colour;
     public FruitDrinkItem(String name, int color) {
         super(name, 4.0f, false);
-        colour=color;
+        colour = color;
     }
     @SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderPass) {

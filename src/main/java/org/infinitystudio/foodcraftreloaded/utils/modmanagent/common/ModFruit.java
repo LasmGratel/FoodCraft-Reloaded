@@ -1,4 +1,4 @@
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+﻿package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -28,113 +28,104 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModFruit {
-    public final int COlOR_PEAR = 0xe5db3b;
-    public final int COlOR_LITCHI = 0xf6edd0;
-    public final int COlOR_PEACH = 0xf6cc24;
-    public final int COlOR_ORANGE = 0xf6ae24;
-    public final int COlOR_MANGO = 0xffd986;
-    public final int COlOR_LEMON = 0xfcf393;
-    public final int COlOR_GRAPEFRUIT = 0xece382;
-    public final int COlOR_PERSIMMON = 0xeb8c30;
-    public final int COlOR_PAPAYA = 0xf18a25;
-    public final int COlOR_HAWTHORN = 0xea7b0e;
-    public final int COlOR_POMEGRANATE = 0xf46c30;
-    public final int COlOR_DATE = 0xb57c63;
-    public final int COlOR_CHERRY = 0xfd6d0d;
-    public final int COlOR_COCONUT = 0xfcf4d6;
-    public final int COlOR_BANANA = 0xf7eb6a;
-
     enum FruitType {
         /**
          * Pear
          * 梨
          */
-        Pear,
+        Pear(0xe5db3b),
 
         /**
          * Litchi
          * 荔枝
          */
-        Litchi,
+        Litchi(0xf6edd0),
 
         /**
          * Peach
          * 桃
          */
-        Peach,
+        Peach(0xf6cc24),
 
         /**
          * Orange
          * 橘子
          */
-        Orange,
+        Orange(0xf6ae24),
 
         /**
          * Mango
          * 芒果
          */
-        Mango,
+        Mango(0xffd986),
 
         /**
          * Lemon
          * 柠檬
          */
-        Lemon,
+        Lemon(0xfcf393),
 
         /**
          * Grapefruit
          * 柚子
          * NOTICE: NOT SAME WITH GRAPE!
          */
-        Grapefruit,
+        Grapefruit(0xece382),
 
         /**
          * Persimmon
          * 柿子
          */
-        Persimmon,
+        Persimmon(0xeb8c30),
 
         /**
          * Papaya
          * 木瓜
          */
-        Papaya,
+        Papaya(0xf18a25),
 
         /**
          * Hawthorn
          * 山楂
          */
-        Hawthorn,
+        Hawthorn(0xea7b0e),
 
         /**
          * Pomegranate
          * 石榴
          */
-        Pomegranate,
+        Pomegranate(0xf46c30),
 
         /**
          * Dates
          * 红枣
          */
-        Date,
+        Date(0xb57c63),
 
         /**
          * Cherry
          * 樱桃
          */
-        Cherry,
+        Cherry(0xfd6d0d),
 
         /**
          * Coconut
          * 椰子
          */
-        Coconut,
+        Coconut(0xfcf4d6),
 
         /**
          * Banana
          * 香蕉
          */
-        Banana
+        Banana(0xf7eb6a);
+        private int color;
+        public int getcolor() {
+        	return color;
+        }
+        FruitType(int color) {
+        	this.color = color;
+        }
     }
 
     FruitType type();
