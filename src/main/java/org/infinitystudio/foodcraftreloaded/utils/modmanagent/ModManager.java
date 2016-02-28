@@ -148,6 +148,9 @@ public class ModManager {
             Field field = entry.getKey();
             try {
                 for (IModManagement management : mPreInitClient.get(annotation.annotationType())) {
+                    if (field.get(null) == null) {
+                        field.set(null, management.init(this.modid, annotation, field.getType()));
+                    }
                     management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
@@ -165,6 +168,9 @@ public class ModManager {
             Field field = entry.getKey();
             try {
                 for (IModManagement management : mInitClient.get(annotation.annotationType())) {
+                    if (field.get(null) == null) {
+                        field.set(null, management.init(this.modid, annotation, field.getType()));
+                    }
                     management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {
@@ -182,6 +188,9 @@ public class ModManager {
             Field field = entry.getKey();
             try {
                 for (IModManagement management : mPostInitClient.get(annotation.annotationType())) {
+                    if (field.get(null) == null) {
+                        field.set(null, management.init(this.modid, annotation, field.getType()));
+                    }
                     management.registerClient(this.modid, annotation, field.get(null));
                 }
             } catch (Exception e) {

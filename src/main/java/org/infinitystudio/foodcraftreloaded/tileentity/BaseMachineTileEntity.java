@@ -23,9 +23,11 @@ import com.google.common.collect.Lists;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IChatComponent;
 import org.apache.logging.log4j.LogManager;
+import org.infinitystudio.foodcraftreloaded.utils.message.ChatComponentHelper;
 
 import java.util.List;
 
@@ -33,6 +35,17 @@ public abstract class BaseMachineTileEntity extends TileEntity implements IInven
     protected static int limit = 64;
     protected static List<ItemStack> inventory = Lists.newArrayList();
     protected static String displayName = "";
+    protected static NBTTagCompound nbtTagCompound;
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+    }
 
     /**
      * Returns the number of slots in the inventory.
@@ -168,7 +181,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements IInven
      */
     @Override
     public boolean hasCustomName() {
-        return false;
+        return true;
     }
 
     /**
@@ -176,7 +189,6 @@ public abstract class BaseMachineTileEntity extends TileEntity implements IInven
      */
     @Override
     public IChatComponent getDisplayName() {
-//        return displayName;
-        return null;
+        return ChatComponentHelper.createChatComponent(displayName);
     }
 }

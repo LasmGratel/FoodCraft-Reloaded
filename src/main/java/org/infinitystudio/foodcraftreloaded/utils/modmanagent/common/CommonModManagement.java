@@ -24,6 +24,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -167,6 +168,7 @@ public class CommonModManagement {
             ((BeanBlock) instance).setSprouts(sproutsName);
 
             GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), name);
+
         }
 
         @Override
@@ -175,8 +177,9 @@ public class CommonModManagement {
                 String name = "block" + annotation.type().name() + "Bean";
                 String location = modid + ":" + name;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+                RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+                renderItem.getItemModelMesher().register(Item.getItemFromBlock((Block) instance), 0, mrl);
+
             }
         }
     };

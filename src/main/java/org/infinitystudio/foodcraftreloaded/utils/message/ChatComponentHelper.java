@@ -17,18 +17,13 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.client;
+package org.infinitystudio.foodcraftreloaded.utils.message;
 
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
-
-public class ClientProxy extends CommonProxy {
-    @Override
-    public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
-        manager.preInitClient();
-        manager.initClient();
-        manager.postInitClient();
+public class ChatComponentHelper {
+    public static IChatComponent createChatComponent(String msg) {
+        return new ChatComponentText(msg);
     }
 }
