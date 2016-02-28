@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "foodcraft:Guo" },
-        "facing=south": { "model": "foodcraft:Guo", "y": 180 },
-        "facing=west":  { "model": "foodcraft:Guo", "y": 270 },
-        "facing=east":  { "model": "foodcraft:Guo", "y": 90 }
-    }
-}
