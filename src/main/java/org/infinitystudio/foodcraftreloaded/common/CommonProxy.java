@@ -38,7 +38,7 @@ public class CommonProxy {
             CommonModManagement.FRUIT, CommonModManagement.JUICE, CommonModManagement.FRUITICECREAM,
             CommonModManagement.VEGETABLE, CommonModManagement.MEAT,
             CommonModManagement.OBJPREINIT, CommonModManagement.OBJINIT, CommonModManagement.OBJPOSTINIT,
-            CommonModManagement.TILEENTITY
+            CommonModManagement.TILEENTITY, CommonModManagement.FRUITSODA
     );
 
     /**

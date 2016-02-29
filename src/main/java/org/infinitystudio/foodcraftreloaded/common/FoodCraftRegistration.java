@@ -319,7 +319,51 @@ public class FoodCraftRegistration {
 
     @ModIcecream(type = ModFruit.FruitType.Banana)
     public static IcecreamItem itemFruitBananaIcecream;
+    
+    // Soda Registry
+    // 汽水注册
+    @ModSoda(type = ModFruit.FruitType.Pear)
+    public static SodaItem itemFruitPearSoda;
 
+    @ModSoda(type = ModFruit.FruitType.Litchi)
+    public static SodaItem itemFruitLitchiSoda;
 
+    @ModSoda(type = ModFruit.FruitType.Peach)
+    public static SodaItem itemFruitPeachSoda;
 
+    @ModSoda(type = ModFruit.FruitType.Orange)
+    public static SodaItem itemFruitOrangeSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Mango)
+    public static SodaItem itemFruitMangoSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Lemon)
+    public static SodaItem itemFruitLemonSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Grapefruit)
+    public static SodaItem itemFruitGrapefruitSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Persimmon)
+    public static SodaItem itemFruitPersimmonSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Papaya)
+    public static SodaItem itemFruitPapayaSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Hawthorn)
+    public static SodaItem itemFruitHawthornSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Pomegranate)
+    public static SodaItem itemFruitPomegranateSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Date)
+    public static SodaItem itemFruitDateSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Cherry)
+    public static SodaItem itemFruitCherrySoda;
+
+    @ModSoda(type = ModFruit.FruitType.Coconut)
+    public static SodaItem itemFruitCoconutSoda;
+
+    @ModSoda(type = ModFruit.FruitType.Banana)
+    public static SodaItem itemFruitBananaSoda;
 }

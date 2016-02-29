@@ -501,4 +501,35 @@ public class CommonModManagement {
             GameRegistry.registerTileEntity(clz, annotation.id());
         }
     };
+    public final static ModManagement<ModSoda> FRUITSODA = new ModManagement<ModSoda>(ModSoda.class, IModManagement.Stage.INIT) {
+        @Override
+        public Object init(String modid, ModSoda annotation, Class<?> clazz) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Soda";
+            Class[] typeName = new Class[]{
+                    String.class, int.class
+            };
+            return SodaItem.class.getConstructor(typeName).newInstance(fruitName, annotation.type().getcolor());
+        }
+
+        @Override
+        public void register(String modid, ModSoda annotation, Object instance) throws Exception {
+            String fruitName = "itemFruit" + annotation.type().name() + "Soda";
+            ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
+            ((Item) instance).setUnlocalizedName(fruitName);
+            GameRegistry.registerItem((Item) instance, fruitName);
+            OreDictionary.registerOre("listAllsoda", (Item) instance);
+            OreDictionary.registerOre("food" + annotation.type().name() + "soda", (Item) instance);
+        }
+
+        @Override
+        public void registerClient(String modid, ModSoda annotation, Object instance) throws Exception {
+            if (annotation.itemRender()) {
+                String fruitName = "itemFruit" + annotation.type().name() + "Soda";
+                String location = modid + ":" + fruitName;
+                ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
+                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+            }
+        }
+    };
+
 }
