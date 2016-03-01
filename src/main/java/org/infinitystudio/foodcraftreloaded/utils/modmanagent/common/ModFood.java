@@ -45,10 +45,10 @@ public @interface ModFood {
     /**
      * @return true if this food has random effect
      */
-    boolean hasEffect() default false;
+boolean hasEffect() default false;
 
     /**
      * @return true if item should be rendered
      */
-    boolean itemRender() default true;
+boolean itemRender() default true;
 }

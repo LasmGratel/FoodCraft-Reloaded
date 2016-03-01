@@ -37,12 +37,12 @@ public @interface ModBlock {
     /**
      * @return true if item should be rendered
      */
-    boolean itemRender() default true;
+boolean itemRender() default true;
 
     String name();
 
     /**
      * @return ItemBlock Class
      */
-    Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
+Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
 }

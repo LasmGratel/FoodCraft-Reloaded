@@ -55,5 +55,5 @@ public @interface ModBean {
 
     BeanType type();
 
-    boolean itemRender() default true;
+boolean itemRender() default true;
 }

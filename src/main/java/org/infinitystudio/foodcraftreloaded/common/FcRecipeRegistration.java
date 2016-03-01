@@ -45,8 +45,8 @@ public class FcRecipeRegistration {
         // Vegetable Crafting
         // 蔬菜合成
         GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(carrot, 2),
-                "cropCarrot", "cropCarrot"
-        ));
+                               "cropCarrot", "cropCarrot"
+                                                     ));
 
         // Fruit Crafting
         // 水果合成
@@ -56,8 +56,8 @@ public class FcRecipeRegistration {
         for(ModFruit.FruitType fruitType : ModFruit.FruitType.values()) {
             String fruitName = fruitType.name();
             GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(Item.getByNameOrId("itemFruit" + fruitName + "Icecream")),
-                    "food" + fruitName + "juice", "itemBaseIceCream"
-                    ));
+                                   "food" + fruitName + "juice", "itemBaseIceCream"
+                                                         ));
         }
     }
 }

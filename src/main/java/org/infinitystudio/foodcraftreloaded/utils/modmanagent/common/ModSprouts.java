@@ -29,5 +29,5 @@ import java.lang.annotation.Target;
 public @interface ModSprouts {
     ModBean.BeanType type();
 
-    boolean itemRender() default true;
+boolean itemRender() default true;
 }

@@ -24,13 +24,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class IcecreamItem extends FoodItem {
-	public int colour;
+    public int colour;
     public IcecreamItem(String name, int color) {
         super(name, 5.0f, false);
         colour = color;
     }
     @SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass) {
-			return renderPass == 0 ? 16777215 : colour;
-	}
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return renderPass == 0 ? 16777215 : colour;
+    }
 }

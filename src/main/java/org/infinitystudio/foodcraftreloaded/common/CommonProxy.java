@@ -29,16 +29,16 @@ import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.CommonModMa
 
 public class CommonProxy {
     protected static final ModManager manager = new ModManager(
-            FoodCraftReloaded.MODID, FoodCraftRegistration.class,
-            CommonModManagement.BLOCK, CommonModManagement.BLOCKFLUID,
-            CommonModManagement.EVENT, CommonModManagement.EVENTBUS,
-            CommonModManagement.FLUID,
-            CommonModManagement.ITEM, CommonModManagement.FOOD,
-            CommonModManagement.BEAN, CommonModManagement.SPROUTS, CommonModManagement.BEANBLOCK,
-            CommonModManagement.FRUIT, CommonModManagement.JUICE, CommonModManagement.FRUITICECREAM,
-            CommonModManagement.VEGETABLE, CommonModManagement.MEAT,
-            CommonModManagement.OBJPREINIT, CommonModManagement.OBJINIT, CommonModManagement.OBJPOSTINIT,
-            CommonModManagement.TILEENTITY, CommonModManagement.FRUITSODA
+        FoodCraftReloaded.MODID, FoodCraftRegistration.class,
+        CommonModManagement.BLOCK, CommonModManagement.BLOCKFLUID,
+        CommonModManagement.EVENT, CommonModManagement.EVENTBUS,
+        CommonModManagement.FLUID,
+        CommonModManagement.ITEM, CommonModManagement.FOOD,
+        CommonModManagement.BEAN, CommonModManagement.SPROUTS, CommonModManagement.BEANBLOCK,
+        CommonModManagement.FRUIT, CommonModManagement.JUICE, CommonModManagement.FRUITICECREAM,
+        CommonModManagement.VEGETABLE, CommonModManagement.MEAT,
+        CommonModManagement.OBJPREINIT, CommonModManagement.OBJINIT, CommonModManagement.OBJPOSTINIT,
+        CommonModManagement.TILEENTITY, CommonModManagement.FRUITSODA
     );
 
     /**

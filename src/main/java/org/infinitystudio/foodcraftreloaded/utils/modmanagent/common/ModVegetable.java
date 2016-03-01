@@ -52,15 +52,15 @@ public @interface ModVegetable {
     /**
      * @return true if this food has random effect
      */
-    boolean hasEffect() default false;
+boolean hasEffect() default false;
 
     /**
      * @return true if this vegetable can be planted
      */
-    boolean canPlant() default true;
+boolean canPlant() default true;
 
     /**
      * @return true if item should be rendered
      */
-    boolean itemRender() default true;
+boolean itemRender() default true;
 }

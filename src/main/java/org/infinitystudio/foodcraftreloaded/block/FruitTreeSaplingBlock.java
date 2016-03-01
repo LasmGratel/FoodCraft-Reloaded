@@ -40,7 +40,7 @@ public class FruitTreeSaplingBlock extends BaseBlock implements IGrowable {
                 || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.leaves
                 || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.leaves2
 //                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == FoodCraftRegistration.blockFruitTreeLeaves
-                ) {
+          ) {
             return true;
         } else {
             return false;
@@ -54,63 +54,63 @@ public class FruitTreeSaplingBlock extends BaseBlock implements IGrowable {
         int z = pos.getZ();
         if(
             //A
-                isBlockAir(w, x, y + 1, z) &&
-                        isBlockAir(w, x, y + 2, z) &&
-                        isBlockAir(w, x, y + 3, z) &&
-                        isBlockAir(w, x, y + 4, z) &&
-                        isBlockAir(w, x, y + 5, z) &&
-                        isBlockAir(w, x, y + 6, z) &&
-                        isBlockAir(w, x, y + 7, z) &&
-                        isBlockAir(w, x, y + 8, z) &&
-                        isBlockAir(w, x, y + 9, z) &&
-                        isBlockAir(w, x, y + 10, z) &&
-                        //-x
-                        isBlockAir(w, x - 1, y + 6, z) &&
-                        isBlockAir(w, x - 1, y + 7, z) &&
-                        //+x
-                        isBlockAir(w, x + 1, y + 6, z) &&
-                        isBlockAir(w, x + 1, y + 7, z) &&
-                        //-z
-                        isBlockAir(w, x, y + 6, z - 1) &&
-                        isBlockAir(w, x, y + 7, z - 1) &&
-                        //+z
-                        isBlockAir(w, x, y + 6, z + 1) &&
-                        isBlockAir(w, x, y + 7, z + 1) &&
-                        //-x leaves
-                        isBlockAir(w, x - 2, y + 6, z) &&
-                        isBlockAir(w, x - 3, y + 7, z) &&
-                        isBlockAir(w, x - 3, y + 5, z) &&
-                        isBlockAir(w, x - 4, y + 8, z) &&
-                        //+x leaves
-                        isBlockAir(w, x + 2, y + 6, z) &&
-                        isBlockAir(w, x + 3, y + 7, z) &&
-                        isBlockAir(w, x + 3, y + 5, z) &&
-                        isBlockAir(w, x + 4, y + 8, z) &&
-                        //-z leaves
-                        isBlockAir(w, x, y + 6, z - 2) &&
-                        isBlockAir(w, x, y + 7, z - 3) &&
-                        isBlockAir(w, x, y + 5, z - 3) &&
-                        isBlockAir(w, x, y + 8, z - 4) &&
-                        //+z leaves
-                        isBlockAir(w, x, y + 6, z + 2) &&
-                        isBlockAir(w, x, y + 7, z + 3) &&
-                        isBlockAir(w, x, y + 5, z + 3) &&
-                        isBlockAir(w, x, y + 8, z + 4) &&
-                        //fruit
-                        isBlockAir(w, x, y + 5, z + 1) &&
-                        isBlockAir(w, x, y + 5, z - 1) &&
-                        isBlockAir(w, x + 1, y + 5, z) &&
-                        isBlockAir(w, x - 1, y + 5, z) &&
+            isBlockAir(w, x, y + 1, z) &&
+            isBlockAir(w, x, y + 2, z) &&
+            isBlockAir(w, x, y + 3, z) &&
+            isBlockAir(w, x, y + 4, z) &&
+            isBlockAir(w, x, y + 5, z) &&
+            isBlockAir(w, x, y + 6, z) &&
+            isBlockAir(w, x, y + 7, z) &&
+            isBlockAir(w, x, y + 8, z) &&
+            isBlockAir(w, x, y + 9, z) &&
+            isBlockAir(w, x, y + 10, z) &&
+            //-x
+            isBlockAir(w, x - 1, y + 6, z) &&
+            isBlockAir(w, x - 1, y + 7, z) &&
+            //+x
+            isBlockAir(w, x + 1, y + 6, z) &&
+            isBlockAir(w, x + 1, y + 7, z) &&
+            //-z
+            isBlockAir(w, x, y + 6, z - 1) &&
+            isBlockAir(w, x, y + 7, z - 1) &&
+            //+z
+            isBlockAir(w, x, y + 6, z + 1) &&
+            isBlockAir(w, x, y + 7, z + 1) &&
+            //-x leaves
+            isBlockAir(w, x - 2, y + 6, z) &&
+            isBlockAir(w, x - 3, y + 7, z) &&
+            isBlockAir(w, x - 3, y + 5, z) &&
+            isBlockAir(w, x - 4, y + 8, z) &&
+            //+x leaves
+            isBlockAir(w, x + 2, y + 6, z) &&
+            isBlockAir(w, x + 3, y + 7, z) &&
+            isBlockAir(w, x + 3, y + 5, z) &&
+            isBlockAir(w, x + 4, y + 8, z) &&
+            //-z leaves
+            isBlockAir(w, x, y + 6, z - 2) &&
+            isBlockAir(w, x, y + 7, z - 3) &&
+            isBlockAir(w, x, y + 5, z - 3) &&
+            isBlockAir(w, x, y + 8, z - 4) &&
+            //+z leaves
+            isBlockAir(w, x, y + 6, z + 2) &&
+            isBlockAir(w, x, y + 7, z + 3) &&
+            isBlockAir(w, x, y + 5, z + 3) &&
+            isBlockAir(w, x, y + 8, z + 4) &&
+            //fruit
+            isBlockAir(w, x, y + 5, z + 1) &&
+            isBlockAir(w, x, y + 5, z - 1) &&
+            isBlockAir(w, x + 1, y + 5, z) &&
+            isBlockAir(w, x - 1, y + 5, z) &&
 
-                        isBlockAir(w, x, y + 4, z + 1) &&
-                        isBlockAir(w, x, y + 4, z - 1) &&
-                        isBlockAir(w, x + 1, y + 4, z) &&
-                        isBlockAir(w, x - 1, y + 4, z) &&
+            isBlockAir(w, x, y + 4, z + 1) &&
+            isBlockAir(w, x, y + 4, z - 1) &&
+            isBlockAir(w, x + 1, y + 4, z) &&
+            isBlockAir(w, x - 1, y + 4, z) &&
 
-                        isBlockAir(w, x, y + 3, z + 1) &&
-                        isBlockAir(w, x, y + 3, z - 1) &&
-                        isBlockAir(w, x + 1, y + 3, z) &&
-                        isBlockAir(w, x - 1, y + 3, z)) {
+            isBlockAir(w, x, y + 3, z + 1) &&
+            isBlockAir(w, x, y + 3, z - 1) &&
+            isBlockAir(w, x + 1, y + 3, z) &&
+            isBlockAir(w, x - 1, y + 3, z)) {
             return true;
         } else {
             return false;

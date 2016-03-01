@@ -319,7 +319,7 @@ public class FoodCraftRegistration {
 
     @ModIcecream(type = ModFruit.FruitType.Banana)
     public static IcecreamItem itemFruitBananaIcecream;
-    
+
     // Soda Registry
     // 汽水注册
     @ModSoda(type = ModFruit.FruitType.Pear)

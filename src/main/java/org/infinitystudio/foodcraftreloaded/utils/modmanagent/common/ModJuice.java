@@ -27,6 +27,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModJuice {
-	ModFruit.FruitType type();
-    boolean itemRender() default true;
+    ModFruit.FruitType type();
+boolean itemRender() default true;
 }

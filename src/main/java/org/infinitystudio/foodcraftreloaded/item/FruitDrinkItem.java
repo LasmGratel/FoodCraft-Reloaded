@@ -25,16 +25,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FruitDrinkItem extends FoodItem {
-	public int colour;
+    public int colour;
     public FruitDrinkItem(String name, int color) {
         super(name, 4.0f, false);
         colour = color;
     }
     @SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int renderPass) {
-			return renderPass == 0 ? 16777215 : colour;
-	}
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return renderPass == 0 ? 16777215 : colour;
+    }
     public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-		return EnumAction.DRINK;
-	}
+        return EnumAction.DRINK;
+    }
 }

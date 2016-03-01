@@ -35,9 +35,9 @@ public @interface ModBlockFluid {
     /**
      * @return true if model should be rendered
      */
-    boolean modelRender() default true;
+boolean modelRender() default true;
 
     String name();
 
-    boolean bucket() default false;
+boolean bucket() default false;
 }

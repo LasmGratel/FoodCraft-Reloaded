@@ -121,14 +121,14 @@ public @interface ModFruit {
         Banana(0xf7eb6a);
         private int color;
         public int getcolor() {
-        	return color;
+            return color;
         }
         FruitType(int color) {
-        	this.color = color;
+            this.color = color;
         }
     }
 
     FruitType type();
 
-    boolean itemRender() default true;
+boolean itemRender() default true;
 }

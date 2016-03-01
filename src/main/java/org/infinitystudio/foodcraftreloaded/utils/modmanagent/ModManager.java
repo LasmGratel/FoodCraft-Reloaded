@@ -95,7 +95,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in pre initialization.";
+                                 + annotation.toString() + "' in pre initialization.";
                 throw new RuntimeException(message, e);
             }
         }
@@ -115,7 +115,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in initialization.";
+                                 + annotation.toString() + "' in initialization.";
                 throw new RuntimeException(message, e);
             }
         }
@@ -135,7 +135,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in post initialization.";
+                                 + annotation.toString() + "' in post initialization.";
                 throw new RuntimeException(message, e);
             }
         }
@@ -155,7 +155,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in pre initialization.";
+                                 + annotation.toString() + "' in pre initialization.";
                 throw new RuntimeException(message, e);
             }
         }
@@ -175,7 +175,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in initialization.";
+                                 + annotation.toString() + "' in initialization.";
                 throw new RuntimeException(message, e);
             }
         }
@@ -195,7 +195,7 @@ public class ModManager {
                 }
             } catch (Exception e) {
                 String message = "Cannot register field '" + entry.getKey().getName() + "' with annotation '"
-                        + annotation.toString() + "' in post initialization.";
+                                 + annotation.toString() + "' in post initialization.";
                 throw new RuntimeException(message, e);
             }
         }

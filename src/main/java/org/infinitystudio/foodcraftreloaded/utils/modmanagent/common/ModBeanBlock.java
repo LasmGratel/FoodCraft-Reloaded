@@ -34,10 +34,10 @@ public @interface ModBeanBlock {
     /**
      * @return true if item should be rendered
      */
-    boolean itemRender() default true;
+boolean itemRender() default true;
 
     /**
      * @return ItemBlock Class
      */
-    Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
+Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
 }
