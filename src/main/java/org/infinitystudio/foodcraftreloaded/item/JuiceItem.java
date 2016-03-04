@@ -27,8 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class JuiceItem extends FoodItem {
     private int color;
 
-    public JuiceItem(String name) {
-        super(name, 4.0f);
+    public JuiceItem() {
+        super(4.0f);
     }
 
     public int getColor() {

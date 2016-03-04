@@ -27,8 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class SodaItem extends FoodItem {
     private int color;
 
-    public SodaItem(String name) {
-        super(name, 4.0f);
+    public SodaItem() {
+        super(4.0f);
     }
 
     public int getColor() {

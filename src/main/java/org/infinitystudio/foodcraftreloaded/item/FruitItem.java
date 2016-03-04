@@ -20,7 +20,7 @@
 package org.infinitystudio.foodcraftreloaded.item;
 
 public class FruitItem extends FoodItem {
-    public FruitItem(String name) {
-        super(name, 1.0f);
+    public FruitItem() {
+        super(1.0f);
     }
 }

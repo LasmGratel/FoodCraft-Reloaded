@@ -32,8 +32,8 @@ import net.minecraftforge.common.IPlantable;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
 public class VegetableItem extends FoodItem implements IPlantable {
-    public VegetableItem(String name, float saturation) {
-        super(name, saturation);
+    public VegetableItem(float saturation) {
+        super(saturation);
     }
 
     protected boolean canPlant = false;

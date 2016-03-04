@@ -26,8 +26,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class IcecreamItem extends FoodItem {
     private int color;
 
-    public IcecreamItem(String name) {
-        super(name, 5.0f);
+    public IcecreamItem() {
+        super(5.0f);
     }
 
     public int getColor() {

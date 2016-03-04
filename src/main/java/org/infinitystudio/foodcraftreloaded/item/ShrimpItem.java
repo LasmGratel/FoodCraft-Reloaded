@@ -29,10 +29,10 @@ import net.minecraft.world.World;
  * Shrimp
  * 虾
  */
-public class Shrimp extends FoodItem {
+public class ShrimpItem extends FoodItem {
 
-    public Shrimp(String name) {
-        super(name, 2.0f);
+    public ShrimpItem(float saturation) {
+        super(saturation);
     }
 
     @Override

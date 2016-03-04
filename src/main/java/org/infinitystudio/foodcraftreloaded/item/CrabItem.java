@@ -29,10 +29,10 @@ import net.minecraft.world.World;
  * Crab
  * 螃蟹
  */
-public class Crab extends FoodItem {
+public class CrabItem extends FoodItem {
 
-    public Crab(String name) {
-        super(name, 2.0f);
+    public CrabItem(float saturation) {
+        super(saturation);
     }
 
     @Override

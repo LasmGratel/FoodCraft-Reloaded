@@ -21,7 +21,11 @@ package org.infinitystudio.foodcraftreloaded.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import org.infinitystudio.foodcraftreloaded.block.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomFishable;
+import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
+import org.infinitystudio.foodcraftreloaded.block.BeanBlock;
+import org.infinitystudio.foodcraftreloaded.block.VegetableBlock;
 import org.infinitystudio.foodcraftreloaded.item.*;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.*;
 
@@ -366,4 +370,25 @@ public class FoodCraftRegistration {
 
     @ModSoda(type = ModFruit.FruitType.Banana)
     public static SodaItem itemFruitBananaSoda;
+
+    // Meat Registry
+    // 肉类注册
+
+    // Fish Registry
+    // 水产注册
+    @ModFood(name = "itemMeatCrabRaw", oredicts = {"foodCrabraw"}, satuation = 2.0f)
+    public static CrabItem itemMeatCrabRaw;
+
+    public static WeightedRandomFishable fishCrab = new WeightedRandomFishable(new ItemStack(itemMeatCrabRaw), 1);
+
+    @ModFood(name = "itemMeatShrimpRaw", oredicts = {"foodShrimpraw", "listAllfishraw"}, satuation = 2.0f)
+    public static ShrimpItem itemMeatShrimpRaw;
+
+    public static WeightedRandomFishable fishShrimp = new WeightedRandomFishable(new ItemStack(itemMeatShrimpRaw), 1);
+
+    @ModFood(name = "itemMeatCrabCooked", oredicts = {"foodCrabcooked"}, satuation = 4.0f)
+    public static FoodItem itemMeatCrabCooked;
+
+    @ModFood(name = "itemMeatShrimpRaw", oredicts = {"foodShrimpcooked", "listAllfishcooked"}, satuation = 4.0f)
+    public static FoodItem itemMeatShrimpCooked;
 }

@@ -159,7 +159,7 @@ public class CommonModManagement {
         @Override
         public void register(String modid, ModBeanBlock annotation, Object instance) throws Exception {
             String sproutsName = "item" + annotation.type().name() + "BeanSprouts";
-            ;
+
             String seedName = "item" + annotation.type().name() + "Bean";
             String name = "block" + annotation.type().name() + "Bean";
 
@@ -187,15 +187,6 @@ public class CommonModManagement {
 
     public final static ModManagement<ModFruit> FRUIT = new ModManagement<ModFruit>(ModFruit.class, IModManagement.Stage.PREINIT) {
         @Override
-        public Object init(String modid, ModFruit annotation, Class<?> clazz) throws Exception {
-            String fruitName = "itemFruit" + annotation.type().name();
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-            return FruitItem.class.getConstructor(typeName).newInstance(fruitName);
-        }
-
-        @Override
         public void register(String modid, ModFruit annotation, Object instance) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name();
             ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
@@ -218,15 +209,6 @@ public class CommonModManagement {
 
     public final static ModManagement<ModJuice> JUICE = new ModManagement<ModJuice>(ModJuice.class, IModManagement.Stage.INIT) {
         @Override
-        public Object init(String modid, ModJuice annotation, Class<?> clazz) throws Exception {
-            String fruitName = "itemJuice" + annotation.type().name();
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-            return JuiceItem.class.getConstructor(typeName).newInstance(fruitName);
-        }
-
-        @Override
         public void register(String modid, ModJuice annotation, Object instance) throws Exception {
             String fruitName = "itemJuice" + annotation.type().name();
             ((JuiceItem) instance).setColor(annotation.type().getColor());
@@ -240,7 +222,7 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModJuice annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String fruitName = "itemJuice" + annotation.type().name();
+                String fruitName = "itemJuice";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
@@ -249,15 +231,6 @@ public class CommonModManagement {
     };
 
     public final static ModManagement<ModIcecream> FRUITICECREAM = new ModManagement<ModIcecream>(ModIcecream.class, IModManagement.Stage.INIT) {
-        @Override
-        public Object init(String modid, ModIcecream annotation, Class<?> clazz) throws Exception {
-            String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-            return IcecreamItem.class.getConstructor(typeName).newInstance(fruitName);
-        }
-
         @Override
         public void register(String modid, ModIcecream annotation, Object instance) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
@@ -272,7 +245,7 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModIcecream annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
+                String fruitName = "itemFruitIcecream";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
@@ -281,15 +254,6 @@ public class CommonModManagement {
     };
 
     public final static ModManagement<ModSprouts> SPROUTS = new ModManagement<ModSprouts>(ModSprouts.class, IModManagement.Stage.PREINIT) {
-        @Override
-        public Object init(String modid, ModSprouts annotation, Class<?> clazz) throws Exception {
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-
-            String beanName = "item" + annotation.type().name() + "BeanSprouts";
-            return SproutsItem.class.getConstructor(typeName).newInstance(beanName);
-        }
 
         @Override
         public void register(String modid, ModSprouts annotation, Object instance) throws Exception {
@@ -314,17 +278,6 @@ public class CommonModManagement {
     };
 
     public final static ModManagement<ModBean> BEAN = new ModManagement<ModBean>(ModBean.class, IModManagement.Stage.PREINIT) {
-        @Override
-        public Object init(String modid, ModBean annotation, Class<?> clazz) throws Exception {
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-
-            String beanName = "item" + annotation.type().name() + "Bean";
-
-            return BeanItem.class.getConstructor(typeName).newInstance(beanName);
-        }
-
         @Override
         public void register(String modid, ModBean annotation, Object instance) throws Exception {
             ((Item) instance).setUnlocalizedName("item" + annotation.type().name() + "Bean");
@@ -351,7 +304,7 @@ public class CommonModManagement {
         @Override
         public Object init(String modid, ModFood annotation, Class<?> clazz) throws Exception {
             Class<?>[] types = {
-                    String.class, float.class
+                    float.class
             };
             Constructor<FoodItem> constructor = FoodItem.class.getConstructor(types);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
@@ -382,7 +335,7 @@ public class CommonModManagement {
         @Override
         public Object init(String modid, ModVegetable annotation, Class<?> clazz) throws Exception {
             Class[] type = new Class[]{
-                    String.class, float.class
+                    float.class
             };
             Constructor<VegetableItem> constructor = VegetableItem.class.getConstructor(type);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
@@ -432,7 +385,7 @@ public class CommonModManagement {
         @Override
         public Object init(String modid, ModMeat annotation, Class<?> clazz) throws Exception {
             Class[] type = new Class[]{
-                    String.class, float.class
+                    float.class
             };
             Constructor<MeatItem> constructor = MeatItem.class.getConstructor(type);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
@@ -509,15 +462,6 @@ public class CommonModManagement {
     };
     public final static ModManagement<ModSoda> FRUITSODA = new ModManagement<ModSoda>(ModSoda.class, IModManagement.Stage.INIT) {
         @Override
-        public Object init(String modid, ModSoda annotation, Class<?> clazz) throws Exception {
-            String fruitName = "itemFruit" + annotation.type().name() + "Soda";
-            Class[] typeName = new Class[]{
-                    String.class
-            };
-            return SodaItem.class.getConstructor(typeName).newInstance(fruitName);
-        }
-
-        @Override
         public void register(String modid, ModSoda annotation, Object instance) throws Exception {
             String fruitName = "itemFruit" + annotation.type().name() + "Soda";
             ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
@@ -531,7 +475,7 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModSoda annotation, Object instance) throws Exception {
             if (annotation.itemRender()) {
-                String fruitName = "itemFruit" + annotation.type().name() + "Soda";
+                String fruitName = "itemFruitSoda";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
                 Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);

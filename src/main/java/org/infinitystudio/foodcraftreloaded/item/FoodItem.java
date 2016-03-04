@@ -29,9 +29,8 @@ import net.minecraft.world.World;
 public class FoodItem extends ItemFood {
     protected boolean hasEffect = false;
 
-    public FoodItem(String name, float saturation) {
+    public FoodItem(float saturation) {
         super((int) saturation, saturation, false);
-        setUnlocalizedName(name);
     }
 
     public boolean isHasEffect() {
