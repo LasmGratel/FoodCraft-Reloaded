@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,27 +17,10 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+package org.infinitystudio.foodcraftreloaded.tileentity;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public class GlassCupTileEntity extends TileEntity {
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModBeanBlock {
-    ModBean.BeanType type();
-
-    /**
-     * @return true if item should be rendered
-     */
-    boolean itemRender() default true;
-
-    /**
-     * @return ItemBlock Class
-     */
-    Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
 }

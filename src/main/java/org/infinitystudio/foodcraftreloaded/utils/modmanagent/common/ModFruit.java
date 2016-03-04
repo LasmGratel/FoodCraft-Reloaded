@@ -28,6 +28,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModFruit {
+    FruitType type();
+
+    boolean itemRender() default true;
+
     enum FruitType {
         /**
          * Pear
@@ -119,16 +123,16 @@ public @interface ModFruit {
          * 香蕉
          */
         Banana(0xf7eb6a);
+
         private int color;
-        public int getcolor() {
-            return color;
-        }
+
         FruitType(int color) {
             this.color = color;
         }
+
+        public int getColor() {
+            return color;
+        }
+
     }
-
-    FruitType type();
-
-boolean itemRender() default true;
 }

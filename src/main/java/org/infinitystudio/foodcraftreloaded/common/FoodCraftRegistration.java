@@ -226,49 +226,49 @@ public class FoodCraftRegistration {
     // Juice Registry
     // 果汁注册
     @ModJuice(type = ModFruit.FruitType.Pear)
-    public static FruitDrinkItem itemFruitPearDrink;
+    public static JuiceItem itemFruitPearDrink;
 
     @ModJuice(type = ModFruit.FruitType.Litchi)
-    public static FruitDrinkItem itemFruitLitchiDrink;
+    public static JuiceItem itemFruitLitchiDrink;
 
     @ModJuice(type = ModFruit.FruitType.Peach)
-    public static FruitDrinkItem itemFruitPeachDrink;
+    public static JuiceItem itemFruitPeachDrink;
 
     @ModJuice(type = ModFruit.FruitType.Orange)
-    public static FruitDrinkItem itemFruitOrangeDrink;
+    public static JuiceItem itemFruitOrangeDrink;
 
     @ModJuice(type = ModFruit.FruitType.Mango)
-    public static FruitDrinkItem itemFruitMangoDrink;
+    public static JuiceItem itemFruitMangoDrink;
 
     @ModJuice(type = ModFruit.FruitType.Lemon)
-    public static FruitDrinkItem itemFruitLemonDrink;
+    public static JuiceItem itemFruitLemonDrink;
 
     @ModJuice(type = ModFruit.FruitType.Grapefruit)
-    public static FruitDrinkItem itemFruitGrapefruitDrink;
+    public static JuiceItem itemFruitGrapefruitDrink;
 
     @ModJuice(type = ModFruit.FruitType.Persimmon)
-    public static FruitDrinkItem itemFruitPersimmonDrink;
+    public static JuiceItem itemFruitPersimmonDrink;
 
     @ModJuice(type = ModFruit.FruitType.Papaya)
-    public static FruitDrinkItem itemFruitPapayaDrink;
+    public static JuiceItem itemFruitPapayaDrink;
 
     @ModJuice(type = ModFruit.FruitType.Hawthorn)
-    public static FruitDrinkItem itemFruitHawthornDrink;
+    public static JuiceItem itemFruitHawthornDrink;
 
     @ModJuice(type = ModFruit.FruitType.Pomegranate)
-    public static FruitDrinkItem itemFruitPomegranateDrink;
+    public static JuiceItem itemFruitPomegranateDrink;
 
     @ModJuice(type = ModFruit.FruitType.Date)
-    public static FruitDrinkItem itemFruitDateDrink;
+    public static JuiceItem itemFruitDateDrink;
 
     @ModJuice(type = ModFruit.FruitType.Cherry)
-    public static FruitDrinkItem itemFruitCherryDrink;
+    public static JuiceItem itemFruitCherryDrink;
 
     @ModJuice(type = ModFruit.FruitType.Coconut)
-    public static FruitDrinkItem itemFruitCoconutDrink;
+    public static JuiceItem itemFruitCoconutDrink;
 
     @ModJuice(type = ModFruit.FruitType.Banana)
-    public static FruitDrinkItem itemFruitBananaDrink;
+    public static JuiceItem itemFruitBananaDrink;
 
     // Ice-cream Registry
     // 冰激凌注册

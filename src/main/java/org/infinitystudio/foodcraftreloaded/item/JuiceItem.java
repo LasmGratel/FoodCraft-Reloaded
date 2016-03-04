@@ -17,27 +17,34 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
+package org.infinitystudio.foodcraftreloaded.item;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public class JuiceItem extends FoodItem {
+    private int color;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface ModBeanBlock {
-    ModBean.BeanType type();
+    public JuiceItem(String name) {
+        super(name, 4.0f);
+    }
 
-    /**
-     * @return true if item should be rendered
-     */
-    boolean itemRender() default true;
+    public int getColor() {
+        return color;
+    }
 
-    /**
-     * @return ItemBlock Class
-     */
-    Class<? extends ItemBlock> itemBlock() default ItemBlock.class;
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return renderPass == 0 ? 16777215 : color;
+    }
+
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+        return EnumAction.DRINK;
+    }
 }

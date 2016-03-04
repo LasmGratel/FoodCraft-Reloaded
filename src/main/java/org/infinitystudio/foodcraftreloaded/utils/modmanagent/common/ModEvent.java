@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModEvent {
-ModEvent.Target value() default Target.FORGE;
+    ModEvent.Target value() default Target.FORGE;
 
     enum Target {
         NONE, FORGE, TERRAIN, ORE, FML, ALL

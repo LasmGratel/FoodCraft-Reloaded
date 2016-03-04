@@ -27,6 +27,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModBean {
+    BeanType type();
+
+    boolean itemRender() default true;
+
     enum BeanType {
         /**
          * Red Beans
@@ -52,8 +56,4 @@ public @interface ModBean {
          */
         Soy
     }
-
-    BeanType type();
-
-boolean itemRender() default true;
 }

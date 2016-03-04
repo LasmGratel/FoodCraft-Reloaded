@@ -27,18 +27,27 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class FoodItem extends ItemFood {
-    public boolean hasEffect = false;
+    protected boolean hasEffect = false;
 
-    public FoodItem(String name, float saturation, boolean hasEffect) {
+    public FoodItem(String name, float saturation) {
         super((int) saturation, saturation, false);
-        this.hasEffect = hasEffect;
         setUnlocalizedName(name);
     }
 
+    public boolean isHasEffect() {
+        return hasEffect;
+    }
+
+    public void setHasEffect(boolean hasEffect) {
+        this.hasEffect = hasEffect;
+    }
+
+    @Override
     public boolean hasEffect(ItemStack par1ItemStack) {
         return hasEffect;
     }
 
+    @Override
     protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
         if (hasEffect) {
             int o;

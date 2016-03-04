@@ -35,7 +35,7 @@ public @interface ModItem {
     /**
      * @return true if item should be rendered
      */
-boolean itemRender() default true;
+    boolean itemRender() default true;
 
     String name();
 }

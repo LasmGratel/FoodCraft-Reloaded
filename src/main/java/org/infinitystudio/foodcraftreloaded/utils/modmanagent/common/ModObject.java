@@ -34,5 +34,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ModObject {
-IModManagement.Stage stage() default IModManagement.Stage.PREINIT;
+    IModManagement.Stage stage() default IModManagement.Stage.PREINIT;
 }

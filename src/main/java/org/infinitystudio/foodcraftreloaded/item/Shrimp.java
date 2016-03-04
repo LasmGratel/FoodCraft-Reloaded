@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -19,32 +19,37 @@
  */
 package org.infinitystudio.foodcraftreloaded.item;
 
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
 
-public class SodaItem extends FoodItem {
-    private int color;
+/**
+ * Shrimp
+ * 虾
+ */
+public class Shrimp extends FoodItem {
 
-    public SodaItem(String name) {
-        super(name, 4.0f);
+    public Shrimp(String name) {
+        super(name, 2.0f);
     }
 
-    public int getColor() {
-        return color;
-    }
+    @Override
+    protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
+        if (hasEffect) {
+            int o;
+            if (!w.isRemote) {
+                o = w.rand.nextInt(1);
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack stack, int renderPass) {
-        return renderPass == 1 ? color : 16777215;
-    }
-
-    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-        return EnumAction.DRINK;
+                switch (o) {
+                    case 0:
+                        ep.addPotionEffect(new PotionEffect(Potion.hunger.id, 6000, 1));
+                        break;
+                }
+            }
+            hasEffect = false;
+        }
+        super.onFoodEaten(is, w, ep);
     }
 }

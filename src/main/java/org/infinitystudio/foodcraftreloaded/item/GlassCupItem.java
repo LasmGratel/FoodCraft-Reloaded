@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -19,22 +19,8 @@
  */
 package org.infinitystudio.foodcraftreloaded.item;
 
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+public class GlassCupItem extends BaseItem {
+    public GlassCupItem() {
 
-public class FruitDrinkItem extends FoodItem {
-    public int colour;
-    public FruitDrinkItem(String name, int color) {
-        super(name, 4.0f, false);
-        colour = color;
-    }
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack stack, int renderPass) {
-        return renderPass == 0 ? 16777215 : colour;
-    }
-    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
-        return EnumAction.DRINK;
     }
 }

@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,34 @@
  */
 package org.infinitystudio.foodcraftreloaded.item;
 
-public class BeanItem extends VegetableItem {
-    public BeanItem(String name) {
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
+
+/**
+ * Crab
+ * 螃蟹
+ */
+public class Crab extends FoodItem {
+
+    public Crab(String name) {
         super(name, 2.0f);
+    }
+
+    @Override
+    protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
+        int o;
+        if (!w.isRemote) {
+            o = w.rand.nextInt(1);
+
+            switch (o) {
+                case 0:
+                    ep.addPotionEffect(new PotionEffect(Potion.hunger.id, 6000, 1));
+                    break;
+            }
+        }
+        super.onFoodEaten(is, w, ep);
     }
 }

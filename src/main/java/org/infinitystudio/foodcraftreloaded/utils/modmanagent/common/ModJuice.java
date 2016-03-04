@@ -28,5 +28,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ModJuice {
     ModFruit.FruitType type();
-boolean itemRender() default true;
+
+    boolean itemRender() default true;
 }
