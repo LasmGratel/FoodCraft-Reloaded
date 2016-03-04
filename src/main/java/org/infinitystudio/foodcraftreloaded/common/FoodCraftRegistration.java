@@ -33,7 +33,7 @@ public class FoodCraftRegistration {
     /**
      * 基础 Base
      */
-    public static final CreativeTabs FcTabBase = new CreativeTabs("creativetabs.base") {
+    public static final CreativeTabs FcTabBase = new CreativeTabs("foodcraftreloaded.base") {
         @Override
         public Item getTabIconItem() {
             return Item.getItemFromBlock(blockRice);
@@ -43,7 +43,7 @@ public class FoodCraftRegistration {
     /**
      * 植物&种子 Plants & Seeds
      */
-    public static final CreativeTabs FcTabPlant = new CreativeTabs("creativetabs.plant") {
+    public static final CreativeTabs FcTabPlant = new CreativeTabs("foodcraftreloaded.plant") {
         @Override
         public Item getTabIconItem() {
             return itemBlackBean;
@@ -53,7 +53,7 @@ public class FoodCraftRegistration {
     /**
      * 饮品 Drinks
      */
-    public static final CreativeTabs FcTabDrink = new CreativeTabs("creativetabs.drink") {
+    public static final CreativeTabs FcTabDrink = new CreativeTabs("foodcraftreloaded.drink") {
         @Override
         public Item getTabIconItem() {
             return itemFruitOrangeDrink;
@@ -63,7 +63,7 @@ public class FoodCraftRegistration {
     /**
      * 主食 Staple
      */
-    public static final CreativeTabs FcTabStaple = new CreativeTabs("creativetabs.staple") {
+    public static final CreativeTabs FcTabStaple = new CreativeTabs("foodcraftreloaded.staple") {
         @Override
         public Item getTabIconItem() {
             return itemBlackBean;
@@ -73,7 +73,7 @@ public class FoodCraftRegistration {
     /**
      * 食材 Ingredient
      */
-    public static final CreativeTabs FcTabIngredient = new CreativeTabs("creativetabs.ingredient") {
+    public static final CreativeTabs FcTabIngredient = new CreativeTabs("foodcraftreloaded.ingredient") {
         @Override
         public Item getTabIconItem() {
             return itemBlackBean;
@@ -83,7 +83,7 @@ public class FoodCraftRegistration {
     /**
      * 小吃 Snack
      */
-    public static final CreativeTabs FcTabSnack = new CreativeTabs("creativetabs.snack") {
+    public static final CreativeTabs FcTabSnack = new CreativeTabs("foodcraftreloaded.snack") {
         @Override
         public Item getTabIconItem() {
             return itemBlackBean;
