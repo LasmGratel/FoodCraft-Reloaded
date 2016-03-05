@@ -17,10 +17,10 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
-public class SproutsItem extends FoodItem {
-    public SproutsItem() {
-        super(1.0f);
+public class ItemMeat extends ItemFcFood {
+    public ItemMeat(float saturation) {
+        super(saturation);
     }
 }

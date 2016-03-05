@@ -17,7 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -31,8 +31,8 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
-public class VegetableItem extends FoodItem implements IPlantable {
-    public VegetableItem(float saturation) {
+public class ItemVegetable extends ItemFcFood implements IPlantable {
+    public ItemVegetable(float saturation) {
         super(saturation);
     }
 

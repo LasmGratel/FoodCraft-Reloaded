@@ -17,24 +17,10 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.IBlockAccess;
-
-import java.util.List;
-
-public class FruitTreeLeavesBlock extends BlockLeaves {
-    @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        return BlockPlanks.EnumType.JUNGLE;
-    }
-
-    @Override
-    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return null;
+public class ItemFruit extends ItemFcFood {
+    public ItemFruit() {
+        super(1.0f);
     }
 }

@@ -17,7 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,9 +29,9 @@ import net.minecraft.world.World;
  * Shrimp
  * 虾
  */
-public class ShrimpItem extends FoodItem {
+public class ItemShrimp extends ItemFcFood {
 
-    public ShrimpItem(float saturation) {
+    public ItemShrimp(float saturation) {
         super(saturation);
     }
 

@@ -17,36 +17,29 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class VegetableBlock extends BlockCrops {
-    private String crop;
-    private String seed;
+public class ItemIcecream extends ItemFcFood {
+    private int color;
 
-    public VegetableBlock() {
-        this.setHarvestLevel("pickaxe", -1);
-        this.setStepSound(Block.soundTypeGrass);
+    public ItemIcecream() {
+        super(5.0f);
     }
 
-    public void setCrop(String crop) {
-        this.crop = crop;
+    public int getColor() {
+        return color;
     }
 
-    public void setSeed(String seed) {
-        this.seed = seed;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    @Override
-    public Item getSeed() {
-        return Item.getByNameOrId(seed);
-    }
-
-    @Override
-    public Item getCrop() {
-        return Item.getByNameOrId(crop);
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return renderPass == 0 ? 16777215 : color;
     }
 }

@@ -17,7 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
@@ -26,10 +26,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class FoodItem extends ItemFood {
+public class ItemFcFood extends ItemFood {
     protected boolean hasEffect = false;
 
-    public FoodItem(float saturation) {
+    public ItemFcFood(float saturation) {
         super((int) saturation, saturation, false);
     }
 

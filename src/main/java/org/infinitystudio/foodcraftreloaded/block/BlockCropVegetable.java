@@ -17,10 +17,36 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.block;
 
-public class MeatItem extends FoodItem {
-    public MeatItem(float saturation) {
-        super(saturation);
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
+import net.minecraft.item.Item;
+
+public class BlockCropVegetable extends BlockCrops {
+    private String crop;
+    private String seed;
+
+    public BlockCropVegetable() {
+        this.setHarvestLevel("pickaxe", -1);
+        this.setStepSound(Block.soundTypeGrass);
+    }
+
+    public void setCrop(String crop) {
+        this.crop = crop;
+    }
+
+    public void setSeed(String seed) {
+        this.seed = seed;
+    }
+
+    @Override
+    public Item getSeed() {
+        return Item.getByNameOrId(seed);
+    }
+
+    @Override
+    public Item getCrop() {
+        return Item.getByNameOrId(crop);
     }
 }

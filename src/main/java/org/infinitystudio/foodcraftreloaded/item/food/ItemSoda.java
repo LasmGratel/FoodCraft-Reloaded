@@ -17,10 +17,34 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.item.food;
 
-public class FruitItem extends FoodItem {
-    public FruitItem() {
-        super(1.0f);
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class ItemSoda extends ItemFcFood {
+    private int color;
+
+    public ItemSoda() {
+        super(4.0f);
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack stack, int renderPass) {
+        return renderPass == 1 ? color : 16777215;
+    }
+
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+        return EnumAction.DRINK;
     }
 }

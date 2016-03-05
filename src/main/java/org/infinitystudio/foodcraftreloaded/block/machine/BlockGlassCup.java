@@ -17,7 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.block.machine;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,11 +37,25 @@ import org.infinitystudio.foodcraftreloaded.tileentity.GlassCupTileEntity;
  * Cup Block
  * 杯子
  */
-public class GlassCupBlock extends Block {
-    public GlassCupBlock() {
+public class BlockGlassCup extends Block {
+    public BlockGlassCup() {
         super(Material.glass);
         setHardness(1.0f);
         setResistance(5.0f);
+    }
+
+    /**
+     * Called throughout the code as a replacement for ITileEntityProvider.createNewTileEntity
+     * Return the same thing you would from that function.
+     * This will fall back to ITileEntityProvider.createNewTileEntity(World) if this block is a ITileEntityProvider
+     *
+     * @param world
+     * @param state
+     * @return A instance of a class extending TileEntity
+     */
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new GlassCupTileEntity();
     }
 
     @Override
@@ -57,6 +71,10 @@ public class GlassCupBlock extends Block {
                 if (fluid != null) {
                     if (currentItemStack.isItemEqual(new ItemStack(Items.potionitem))) {
                         fluid = new FluidStack(fluid.getFluid(), (FluidContainerRegistry.BUCKET_VOLUME / 4), fluid.tag);
+                        glassCup.drain(side, fluid, true);
+                    } else if (currentItemStack.getUnlocalizedName().startsWith("itemJuice")) {
+                        fluid = new FluidStack(fluid.getFluid(), (FluidContainerRegistry.BUCKET_VOLUME / 4), fluid.tag);
+                        glassCup.drain(side, fluid, true);
                     }
                 }
             }

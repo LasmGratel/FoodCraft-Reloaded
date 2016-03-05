@@ -1,5 +1,5 @@
 /**
- * Singularity Mod for Minecraft.
+ * FoodCraft Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,36 +17,24 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.block.tree.fruit;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
-/**
- * Crab
- * 螃蟹
- */
-public class CrabItem extends FoodItem {
+import java.util.List;
 
-    public CrabItem(float saturation) {
-        super(saturation);
+public class BlockFruitTreeLeaves extends BlockLeaves {
+    @Override
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return BlockPlanks.EnumType.JUNGLE;
     }
 
     @Override
-    protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
-        int o;
-        if (!w.isRemote) {
-            o = w.rand.nextInt(1);
-
-            switch (o) {
-                case 0:
-                    ep.addPotionEffect(new PotionEffect(Potion.hunger.id, 6000, 1));
-                    break;
-            }
-        }
-        super.onFoodEaten(is, w, ep);
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return null;
     }
 }

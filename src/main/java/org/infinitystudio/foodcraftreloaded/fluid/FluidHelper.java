@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,32 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.fluid;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-
-import java.util.Random;
-
-public class BeanBlock extends VegetableBlock {
-    private String sprouts;
-
-    @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        if (state.getValue(AGE) == 7)
-            return getCrop();
-        else if(state.getValue(AGE) == 2)
-            return getSprouts();
-        else
-            return getSeed();
-    }
-
-    public Item getSprouts() {
-        return Item.getByNameOrId(sprouts);
-    }
-
-    public void setSprouts(String sprouts) {
-        this.sprouts = sprouts;
-    }
-
+public class FluidHelper {
 }

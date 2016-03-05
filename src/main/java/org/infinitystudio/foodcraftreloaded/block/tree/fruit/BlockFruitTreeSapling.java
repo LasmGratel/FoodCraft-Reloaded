@@ -17,7 +17,7 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.block.tree.fruit;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -25,13 +25,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
 
 import java.util.Random;
 
-public class FruitTreeSaplingBlock extends BaseBlock implements IGrowable {
+public class BlockFruitTreeSapling extends BaseBlock implements IGrowable {
     private Block fruit;
 
-    public FruitTreeSaplingBlock(Block fruitBlock) {
+    public BlockFruitTreeSapling(Block fruitBlock) {
         fruit = fruitBlock;
     }
 

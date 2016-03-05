@@ -17,10 +17,32 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.block;
 
-public class BeanItem extends VegetableItem {
-    public BeanItem() {
-        super(2.0f);
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
+
+import java.util.Random;
+
+public class BlockCropBean extends BlockCropVegetable {
+    private String sprouts;
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        if (state.getValue(AGE) == 7)
+            return getCrop();
+        else if(state.getValue(AGE) == 2)
+            return getSprouts();
+        else
+            return getSeed();
     }
+
+    public Item getSprouts() {
+        return Item.getByNameOrId(sprouts);
+    }
+
+    public void setSprouts(String sprouts) {
+        this.sprouts = sprouts;
+    }
+
 }

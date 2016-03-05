@@ -1,5 +1,5 @@
 /**
- * Singularity Mod for Minecraft.
+ * FoodCraft Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.block.tree.fruit;
 
-public class GlassCupItem extends BaseItem {
-    public GlassCupItem() {
+import net.minecraft.block.BlockLog;
 
-    }
+public class BlockFruitTree extends BlockLog {
 }

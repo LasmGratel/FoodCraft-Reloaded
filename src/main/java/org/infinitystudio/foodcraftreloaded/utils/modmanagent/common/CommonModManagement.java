@@ -30,6 +30,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -40,10 +41,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import org.infinitystudio.foodcraftreloaded.block.BeanBlock;
-import org.infinitystudio.foodcraftreloaded.block.VegetableBlock;
+import org.infinitystudio.foodcraftreloaded.block.BlockCropBean;
+import org.infinitystudio.foodcraftreloaded.block.BlockCropVegetable;
+import org.infinitystudio.foodcraftreloaded.block.BlockJuiceFluid;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
-import org.infinitystudio.foodcraftreloaded.item.*;
+import org.infinitystudio.foodcraftreloaded.fluid.FluidJuice;
+import org.infinitystudio.foodcraftreloaded.item.food.*;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.IModManagement;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.ModManagement;
 
@@ -163,10 +166,10 @@ public class CommonModManagement {
             String seedName = "item" + annotation.type().name() + "Bean";
             String name = "block" + annotation.type().name() + "Bean";
 
-            ((BeanBlock) instance).setUnlocalizedName(name);
-            ((BeanBlock) instance).setSeed(seedName);
-            ((BeanBlock) instance).setCrop(seedName);
-            ((BeanBlock) instance).setSprouts(sproutsName);
+            ((BlockCropBean) instance).setUnlocalizedName(name);
+            ((BlockCropBean) instance).setSeed(seedName);
+            ((BlockCropBean) instance).setCrop(seedName);
+            ((BlockCropBean) instance).setSprouts(sproutsName);
 
             GameRegistry.registerBlock((Block) instance, annotation.itemBlock(), name);
 
@@ -211,7 +214,7 @@ public class CommonModManagement {
         @Override
         public void register(String modid, ModJuice annotation, Object instance) throws Exception {
             String fruitName = "itemJuice" + annotation.type().name();
-            ((JuiceItem) instance).setColor(annotation.type().getColor());
+            ((ItemJuice) instance).setColor(annotation.type().getColor());
             ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
             ((Item) instance).setUnlocalizedName(fruitName);
             GameRegistry.registerItem((Item) instance, fruitName);
@@ -236,7 +239,7 @@ public class CommonModManagement {
             String fruitName = "itemFruit" + annotation.type().name() + "Icecream";
             ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
             ((Item) instance).setUnlocalizedName(fruitName);
-            ((IcecreamItem) instance).setColor(annotation.type().getColor());
+            ((ItemIcecream) instance).setColor(annotation.type().getColor());
             GameRegistry.registerItem((Item) instance, fruitName);
             OreDictionary.registerOre("listAllicecream", (Item) instance);
             OreDictionary.registerOre("food" + annotation.type().name() + "icecream", (Item) instance);
@@ -306,15 +309,15 @@ public class CommonModManagement {
             Class<?>[] types = {
                     float.class
             };
-            Constructor<FoodItem> constructor = FoodItem.class.getConstructor(types);
+            Constructor<ItemFcFood> constructor = ItemFcFood.class.getConstructor(types);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override
         public void register(String modid, ModFood annotation, Object instance) throws Exception {
-            ((FoodItem) instance).setUnlocalizedName(annotation.name());
-            ((FoodItem) instance).setCreativeTab(FoodCraftRegistration.FcTabBase);
-            ((FoodItem) instance).setHasEffect(annotation.hasEffect());
+            ((ItemFcFood) instance).setUnlocalizedName(annotation.name());
+            ((ItemFcFood) instance).setCreativeTab(FoodCraftRegistration.FcTabBase);
+            ((ItemFcFood) instance).setHasEffect(annotation.hasEffect());
             GameRegistry.registerItem((Item) instance, annotation.name());
             for (String oreDictName : annotation.oredicts()) {
                 OreDictionary.registerOre(oreDictName, (Item) instance);
@@ -337,17 +340,17 @@ public class CommonModManagement {
             Class[] type = new Class[]{
                     float.class
             };
-            Constructor<VegetableItem> constructor = VegetableItem.class.getConstructor(type);
+            Constructor<ItemVegetable> constructor = ItemVegetable.class.getConstructor(type);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override
         public void register(String modid, ModVegetable annotation, Object instance) throws Exception {
-            ((VegetableItem) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
-            ((VegetableItem) instance).setCanPlant(annotation.canPlant());
-            ((VegetableItem) instance).setSeedblock(Block.getBlockFromName(annotation.seedBlockName()));
-            ((VegetableItem) instance).setHasEffect(annotation.hasEffect());
-            MinecraftForge.addGrassSeed(new ItemStack((VegetableItem) instance), 2);
+            ((ItemVegetable) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+            ((ItemVegetable) instance).setCanPlant(annotation.canPlant());
+            ((ItemVegetable) instance).setSeedblock(Block.getBlockFromName(annotation.seedBlockName()));
+            ((ItemVegetable) instance).setHasEffect(annotation.hasEffect());
+            MinecraftForge.addGrassSeed(new ItemStack((ItemVegetable) instance), 2);
             for (String oreDictName : annotation.oredicts()) {
                 OreDictionary.registerOre(oreDictName, (Item) instance);
             }
@@ -366,8 +369,8 @@ public class CommonModManagement {
     public final static ModManagement<ModVegetableBlock> VEGETABLEBLOCK = new ModManagement<ModVegetableBlock>(ModVegetableBlock.class, IModManagement.Stage.PREINIT) {
         @Override
         public void register(String modid, ModVegetableBlock annotation, Object instance) throws Exception {
-            ((VegetableBlock) instance).setCrop(annotation.cropName());
-            ((VegetableBlock) instance).setSeed(annotation.seedName());
+            ((BlockCropVegetable) instance).setCrop(annotation.cropName());
+            ((BlockCropVegetable) instance).setSeed(annotation.seedName());
         }
 
         @Override
@@ -387,15 +390,15 @@ public class CommonModManagement {
             Class[] type = new Class[]{
                     float.class
             };
-            Constructor<MeatItem> constructor = MeatItem.class.getConstructor(type);
+            Constructor<ItemMeat> constructor = ItemMeat.class.getConstructor(type);
             return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
         }
 
         @Override
         public void register(String modid, ModMeat annotation, Object instance) throws Exception {
-            ((MeatItem) instance).setUnlocalizedName(annotation.name());
-            ((MeatItem) instance).setHasEffect(annotation.hasEffect());
-            ((MeatItem) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
+            ((ItemMeat) instance).setUnlocalizedName(annotation.name());
+            ((ItemMeat) instance).setHasEffect(annotation.hasEffect());
+            ((ItemMeat) instance).setCreativeTab(FoodCraftRegistration.FcTabPlant);
         }
 
         @Override
@@ -408,10 +411,74 @@ public class CommonModManagement {
         }
     };
 
+    public final static ModManagement<ModBlockJuiceFluid> BLOCKJUICEFLUID = new ModManagement<ModBlockJuiceFluid>(ModBlockJuiceFluid.class,
+            IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModBlockJuiceFluid annotation, Class<?> clazz) throws Exception {
+            String fluidName = "fluid" + annotation.type().name() + "Juice";
+            Class<?>[] type = new Class<?>[]{
+                    Fluid.class
+            };
+            return BlockJuiceFluid.class.getConstructor(type).newInstance(FluidRegistry.getFluid(fluidName));
+        }
+
+        @Override
+        public void register(String modid, ModBlockJuiceFluid annotation, Object instance) throws Exception {
+            String blockName = "blockFluid" + annotation.type().name() + "Juice";
+            GameRegistry.registerBlock((Block) instance, blockName);
+            ((BlockJuiceFluid) instance).setColor(annotation.type().getColor());
+        }
+
+        @SideOnly(Side.CLIENT)
+        @Override
+        public void registerClient(String modid, ModBlockJuiceFluid annotation, Object instance) throws Exception {
+            if (annotation.modelRender()) {
+                String blockName = "blockFluidJuice";
+                String location = modid + ":" + blockName;
+                BlockFluidBase blockFluid = (BlockFluidBase) instance;
+                Item itemFluid = Item.getItemFromBlock(blockFluid);
+                ModelBakery.addVariantName(itemFluid);
+                final ModelResourceLocation mrl = new ModelResourceLocation(location, "fluid");
+                ModelLoader.setCustomMeshDefinition(itemFluid, new ItemMeshDefinition() {
+                    @Override
+                    public ModelResourceLocation getModelLocation(ItemStack stack) {
+                        return mrl;
+                    }
+                });
+                ModelLoader.setCustomStateMapper(blockFluid, new StateMapperBase() {
+                    @Override
+                    protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                        return mrl;
+                    }
+                });
+            }
+        }
+    };
+
     public final static ModManagement<ModFluid> FLUID = new ModManagement<ModFluid>(ModFluid.class, IModManagement.Stage.PREINIT) {
         @Override
         public void register(String modid, ModFluid annotation, Object instance) throws Exception {
             FluidRegistry.registerFluid((Fluid) instance);
+        }
+    };
+
+    public final static ModManagement<ModJuiceFluid> JUICEFLUID = new ModManagement<ModJuiceFluid>(ModJuiceFluid.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModJuiceFluid annotation, Class<?> clazz) throws Exception {
+            String fluidName = "fluidJuice";
+            String location = modid + ":" + fluidName;
+            ResourceLocation still = new ResourceLocation(location, "still");
+            ResourceLocation flowing = new ResourceLocation(location, "flowing");
+            Class<?>[] types = new Class<?>[]{
+                String.class, ResourceLocation.class, ResourceLocation.class
+            };
+            return FluidJuice.class.getConstructor(types).newInstance(fluidName, still, flowing);
+        }
+
+        @Override
+        public void register(String modid, ModJuiceFluid annotation, Object instance) throws Exception {
+            FluidRegistry.registerFluid((Fluid) instance);
+            ((FluidJuice) instance).setColor(annotation.type().getColor());
         }
     };
 
@@ -466,7 +533,7 @@ public class CommonModManagement {
             String fruitName = "itemFruit" + annotation.type().name() + "Soda";
             ((Item) instance).setCreativeTab(FoodCraftRegistration.FcTabDrink);
             ((Item) instance).setUnlocalizedName(fruitName);
-            ((SodaItem) instance).setColor(annotation.type().getColor());
+            ((ItemSoda) instance).setColor(annotation.type().getColor());
             GameRegistry.registerItem((Item) instance, fruitName);
             OreDictionary.registerOre("listAllsoda", (Item) instance);
             OreDictionary.registerOre("food" + annotation.type().name() + "soda", (Item) instance);

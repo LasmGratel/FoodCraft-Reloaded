@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,27 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.fluid;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemSeeds;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class SeedItem extends ItemSeeds {
-    public SeedItem(Block crops, Block soil) {
-        super(crops, soil);
+public class FluidJuice extends Fluid {
+    private int color;
+
+    public FluidJuice(String fluidName, ResourceLocation still, ResourceLocation flowing) {
+        super(fluidName, still, flowing);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }
