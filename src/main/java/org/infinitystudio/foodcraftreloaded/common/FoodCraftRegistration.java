@@ -25,8 +25,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomFishable;
 import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
 import org.infinitystudio.foodcraftreloaded.block.BlockCropBean;
-import org.infinitystudio.foodcraftreloaded.block.machine.BlockGlassCup;
 import org.infinitystudio.foodcraftreloaded.block.BlockCropVegetable;
+import org.infinitystudio.foodcraftreloaded.block.BlockJuiceFluid;
+import org.infinitystudio.foodcraftreloaded.block.machine.BlockGlassCup;
+import org.infinitystudio.foodcraftreloaded.fluid.FluidJuice;
 import org.infinitystudio.foodcraftreloaded.item.food.*;
 import org.infinitystudio.foodcraftreloaded.tileentity.GlassCupTileEntity;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.*;
@@ -97,7 +99,53 @@ public class FoodCraftRegistration {
     // Block Registry
     // 方块注册
     ////////////////////////////////////////////////////////////////
+    // Fluid Block Registry
+    // 流体方块注册
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pear)
+    public static BlockJuiceFluid blockFluidPearJuice;
 
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Litchi)
+    public static BlockJuiceFluid blockFluidLitchiJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Peach)
+    public static BlockJuiceFluid blockFluidPeachJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Orange)
+    public static BlockJuiceFluid blockFluidOrangeJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Mango)
+    public static BlockJuiceFluid blockFluidMangoJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Lemon)
+    public static BlockJuiceFluid blockFluidLemonJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Grapefruit)
+    public static BlockJuiceFluid blockFluidGrapefruitJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Persimmon)
+    public static BlockJuiceFluid blockFluidPersimmonJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Papaya)
+    public static BlockJuiceFluid blockFluidPapayaJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Hawthorn)
+    public static BlockJuiceFluid blockFluidHawthornJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pomegranate)
+    public static BlockJuiceFluid blockFluidPomegranateJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Date)
+    public static BlockJuiceFluid blockFluidDateJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Cherry)
+    public static BlockJuiceFluid blockFluidCherryJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Coconut)
+    public static BlockJuiceFluid blockFluidCoconutJuice;
+
+    @ModBlockJuiceFluid(type = ModFruit.FruitType.Banana)
+    public static BlockJuiceFluid blockFluidBananaJuice;
+    
     // Machine Registry
     // 机器注册
     @ModBlock(name = "blockGlassCup")
@@ -405,5 +453,54 @@ public class FoodCraftRegistration {
     ////////////////////////////////////////////////////////////////
     @ModTileEntity(id = "glassCupTileEntity", tileEntityClass = GlassCupTileEntity.class)
     public static GlassCupTileEntity glassCupTileEntity;
+    
+    ////////////////////////////////////////////////////////////////
+    // Fluid Registry
+    // 流体注册
+    ////////////////////////////////////////////////////////////////
+    @ModJuiceFluid(type = ModFruit.FruitType.Pear)
+    public static FluidJuice fluidPearJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Litchi)
+    public static FluidJuice fluidLitchiJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Peach)
+    public static FluidJuice fluidPeachJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Orange)
+    public static FluidJuice fluidOrangeJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Mango)
+    public static FluidJuice fluidMangoJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Lemon)
+    public static FluidJuice fluidLemonJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Grapefruit)
+    public static FluidJuice fluidGrapefruitJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Persimmon)
+    public static FluidJuice fluidPersimmonJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Papaya)
+    public static FluidJuice fluidPapayaJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Hawthorn)
+    public static FluidJuice fluidHawthornJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Pomegranate)
+    public static FluidJuice fluidPomegranateJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Date)
+    public static FluidJuice fluidDateJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Cherry)
+    public static FluidJuice fluidCherryJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Coconut)
+    public static FluidJuice fluidCoconutJuice;
+
+    @ModJuiceFluid(type = ModFruit.FruitType.Banana)
+    public static FluidJuice fluidBananaJuice;
 
 }
