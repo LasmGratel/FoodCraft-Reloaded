@@ -21,9 +21,9 @@ package org.infinitystudio.foodcraftreloaded.item.food;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import org.infinitystudio.foodcraftreloaded.utils.potion.PotionHelper;
 
 /**
  * Crab
@@ -43,7 +43,7 @@ public class ItemCrab extends ItemFcFood {
 
             switch (o) {
                 case 0:
-                    ep.addPotionEffect(new PotionEffect(Potion.hunger.id, 6000, 1));
+                    ep.addPotionEffect(new PotionEffect(PotionHelper.PotionType.hunger.getPotion(), 6000, 1));
                     break;
             }
         }

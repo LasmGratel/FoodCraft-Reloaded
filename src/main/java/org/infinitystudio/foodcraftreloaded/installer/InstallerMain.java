@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,16 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.installer;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
-
-public class BaseBlock extends Block {
-
-    public BaseBlock() {
-        super(Material.IRON);
-        setCreativeTab(FoodCraftRegistration.FcTabBase);
+public class InstallerMain {
+    public static void main(String[] args) {
     }
 }

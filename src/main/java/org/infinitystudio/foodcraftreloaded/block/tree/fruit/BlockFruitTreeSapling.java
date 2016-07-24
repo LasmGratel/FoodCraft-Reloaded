@@ -23,7 +23,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
 
@@ -37,9 +37,9 @@ public class BlockFruitTreeSapling extends BaseBlock implements IGrowable {
     }
 
     private boolean isBlockAir(World w, int x, int y, int z) {
-        if(w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.air
-                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.leaves
-                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.leaves2
+        if(w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.AIR
+                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.LEAVES
+                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == Blocks.LEAVES2
 //                || w.getBlockState(new BlockPos(x, y, z)).getBlock() == FoodCraftRegistration.blockFruitTreeLeaves
           ) {
             return true;
@@ -150,51 +150,51 @@ public class BlockFruitTreeSapling extends BaseBlock implements IGrowable {
         int z = pos.getZ();
         w.setBlockToAir(new BlockPos(x, y, z));
         //A
-        setBlockToTree(w, x, y, z,Blocks.log);
-        setBlockToTree(w, x, y + 1, z,Blocks.log);
-        setBlockToTree(w, x, y + 2, z,Blocks.log);
-        setBlockToTree(w, x, y + 3, z,Blocks.log);
-        setBlockToTree(w, x, y + 4, z,Blocks.log);
-        setBlockToTree(w, x, y + 5, z,Blocks.log);
-        setBlockToTree(w, x, y + 6, z,Blocks.leaves);
-        setBlockToTree(w, x, y + 7, z,Blocks.leaves);
-        setBlockToTree(w, x, y + 8, z,Blocks.leaves);
-        setBlockToTree(w, x, y + 9, z,Blocks.leaves);
-        setBlockToTree(w, x, y + 10, z,Blocks.leaves);
+        setBlockToTree(w, x, y, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 1, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 2, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 3, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 4, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 5, z,Blocks.LOG);
+        setBlockToTree(w, x, y + 6, z,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 7, z,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 8, z,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 9, z,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 10, z,Blocks.LEAVES);
         //-x
-        setBlockToTree(w, x - 1, y + 6, z,Blocks.leaves);
-        setBlockToTree(w, x - 1, y + 7, z,Blocks.leaves);
+        setBlockToTree(w, x - 1, y + 6, z,Blocks.LEAVES);
+        setBlockToTree(w, x - 1, y + 7, z,Blocks.LEAVES);
         //+x
-        setBlockToTree(w, x + 1, y + 6, z,Blocks.leaves);
-        setBlockToTree(w, x + 1, y + 7, z,Blocks.leaves);
+        setBlockToTree(w, x + 1, y + 6, z,Blocks.LEAVES);
+        setBlockToTree(w, x + 1, y + 7, z,Blocks.LEAVES);
         //-z
-        setBlockToTree(w, x, y + 6, z - 1,Blocks.leaves);
-        setBlockToTree(w, x, y + 7, z - 1,Blocks.leaves);
+        setBlockToTree(w, x, y + 6, z - 1,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 7, z - 1,Blocks.LEAVES);
         //+z
-        setBlockToTree(w, x, y + 6, z + 1,Blocks.leaves);
-        setBlockToTree(w, x, y + 7, z + 1,Blocks.leaves);
+        setBlockToTree(w, x, y + 6, z + 1,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 7, z + 1,Blocks.LEAVES);
 
         //-x leaves
-        setBlockToTree(w, x - 2, y + 6, z,Blocks.leaves);
-        setBlockToTree(w, x - 3, y + 7, z,Blocks.leaves);
-        setBlockToTree(w, x - 3, y + 5, z,Blocks.leaves);
-        setBlockToTree(w, x - 4, y + 8, z,Blocks.leaves);
+        setBlockToTree(w, x - 2, y + 6, z,Blocks.LEAVES);
+        setBlockToTree(w, x - 3, y + 7, z,Blocks.LEAVES);
+        setBlockToTree(w, x - 3, y + 5, z,Blocks.LEAVES);
+        setBlockToTree(w, x - 4, y + 8, z,Blocks.LEAVES);
         //+x leaves
-        setBlockToTree(w, x + 2, y + 6, z,Blocks.leaves);
-        setBlockToTree(w, x + 3, y + 7, z,Blocks.leaves);
-        setBlockToTree(w, x + 3, y + 5, z,Blocks.leaves);
-        setBlockToTree(w, x + 4, y + 8, z,Blocks.leaves);
+        setBlockToTree(w, x + 2, y + 6, z,Blocks.LEAVES);
+        setBlockToTree(w, x + 3, y + 7, z,Blocks.LEAVES);
+        setBlockToTree(w, x + 3, y + 5, z,Blocks.LEAVES);
+        setBlockToTree(w, x + 4, y + 8, z,Blocks.LEAVES);
 
         //-z leaves
-        setBlockToTree(w, x, y + 6, z - 2,Blocks.leaves);
-        setBlockToTree(w, x, y + 7, z - 3,Blocks.leaves);
-        setBlockToTree(w, x, y + 5, z - 3,Blocks.leaves);
-        setBlockToTree(w, x, y + 8, z - 4,Blocks.leaves);
+        setBlockToTree(w, x, y + 6, z - 2,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 7, z - 3,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 5, z - 3,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 8, z - 4,Blocks.LEAVES);
         //+z leaves
-        setBlockToTree(w, x, y + 6, z + 2,Blocks.leaves);
-        setBlockToTree(w, x, y + 7, z + 3,Blocks.leaves);
-        setBlockToTree(w, x, y + 5, z + 3,Blocks.leaves);
-        setBlockToTree(w, x, y + 8, z + 4,Blocks.leaves);
+        setBlockToTree(w, x, y + 6, z + 2,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 7, z + 3,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 5, z + 3,Blocks.LEAVES);
+        setBlockToTree(w, x, y + 8, z + 4,Blocks.LEAVES);
 
         //fruit
         setBlockToFruit(w, x, y + 5, z + 1,fruit);

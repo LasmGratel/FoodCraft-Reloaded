@@ -21,7 +21,6 @@ package org.infinitystudio.foodcraftreloaded.common;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.FishingHooks;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.infinitystudio.foodcraftreloaded.utils.modmanagent.common.ModFruit;
@@ -68,8 +67,6 @@ public class FcRecipeRegistration {
         // 水产合成
         GameRegistry.addSmelting(itemMeatCrabCooked, new ItemStack(itemMeatCrabRaw), 1.0f);
         GameRegistry.addSmelting(itemMeatShrimpCooked, new ItemStack(itemMeatShrimpRaw), 1.0f);
-
-        FishingHooks.addFish(fishCrab);
-        FishingHooks.addFish(fishShrimp);
+        
     }
 }

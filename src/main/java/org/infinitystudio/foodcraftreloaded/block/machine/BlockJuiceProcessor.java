@@ -17,16 +17,17 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.block.machine;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
-public class BaseBlock extends Block {
-
-    public BaseBlock() {
-        super(Material.IRON);
-        setCreativeTab(FoodCraftRegistration.FcTabBase);
+/**
+ * Juice Processor
+ * 饮料处理机
+ */
+public class BlockJuiceProcessor extends BaseMachineBlock {
+    public BlockJuiceProcessor() {
+        blockMaterial = FoodCraftRegistration.materialRiceMachine;
+        blockMapColor = FoodCraftRegistration.materialRiceMachine.getMaterialMapColor();
     }
 }

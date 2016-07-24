@@ -17,16 +17,35 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.common.recipe;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
-public class BaseBlock extends Block {
+public interface IFcRecipe {
 
-    public BaseBlock() {
-        super(Material.IRON);
-        setCreativeTab(FoodCraftRegistration.FcTabBase);
-    }
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     *
+     * @param inv
+     */
+    boolean matches(ItemStack[] inv);
+
+    /**
+     * Get the result of current crafting inventory
+     *
+     * @param inv
+     */
+    ItemStack[] getCraftingResult(ItemStack[] inv);
+
+    /**
+     * Get the output of this recipe
+     */
+    ItemStack[] getRecipeOutput();
+
+    /**
+     * Get the TileEntity class.
+     * Used to tag the recipe type.
+     */
+    Class<? extends TileEntity> getTileEntityClass();
 }

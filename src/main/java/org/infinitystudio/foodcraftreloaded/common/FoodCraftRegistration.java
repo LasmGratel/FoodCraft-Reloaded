@@ -19,14 +19,12 @@
  */
 package org.infinitystudio.foodcraftreloaded.common;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandomFishable;
 import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
 import org.infinitystudio.foodcraftreloaded.block.BlockCropBean;
 import org.infinitystudio.foodcraftreloaded.block.BlockCropVegetable;
-import org.infinitystudio.foodcraftreloaded.block.BlockJuiceFluid;
 import org.infinitystudio.foodcraftreloaded.block.machine.BlockGlassCup;
 import org.infinitystudio.foodcraftreloaded.fluid.FluidJuice;
 import org.infinitystudio.foodcraftreloaded.item.food.*;
@@ -93,106 +91,18 @@ public class FoodCraftRegistration {
             return itemBlackBean;
         }
     };
-
-
     ////////////////////////////////////////////////////////////////
-    // Block Registry
-    // 方块注册
+    // Material Registry
+    // 材料注册
     ////////////////////////////////////////////////////////////////
-    // Fluid Block Registry
-    // 流体方块注册
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pear)
-    public static BlockJuiceFluid blockFluidPearJuice;
+    @ModMaterial(26)
+    public static Material materialRiceMachine;
 
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Litchi)
-    public static BlockJuiceFluid blockFluidLitchiJuice;
+    @ModMaterial(21)
+    public static Material materialAdvancedRiceMachine;
 
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Peach)
-    public static BlockJuiceFluid blockFluidPeachJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Orange)
-    public static BlockJuiceFluid blockFluidOrangeJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Mango)
-    public static BlockJuiceFluid blockFluidMangoJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Lemon)
-    public static BlockJuiceFluid blockFluidLemonJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Grapefruit)
-    public static BlockJuiceFluid blockFluidGrapefruitJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Persimmon)
-    public static BlockJuiceFluid blockFluidPersimmonJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Papaya)
-    public static BlockJuiceFluid blockFluidPapayaJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Hawthorn)
-    public static BlockJuiceFluid blockFluidHawthornJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pomegranate)
-    public static BlockJuiceFluid blockFluidPomegranateJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Date)
-    public static BlockJuiceFluid blockFluidDateJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Cherry)
-    public static BlockJuiceFluid blockFluidCherryJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Coconut)
-    public static BlockJuiceFluid blockFluidCoconutJuice;
-
-    @ModBlockJuiceFluid(type = ModFruit.FruitType.Banana)
-    public static BlockJuiceFluid blockFluidBananaJuice;
-    
-    // Machine Registry
-    // 机器注册
-    @ModBlock(name = "blockGlassCup")
-    public static BlockGlassCup blockGlassCup;
-
-    // Tree Registry
-    // 树木注册
-
-    // Tree Leaves Registry
-    // 树叶注册
-//    @ModBlock(name = "blockFruitTreeLeaves")
-//    public static BlockFruitTreeLeaves blockFruitTreeLeaves;
-
-    // Tree Logs Registry
-    // 树干注册
-//    @ModBlock(name = "blockFruitTreeLog")
-//    public static BlockFruitTree blockFruitTreeLog;
-
-    // Tree Sapling Registry
-    // 树苗注册
-//    @ModBlock(name = "blockFruitTreeSapling")
-//    public static BlockFruitTreeSapling blockFruitTreeSapling;
-
-    // Food Block Registry
-    // 食物方块注册(用于储存&合成)
-    @ModBlock(name = "blockRice")
-    public static BaseBlock blockRice;
-
-    // Seed Block Registry
-    // 种子方块注册
-//    @ModBlock(name = "blockCarrot")
-    @ModVegetableBlock(name = "blockCarrot", seedName = "itemCarrot", cropName = "itemCarrot")
-    public static BlockCropVegetable blockCarrot;
-
-    // Bean Block Registry
-    // 豆子种子方块注册
-    @ModBeanBlock(type = ModBean.BeanType.Red)
-    public static BlockCropBean blockRedBean;
-
-    @ModBeanBlock(type = ModBean.BeanType.Black)
-    public static BlockCropBean blockBlackBean;
-
-    @ModBeanBlock(type = ModBean.BeanType.Green)
-    public static BlockCropBean blockGreenBean;
-
-    @ModBeanBlock(type = ModBean.BeanType.Soy)
-    public static BlockCropBean blockSoybean;
+    @ModMaterial()
+    public static Material materialJuiceFluid;
 
     ////////////////////////////////////////////////////////////////
     // Item Registry
@@ -432,19 +342,15 @@ public class FoodCraftRegistration {
     // Fish Registry
     // 水产注册
     @ModFood(name = "itemMeatCrabRaw", oredicts = {"foodCrabraw"}, satuation = 2.0f)
-    public static ItemCrab itemMeatCrabRaw;
-
-    public static WeightedRandomFishable fishCrab = new WeightedRandomFishable(new ItemStack(itemMeatCrabRaw), 1);
+    public static ItemCrab itemMeatCrabRaw = new ItemCrab(2.0f);
 
     @ModFood(name = "itemMeatShrimpRaw", oredicts = {"foodShrimpraw", "listAllfishraw"}, satuation = 2.0f)
-    public static ItemShrimp itemMeatShrimpRaw;
-
-    public static WeightedRandomFishable fishShrimp = new WeightedRandomFishable(new ItemStack(itemMeatShrimpRaw), 1);
+    public static ItemShrimp itemMeatShrimpRaw = new ItemShrimp(2.0f);
 
     @ModFood(name = "itemMeatCrabCooked", oredicts = {"foodCrabcooked"}, satuation = 4.0f)
     public static ItemFcFood itemMeatCrabCooked;
 
-    @ModFood(name = "itemMeatShrimpRaw", oredicts = {"foodShrimpcooked", "listAllfishcooked"}, satuation = 4.0f)
+    @ModFood(name = "itemMeatShrimpCooked", oredicts = {"foodShrimpcooked", "listAllfishcooked"}, satuation = 4.0f)
     public static ItemFcFood itemMeatShrimpCooked;
 
     ////////////////////////////////////////////////////////////////
@@ -502,5 +408,104 @@ public class FoodCraftRegistration {
 
     @ModJuiceFluid(type = ModFruit.FruitType.Banana)
     public static FluidJuice fluidBananaJuice;
+
+    ////////////////////////////////////////////////////////////////
+    // Block Registry
+    // 方块注册
+    ////////////////////////////////////////////////////////////////
+    // Fluid Block Registry
+    // 流体方块注册
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pear)
+//    public static BlockJuiceFluid blockFluidPearJuice = new BlockJuiceFluid(fluidPearJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Litchi)
+//    public static BlockJuiceFluid blockFluidLitchiJuice = new BlockJuiceFluid(fluidLitchiJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Peach)
+//    public static BlockJuiceFluid blockFluidPeachJuice = new BlockJuiceFluid(fluidPeachJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Orange)
+//    public static BlockJuiceFluid blockFluidOrangeJuice = new BlockJuiceFluid(fluidOrangeJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Mango)
+//    public static BlockJuiceFluid blockFluidMangoJuice = new BlockJuiceFluid(fluidMangoJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Lemon)
+//    public static BlockJuiceFluid blockFluidLemonJuice = new BlockJuiceFluid(fluidLemonJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Grapefruit)
+//    public static BlockJuiceFluid blockFluidGrapefruitJuice = new BlockJuiceFluid(fluidGrapefruitJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Persimmon)
+//    public static BlockJuiceFluid blockFluidPersimmonJuice = new BlockJuiceFluid(fluidPersimmonJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Papaya)
+//    public static BlockJuiceFluid blockFluidPapayaJuice = new BlockJuiceFluid(fluidPapayaJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Hawthorn)
+//    public static BlockJuiceFluid blockFluidHawthornJuice = new BlockJuiceFluid(fluidHawthornJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Pomegranate)
+//    public static BlockJuiceFluid blockFluidPomegranateJuice = new BlockJuiceFluid(fluidPomegranateJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Date)
+//    public static BlockJuiceFluid blockFluidDateJuice = new BlockJuiceFluid(fluidDateJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Cherry)
+//    public static BlockJuiceFluid blockFluidCherryJuice = new BlockJuiceFluid(fluidCherryJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Coconut)
+//    public static BlockJuiceFluid blockFluidCoconutJuice = new BlockJuiceFluid(fluidCoconutJuice);
+//
+//    @ModBlockJuiceFluid(type = ModFruit.FruitType.Banana)
+//    public static BlockJuiceFluid blockFluidBananaJuice = new BlockJuiceFluid(fluidBananaJuice);
+
+    // Machine Registry
+    // 机器注册
+    @ModBlock(name = "blockGlassCup")
+    public static BlockGlassCup blockGlassCup;
+
+    // Tree Registry
+    // 树木注册
+
+    // Tree Leaves Registry
+    // 树叶注册
+//    @ModBlock(name = "blockFruitTreeLeaves")
+//    public static BlockFruitTreeLeaves blockFruitTreeLeaves;
+
+    // Tree Logs Registry
+    // 树干注册
+//    @ModBlock(name = "blockFruitTreeLog")
+//    public static BlockFruitTree blockFruitTreeLog;
+
+    // Tree Sapling Registry
+    // 树苗注册
+//    @ModBlock(name = "blockFruitTreeSapling")
+//    public static BlockFruitTreeSapling blockFruitTreeSapling;
+
+    // Food Block Registry
+    // 食物方块注册(用于储存&合成)
+    @ModBlock(name = "blockRice")
+    public static BaseBlock blockRice;
+
+    // Seed Block Registry
+    // 种子方块注册
+//    @ModBlock(name = "blockCarrot")
+    @ModVegetableBlock(name = "blockCarrot", seedName = "itemCarrot", cropName = "itemCarrot")
+    public static BlockCropVegetable blockCarrot;
+
+    // Bean Block Registry
+    // 豆子种子方块注册
+    @ModBeanBlock(type = ModBean.BeanType.Red)
+    public static BlockCropBean blockRedBean;
+
+    @ModBeanBlock(type = ModBean.BeanType.Black)
+    public static BlockCropBean blockBlackBean;
+
+    @ModBeanBlock(type = ModBean.BeanType.Green)
+    public static BlockCropBean blockGreenBean;
+
+    @ModBeanBlock(type = ModBean.BeanType.Soy)
+    public static BlockCropBean blockSoybean;
 
 }

@@ -25,7 +25,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
 import org.apache.logging.log4j.LogManager;
 import org.infinitystudio.foodcraftreloaded.utils.message.ChatComponentHelper;
 
@@ -43,8 +43,8 @@ public abstract class BaseMachineTileEntity extends TileEntity implements IInven
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        return super.writeToNBT(compound);
     }
 
     /**
@@ -188,7 +188,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements IInven
      * Get the formatted ChatComponent that will be used for the sender's username in chat
      */
     @Override
-    public IChatComponent getDisplayName() {
+    public ITextComponent getDisplayName() {
         return ChatComponentHelper.createChatComponent(displayName);
     }
 }

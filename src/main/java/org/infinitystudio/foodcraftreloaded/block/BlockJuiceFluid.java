@@ -19,21 +19,20 @@
  */
 package org.infinitystudio.foodcraftreloaded.block;
 
-import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
 
 public class BlockJuiceFluid extends BlockFluidClassic {
     private int color;
 
     public BlockJuiceFluid(Fluid fluid) {
-        super(fluid, Material.water);
+        super(fluid, FoodCraftRegistration.materialJuiceFluid);
     }
 
     @SideOnly(Side.CLIENT)
-    @Override
     public int getBlockColor() {
         return color;
     }

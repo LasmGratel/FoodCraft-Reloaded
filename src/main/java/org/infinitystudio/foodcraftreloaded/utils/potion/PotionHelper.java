@@ -1,5 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
+ * Singularity Mod for Minecraft.
  * Copyright (C) 2016 Infinity Studio.
  * <p/>
  * This program is free software: you can redistribute it and/or modify
@@ -17,16 +17,30 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.utils.potion;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
-public class BaseBlock extends Block {
+public class PotionHelper {
+    public enum PotionType {
+        hunger,
+        digSpeed,
+        fireResistance,
+        invisibility,
+        jump,
+        moveSpeed,
+        nightVision,
+        waterBreathing;
 
-    public BaseBlock() {
-        super(Material.IRON);
-        setCreativeTab(FoodCraftRegistration.FcTabBase);
+        public Potion getPotion() {
+            return Potion.REGISTRY.getObject(new ResourceLocation("minecraft", name()));
+        }
+
+        public PotionEffect createPotionEffect(int duration, int amplifier) {
+            return new PotionEffect(getPotion(), duration, amplifier);
+        }
+
     }
 }

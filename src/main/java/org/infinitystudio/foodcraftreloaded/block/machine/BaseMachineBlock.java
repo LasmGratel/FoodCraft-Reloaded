@@ -17,16 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block;
+package org.infinitystudio.foodcraftreloaded.block.machine;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import org.infinitystudio.foodcraftreloaded.common.FoodCraftRegistration;
+import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
 
-public class BaseBlock extends Block {
-
-    public BaseBlock() {
-        super(Material.IRON);
-        setCreativeTab(FoodCraftRegistration.FcTabBase);
-    }
+public class BaseMachineBlock extends BaseBlock {
 }

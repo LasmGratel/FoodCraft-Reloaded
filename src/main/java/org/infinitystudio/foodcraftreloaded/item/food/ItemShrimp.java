@@ -21,9 +21,9 @@ package org.infinitystudio.foodcraftreloaded.item.food;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import org.infinitystudio.foodcraftreloaded.utils.potion.PotionHelper.PotionType;
 
 /**
  * Shrimp
@@ -37,19 +37,17 @@ public class ItemShrimp extends ItemFcFood {
 
     @Override
     protected void onFoodEaten(ItemStack is, World w, EntityPlayer ep) {
-        if (hasEffect) {
-            int o;
-            if (!w.isRemote) {
-                o = w.rand.nextInt(1);
+        int o;
+        if (!w.isRemote) {
+            o = w.rand.nextInt(1);
 
-                switch (o) {
-                    case 0:
-                        ep.addPotionEffect(new PotionEffect(Potion.hunger.id, 6000, 1));
-                        break;
-                }
+            switch (o) {
+                case 0:
+                    ep.addPotionEffect(new PotionEffect(PotionType.hunger.getPotion(), 6000, 1));
+                    break;
             }
-            hasEffect = false;
         }
+        setHasEffect(false);
         super.onFoodEaten(is, w, ep);
     }
 }

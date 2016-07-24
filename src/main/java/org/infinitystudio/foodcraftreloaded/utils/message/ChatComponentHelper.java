@@ -19,11 +19,11 @@
  */
 package org.infinitystudio.foodcraftreloaded.utils.message;
 
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class ChatComponentHelper {
-    public static IChatComponent createChatComponent(String msg) {
-        return new ChatComponentText(msg);
+    public static ITextComponent createChatComponent(String msg) {
+        return new TextComponentTranslation(msg);
     }
 }

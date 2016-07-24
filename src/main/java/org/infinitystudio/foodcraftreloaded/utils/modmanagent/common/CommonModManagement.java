@@ -20,16 +20,17 @@
 package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -90,6 +91,21 @@ public class CommonModManagement {
 
     };
 
+    public final static ModManagement<ModMaterial> MATERIAL = new ModManagement<ModMaterial>(ModMaterial.class, IModManagement.Stage.PREINIT) {
+        @Override
+        public Object init(String modid, ModMaterial annotation, Class<?> clazz) throws Exception {
+            MapColor color = MapColor.AIR;
+            for(MapColor mapColor : MapColor.COLORS)
+                if(mapColor.colorIndex == annotation.value())
+                    color = mapColor;
+            return Material.class.getConstructor(MapColor.class).newInstance(color);
+        }
+
+        @Override
+        public void register(String modid, ModMaterial annotation, Object instance) throws Exception {
+        }
+    };
+
     public final static ModManagement<ModBlock> BLOCK = new ModManagement<ModBlock>(ModBlock.class, IModManagement.Stage.PREINIT,
             IModManagement.Stage.INIT) {
         @Override
@@ -105,8 +121,8 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -125,7 +141,8 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -181,9 +198,8 @@ public class CommonModManagement {
                 String name = "block" + annotation.type().name() + "Bean";
                 String location = modid + ":" + name;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-                renderItem.getItemModelMesher().register(Item.getItemFromBlock((Block) instance), 0, mrl);
-
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -205,7 +221,8 @@ public class CommonModManagement {
                 String fruitName = "itemFruit" + annotation.type().name();
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -228,7 +245,8 @@ public class CommonModManagement {
                 String fruitName = "itemJuice";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -251,7 +269,8 @@ public class CommonModManagement {
                 String fruitName = "itemFruitIcecream";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -275,7 +294,8 @@ public class CommonModManagement {
                 String beanName = "item" + annotation.type().name() + "BeanSprouts";
                 String location = modid + ":" + beanName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -298,7 +318,8 @@ public class CommonModManagement {
                 String beanName = "item" + annotation.type().name() + "Bean";
                 String location = modid + ":" + beanName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -310,7 +331,7 @@ public class CommonModManagement {
                     float.class
             };
             Constructor<ItemFcFood> constructor = ItemFcFood.class.getConstructor(types);
-            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
+            return constructor.newInstance(annotation.satuation());
         }
 
         @Override
@@ -329,7 +350,8 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -341,7 +363,7 @@ public class CommonModManagement {
                     float.class
             };
             Constructor<ItemVegetable> constructor = ItemVegetable.class.getConstructor(type);
-            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
+            return constructor.newInstance(annotation.satuation());
         }
 
         @Override
@@ -361,7 +383,8 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -378,8 +401,8 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-                        .register(Item.getItemFromBlock((Block) instance), 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
@@ -391,7 +414,7 @@ public class CommonModManagement {
                     float.class
             };
             Constructor<ItemMeat> constructor = ItemMeat.class.getConstructor(type);
-            return constructor.newInstance(annotation.name(), annotation.satuation(), annotation.hasEffect());
+            return constructor.newInstance(annotation.satuation());
         }
 
         @Override
@@ -406,22 +429,14 @@ public class CommonModManagement {
             if (annotation.itemRender()) {
                 String location = modid + ":" + annotation.name();
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };
 
     public final static ModManagement<ModBlockJuiceFluid> BLOCKJUICEFLUID = new ModManagement<ModBlockJuiceFluid>(ModBlockJuiceFluid.class,
-            IModManagement.Stage.PREINIT) {
-        @Override
-        public Object init(String modid, ModBlockJuiceFluid annotation, Class<?> clazz) throws Exception {
-            String fluidName = "fluid" + annotation.type().name() + "Juice";
-            Class<?>[] type = new Class<?>[]{
-                    Fluid.class
-            };
-            return BlockJuiceFluid.class.getConstructor(type).newInstance(FluidRegistry.getFluid(fluidName));
-        }
-
+            IModManagement.Stage.POSTINIT) {
         @Override
         public void register(String modid, ModBlockJuiceFluid annotation, Object instance) throws Exception {
             String blockName = "blockFluid" + annotation.type().name() + "Juice";
@@ -433,11 +448,11 @@ public class CommonModManagement {
         @Override
         public void registerClient(String modid, ModBlockJuiceFluid annotation, Object instance) throws Exception {
             if (annotation.modelRender()) {
-                String blockName = "blockFluidJuice";
-                String location = modid + ":" + blockName;
+                String blockName = "blockFluid"+ annotation.type().name() +"Juice";
+                String location = modid + ":" + "blockFluidJuice";
                 BlockFluidBase blockFluid = (BlockFluidBase) instance;
                 Item itemFluid = Item.getItemFromBlock(blockFluid);
-                ModelBakery.addVariantName(itemFluid);
+                ModelBakery.registerItemVariants(itemFluid, new ModelResourceLocation(location, "inventory"));
                 final ModelResourceLocation mrl = new ModelResourceLocation(location, "fluid");
                 ModelLoader.setCustomMeshDefinition(itemFluid, new ItemMeshDefinition() {
                     @Override
@@ -465,8 +480,8 @@ public class CommonModManagement {
     public final static ModManagement<ModJuiceFluid> JUICEFLUID = new ModManagement<ModJuiceFluid>(ModJuiceFluid.class, IModManagement.Stage.PREINIT) {
         @Override
         public Object init(String modid, ModJuiceFluid annotation, Class<?> clazz) throws Exception {
-            String fluidName = "fluidJuice";
-            String location = modid + ":" + fluidName;
+            String fluidName = "fluid" + annotation.type().name() + "Juice";
+            String location = modid + ":" + "fluidJuice";
             ResourceLocation still = new ResourceLocation(location, "still");
             ResourceLocation flowing = new ResourceLocation(location, "flowing");
             Class<?>[] types = new Class<?>[]{
@@ -477,6 +492,8 @@ public class CommonModManagement {
 
         @Override
         public void register(String modid, ModJuiceFluid annotation, Object instance) throws Exception {
+            String fluidName = "fluid" + annotation.type().name() + "Juice";
+            ((Fluid) instance).setUnlocalizedName(fluidName);
             FluidRegistry.registerFluid((Fluid) instance);
             ((FluidJuice) instance).setColor(annotation.type().getColor());
         }
@@ -496,7 +513,7 @@ public class CommonModManagement {
                 String location = modid + ":" + annotation.name();
                 BlockFluidBase blockFluid = (BlockFluidBase) instance;
                 Item itemFluid = Item.getItemFromBlock(blockFluid);
-                ModelBakery.addVariantName(itemFluid);
+                ModelBakery.registerItemVariants(itemFluid, new ModelResourceLocation(location, "inventory"));
                 final ModelResourceLocation mrl = new ModelResourceLocation(location, "fluid");
                 ModelLoader.setCustomMeshDefinition(itemFluid, new ItemMeshDefinition() {
                     @Override
@@ -517,14 +534,13 @@ public class CommonModManagement {
     public final static ModManagement<ModTileEntity> TILEENTITY = new ModManagement<ModTileEntity>(
             ModTileEntity.class) {
         @Override
-        public Object init(String modid, ModTileEntity annotation, Class<?> clazz) {
-            return annotation.tileEntityClass();
+        public Object init(String modid, ModTileEntity annotation, Class<?> clazz) throws IllegalAccessException, InstantiationException {
+            return annotation.tileEntityClass().newInstance();
         }
 
         @Override
         public void register(String modid, ModTileEntity annotation, Object instance) throws Exception {
-            Class<? extends TileEntity> clz = ((Class<?>) instance).asSubclass(TileEntity.class);
-            GameRegistry.registerTileEntity(clz, annotation.id());
+            GameRegistry.registerTileEntity(annotation.tileEntityClass(), annotation.id());
         }
     };
     public final static ModManagement<ModSoda> FRUITSODA = new ModManagement<ModSoda>(ModSoda.class, IModManagement.Stage.INIT) {
@@ -545,7 +561,8 @@ public class CommonModManagement {
                 String fruitName = "itemFruitSoda";
                 String location = modid + ":" + fruitName;
                 ModelResourceLocation mrl = new ModelResourceLocation(location, "inventory");
-                Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register((Item) instance, 0, mrl);
+                ModelLoader.setCustomModelResourceLocation(
+                		Item.getItemFromBlock((Block) instance), 0, mrl);
             }
         }
     };

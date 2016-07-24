@@ -17,9 +17,15 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.block.machine;
+package org.infinitystudio.foodcraftreloaded.utils.modmanagent.common;
 
-import org.infinitystudio.foodcraftreloaded.block.BaseBlock;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public class BaseMachine extends BaseBlock {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ModMaterial {
+    int value() default 0;
 }

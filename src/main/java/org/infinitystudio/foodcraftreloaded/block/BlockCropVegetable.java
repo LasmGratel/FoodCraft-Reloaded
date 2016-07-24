@@ -19,8 +19,8 @@
  */
 package org.infinitystudio.foodcraftreloaded.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.SoundType;
 import net.minecraft.item.Item;
 
 public class BlockCropVegetable extends BlockCrops {
@@ -29,7 +29,7 @@ public class BlockCropVegetable extends BlockCrops {
 
     public BlockCropVegetable() {
         this.setHarvestLevel("pickaxe", -1);
-        this.setStepSound(Block.soundTypeGrass);
+        this.setSoundType(SoundType.PLANT);
     }
 
     public void setCrop(String crop) {

@@ -38,12 +38,13 @@ public class GlassCupTileEntity extends TileEntity implements IFluidHandler {
     private static NBTTagCompound storageFluidNBT = new NBTTagCompound();
 
     @Override
-    public void writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         if(storageFluid != null)
             compound.setString("storageFluid", FluidRegistry.getFluidName(storageFluid));
         compound.setInteger("storageFluidAmount", storageFluidAmount);
         compound.merge(storageFluidNBT);
+		return compound;
     }
 
     @Override

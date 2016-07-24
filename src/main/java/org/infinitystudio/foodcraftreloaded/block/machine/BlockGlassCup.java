@@ -26,8 +26,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,7 +40,7 @@ import org.infinitystudio.foodcraftreloaded.tileentity.GlassCupTileEntity;
  */
 public class BlockGlassCup extends Block {
     public BlockGlassCup() {
-        super(Material.glass);
+        super(Material.GLASS);
         setHardness(1.0f);
         setResistance(5.0f);
     }
@@ -59,7 +60,7 @@ public class BlockGlassCup extends Block {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (playerIn.isSneaking())
             return false;
         ItemStack currentItemStack = playerIn.inventory.getCurrentItem();
@@ -69,7 +70,7 @@ public class BlockGlassCup extends Block {
             if (tileEntity instanceof GlassCupTileEntity) {
                 GlassCupTileEntity glassCup = (GlassCupTileEntity) tileEntity;
                 if (fluid != null) {
-                    if (currentItemStack.isItemEqual(new ItemStack(Items.potionitem))) {
+                    if (currentItemStack.isItemEqual(new ItemStack(Items.POTIONITEM))) {
                         fluid = new FluidStack(fluid.getFluid(), (FluidContainerRegistry.BUCKET_VOLUME / 4), fluid.tag);
                         glassCup.drain(side, fluid, true);
                     } else if (currentItemStack.getUnlocalizedName().startsWith("itemJuice")) {
