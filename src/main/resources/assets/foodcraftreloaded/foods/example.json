@@ -1,0 +1,46 @@
+/**
+ * An example food json.
+ * This file doesn't appears in Minecraft, you could freely copy/paste it anywhere.
+ */
+{
+  /**
+   * This param defines the unlocalized name of this food.
+   */
+  "unlocalizedName": "example_food",
+
+  /**
+   * This param defines the level of this food.
+   */
+  "foodLevel": 5,
+  /**
+   * This param defines the ingredients modifier of this food.
+   * You could only put 5 floats here.
+   * First: sour
+   * Second: sweet
+   * Third: bitter
+   * Fourth: spicy
+   * Fifth: salty
+   */
+  "modifier": [
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  /**
+   * This param defines the effects appeared when the player has eaten the food.
+   */
+  "effects": [
+    {
+      /**
+       * This param defines the name of the effect.
+       */
+      "effectName": "foodcraftreloaded:example_effect",
+      /**
+       * This param defines the duration(tick) of the effect.
+       */
+      "duration": 10
+    }
+  ]
+}

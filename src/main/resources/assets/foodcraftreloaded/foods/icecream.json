@@ -1,0 +1,17 @@
+{
+  "unlocalizedName": "ice_cream",
+  "foodLevel": 2,
+  "modifier": [
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "effects": [
+    {
+      "effectName": "foodcraftreloaded:freeze",
+      "duration": "10"
+    }
+  ]
+}
