@@ -19,3 +19,6 @@
 # include git important files
 !.gitmodules
 !.gitignore
+
+# other important files
+!.editorconfig
