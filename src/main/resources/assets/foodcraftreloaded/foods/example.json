@@ -12,6 +12,12 @@
    * This param defines the level of this food.
    */
   "foodLevel": 5,
+
+  /**
+   * If this param is true, the food can be consumed even if the player don't need to eat.
+   */
+  "alwaysEdible": false,
+
   /**
    * This param defines the ingredients modifier of this food.
    * You could only put 5 floats here.
@@ -28,6 +34,7 @@
     0.0,
     0.0
   ],
+
   /**
    * This param defines the effects appeared when the player has eaten the food.
    */
@@ -37,10 +44,51 @@
        * This param defines the name of the effect.
        */
       "effectName": "foodcraftreloaded:example_effect",
+
       /**
        * This param defines the duration(tick) of the effect.
        */
-      "duration": 10
+      "duration": 10,
+
+      /**
+       * This param defines probably of the set potion effect occurring.
+       * In this example, probably is 0.7(70%).
+       */
+      "probability": 0.7
+
+    }
+  ],
+
+  /**
+   * This param defines the OreDictionary names to register.
+   * Recommanded.
+   */
+  "oredicts": [
+    "listAllTests",
+    "foodExample"
+  ],
+
+  /**
+   * This param defines the recipes for this food.
+   * "" is null(or air)
+   * Recommanded.
+   */
+  "recipes": [
+    {
+      "type": "shaped", // Shaped or Shapeless
+      "value": [
+        [ "", "", "" ],
+        [ "", "foodcraftreloaded:test", "" ],
+        [ "", "", "" ]
+      ]
+    },
+    {
+      "type": "shapeless",
+      "value": [
+        [ "", "minecraft:grass_block", "" ],
+        [ "", "foodcraftreloaded:less", "" ],
+        [ "", "", "" ]
+      ]
     }
   ]
 }

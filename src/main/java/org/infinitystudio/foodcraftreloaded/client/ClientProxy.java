@@ -27,14 +27,18 @@ import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
 
 public class ClientProxy extends CommonProxy {
     public void preInitClient(FMLPreInitializationEvent event) {
+        super.preInit(event);
     }
 
     public void initClient(FMLInitializationEvent event) {
+        super.init(event);
     }
 
     public void postInitClient(FMLPostInitializationEvent event) {
+        super.postInit(event);
     }
 
     public void loadCompleteClient(FMLLoadCompleteEvent event) {
+        super.loadComplete(event);
     }
 }

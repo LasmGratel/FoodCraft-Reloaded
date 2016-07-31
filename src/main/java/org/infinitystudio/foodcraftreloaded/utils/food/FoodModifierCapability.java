@@ -1,6 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
- * Copyright (C) 2016 Infinity Studio.
+ * Infinity Launcher for Minecraft.
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,13 +13,8 @@
  * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package org.infinitystudio.foodcraftreloaded.utils.food;
 
-/**
- * A registry for items.
- */
-public class FCRItemRegistry {
+public class FoodModifierCapability  {
 }

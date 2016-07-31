@@ -16,12 +16,18 @@
  */
 package org.infinitystudio.foodcraftreloaded.utils.food;
 
+import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayer;
+
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Modify the food value of the Player.
  */
 public class FoodModifier {
+    private static Map<UUID, float[]> playerModifierMap = Maps.newHashMap();
+
     /**
      * Get current player's food level.
      * @param player current player
@@ -29,6 +35,22 @@ public class FoodModifier {
      */
     public static int getPlayerFoodLevel(EntityPlayer player) {
         return player.getFoodStats().getFoodLevel();
+    }
+
+    public static float[] getModifierForPlayer(UUID uuid) {
+        return playerModifierMap.get(uuid);
+    }
+
+    public static void putModifierForPlayer(UUID uuid, float[] modifiers) {
+        playerModifierMap.put(uuid, modifiers);
+    }
+
+    public static UUID[] getAllSavedPlayer() {
+        return (UUID[]) playerModifierMap.keySet().toArray();
+    }
+
+    public static void generateModifierForPlayer(UUID uuid) {
+
     }
 
 }
