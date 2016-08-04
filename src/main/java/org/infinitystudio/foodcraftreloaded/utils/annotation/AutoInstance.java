@@ -1,5 +1,6 @@
 /**
- * Infinity Launcher for Minecraft.
+ * FoodCraft Mod for Minecraft.
+ * Copyright (C) 2016 Infinity Studio.
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +26,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+/**
+ * Auto create a instance for some thing.
+ * Supported class: Object(with void constructor), Block, Item, EventBus, Capability, etc.
+ */
 public @interface AutoInstance {
     State value() default State.PREINIT;
     enum State {
