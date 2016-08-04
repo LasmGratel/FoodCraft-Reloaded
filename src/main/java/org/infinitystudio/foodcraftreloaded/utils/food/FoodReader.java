@@ -17,9 +17,35 @@
  */
 package org.infinitystudio.foodcraftreloaded.utils.food;
 
+import com.google.common.collect.Lists;
+import net.minecraft.util.ResourceLocation;
+
+import java.io.File;
+import java.util.List;
+
 /**
  * A reading helper to read food data.
  */
 public class FoodReader {
+    public List<Food> readAllFoods(File configDir) {
+        if(configDir.isFile()) {
+            configDir.delete();
+            configDir.mkdir();
+        }
+        File foodDir = new File(configDir, "foods");
+        if(foodDir.isFile()) {
+            foodDir.delete();
+            foodDir.mkdir();
+            // First run
+            ResourceLocation location = new ResourceLocation("foodcraftreloaded", "foods/");
 
+        }
+        List<Food> foods = Lists.newArrayList();
+        return foods;
+    }
+
+    private Food readFood(ResourceLocation resource) {
+        File file = new File(resource.getResourceDomain());
+        return new Food();
+    }
 }

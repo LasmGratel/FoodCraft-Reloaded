@@ -23,8 +23,19 @@ package org.infinitystudio.foodcraftreloaded.utils.food;
 public class Food {
     private String unlocalizedName;
     private int foodLevel;
+    private boolean alwaysEdible = false;
     private float[] modifier;
     private FoodEffect[] effects;
+    private String[] oredicts = {""};
+    private FoodRecipe[] recipes;
+
+    public boolean isAlwaysEdible() {
+        return alwaysEdible;
+    }
+
+    public void setAlwaysEdible(boolean alwaysEdible) {
+        this.alwaysEdible = alwaysEdible;
+    }
 
     public FoodEffect[] getEffects() {
         return effects;
@@ -48,6 +59,22 @@ public class Food {
 
     public void setModifier(float[] modifier) {
         this.modifier = modifier;
+    }
+
+    public String[] getOredicts() {
+        return oredicts;
+    }
+
+    public void setOredicts(String[] oredicts) {
+        this.oredicts = oredicts;
+    }
+
+    public FoodRecipe[] getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(FoodRecipe[] recipes) {
+        this.recipes = recipes;
     }
 
     public String getUnlocalizedName() {

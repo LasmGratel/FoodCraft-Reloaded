@@ -54,7 +54,13 @@
        * This param defines probably of the set potion effect occurring.
        * In this example, probably is 0.7(70%).
        */
-      "probability": 0.7
+      "probability": 0.7,
+      
+      /**
+       * This param defines the amplifier of the potion.
+       * Recommanded, default set to 1(Roman: I)
+       */
+      "amplifier": 2
 
     }
   ],

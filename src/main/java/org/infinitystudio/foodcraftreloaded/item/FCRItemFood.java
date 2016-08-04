@@ -22,10 +22,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import org.infinitystudio.foodcraftreloaded.utils.food.FoodEffect;
 
 import javax.annotation.Nullable;
 
@@ -36,11 +38,6 @@ import javax.annotation.Nullable;
  */
 public class FCRItemFood extends Item {
     /**
-     * Number of ticks to run while 'EnumAction'ing until result.
-     */
-    public int itemUseDuration;
-
-    /**
      * The amount this food item heals the player.
      */
     private int healAmount;
@@ -50,15 +47,7 @@ public class FCRItemFood extends Item {
      */
     private boolean alwaysEdible;
 
-    /**
-     * represents the potion effect that will occurr upon eating this food. Set by setPotionEffect
-     */
-    private PotionEffect potionId;
-
-    /**
-     * probably of the set potion effect occurring
-     */
-    private float potionEffectProbability;
+    private FoodEffect[] effects;
 
     /**
      * Modifier for the food, see the example json.
@@ -85,9 +74,14 @@ public class FCRItemFood extends Item {
 
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
     {
-        if (!worldIn.isRemote && this.potionId != null && worldIn.rand.nextFloat() < this.potionEffectProbability)
-        {
-            player.addPotionEffect(new PotionEffect(this.potionId));
+        if(effects != null)
+        for(FoodEffect effect : effects) {
+            float potionEffectProbability = effect.getProbability();
+            int amplifier = effect.getAmplifier();
+            int duration = effect.getDuration();
+            if (!worldIn.isRemote && worldIn.rand.nextFloat() < potionEffectProbability && Potion.getPotionFromResourceLocation(effect.getEffectName()) != null) {
+                player.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation(effect.getEffectName()), duration, amplifier));
+            }
         }
     }
 
@@ -107,28 +101,12 @@ public class FCRItemFood extends Item {
         this.healAmount = healAmount;
     }
 
-    public int getItemUseDuration() {
-        return itemUseDuration;
+    public FoodEffect[] getEffects() {
+        return effects;
     }
 
-    public void setItemUseDuration(int itemUseDuration) {
-        this.itemUseDuration = itemUseDuration;
-    }
-
-    public float getPotionEffectProbability() {
-        return potionEffectProbability;
-    }
-
-    public void setPotionEffectProbability(float potionEffectProbability) {
-        this.potionEffectProbability = potionEffectProbability;
-    }
-
-    public PotionEffect getPotionId() {
-        return potionId;
-    }
-
-    public void setPotionId(PotionEffect potionId) {
-        this.potionId = potionId;
+    public void setEffects(FoodEffect[] effects) {
+        this.effects = effects;
     }
 
     public float[] getModifier() {

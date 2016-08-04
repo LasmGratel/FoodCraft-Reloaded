@@ -23,6 +23,8 @@ package org.infinitystudio.foodcraftreloaded.utils.food;
 public class FoodEffect {
     private String effectName;
     private int duration;
+    private float probability;
+    private int amplifier;
 
     public int getDuration() {
         return duration;
@@ -38,5 +40,21 @@ public class FoodEffect {
 
     public void setEffectName(String effectName) {
         this.effectName = effectName;
+    }
+
+    public float getProbability() {
+        return probability;
+    }
+
+    public void setProbability(float probability) {
+        this.probability = probability;
+    }
+
+    public int getAmplifier() {
+        return amplifier;
+    }
+
+    public void setAmplifier(int amplifier) {
+        this.amplifier = amplifier;
     }
 }
