@@ -17,5 +17,5 @@
  */
 package org.infinitystudio.foodcraftreloaded.utils.food;
 
-public class FoodModifierCapability  {
+public class FoodModifierCapability {
 }

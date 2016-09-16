@@ -17,8 +17,13 @@
  */
 package org.infinitystudio.foodcraftreloaded.utils.annotation;
 
+import org.reflections.Reflections;
+import org.reflections.scanners.FieldAnnotationsScanner;
+
 public class AnnotationRegisterScanner {
 
     public static void addRegistrationClass(Class<IRegistration> registrationClass) {
+        Reflections reflections = new Reflections(new FieldAnnotationsScanner(), registrationClass);
+
     }
 }

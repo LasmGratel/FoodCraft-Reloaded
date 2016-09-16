@@ -33,6 +33,8 @@ minecraft {
     replace "@version@", mod_version
 
     mappings = mcp_mapping_version
+    
+    useDepAts = true
 }
 
 dependencies {
@@ -48,6 +50,8 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    
+    compile 'org.reflections:reflections:0.9.10'
 }
 
 processResources
