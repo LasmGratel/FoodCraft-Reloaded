@@ -14,13 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.food;
+package net.infstudio.foodcraftreloaded.utils.food;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.oredict.OreDictionary;
-import org.infinitystudio.foodcraftreloaded.item.FCRItemFood;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,21 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FCRItemStackFoodHelper {
-    public static ItemStack createFoodItemStack(Food food) {
-        FCRItemFood fcrFood = new FCRItemFood();
-        fcrFood.setModifier(food.getModifier());
-        fcrFood.setAlwaysEdible(food.isAlwaysEdible());
-        fcrFood.setHealAmount(food.getFoodLevel());
-        fcrFood.setEffects(food.getEffects());
-        return createFoodItemStack(fcrFood);
-    }
-
-    public static ItemStack createFoodItemStack(FCRItemFood food) {
-        ItemStack stack = new ItemStack(food);
-        return stack;
-    }
-
-    public static @Nullable Food getFoodFromStack(@Nonnull ItemStack stack) {
+    @Nullable
+    public static Food getFoodFromStack(@Nonnull ItemStack stack) {
         try {
             NBTTagCompound modifierTag = stack.getTagCompound().getCompoundTag("modifier");
             float[] modifier = new float[5];

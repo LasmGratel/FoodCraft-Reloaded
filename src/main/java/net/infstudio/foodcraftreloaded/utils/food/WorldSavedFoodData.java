@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.food;
+package net.infstudio.foodcraftreloaded.utils.food;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldSavedData;
 
 import java.util.UUID;
 
-import static org.infinitystudio.foodcraftreloaded.FoodCraftReloaded.MODID;
+import static net.infstudio.foodcraftreloaded.FoodCraftReloaded.MODID;
 
 public class WorldSavedFoodData extends WorldSavedData {
     private static final String DATA_NAME = MODID + "_FoodData";

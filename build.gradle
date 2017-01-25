@@ -33,8 +33,6 @@ minecraft {
     replace "@version@", mod_version
 
     mappings = mcp_mapping_version
-    
-    useDepAts = true
 }
 
 dependencies {

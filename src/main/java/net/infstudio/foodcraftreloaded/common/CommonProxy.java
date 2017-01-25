@@ -14,16 +14,27 @@
  * <p>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.utils.annotation;
+package net.infstudio.foodcraftreloaded.common;
 
-import org.reflections.Reflections;
-import org.reflections.scanners.FieldAnnotationsScanner;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public class AnnotationRegisterScanner {
+public class CommonProxy {
+    public void preInit(FMLPreInitializationEvent event) {
 
-    public static void addRegistrationClass(Class<IRegistration> registrationClass) {
-        Reflections reflections = new Reflections(new FieldAnnotationsScanner(), registrationClass);
+    }
 
+    public void init(FMLInitializationEvent event) {
+    }
+
+    public void postInit(FMLPostInitializationEvent event) {
+    }
+
+    public void loadComplete(FMLLoadCompleteEvent event) {
     }
 }

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.annotation;
+package net.infstudio.foodcraftreloaded.utils.annotation;
 
 import net.minecraftforge.fml.common.event.*;
 

@@ -17,27 +17,38 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded.client;
+package net.infstudio.foodcraftreloaded.client;
 
+import net.infstudio.foodcraftreloaded.common.CommonProxy;
+import net.infstudio.foodcraftreloaded.common.FCRCommonRegistration;
+import net.infstudio.foodcraftreloaded.utils.food.FoodReader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ClientProxy extends CommonProxy {
+    @SideOnly(Side.CLIENT)
     public void preInitClient(FMLPreInitializationEvent event) {
         super.preInit(event);
+        if (!event.getModConfigurationDirectory().isDirectory())
+            event.getModConfigurationDirectory().mkdirs();
+        FoodReader.readAllFoods(event.getModConfigurationDirectory()).forEach(FCRCommonRegistration::addFood);
     }
 
+    @SideOnly(Side.CLIENT)
     public void initClient(FMLInitializationEvent event) {
         super.init(event);
     }
 
+    @SideOnly(Side.CLIENT)
     public void postInitClient(FMLPostInitializationEvent event) {
         super.postInit(event);
     }
 
+    @SideOnly(Side.CLIENT)
     public void loadCompleteClient(FMLLoadCompleteEvent event) {
         super.loadComplete(event);
     }

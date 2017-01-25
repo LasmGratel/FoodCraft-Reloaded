@@ -1,9 +1,9 @@
 [
 {
-  "modid": "FoodCraft-Reloaded",
+  "modid": "foodcraftreloaded",
   "name": "FoodCraft Reloaded",
   "description": "A China and foreign food Minecraft mod(Reloaded!)",
-  "version": "1.2.0",
+  "version": "1.0.0-SNAPSHOT",
   "credits": "Infinity Studio",
   "logoFile": "",
   "url": "",

@@ -17,8 +17,9 @@
  *
  * @license GPLv3
  */
-package org.infinitystudio.foodcraftreloaded;
+package net.infstudio.foodcraftreloaded;
 
+import net.infstudio.foodcraftreloaded.common.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -27,14 +28,13 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.infinitystudio.foodcraftreloaded.common.CommonProxy;
 
 @Mod(modid = FoodCraftReloaded.MODID, name = FoodCraftReloaded.NAME, version = FoodCraftReloaded.VERSION, acceptedMinecraftVersions = "[1.8.9,)")
 public class FoodCraftReloaded {
     public static final String MODID = "foodcraftreloaded";
     public static final String NAME = "FoodCraft-Reloaded";
     public static final String VERSION = "@version@";
-    public static final String GROUP = "org.infinitystudio.foodcraftreloaded";
+    public static final String GROUP = "net.infstudio.foodcraftreloaded";
 
     @Instance(MODID)
     public static FoodCraftReloaded INSTANCE;

@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.item;
+package net.infstudio.foodcraftreloaded.item;
 
+import net.infstudio.foodcraftreloaded.utils.food.Food;
+import net.infstudio.foodcraftreloaded.utils.food.FoodEffect;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -27,7 +29,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import org.infinitystudio.foodcraftreloaded.utils.food.FoodEffect;
 
 import javax.annotation.Nullable;
 
@@ -54,10 +55,17 @@ public class FCRItemFood extends Item {
      */
     private float[] modifier;
 
+    public FCRItemFood(Food food) {
+        healAmount = food.getFoodLevel();
+        alwaysEdible = food.isAlwaysEdible();
+        effects = food.getEffects();
+        modifier = food.getModifier();
+    }
+
     public ItemStack onItemUseFinish(@Nullable ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
         if (stack != null) {
-            --stack.stackSize;
+            stack.setCount(stack.getCount() - 1);
         }
 
         if (entityLiving instanceof EntityPlayer)

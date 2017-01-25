@@ -1,6 +1,5 @@
 /**
- * FoodCraft Mod for Minecraft.
- * Copyright (C) 2016 Infinity Studio.
+ * Infinity Launcher for Minecraft.
  * <p>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.annotation;
+package net.infstudio.foodcraftreloaded.utils.food;
 
-import net.minecraftforge.fml.common.event.FMLStateEvent;
-
-public abstract class AbstractFieldRegistration<T> {
-    public abstract T init(AutoInstance annotation, T object, FMLStateEvent state);
-    public T initClient(AutoInstance annotation, T object, FMLStateEvent state) {
-        return init(annotation, object, state);
-    }
-    public abstract T newInstance() throws Exception;
+public class FoodRecipe {
+    private String type;
+    private String[][] value;
 }

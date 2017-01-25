@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.food;
+package net.infstudio.foodcraftreloaded.utils.food;
 
 import com.google.common.collect.Lists;
 import net.minecraft.util.ResourceLocation;
@@ -27,7 +27,7 @@ import java.util.List;
  * A reading helper to read food data.
  */
 public class FoodReader {
-    public List<Food> readAllFoods(File configDir) {
+    public static List<Food> readAllFoods(File configDir) {
         if(configDir.isFile()) {
             configDir.delete();
             configDir.mkdir();
@@ -44,7 +44,7 @@ public class FoodReader {
         return foods;
     }
 
-    private Food readFood(ResourceLocation resource) {
+    private static Food readFood(ResourceLocation resource) {
         File file = new File(resource.getResourceDomain());
         return new Food();
     }

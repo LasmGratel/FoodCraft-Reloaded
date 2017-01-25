@@ -15,22 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.infinitystudio.foodcraftreloaded.utils.food;
+package net.infstudio.foodcraftreloaded.utils.food;
 
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.capabilities.Capability;
+import java.util.concurrent.Callable;
 
-public class FoodModifierStorage implements Capability.IStorage<FoodModifierCapability> {
+public class FoodModifierFactory implements Callable<FoodModifierCapability> {
     @Override
-    public NBTBase writeNBT(Capability<FoodModifierCapability> capability,
-                            FoodModifierCapability instance, EnumFacing side) {
+    public FoodModifierCapability call() throws Exception {
         return null;
-    }
-
-    @Override
-    public void readNBT(Capability<FoodModifierCapability> capability,
-                        FoodModifierCapability instance, EnumFacing side, NBTBase nbt) {
-
     }
 }
