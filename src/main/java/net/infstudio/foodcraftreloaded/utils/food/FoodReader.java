@@ -18,9 +18,14 @@
 package net.infstudio.foodcraftreloaded.utils.food;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.ResourceLocation;
+import com.google.gson.Gson;
+import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -28,24 +33,33 @@ import java.util.List;
  */
 public class FoodReader {
     public static List<Food> readAllFoods(File configDir) {
-        if(configDir.isFile()) {
+        Gson gson = new Gson();
+        if (configDir.isFile()) {
             configDir.delete();
             configDir.mkdir();
         }
         File foodDir = new File(configDir, "foods");
-        if(foodDir.isFile()) {
+        List<Food> foods = Lists.newArrayList();
+        if (foodDir.isFile()) {
             foodDir.delete();
             foodDir.mkdir();
             // First run
-            ResourceLocation location = new ResourceLocation("foodcraftreloaded", "foods/");
-
+            try {
+                FileUtils.copyURLToFile(
+                    FoodCraftReloaded.class.getResource("assets/" + FoodCraftReloaded.MODID + "/foods/example.json"),
+                    new File(foodDir, "example.json")
+                );
+                FileUtils.listFiles(foodDir, new String[]{"json"}, true).stream().filter(file -> !file.getName().equals("example.json")).forEach(foodFile -> {
+                    try {
+                        foods.add(gson.fromJson(new FileReader(foodFile), Food.class));
+                    } catch (FileNotFoundException e) {
+                        FoodCraftReloaded.LOGGER.warn("Un-able to parse json file", e);
+                    }
+                });
+            } catch (IOException e) {
+                FoodCraftReloaded.LOGGER.warn("Un-able to parse json file", e);
+            }
         }
-        List<Food> foods = Lists.newArrayList();
         return foods;
-    }
-
-    private static Food readFood(ResourceLocation resource) {
-        File file = new File(resource.getResourceDomain());
-        return new Food();
     }
 }

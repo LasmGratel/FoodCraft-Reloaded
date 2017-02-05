@@ -28,6 +28,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = FoodCraftReloaded.MODID, name = FoodCraftReloaded.NAME, version = FoodCraftReloaded.VERSION, acceptedMinecraftVersions = "[1.8.9,)")
 public class FoodCraftReloaded {
@@ -35,6 +37,7 @@ public class FoodCraftReloaded {
     public static final String NAME = "FoodCraft-Reloaded";
     public static final String VERSION = "@version@";
     public static final String GROUP = "net.infstudio.foodcraftreloaded";
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     @Instance(MODID)
     public static FoodCraftReloaded INSTANCE;

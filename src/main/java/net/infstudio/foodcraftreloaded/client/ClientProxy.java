@@ -20,8 +20,6 @@
 package net.infstudio.foodcraftreloaded.client;
 
 import net.infstudio.foodcraftreloaded.common.CommonProxy;
-import net.infstudio.foodcraftreloaded.common.FCRCommonRegistration;
-import net.infstudio.foodcraftreloaded.utils.food.FoodReader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -33,9 +31,6 @@ public class ClientProxy extends CommonProxy {
     @SideOnly(Side.CLIENT)
     public void preInitClient(FMLPreInitializationEvent event) {
         super.preInit(event);
-        if (!event.getModConfigurationDirectory().isDirectory())
-            event.getModConfigurationDirectory().mkdirs();
-        FoodReader.readAllFoods(event.getModConfigurationDirectory()).forEach(FCRCommonRegistration::addFood);
     }
 
     @SideOnly(Side.CLIENT)

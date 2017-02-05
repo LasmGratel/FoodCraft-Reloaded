@@ -19,14 +19,20 @@
  */
 package net.infstudio.foodcraftreloaded.common;
 
+import net.infstudio.foodcraftreloaded.item.FCRItemFood;
+import net.infstudio.foodcraftreloaded.utils.food.FoodReader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
-
+        GameRegistry.register(new FCRItemFood());
+        if (!event.getModConfigurationDirectory().isDirectory())
+            event.getModConfigurationDirectory().mkdirs();
+        FoodReader.readAllFoods(event.getModConfigurationDirectory()).forEach(FCRCommonRegistration::addFood);
     }
 
     public void init(FMLInitializationEvent event) {
