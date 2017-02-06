@@ -33,7 +33,11 @@ public class CommonProxy {
     private final LoaderManager loaderManager = new LoaderManager();
 
     public CommonProxy() {
-        Arrays.asList(BlockLoader.class, ItemLoader.class, FruitLoader.class, AchievementLoader.class, RecipeLoader.class).forEach(loaderManager::addLoader);
+        Arrays.asList(
+            BlockLoader.class, ItemLoader.class,
+            FruitLoader.class, KitchenKnifeLoader.class,
+            AchievementLoader.class, RecipeLoader.class
+        ).forEach(loaderManager::addLoader);
     }
 
     @OverridingMethodsMustInvokeSuper

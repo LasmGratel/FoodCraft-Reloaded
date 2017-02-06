@@ -20,6 +20,7 @@ public class FruitLoader {
     private ItemJuices juices;
     private ItemSodas sodas;
     private ItemIcecreams icecreams;
+    private ItemCakes cakes;
 
     @Load
     public void loadJuices() {
@@ -31,6 +32,8 @@ public class FruitLoader {
         GameRegistry.register(sodas);
         icecreams = new ItemIcecreams();
         GameRegistry.register(icecreams);
+        cakes = new ItemCakes();
+        GameRegistry.register(cakes);
         for (int i = 0; i < EnumFruitType.values().length; i++) {
             OreDictionary.registerOre("listAllfruit", new ItemStack(fruits, 1, i));
             OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("crop", EnumFruitType.values()[i].toString()), new ItemStack(fruits, 1, i));
@@ -49,6 +52,7 @@ public class FruitLoader {
             registerRender(juices, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory"));
             registerRender(sodas, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
             registerRender(icecreams, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory"));
+            registerRender(cakes, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
         }
     }
 
@@ -57,6 +61,7 @@ public class FruitLoader {
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(juices, juices);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(sodas, sodas);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(icecreams, icecreams);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(cakes, cakes);
     }
 
     private void registerRender(Item item, int meta, ModelResourceLocation location) {

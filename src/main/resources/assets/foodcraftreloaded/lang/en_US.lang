@@ -30,6 +30,9 @@ item.fruitCherry=Cherry
 item.fruitCoconut=Coconut
 item.fruitBanana=Banana
 
+# Cake
+item.cake=%s Cake
+
 # Juice
 item.juice=%s Juice
 
@@ -37,11 +40,11 @@ item.juice=%s Juice
 item.soda=%s Soda
 
 # Ice-cream
-item.originalIceCream=Original Ice-cream
+item.originalIceCream.name=Original Ice-cream
 item.iceCream=%s Ice-cream
 
 # Blocks
-tile.rice=Rice Block
+tile.rice.name=Rice Block
 
 # ItemGroups
 itemGroup.foodcraftreloaded.base=FoodCraft|Base

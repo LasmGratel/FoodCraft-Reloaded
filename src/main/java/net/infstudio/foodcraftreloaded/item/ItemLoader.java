@@ -26,7 +26,7 @@ public class ItemLoader {
                     continue;
 
                 Item item = (Item) field.get(null);
-                GameRegistry.register(item.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
+                GameRegistry.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
 
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
             } catch (Throwable e) {

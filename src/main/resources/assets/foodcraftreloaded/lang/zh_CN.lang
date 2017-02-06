@@ -30,6 +30,16 @@ item.fruitCherry=樱桃
 item.fruitCoconut=椰子
 item.fruitBanana=香蕉
 
+# Kitchen knife
+item.kitchenKnifeStone.name=石刀
+item.kitchenKnifeIron.name=铁刀
+item.kitchenKnifeGold.name=金刀
+item.kitchenKnifeDiamond.name=钻石刀
+item.kitchenKnifeEmerald.name=绿宝石刀
+
+# Cake
+item.cake=%s蛋糕
+
 # Juice
 item.juice=%s果汁
 
@@ -37,11 +47,11 @@ item.juice=%s果汁
 item.soda=%s苏打水
 
 # Ice-cream
-item.originalIceCream=原味冰激凌
+item.originalIceCream.name=原味冰激凌
 item.iceCream=%s冰激凌
 
 # Blocks
-tile.rice=水稻块
+tile.rice.name=水稻块
 
 # ItemGroups
 itemGroup.foodcraftreloaded.base=食物工艺|基础

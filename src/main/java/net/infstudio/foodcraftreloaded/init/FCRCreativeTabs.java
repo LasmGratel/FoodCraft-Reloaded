@@ -3,6 +3,7 @@ package net.infstudio.foodcraftreloaded.init;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 
@@ -29,7 +30,7 @@ public interface FCRCreativeTabs {
         @Nonnull
         @Override
         public ItemStack getTabIconItem() {
-            return new ItemStack(FCRItems.GLASS_BOTTLE);
+            return OreDictionary.getOres("foodLemonjuice").get(0);
         }
     };
 }

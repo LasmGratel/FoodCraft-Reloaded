@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "foodcraftreloaded:rice_plant_0" },
+        "age=1": { "model": "foodcraftreloaded:rice_plant_1" },
+        "age=2": { "model": "foodcraftreloaded:rice_plant_2" },
+        "age=3": { "model": "foodcraftreloaded:rice_plant_2" },
+        "age=4": { "model": "foodcraftreloaded:rice_plant_3" },
+        "age=5": { "model": "foodcraftreloaded:rice_plant_3" },
+        "age=6": { "model": "foodcraftreloaded:rice_plant_3" },
+        "age=7": { "model": "foodcraftreloaded:rice_plant_4" }
+    }
+}
