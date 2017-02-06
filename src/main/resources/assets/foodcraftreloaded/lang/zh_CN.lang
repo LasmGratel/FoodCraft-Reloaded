@@ -1,46 +1,47 @@
 # Items
 # Vegetables
 # Beans
-item.itemRedBean=红豆
-item.itemBlackBean=黑豆
-item.itemGreenBean=绿豆
-item.itemSoyBean=黄豆
+item.bedBean=红豆
+item.blackBean=黑豆
+item.greenBean=绿豆
+item.SoyBean=黄豆
 
 # Bean Sprouts
-item.itemRedBeanSprouts=红豆芽
-item.itemBlackBeanSprouts=黑豆芽
-item.itemGreenBeanSprouts=绿豆芽
-item.itemSoyBeanSprouts=黄豆芽
+item.redBeanSprouts=红豆芽
+item.blackBeanSprouts=黑豆芽
+item.greenBeanSprouts=绿豆芽
+item.soyBeanSprouts=黄豆芽
 
 # Foods
 # Fruits
-item.itemFruitPear=梨
-item.itemFruitLitchi=荔枝
-item.itemFruitPeach=桃
-item.itemFruitOrange=橘子
-item.itemFruitMango=芒果
-item.itemFruitLemon=柠檬
-item.itemFruitGrapefruit=柚子
-item.itemFruitPersimmon=柿子
-item.itemFruitPapaya=木瓜
-item.itemFruitHawthorn=山楂
-item.itemFruitPomegranate=石榴
-item.itemFruitDate=红枣
-item.itemFruitCherry=樱桃
-item.itemFruitCoconut=椰子
-item.itemFruitBanana=香蕉
+item.fruitPear=梨
+item.fruitLitchi=荔枝
+item.fruitPeach=桃
+item.fruitOrange=橘子
+item.fruitMango=芒果
+item.fruitLemon=柠檬
+item.fruitGrapefruit=柚子
+item.fruitPersimmon=柿子
+item.fruitPapaya=木瓜
+item.fruitHawthorn=山楂
+item.fruitPomegranate=石榴
+item.fruitDate=红枣
+item.fruitCherry=樱桃
+item.fruitCoconut=椰子
+item.fruitBanana=香蕉
 
 # Juice
-item.itemJuice=%s果汁
+item.juice=%s果汁
 
 # Soda
-item.itemFruitSoda=%s苏打水
+item.soda=%s苏打水
 
 # Ice-cream
-item.itemFruitIcecream=%s冰激凌
+item.originalIceCream=原味冰激凌
+item.iceCream=%s冰激凌
 
 # Blocks
-tile.blockRice=水稻块
+tile.rice=水稻块
 
 # ItemGroups
 itemGroup.foodcraftreloaded.base=食物工艺|基础

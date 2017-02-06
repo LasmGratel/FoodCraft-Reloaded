@@ -1,46 +1,47 @@
 # Items
 # Vegetables
 # Beans
-item.itemRedBean=Red Bean
-item.itemBlackBean=Black Bean
-item.itemGreenBean=Green Bean
-item.itemSoyBean=Soy Bean
+item.redBean=Red Bean
+item.blackBean=Black Bean
+item.greenBean=Green Bean
+item.soyBean=Soy Bean
 
 # Bean Sprouts
-item.itemRedBeanSprouts=Red Bean Sprouts
-item.itemBlackBeanSprouts=Black Bean Sprouts
-item.itemGreenBeanSprouts=Green Bean Sprouts
-item.itemSoyBeanSprouts=Soy Bean Sprouts
+item.redBeanSprouts=Red Bean Sprouts
+item.blackBeanSprouts=Black Bean Sprouts
+item.greenBeanSprouts=Green Bean Sprouts
+item.soyBeanSprouts=Soy Bean Sprouts
 
 # Foods
 # Fruits
-item.itemFruitPear=Pear
-item.itemFruitLitchi=Litchi
-item.itemFruitPeach=Peach
-item.itemFruitOrange=Orange
-item.itemFruitMango=Mango
-item.itemFruitLemon=Lemon
-item.itemFruitGrapefruit=Grapefruit
-item.itemFruitPersimmon=Persimmon
-item.itemFruitPapaya=Papaya
-item.itemFruitHawthorn=Hawthorn
-item.itemFruitPomegranate=Pomegranate
-item.itemFruitDate=Date
-item.itemFruitCherry=Cherry
-item.itemFruitCoconut=Coconut
-item.itemFruitBanana=Banana
+item.fruitPear=Pear
+item.fruitLitchi=Litchi
+item.fruitPeach=Peach
+item.fruitOrange=Orange
+item.fruitMango=Mango
+item.fruitLemon=Lemon
+item.fruitGrapefruit=Grapefruit
+item.fruitPersimmon=Persimmon
+item.fruitPapaya=Papaya
+item.fruitHawthorn=Hawthorn
+item.fruitPomegranate=Pomegranate
+item.fruitDate=Date
+item.fruitCherry=Cherry
+item.fruitCoconut=Coconut
+item.fruitBanana=Banana
 
 # Juice
-item.itemJuice=%s Juice
+item.juice=%s Juice
 
 # Soda
-item.itemFruitSoda=%s Soda
+item.soda=%s Soda
 
 # Ice-cream
-item.itemFruitIcecream=%s Icecream
+item.originalIceCream=Original Ice-cream
+item.iceCream=%s Ice-cream
 
 # Blocks
-tile.blockRice=Rice Block
+tile.rice=Rice Block
 
 # ItemGroups
 itemGroup.foodcraftreloaded.base=FoodCraft|Base

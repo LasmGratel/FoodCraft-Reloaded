@@ -1,8 +1,8 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "foodcraftreloaded:items/icecream_bottle",
-        "layer1": "foodcraftreloaded:items/icecream_overlay"
+        "layer0": "foodcraftreloaded:items/juice_bottle",
+        "layer1": "foodcraftreloaded:items/juice_overlay"
     },
     "display": {
         "thirdperson": {

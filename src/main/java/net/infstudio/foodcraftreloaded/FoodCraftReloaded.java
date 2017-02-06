@@ -24,10 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,13 +34,26 @@ public class FoodCraftReloaded {
     public static final String NAME = "FoodCraft-Reloaded";
     public static final String VERSION = "@version@";
     public static final String GROUP = "net.infstudio.foodcraftreloaded";
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
+    private static final Logger LOGGER = LogManager.getLogger(MODID);
 
     @Instance(MODID)
     public static FoodCraftReloaded INSTANCE;
 
     @SidedProxy(clientSide = GROUP + ".client.ClientProxy", serverSide = GROUP + ".common.CommonProxy")
-    public static CommonProxy proxy;
+    private static CommonProxy proxy;
+
+    public static Logger getLogger() {
+        return LOGGER;
+    }
+
+    public static CommonProxy getProxy() {
+        return proxy;
+    }
+
+    @EventHandler
+    public void construct(FMLConstructionEvent event) {
+        proxy.construct(event);
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
