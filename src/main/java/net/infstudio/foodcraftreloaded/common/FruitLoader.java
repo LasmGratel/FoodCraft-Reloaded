@@ -1,6 +1,7 @@
 package net.infstudio.foodcraftreloaded.common;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
+import net.infstudio.foodcraftreloaded.block.BlockFruitLeaves;
 import net.infstudio.foodcraftreloaded.item.food.*;
 import net.infstudio.foodcraftreloaded.utils.NameBuilder;
 import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
@@ -15,7 +16,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
+
 public class FruitLoader {
+    private Map<EnumFruitType, BlockFruitLeaves> leavesMap = new EnumMap<>(EnumFruitType.class);
     private ItemFruits fruits;
     private ItemJuices juices;
     private ItemSodas sodas;
@@ -26,6 +32,11 @@ public class FruitLoader {
     public void loadJuices() {
         fruits = new ItemFruits();
         GameRegistry.register(fruits);
+        Arrays.stream(EnumFruitType.values()).forEach(fruitType -> {
+            BlockFruitLeaves fruitLeaves = new BlockFruitLeaves(fruitType);
+            GameRegistry.register(fruitLeaves);
+            leavesMap.put(fruitType, fruitLeaves);
+        });
         juices = new ItemJuices();
         GameRegistry.register(juices);
         sodas = new ItemSodas();
@@ -53,11 +64,13 @@ public class FruitLoader {
             registerRender(sodas, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
             registerRender(icecreams, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory"));
             registerRender(cakes, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
+            registerRender(Item.getItemFromBlock(leavesMap.get(EnumFruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "inventory"));
         }
     }
 
     @Load(value = LoaderState.POSTINITIALIZATION, side = Side.CLIENT)
     public void loadColors() {
+        leavesMap.values().forEach((leaves) -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(leaves, leaves));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(juices, juices);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(sodas, sodas);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler(icecreams, icecreams);
