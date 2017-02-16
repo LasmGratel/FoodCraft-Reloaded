@@ -1,4 +1,5 @@
-{   "parent": "block/block",
+{
+    "parent": "block/block",
     "textures": {
         "all": "foodcraftreloaded:blocks/fruit_leaves",
         "overlay": "foodcraftreloaded:blocks/fruit_leaves_overlay",

@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -64,17 +66,18 @@ public class FruitLoader {
             registerRender(sodas, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
             registerRender(icecreams, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory"));
             registerRender(cakes, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
+            ModelLoader.setCustomStateMapper(leavesMap.get(EnumFruitType.values()[i]), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "normal")));
             registerRender(Item.getItemFromBlock(leavesMap.get(EnumFruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "inventory"));
         }
     }
 
     @Load(value = LoaderState.POSTINITIALIZATION, side = Side.CLIENT)
     public void loadColors() {
-        leavesMap.values().forEach((leaves) -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(leaves, leaves));
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(juices, juices);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(sodas, sodas);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(icecreams, icecreams);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(cakes, cakes);
+        leavesMap.values().forEach((leaves) -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> tintIndex == 0 ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : tintIndex == 1 ? ((BlockFruitLeaves) state.getBlock()).getFruitType().getColor().getRGB() : -1, leaves));
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 && stack.getItem() instanceof ItemJuices ? EnumFruitType.values()[stack.getMetadata()].getColor().getRGB() : -1, juices);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 && stack.getItem() instanceof ItemSodas ? EnumFruitType.values()[stack.getMetadata()].getColor().getRGB() : -1, sodas);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 && stack.getItem() instanceof ItemIcecreams ? EnumFruitType.values()[stack.getMetadata()].getColor().getRGB() : -1, icecreams);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> tintIndex == 1 && stack.getItem() instanceof ItemCakes ? EnumFruitType.values()[stack.getMetadata()].getColor().getRGB() : -1, cakes);
     }
 
     private void registerRender(Item item, int meta, ModelResourceLocation location) {

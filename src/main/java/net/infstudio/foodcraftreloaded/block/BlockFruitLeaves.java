@@ -7,23 +7,29 @@ import net.infstudio.foodcraftreloaded.utils.NameBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
-public class BlockFruitLeaves extends Block implements IBlockColor {
+public class BlockFruitLeaves extends Block implements IShearable {
     private EnumFruitType fruitType;
 
     public BlockFruitLeaves(EnumFruitType fruitType) {
         super(Material.LEAVES);
+        this.setTickRandomly(true);
         this.fruitType = fruitType;
+        this.setHardness(0.2F);
+        this.setLightOpacity(1);
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "leaves"));
     }
 
@@ -48,17 +54,28 @@ public class BlockFruitLeaves extends Block implements IBlockColor {
     }
 
     @Override
+    @Nonnull
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
+    @Override
     public int damageDropped(IBlockState state) {
         return fruitType.ordinal();
     }
 
     @Override
-    public int colorMultiplier(@Nonnull IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-        if (tintIndex == 0)
-            return BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
-        else if (tintIndex == 1)
-            return ((BlockFruitLeaves) state.getBlock()).fruitType.getColor().getRGB();
-        else
-            return -1;
+    public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return Collections.singletonList(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getFruits(), fruitType.ordinal(), MathHelper.ceil(quantityDroppedWithBonus(fortune, ((World) world).rand) * 1.5)));
     }
 }
