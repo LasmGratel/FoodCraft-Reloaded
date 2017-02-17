@@ -99,4 +99,12 @@ public class FruitLoader {
     public ItemIcecreams getIcecreams() {
         return icecreams;
     }
+
+    public ItemCakes getCakes() {
+        return cakes;
+    }
+
+    public Map<EnumFruitType, BlockFruitLeaves> getLeavesMap() {
+        return leavesMap;
+    }
 }

@@ -1,6 +1,6 @@
 {
     "parent": "block/crop",
     "textures": {
-        "crop": "foodcraft:blocks/rice/crop_3"
+        "crop": "foodcraftreloaded:blocks/rice/crop_3"
     }
 }
