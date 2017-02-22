@@ -1,13 +1,13 @@
 package net.infstudio.foodcraftreloaded.block.container;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.capability.TileFluidHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityDrinkMachine extends TileEntity implements IItemHandlerModifiable {
+public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHandlerModifiable {
     private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
 
     @Override

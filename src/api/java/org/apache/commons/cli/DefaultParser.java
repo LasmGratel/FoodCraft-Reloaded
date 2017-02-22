@@ -24,7 +24,7 @@ import java.util.Properties;
 
 /**
  * Default parser.
- * 
+ *
  * @version $Id: DefaultParser.java 1677454 2015-05-03 17:13:54Z ggregory $
  * @since 1.3
  */
@@ -32,29 +32,29 @@ public class DefaultParser implements CommandLineParser
 {
     /** The command-line instance. */
     protected CommandLine cmd;
-    
+
     /** The current options. */
     protected Options options;
 
     /**
      * Flag indicating how unrecognized tokens are handled. <tt>true</tt> to stop
      * the parsing and add the remaining tokens to the args list.
-     * <tt>false</tt> to throw an exception. 
+     * <tt>false</tt> to throw an exception.
      */
     protected boolean stopAtNonOption;
 
     /** The token currently processed. */
     protected String currentToken;
- 
+
     /** The last option parsed. */
     protected Option currentOption;
- 
+
     /** Flag indicating if tokens should no longer be analyzed and simply added as arguments of the command line. */
     protected boolean skipParsing;
- 
+
     /** The required options and groups expected to be found when parsing the command line. */
     protected List expectedOpts;
- 
+
     public CommandLine parse(Options options, String[] arguments) throws ParseException
     {
         return parse(options, arguments, null);
@@ -65,8 +65,8 @@ public class DefaultParser implements CommandLineParser
      *
      * @param options    the specified Options
      * @param arguments  the command line arguments
-     * @param properties command line option name-value pairs
-     * @return the list of atomic option and value tokens
+     * @param properties command line option name-modifier pairs
+     * @return the list of atomic option and modifier tokens
      *
      * @throws ParseException if there are any problems encountered
      * while parsing the command line tokens.
@@ -86,13 +86,13 @@ public class DefaultParser implements CommandLineParser
      *
      * @param options         the specified Options
      * @param arguments       the command line arguments
-     * @param properties      command line option name-value pairs
+     * @param properties      command line option name-modifier pairs
      * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
+     *     the parsing and the remaining arguments are added to the
      *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
      *     argument triggers a ParseException.
      *
-     * @return the list of atomic option and value tokens
+     * @return the list of atomic option and modifier tokens
      * @throws ParseException if there are any problems encountered
      * while parsing the command line tokens.
      */
@@ -135,7 +135,7 @@ public class DefaultParser implements CommandLineParser
     /**
      * Sets the values of Options using the values in <code>properties</code>.
      *
-     * @param properties The value properties to be processed.
+     * @param properties The modifier properties to be processed.
      */
     private void handleProperties(Properties properties) throws ParseException
     {
@@ -160,7 +160,7 @@ public class DefaultParser implements CommandLineParser
 
             if (!cmd.hasOption(option) && !selected)
             {
-                // get the value from the properties
+                // get the modifier from the properties
                 String value = properties.getProperty(option);
 
                 if (opt.hasArg())
@@ -174,7 +174,7 @@ public class DefaultParser implements CommandLineParser
                         || "true".equalsIgnoreCase(value)
                         || "1".equalsIgnoreCase(value)))
                 {
-                    // if the value is not yes, true or 1 then don't add the option to the CommandLine
+                    // if the modifier is not yes, true or 1 then don't add the option to the CommandLine
                     continue;
                 }
 
@@ -293,7 +293,7 @@ public class DefaultParser implements CommandLineParser
 
     /**
      * Tells if the token looks like a short option.
-     * 
+     *
      * @param token
      */
     private boolean isShortOption(String token)
@@ -332,10 +332,10 @@ public class DefaultParser implements CommandLineParser
     }
 
     /**
-     * Handles an unknown token. If the token starts with a dash an 
-     * UnrecognizedOptionException is thrown. Otherwise the token is added 
-     * to the arguments of the command line. If the stopAtNonOption flag 
-     * is set, this stops the parsing and the remaining tokens are added 
+     * Handles an unknown token. If the token starts with a dash an
+     * UnrecognizedOptionException is thrown. Otherwise the token is added
+     * to the arguments of the command line. If the stopAtNonOption flag
+     * is set, this stops the parsing and the remaining tokens are added
      * as-is in the arguments of the command line.
      *
      * @param token the command line token to handle
@@ -383,7 +383,7 @@ public class DefaultParser implements CommandLineParser
      * -L
      * --l
      * -l
-     * 
+     *
      * @param token the command line token to handle
      */
     private void handleLongOptionWithoutEqual(String token) throws ParseException
@@ -544,7 +544,7 @@ public class DefaultParser implements CommandLineParser
             }
             else if (isJavaProperty(opt))
             {
-                // -SV1=V2 (-Dkey=value)
+                // -SV1=V2 (-Dkey=modifier)
                 handleOption(options.getOption(opt.substring(0, 1)));
                 currentOption.addValueForProcessing(opt.substring(1));
                 currentOption.addValueForProcessing(value);
@@ -578,12 +578,12 @@ public class DefaultParser implements CommandLineParser
                 break;
             }
         }
-        
+
         return opt;
     }
 
     /**
-     * Check if the specified token is a Java-like property (-Dkey=value).
+     * Check if the specified token is a Java-like property (-Dkey=modifier).
      */
     private boolean isJavaProperty(String token)
     {
@@ -650,7 +650,7 @@ public class DefaultParser implements CommandLineParser
      *  exists with that id.</li>
      *  <li>if an {@link Option} does exist then add that character
      *  prepended with "<b>-</b>" to the list of processed tokens.</li>
-     *  <li>if the {@link Option} can have an argument value and there
+     *  <li>if the {@link Option} can have an argument modifier and there
      *  are remaining characters in the token then add the remaining
      *  characters as a token to the list of processed tokens.</li>
      *  <li>if an {@link Option} does <b>NOT</b> exist <b>AND</b>

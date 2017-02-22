@@ -24,7 +24,7 @@ package org.apache.commons.cli;
  * <a href="http://c2.com/cgi-bin/wiki?BuilderPattern">http://c2.com/cgi-bin/wiki?BuilderPattern</a>.
  * <p>
  * This class is NOT thread safe. See <a href="https://issues.apache.org/jira/browse/CLI-209">CLI-209</a>
- * 
+ *
  * @version $Id: OptionBuilder.java 1677400 2015-05-03 13:46:08Z britter $
  * @since 1.0
  * @deprecated since 1.3, use {@link Option#builder(String)} instead
@@ -50,10 +50,10 @@ public final class OptionBuilder
     /** option type */
     private static Class<?> type;
 
-    /** option can have an optional argument value */
+    /** option can have an optional argument modifier */
     private static boolean optionalArg;
 
-    /** value separator for argument value */
+    /** modifier separator for argument modifier */
     private static char valuesep;
 
     /** option builder instance */
@@ -89,9 +89,9 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will have the following long option value.
+     * The next Option created will have the following long option modifier.
      *
-     * @param newLongopt the long option value
+     * @param newLongopt the long option modifier
      * @return the OptionBuilder instance
      */
     public static OptionBuilder withLongOpt(String newLongopt)
@@ -102,7 +102,7 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will require an argument value.
+     * The next Option created will require an argument modifier.
      *
      * @return the OptionBuilder instance
      */
@@ -114,10 +114,10 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will require an argument value if
+     * The next Option created will require an argument modifier if
      * <code>hasArg</code> is true.
      *
-     * @param hasArg if true then the Option has an argument value
+     * @param hasArg if true then the Option has an argument modifier
      * @return the OptionBuilder instance
      */
     public static OptionBuilder hasArg(boolean hasArg)
@@ -128,9 +128,9 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will have the specified argument value name.
+     * The next Option created will have the specified argument modifier name.
      *
-     * @param name the name for the argument value
+     * @param name the name for the argument modifier
      * @return the OptionBuilder instance
      */
     public static OptionBuilder withArgName(String name)
@@ -161,13 +161,13 @@ public final class OptionBuilder
      * Option opt = OptionBuilder.withValueSeparator('=')
      *                           .create('D');
      *
-     * String args = "-Dkey=value";
+     * String args = "-Dkey=modifier";
      * CommandLine line = parser.parse(args);
      * String propertyName = opt.getValue(0);  // will be "key"
-     * String propertyValue = opt.getValue(1); // will be "value"
+     * String propertyValue = opt.getValue(1); // will be "modifier"
      * </pre>
      *
-     * @param sep The value separator to be used for the argument values.
+     * @param sep The modifier separator to be used for the argument values.
      *
      * @return the OptionBuilder instance
      */
@@ -282,13 +282,13 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will have a value that will be an instance
+     * The next Option created will have a modifier that will be an instance
      * of <code>type</code>.
      * <p>
      * <b>Note:</b> this method is kept for binary compatibility and the
-     * input type is supposed to be a {@link Class} object. 
+     * input type is supposed to be a {@link Class} object.
      *
-     * @param newType the type of the Options argument value
+     * @param newType the type of the Options argument modifier
      * @return the OptionBuilder instance
      * @deprecated since 1.3, use {@link #withType(Class)} instead
      */
@@ -299,10 +299,10 @@ public final class OptionBuilder
     }
 
     /**
-     * The next Option created will have a value that will be an instance
+     * The next Option created will have a modifier that will be an instance
      * of <code>type</code>.
      *
-     * @param newType the type of the Options argument value
+     * @param newType the type of the Options argument modifier
      * @return the OptionBuilder instance
      * @since 1.3
      */

@@ -24,7 +24,7 @@ public @interface RegBlock {
 
 
     /**
-     * Add prefix on value
+     * Add prefix on modifier
      * Example: gold -> blockGold
      */
     //String prefix() default "block";

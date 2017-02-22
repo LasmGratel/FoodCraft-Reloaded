@@ -22,7 +22,7 @@ public @interface RegItem {
     String[] oreDict() default {};
 
     /**
-     * Add prefix on value
+     * Add prefix on modifier
      * Example: wandIron -> itemWandIron
      */
     //String prefix() default "item";

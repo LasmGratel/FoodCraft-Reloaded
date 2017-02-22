@@ -45,7 +45,7 @@ dependencies {
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-      
+
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -53,7 +53,7 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    
+
     compile 'org.reflections:reflections:0.9.10'
 }
 
@@ -66,11 +66,11 @@ processResources
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
@@ -89,14 +89,14 @@ ext.requireArgument = {String property, String displayValue ->
     return value
 }
 
-tasks.addRule("Pattern: <property>=<value>: Passes arguments to the scripts") { String taskName ->
+tasks.addRule("Pattern: <property>=<modifier>: Passes arguments to the scripts") { String taskName ->
     def match = taskName =~ /(.*?)=(.*?$)/
     if (match) {
         def property = match[0][1]
         def value = match[0][2]
         ext.args[property] = value;
         task(taskName) << {
-            println "Passes value \'$value\' to args[\'$property\']"
+            println "Passes modifier \'$value\' to args[\'$property\']"
         }
     }
 }

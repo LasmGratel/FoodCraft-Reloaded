@@ -27,7 +27,7 @@ import java.util.Date;
  * The pattern contains various single character flags and via
  * an optional punctuation character, their expected type.
  * </p>
- * 
+ *
  * <table border="1">
  *   <caption>Overview of PatternOptionBuilder patterns</caption>
  *   <tr><td>a</td><td>-a flag</td></tr>
@@ -38,9 +38,9 @@ import java.util.Date;
  *   <tr><td>f/</td><td>-f [url]</td></tr>
  *   <tr><td>g:</td><td>-g [string]</td></tr>
  * </table>
- * 
+ *
  * <p>
- * For example, the following allows command line flags of '-v -p string-value -f /dir/file'.
+ * For example, the following allows command line flags of '-v -p string-modifier -f /dir/file'.
  * The exclamation mark precede a mandatory option.
  * </p>
  *
@@ -121,11 +121,11 @@ public class PatternOptionBuilder
     }
 
     /**
-     * Returns whether <code>ch</code> is a value code, i.e.
+     * Returns whether <code>ch</code> is a modifier code, i.e.
      * whether it represents a class in a pattern.
      *
      * @param ch the specified character
-     * @return true if <code>ch</code> is a value code, otherwise false.
+     * @return true if <code>ch</code> is a modifier code, otherwise false.
      */
     public static boolean isValueCode(char ch)
     {
@@ -159,7 +159,7 @@ public class PatternOptionBuilder
         {
             char ch = pattern.charAt(i);
 
-            // a value code comes after an option and specifies
+            // a modifier code comes after an option and specifies
             // details about it
             if (!isValueCode(ch))
             {
@@ -170,7 +170,7 @@ public class PatternOptionBuilder
                         .required(required)
                         .type(type)
                         .build();
-                    
+
                     // we have a previous one to deal with
                     options.addOption(option);
                     required = false;
@@ -197,7 +197,7 @@ public class PatternOptionBuilder
                 .required(required)
                 .type(type)
                 .build();
-            
+
             // we have a final one to deal with
             options.addOption(option);
         }

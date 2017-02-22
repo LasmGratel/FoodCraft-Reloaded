@@ -110,7 +110,7 @@ public abstract class BlockMachine extends BlockContainer {
     }
 
     /**
-     * Convert the BlockState into the correct metadata value
+     * Convert the BlockState into the correct metadata modifier
      */
     @Override
     public int getMetaFromState(IBlockState state) {

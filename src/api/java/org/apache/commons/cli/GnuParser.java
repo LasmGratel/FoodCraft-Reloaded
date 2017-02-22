@@ -79,15 +79,15 @@ public class GnuParser extends Parser
                 {
                     if (opt.indexOf('=') != -1 && options.hasOption(opt.substring(0, opt.indexOf('='))))
                     {
-                        // the format is --foo=value or -foo=value
+                        // the format is --foo=modifier or -foo=modifier
                         tokens.add(arg.substring(0, arg.indexOf('='))); // --foo
-                        tokens.add(arg.substring(arg.indexOf('=') + 1)); // value
+                        tokens.add(arg.substring(arg.indexOf('=') + 1)); // modifier
                     }
                     else if (options.hasOption(arg.substring(0, 2)))
                     {
-                        // the format is a special properties option (-Dproperty=value)
+                        // the format is a special properties option (-Dproperty=modifier)
                         tokens.add(arg.substring(0, 2)); // -D
-                        tokens.add(arg.substring(2)); // property=value
+                        tokens.add(arg.substring(2)); // property=modifier
                     }
                     else
                     {

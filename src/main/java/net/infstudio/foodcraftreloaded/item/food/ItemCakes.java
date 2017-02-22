@@ -3,7 +3,6 @@ package net.infstudio.foodcraftreloaded.item.food;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.init.FCRItems;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,14 +15,12 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemCakes extends FCRItemFood implements IItemColor {
+public class ItemCakes extends FCRItemFood {
     public ItemCakes() {
         super(4, 1.0f, false);
         setRegistryName(FoodCraftReloaded.MODID, "cake");
@@ -59,16 +56,7 @@ public class ItemCakes extends FCRItemFood implements IItemColor {
 
     @Nonnull
     @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack)
-    {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(EnumFruitType.values()[stack.getMetadata()].toString())));
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-        if (tintIndex == 0 && stack.getItem() instanceof ItemCakes)
-            return EnumFruitType.values()[stack.getMetadata()].getColor().getRGB();
-        return -1;
     }
 }

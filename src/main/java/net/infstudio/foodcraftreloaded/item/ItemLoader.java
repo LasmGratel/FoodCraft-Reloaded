@@ -21,14 +21,14 @@ public class ItemLoader {
         for (Field field : FCRItems.class.getFields()) {
             field.setAccessible(true);
             try {
-                RegItem anno = field.getAnnotation(RegItem.class);
-                if (anno == null)
+                RegItem annoItem = field.getAnnotation(RegItem.class);
+                if (annoItem == null)
                     continue;
 
                 Item item = (Item) field.get(null);
-                GameRegistry.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
+                GameRegistry.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
 
-                Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
+                Arrays.asList(annoItem.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
             } catch (Throwable e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);
             }
