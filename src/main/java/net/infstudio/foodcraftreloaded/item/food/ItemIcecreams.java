@@ -41,6 +41,6 @@ public class ItemIcecreams extends FCRItemFood implements IItemColor {
     public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
         if (tintIndex == 1 && stack.getItem() instanceof ItemIcecreams)
             return EnumFruitType.values()[stack.getMetadata()].getColor().getRGB();
-        return 0;
+        return -1;
     }
 }

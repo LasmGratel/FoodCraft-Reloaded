@@ -93,8 +93,8 @@ public abstract class Parser implements CommandLineParser
      *
      * @param options    the specified Options
      * @param arguments  the command line arguments
-     * @param properties command line option name-value pairs
-     * @return the list of atomic option and value tokens
+     * @param properties command line option name-modifier pairs
+     * @return the list of atomic option and modifier tokens
      * @throws ParseException if there are any problems encountered
      *                        while parsing the command line tokens.
      *
@@ -112,7 +112,7 @@ public abstract class Parser implements CommandLineParser
      * @param options         the <code>Options</code>
      * @param arguments       the <code>arguments</code>
      * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
+     *     the parsing and the remaining arguments are added to the
      *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
      *     argument triggers a ParseException.
      * @return the <code>CommandLine</code>
@@ -129,13 +129,13 @@ public abstract class Parser implements CommandLineParser
      *
      * @param options the specified Options
      * @param arguments the command line arguments
-     * @param properties command line option name-value pairs
+     * @param properties command line option name-modifier pairs
      * @param stopAtNonOption if <tt>true</tt> an unrecognized argument stops
-     *     the parsing and the remaining arguments are added to the 
+     *     the parsing and the remaining arguments are added to the
      *     {@link CommandLine}s args list. If <tt>false</tt> an unrecognized
      *     argument triggers a ParseException.
      *
-     * @return the list of atomic option and value tokens
+     * @return the list of atomic option and modifier tokens
      *
      * @throws ParseException if there are any problems encountered
      * while parsing the command line tokens.
@@ -150,12 +150,12 @@ public abstract class Parser implements CommandLineParser
         {
             opt.clearValues();
         }
-        
+
         // clear the data from the groups
         for (OptionGroup group : options.getOptionGroups())
         {
             group.setSelected(null);
-        }        
+        }
 
         // initialise members
         setOptions(options);
@@ -178,13 +178,13 @@ public abstract class Parser implements CommandLineParser
         {
             String t = iterator.next();
 
-            // the value is the double-dash
+            // the modifier is the double-dash
             if ("--".equals(t))
             {
                 eatTheRest = true;
             }
 
-            // the value is a single dash
+            // the modifier is a single dash
             else if ("-".equals(t))
             {
                 if (stopAtNonOption)
@@ -197,7 +197,7 @@ public abstract class Parser implements CommandLineParser
                 }
             }
 
-            // the value is an option
+            // the modifier is an option
             else if (t.startsWith("-"))
             {
                 if (stopAtNonOption && !getOptions().hasOption(t))
@@ -211,7 +211,7 @@ public abstract class Parser implements CommandLineParser
                 }
             }
 
-            // the value is an argument
+            // the modifier is an argument
             else
             {
                 cmd.addArg(t);
@@ -247,7 +247,7 @@ public abstract class Parser implements CommandLineParser
     /**
      * Sets the values of Options using the values in <code>properties</code>.
      *
-     * @param properties The value properties to be processed.
+     * @param properties The modifier properties to be processed.
      * @throws ParseException if there are any problems encountered
      *                        while processing the properties.
      */
@@ -261,20 +261,20 @@ public abstract class Parser implements CommandLineParser
         for (Enumeration<?> e = properties.propertyNames(); e.hasMoreElements();)
         {
             String option = e.nextElement().toString();
-            
+
             Option opt = options.getOption(option);
             if (opt == null)
             {
                 throw new UnrecognizedOptionException("Default option wasn't defined", option);
             }
-            
+
             // if the option is part of a group, check if another option of the group has been selected
             OptionGroup group = options.getOptionGroup(opt);
             boolean selected = group != null && group.getSelected() != null;
-            
+
             if (!cmd.hasOption(option) && !selected)
             {
-                // get the value from the properties instance
+                // get the modifier from the properties instance
                 String value = properties.getProperty(option);
 
                 if (opt.hasArg())
@@ -287,7 +287,7 @@ public abstract class Parser implements CommandLineParser
                         }
                         catch (RuntimeException exp) //NOPMD
                         {
-                            // if we cannot add the value don't worry about it
+                            // if we cannot add the modifier don't worry about it
                         }
                     }
                 }
@@ -295,7 +295,7 @@ public abstract class Parser implements CommandLineParser
                         || "true".equalsIgnoreCase(value)
                         || "1".equalsIgnoreCase(value)))
                 {
-                    // if the value is not yes, true or 1 then don't add the
+                    // if the modifier is not yes, true or 1 then don't add the
                     // option to the CommandLine
                     continue;
                 }
@@ -329,7 +329,7 @@ public abstract class Parser implements CommandLineParser
      * @param opt The current Option
      * @param iter The iterator over the flattened command line Options.
      *
-     * @throws ParseException if an argument value is required
+     * @throws ParseException if an argument modifier is required
      * and it is has not been found.
      */
     public void processArgs(Option opt, ListIterator<String> iter) throws ParseException
@@ -338,7 +338,7 @@ public abstract class Parser implements CommandLineParser
         while (iter.hasNext())
         {
             String str = iter.next();
-            
+
             // found an Option, not an argument
             if (getOptions().hasOption(str) && str.startsWith("-"))
             {
@@ -346,7 +346,7 @@ public abstract class Parser implements CommandLineParser
                 break;
             }
 
-            // found a value
+            // found a modifier
             try
             {
                 opt.addValueForProcessing(Util.stripLeadingAndTrailingQuotes(str));
@@ -368,7 +368,7 @@ public abstract class Parser implements CommandLineParser
      * Process the Option specified by <code>arg</code> using the values
      * retrieved from the specified iterator <code>iter</code>.
      *
-     * @param arg The String value representing an Option
+     * @param arg The String modifier representing an Option
      * @param iter The iterator over the flattened command line arguments.
      *
      * @throws ParseException if <code>arg</code> does not represent an Option
@@ -385,23 +385,23 @@ public abstract class Parser implements CommandLineParser
 
         // get the option represented by arg
         Option opt = (Option) getOptions().getOption(arg).clone();
-        
+
         // update the required options and groups
         updateRequiredOptions(opt);
-        
-        // if the option takes an argument value
+
+        // if the option takes an argument modifier
         if (opt.hasArg())
         {
             processArgs(opt, iter);
         }
-        
+
         // set the option on the command line
         cmd.addOption(opt);
     }
 
     /**
      * Removes the option or its group from the list of expected elements.
-     * 
+     *
      * @param opt
      */
     private void updateRequiredOptions(Option opt) throws ParseException

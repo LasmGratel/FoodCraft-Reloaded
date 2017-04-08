@@ -1,30 +1,32 @@
 package net.infstudio.foodcraftreloaded.item.food;
 
+import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.init.FCRItems;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
-import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemJuice extends FCRItemFood implements IItemColor {
-    private EnumFruitType fruitType;
-
-    public ItemJuice(EnumFruitType fruitType) {
+public class ItemCakes extends FCRItemFood {
+    public ItemCakes() {
         super(4, 1.0f, false);
-        this.fruitType = fruitType;
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName("juice", fruitType.toString()));
-        setRegistryName(NameBuilder.buildRegistryName("juice", fruitType.toString()));
-        setCreativeTab(FCRCreativeTabs.DRINK);
+        setRegistryName(FoodCraftReloaded.MODID, "cake");
+        setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+        setMaxDamage(0);
+        setHasSubtypes(true);
     }
 
     @Nonnull
@@ -46,14 +48,15 @@ public class ItemJuice extends FCRItemFood implements IItemColor {
         return EnumAction.DRINK;
     }
 
-    public EnumFruitType getFruitType() {
-        return fruitType;
+    @Override
+    public void getSubItems(@Nonnull Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        for (EnumFruitType fruitType : EnumFruitType.values())
+            subItems.add(new ItemStack(itemIn, 1, fruitType.ordinal()));
     }
 
+    @Nonnull
     @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-        if (tintIndex == 1 && stack.getItem() instanceof ItemJuice)
-            return ((ItemJuice) stack.getItem()).getFruitType().getColor().getRGB();
-        return 0;
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+        return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(EnumFruitType.values()[stack.getMetadata()].toString())));
     }
 }

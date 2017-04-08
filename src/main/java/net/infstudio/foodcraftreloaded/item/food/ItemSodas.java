@@ -3,7 +3,6 @@ package net.infstudio.foodcraftreloaded.item.food;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.init.FCRItems;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemSodas extends FCRItemFood implements IItemColor {
+public class ItemSodas extends FCRItemFood {
     public ItemSodas() {
         super(5, 1.0f, false);
         setRegistryName(FoodCraftReloaded.MODID, "soda");
@@ -57,15 +56,7 @@ public class ItemSodas extends FCRItemFood implements IItemColor {
 
     @Nonnull
     @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack)
-    {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return I18n.format("item.soda", I18n.format("item.fruit" + StringUtils.capitalize(EnumFruitType.values()[stack.getMetadata()].toString())));
-    }
-
-    @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
-        if (tintIndex == 1 && stack.getItem() instanceof ItemSodas)
-            return EnumFruitType.values()[stack.getMetadata()].getColor().getRGB();
-        return 0;
     }
 }

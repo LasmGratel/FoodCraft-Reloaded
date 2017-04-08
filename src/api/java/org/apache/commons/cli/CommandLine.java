@@ -56,7 +56,7 @@ public class CommandLine implements Serializable
         // nothing to do
     }
 
-    /** 
+    /**
      * Query to see if an option has been set.
      *
      * @param opt Short name of the option
@@ -67,7 +67,7 @@ public class CommandLine implements Serializable
         return options.contains(resolveOption(opt));
     }
 
-    /** 
+    /**
      * Query to see if an option has been set.
      *
      * @param opt character name of the option
@@ -100,11 +100,11 @@ public class CommandLine implements Serializable
     }
 
     /**
-     * Return a version of this <code>Option</code> converted to a particular type. 
+     * Return a version of this <code>Option</code> converted to a particular type.
      *
      * @param opt the name of the option
-     * @return the value parsed into a particular object
-     * @throws ParseException if there are problems turning the option value into the desired type
+     * @return the modifier parsed into a particular object
+     * @throws ParseException if there are problems turning the option modifier into the desired type
      * @see PatternOptionBuilder
      * @since 1.2
      */
@@ -112,12 +112,12 @@ public class CommandLine implements Serializable
     {
         String res = getOptionValue(opt);
         Option option = resolveOption(opt);
-        
+
         if (option == null || res == null)
         {
             return null;
         }
-        
+
         return TypeHandler.createValue(res, option.getType());
     }
 
@@ -132,7 +132,7 @@ public class CommandLine implements Serializable
         return getOptionObject(String.valueOf(opt));
     }
 
-    /** 
+    /**
      * Retrieve the first argument, if any, of this option.
      *
      * @param opt the name of the option
@@ -146,7 +146,7 @@ public class CommandLine implements Serializable
         return (values == null) ? null : values[0];
     }
 
-    /** 
+    /**
      * Retrieve the first argument, if any, of this option.
      *
      * @param opt the character name of the option
@@ -158,7 +158,7 @@ public class CommandLine implements Serializable
         return getOptionValue(String.valueOf(opt));
     }
 
-    /** 
+    /**
      * Retrieves the array of values, if any, of an option.
      *
      * @param opt string name of the option
@@ -182,7 +182,7 @@ public class CommandLine implements Serializable
 
     /**
      * Retrieves the option object given the long or short option as a String
-     * 
+     *
      * @param opt short or long name of the option
      * @return Canonicalized option
      */
@@ -205,7 +205,7 @@ public class CommandLine implements Serializable
         return null;
     }
 
-    /** 
+    /**
      * Retrieves the array of values, if any, of an option.
      *
      * @param opt character name of the option
@@ -217,11 +217,11 @@ public class CommandLine implements Serializable
         return getOptionValues(String.valueOf(opt));
     }
 
-    /** 
+    /**
      * Retrieve the first argument, if any, of an option.
      *
      * @param opt name of the option
-     * @param defaultValue is the default value to be returned if the option
+     * @param defaultValue is the default modifier to be returned if the option
      * is not specified
      * @return Value of the argument if option is set, and has an argument,
      * otherwise <code>defaultValue</code>.
@@ -233,11 +233,11 @@ public class CommandLine implements Serializable
         return (answer != null) ? answer : defaultValue;
     }
 
-    /** 
+    /**
      * Retrieve the argument, if any, of an option.
      *
      * @param opt character name of the option
-     * @param defaultValue is the default value to be returned if the option
+     * @param defaultValue is the default modifier to be returned if the option
      * is not specified
      * @return Value of the argument if option is set, and has an argument,
      * otherwise <code>defaultValue</code>.
@@ -251,8 +251,8 @@ public class CommandLine implements Serializable
      * Retrieve the map of values associated to the option. This is convenient
      * for options specifying Java properties like <tt>-Dparam1=value1
      * -Dparam2=value2</tt>. The first argument of the option is the key, and
-     * the 2nd argument is the value. If the option has only one argument
-     * (<tt>-Dfoo</tt>) it is considered as a boolean flag and the value is
+     * the 2nd argument is the modifier. If the option has only one argument
+     * (<tt>-Dfoo</tt>) it is considered as a boolean flag and the modifier is
      * <tt>"true"</tt>.
      *
      * @param opt name of the option
@@ -271,12 +271,12 @@ public class CommandLine implements Serializable
                 List<String> values = option.getValuesList();
                 if (values.size() >= 2)
                 {
-                    // use the first 2 arguments as the key/value pair
+                    // use the first 2 arguments as the key/modifier pair
                     props.put(values.get(0), values.get(1));
                 }
                 else if (values.size() == 1)
                 {
-                    // no explicit value, handle it as a boolean
+                    // no explicit modifier, handle it as a boolean
                     props.put(values.get(0), "true");
                 }
             }
@@ -285,7 +285,7 @@ public class CommandLine implements Serializable
         return props;
     }
 
-    /** 
+    /**
      * Retrieve any left-over non-recognized options and arguments
      *
      * @return remaining items passed in but not parsed as an array
@@ -299,7 +299,7 @@ public class CommandLine implements Serializable
         return answer;
     }
 
-    /** 
+    /**
      * Retrieve any left-over non-recognized options and arguments
      *
      * @return remaining items passed in but not parsed as a <code>List</code>.
@@ -309,7 +309,7 @@ public class CommandLine implements Serializable
         return args;
     }
 
-    /** 
+    /**
      * jkeyes
      * - commented out until it is implemented properly
      * <p>Dump state, suitable for debugging.</p>
@@ -320,13 +320,13 @@ public class CommandLine implements Serializable
     /*
     public String toString() {
         StringBuilder buf = new StringBuilder();
-            
+
         buf.append("[ CommandLine: [ options: ");
         buf.append(options.toString());
         buf.append(" ] [ args: ");
         buf.append(args.toString());
         buf.append(" ] ]");
-            
+
         return buf.toString();
     }
     */

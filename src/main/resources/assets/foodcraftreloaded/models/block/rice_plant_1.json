@@ -1,0 +1,6 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "crop": "foodcraftreloaded:blocks/rice/crop_1"
+    }
+}

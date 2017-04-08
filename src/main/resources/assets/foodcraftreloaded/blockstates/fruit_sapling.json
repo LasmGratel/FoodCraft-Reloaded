@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "stage=0": { "model": "foodcraftreloaded:fruit_sapling" },
+        "stage=1": { "model": "foodcraftreloaded:fruit_sapling" }
+    }
+}

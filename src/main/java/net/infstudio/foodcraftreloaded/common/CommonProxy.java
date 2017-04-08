@@ -21,7 +21,9 @@ package net.infstudio.foodcraftreloaded.common;
 
 import net.infstudio.foodcraftreloaded.block.BlockLoader;
 import net.infstudio.foodcraftreloaded.item.ItemLoader;
+import net.infstudio.foodcraftreloaded.item.food.PropertiedFoodLoader;
 import net.infstudio.foodcraftreloaded.utils.loader.LoaderManager;
+import net.infstudio.foodcraftreloaded.worldgen.WorldGenFruitTree;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,7 +35,12 @@ public class CommonProxy {
     private final LoaderManager loaderManager = new LoaderManager();
 
     public CommonProxy() {
-        Arrays.asList(BlockLoader.class, ItemLoader.class, FruitLoader.class, AchievementLoader.class, RecipeLoader.class).forEach(loaderManager::addLoader);
+        Arrays.asList(
+            BlockLoader.class, ItemLoader.class,
+            FruitLoader.class, KitchenKnifeLoader.class,
+            PropertiedFoodLoader.class,
+            AchievementLoader.class, RecipeLoader.class
+        ).forEach(loaderManager::addLoader);
     }
 
     @OverridingMethodsMustInvokeSuper
@@ -59,6 +66,8 @@ public class CommonProxy {
     @OverridingMethodsMustInvokeSuper
     public void loadComplete(FMLLoadCompleteEvent event) {
         loaderManager.invoke(event, LoaderState.AVAILABLE, Side.SERVER);
+        new WorldGenFruitTree();
+        new FruitTreeGenerator();
     }
 
     public LoaderManager getLoaderManager() {

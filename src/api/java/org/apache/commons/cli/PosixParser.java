@@ -112,13 +112,13 @@ public class PosixParser extends Parser
             {
                 tokens.add(token);
             }
-            
+
             // handle long option --foo or --foo=bar
             else if (token.startsWith("--"))
             {
                 int pos = token.indexOf('=');
                 String opt = pos == -1 ? token : token.substring(0, pos); // --foo
-                
+
                 List<String> matchingOpts = options.getMatchingOptions(opt);
 
                 if (matchingOpts.isEmpty())
@@ -132,7 +132,7 @@ public class PosixParser extends Parser
                 else
                 {
                     currentOption = options.getOption(matchingOpts.get(0));
-                    
+
                     tokens.add("--" + currentOption.getLongOpt());
                     if (pos != -1)
                     {
@@ -191,7 +191,7 @@ public class PosixParser extends Parser
     }
 
     /**
-     * Add the special token "<b>--</b>" and the current <code>value</code>
+     * Add the special token "<b>--</b>" and the current <code>modifier</code>
      * to the processed tokens list. Then add all the remaining
      * <code>argument</code> values to the processed tokens list.
      *
@@ -245,7 +245,7 @@ public class PosixParser extends Parser
      *  exists with that id.</li>
      *  <li>if an {@link Option} does exist then add that character
      *  prepended with "<b>-</b>" to the list of processed tokens.</li>
-     *  <li>if the {@link Option} can have an argument value and there
+     *  <li>if the {@link Option} can have an argument modifier and there
      *  are remaining characters in the token then add the remaining
      *  characters as a token to the list of processed tokens.</li>
      *  <li>if an {@link Option} does <b>NOT</b> exist <b>AND</b>

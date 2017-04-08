@@ -36,13 +36,13 @@ public class TypeHandler
 {
     /**
      * Returns the <code>Object</code> of type <code>obj</code>
-     * with the value of <code>str</code>.
+     * with the modifier of <code>str</code>.
      *
-     * @param str the command line value
+     * @param str the command line modifier
      * @param obj the type of argument
      * @return The instance of <code>obj</code> initialised with
-     * the value of <code>str</code>.
-     * @throws ParseException if the value creation for the given object type failed
+     * the modifier of <code>str</code>.
+     * @throws ParseException if the modifier creation for the given object type failed
      */
     public static Object createValue(String str, Object obj) throws ParseException
     {
@@ -51,13 +51,13 @@ public class TypeHandler
 
     /**
      * Returns the <code>Object</code> of type <code>clazz</code>
-     * with the value of <code>str</code>.
+     * with the modifier of <code>str</code>.
      *
-     * @param str the command line value
+     * @param str the command line modifier
      * @param clazz the type of argument
      * @return The instance of <code>clazz</code> initialised with
-     * the value of <code>str</code>.
-     * @throws ParseException if the value creation for the given class failed
+     * the modifier of <code>str</code>.
+     * @throws ParseException if the modifier creation for the given class failed
      */
     public static Object createValue(String str, Class<?> clazz) throws ParseException
     {
@@ -106,7 +106,7 @@ public class TypeHandler
     /**
       * Create an Object from the classname and empty constructor.
       *
-      * @param classname the argument value
+      * @param classname the argument modifier
       * @return the initialised object
       * @throws ParseException if the class could not be found or the object could not be created
       */
@@ -122,7 +122,7 @@ public class TypeHandler
         {
             throw new ParseException("Unable to find the class: " + classname);
         }
-        
+
         try
         {
             return cl.newInstance();
@@ -137,7 +137,7 @@ public class TypeHandler
      * Create a number from a String. If a . is present, it creates a
      * Double, otherwise a Long.
      *
-     * @param str the value
+     * @param str the modifier
      * @return the number represented by <code>str</code>
      * @throws ParseException if <code>str</code> is not a number
      */
