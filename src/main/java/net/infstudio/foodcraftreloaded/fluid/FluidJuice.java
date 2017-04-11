@@ -13,6 +13,7 @@ public class FluidJuice extends Fluid {
         super(NameBuilder.buildRegistryName(fruitType.toString(), "juice"), new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_still"),  new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_flow"));
         this.fruitType = fruitType;
         setViscosity(2000);
+
     }
 
     @Override

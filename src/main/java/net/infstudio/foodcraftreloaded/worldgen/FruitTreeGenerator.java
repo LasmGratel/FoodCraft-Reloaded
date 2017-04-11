@@ -32,6 +32,7 @@ public class FruitTreeGenerator {
     @SubscribeEvent
     public void fruitTreeGrow(SaplingGrowTreeEvent event) {
         if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockFruitSapling) {
+            event.setCanceled(true);
             BlockFruitSapling sapling = (BlockFruitSapling) event.getWorld().getBlockState(event.getPos()).getBlock();
             FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().get(sapling.getFruitType()).generate(event.getWorld(), event.getRand(), event.getPos());
         }

@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -14,12 +16,11 @@ public class ContainerDrinkMachine extends Container {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 
-    public ContainerDrinkMachine(InventoryPlayer playerInventory, IItemHandlerModifiable itemHandler) {
+    public ContainerDrinkMachine(InventoryPlayer playerInventory, TileEntity tileEntity) {
         this.inventoryPlayer = playerInventory;
-        this.itemHandler = itemHandler;
-        addSlotToContainer(new SlotItemHandler(itemHandler, 0, 68, 34));
-        addSlotToContainer(new SlotDrinkMachineOutput(playerInventory.player, itemHandler, 1, 130, 38));
-
+        this.itemHandler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        addSlotToContainer(new SlotItemHandler(itemHandler, 0, 65, 31));
+        addSlotToContainer(new SlotDrinkMachineOutput(playerInventory.player, itemHandler, 1, 121 + 4, 28 + 4));
         for (int i = 0; i < 3; ++i)
         {
             for (int j = 0; j < 9; ++j)

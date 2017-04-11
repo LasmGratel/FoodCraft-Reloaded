@@ -31,4 +31,9 @@ public class RecipeLoader {
             GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(loader.getIcecreams(), 1, fruitType.ordinal()), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream"));
         }
     }
+
+    @Load(LoaderState.AVAILABLE)
+    public void loadDrinkRecipes() {
+
+    }
 }

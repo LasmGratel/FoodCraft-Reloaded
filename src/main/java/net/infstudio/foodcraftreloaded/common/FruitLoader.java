@@ -59,6 +59,7 @@ public class FruitLoader {
             GameRegistry.register(fruitLeaves);
             FluidJuice fluidJuice = new FluidJuice(fruitType);
             FluidRegistry.registerFluid(fluidJuice);
+            FluidRegistry.addBucketForFluid(fluidJuice);
             BlockFluidJuice blockFluidJuice = new BlockFluidJuice(fruitType);
             GameRegistry.register(blockFluidJuice);
             fluidJuiceMap.put(fruitType, blockFluidJuice);
@@ -116,8 +117,7 @@ public class FruitLoader {
         ModelLoader.setCustomStateMapper(blockFluid, new StateMapperBase() {
             @Nonnull
             @Override
-            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
-            {
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
                 return new ModelResourceLocation(location, "fluid");
             }
         });
@@ -192,5 +192,9 @@ public class FruitLoader {
 
     public Map<EnumFruitType, GeneratorBasicTree> getGeneratorTreeMap() {
         return generatorTreeMap;
+    }
+
+    public Map<EnumFruitType, BlockFluidJuice> getFluidJuiceMap() {
+        return fluidJuiceMap;
     }
 }

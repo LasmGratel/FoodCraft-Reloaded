@@ -1,9 +1,8 @@
 package net.infstudio.foodcraftreloaded.client;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
-import net.infstudio.foodcraftreloaded.block.tileentity.TileEntityDrinkMachine;
-import net.infstudio.foodcraftreloaded.common.container.ContainerDrinkMachine;
 import net.infstudio.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
+import net.infstudio.foodcraftreloaded.common.container.ContainerDrinkMachine;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -24,7 +23,7 @@ public class GuiHandler implements IGuiHandler {
     public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case GuiID.DRINK_MACHINE:
-                return new ContainerDrinkMachine(player.inventory, (TileEntityDrinkMachine) world.getTileEntity(new BlockPos(x, y, z)));
+                return new ContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -34,7 +33,7 @@ public class GuiHandler implements IGuiHandler {
     public Gui getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (ID) {
             case GuiID.DRINK_MACHINE:
-                return new GuiContainerDrinkMachine(player.inventory, (TileEntityDrinkMachine) world.getTileEntity(new BlockPos(x, y, z)));
+                return new GuiContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
