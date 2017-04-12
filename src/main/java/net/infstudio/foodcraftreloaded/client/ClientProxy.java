@@ -36,6 +36,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
         getLoaderManager().invoke(event, LoaderState.PREINITIALIZATION, Side.CLIENT);
+        new GuiHandler();
     }
 
     @SideOnly(Side.CLIENT)

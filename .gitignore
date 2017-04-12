@@ -15,6 +15,7 @@
 # include source code
 !src/
 !libs/
+!RedstoneFlux-API
 
 # include git important files
 !.gitmodules

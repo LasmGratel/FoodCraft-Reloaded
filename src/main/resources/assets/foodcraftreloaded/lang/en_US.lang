@@ -46,6 +46,9 @@ item.iceCream=%s Ice-cream
 # Blocks
 tile.rice.name=Rice Block
 
+# Gui
+container.drink_machine=Drink Machine
+
 # ItemGroups
 itemGroup.foodcraftreloaded.base=FoodCraft|Base
 itemGroup.foodcraftreloaded.plant=FoodCraft|Plants

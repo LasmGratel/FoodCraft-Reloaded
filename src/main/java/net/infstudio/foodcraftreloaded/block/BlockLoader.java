@@ -1,6 +1,7 @@
 package net.infstudio.foodcraftreloaded.block;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
+import net.infstudio.foodcraftreloaded.block.tileentity.TileEntityDrinkMachine;
 import net.infstudio.foodcraftreloaded.init.FCRBlocks;
 import net.infstudio.foodcraftreloaded.utils.NameBuilder;
 import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
@@ -41,6 +42,11 @@ public class BlockLoader {
                 FoodCraftReloaded.getLogger().warn("Un-able to register block " + field.toGenericString(), e);
             }
         }
+    }
+
+    @Load
+    public void registerTileEntities() {
+        GameRegistry.registerTileEntity(TileEntityDrinkMachine.class, "drink_machine");
     }
 
     @Load(side = Side.CLIENT)
