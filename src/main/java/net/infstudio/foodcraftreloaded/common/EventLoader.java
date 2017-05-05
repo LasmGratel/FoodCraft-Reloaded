@@ -17,10 +17,8 @@ public class EventLoader {
 
     @SubscribeEvent
     public void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
-        if (event.getWorld().getBlockState(event.getPos().up()).getBlock() == FCRBlocks.RICE_PLANT) {
-            System.out.println("Notified " + event.getWorld().getBlockState(event.getPos().up()).getBlock() + " by " + event.getState().getBlock());
-            if (event.getState().getBlock() != Blocks.FARMLAND)
-                event.getWorld().destroyBlock(event.getPos().up(), true);
-        }
+        if (event.getWorld().getBlockState(event.getPos().up()).getBlock() == FCRBlocks.RICE_PLANT &&
+            event.getState().getBlock() != Blocks.FARMLAND)
+            event.getWorld().destroyBlock(event.getPos().up(), true);
     }
 }
