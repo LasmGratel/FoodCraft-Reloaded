@@ -11,6 +11,6 @@
   "authors": [ "Darost" , "Lasm_Gratel", "ustc_zzzz"],
   "parent":"",
   "screenshots": [],
-  "dependencies": ["mod_MinecraftForge"]
+  "dependencies": ["mod_MinecraftForge", "biomesoplenty"]
 }
 ]

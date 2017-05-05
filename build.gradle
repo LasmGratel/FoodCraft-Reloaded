@@ -31,6 +31,18 @@ repositories {
     jcenter()
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'RedstoneFlux-API/src/main/java']
+        }
+
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
 minecraft {
     version = minecraft_version + "-" + forge_version
     runDir = "run"
@@ -54,7 +66,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    compile 'org.reflections:reflections:0.9.10'
+    compile 'com.github.glitchfiend.biomesoplenty:BiomesOPlenty:+:universal'
 }
 
 processResources

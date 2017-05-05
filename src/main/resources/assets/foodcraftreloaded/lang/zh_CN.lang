@@ -53,6 +53,9 @@ item.iceCream=%s冰激凌
 # Blocks
 tile.rice.name=水稻块
 
+# Gui
+container.drink_machine=饮料处理机
+
 # ItemGroups
 itemGroup.foodcraftreloaded.base=食物工艺|基础
 itemGroup.foodcraftreloaded.plant=食物工艺|植物
