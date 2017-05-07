@@ -1,8 +1,8 @@
 package net.infstudio.foodcraftreloaded.client;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
-import net.infstudio.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
-import net.infstudio.foodcraftreloaded.common.container.ContainerDrinkMachine;
+import net.infstudio.foodcraftreloaded.client.gui.*;
+import net.infstudio.foodcraftreloaded.common.container.*;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -24,6 +24,8 @@ public class GuiHandler implements IGuiHandler {
         switch (ID) {
             case GuiID.DRINK_MACHINE:
                 return new ContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            case GuiID.PRESSURE_COOKER:
+                return new ContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -34,6 +36,8 @@ public class GuiHandler implements IGuiHandler {
         switch (ID) {
             case GuiID.DRINK_MACHINE:
                 return new GuiContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            case GuiID.PRESSURE_COOKER:
+                return new GuiContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }

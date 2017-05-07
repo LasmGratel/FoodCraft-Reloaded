@@ -2,6 +2,7 @@ package net.infstudio.foodcraftreloaded.init;
 
 import net.infstudio.foodcraftreloaded.block.BlockRiceCrop;
 import net.infstudio.foodcraftreloaded.block.machine.BlockDrinkMachine;
+import net.infstudio.foodcraftreloaded.block.machine.BlockPressureCooker;
 import net.infstudio.foodcraftreloaded.utils.loader.annotation.RegBlock;
 
 public interface FCRBlocks {
@@ -10,4 +11,7 @@ public interface FCRBlocks {
 
     @RegBlock({"drink", "machine"})
     BlockDrinkMachine DRINK_MACHINE = new BlockDrinkMachine();
+
+    @RegBlock({"pressure", "cooker"})
+    BlockPressureCooker PRESSURE_COOKER = new BlockPressureCooker();
 }

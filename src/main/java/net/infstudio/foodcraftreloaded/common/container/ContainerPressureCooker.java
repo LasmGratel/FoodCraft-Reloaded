@@ -1,6 +1,5 @@
 package net.infstudio.foodcraftreloaded.common.container;
 
-import net.infstudio.foodcraftreloaded.common.container.slot.SlotDrinkMachineOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,15 +11,17 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerDrinkMachine extends Container {
+public class ContainerPressureCooker extends Container {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 
-    public ContainerDrinkMachine(InventoryPlayer playerInventory, TileEntity tileEntity) {
+    public ContainerPressureCooker(InventoryPlayer playerInventory, TileEntity tileEntity) {
         this.inventoryPlayer = playerInventory;
         this.itemHandler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        addSlotToContainer(new SlotItemHandler(itemHandler, 0, 65, 31));
-        addSlotToContainer(new SlotDrinkMachineOutput(playerInventory.player, itemHandler, 1, 121 + 4, 28 + 4));
+        for (int i = 0; i < 2; ++i)
+            for (int j = 0; j < 3; ++j)
+                addSlotToContainer(new SlotItemHandler(itemHandler, j + i * 2, 43 + j * 24, 15 + i * 34));
+        addSlotToContainer(new SlotItemHandler(itemHandler, 6, 141 + 4, 28 + 4));
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 9; ++j)
                 this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));

@@ -7,6 +7,7 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.TileFluidHandler;
@@ -17,10 +18,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHandlerModifiable, ITickable {
-    private IItemHandlerModifiable itemHandler = new ItemStackHandler(7);
+public class TileEntityPressureCooker extends TileFluidHandler implements IItemHandlerModifiable, ITickable {
+    private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
     private EnergyStorage energyStorage = new EnergyStorage(2000);
-    private FluidTank fluidTank = new FluidTank(1000);
+    private FluidTank fluidTank = new FluidTank(FluidRegistry.WATER, 10, 1000);
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
@@ -29,7 +30,7 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHan
 
     @Override
     public int getSlots() {
-        return 7;
+        return 2;
     }
 
     @Nonnull
