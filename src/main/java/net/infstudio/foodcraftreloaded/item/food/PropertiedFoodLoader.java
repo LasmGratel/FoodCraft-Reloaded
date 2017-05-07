@@ -2,7 +2,6 @@ package net.infstudio.foodcraftreloaded.item.food;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRFoods;
-import net.infstudio.foodcraftreloaded.item.food.ItemPFood;
 import net.infstudio.foodcraftreloaded.utils.NameBuilder;
 import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
 import net.infstudio.foodcraftreloaded.utils.loader.annotation.RegFood;
@@ -23,8 +22,16 @@ public class PropertiedFoodLoader {
             field.setAccessible(true);
             try {
                 RegFood anno = field.getAnnotation(RegFood.class);
-                if (anno == null)
+                if (anno == null) {
+                    if (field.getDeclaringClass().equals(ItemPorridge.class)) {
+                        ItemPorridge porridge = (ItemPorridge) field.get(null);
+                        GameRegistry.register(porridge);
+                        OreDictionary.registerOre("foodPorridge" + porridge.getUnlocalizedName().substring(0, porridge.getUnlocalizedName().lastIndexOf("Porridge")), porridge);
+                        OreDictionary.registerOre("listAllporridge", porridge);
+                        OreDictionary.registerOre("listAllfoods", porridge);
+                    }
                     continue;
+                }
 
                 ItemPFood item = (ItemPFood) field.get(null);
                 item.setProperties(anno.modifier());
