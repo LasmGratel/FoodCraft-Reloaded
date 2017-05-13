@@ -1,9 +1,12 @@
 package net.infstudio.foodcraftreloaded.block.tileentity;
 
+import net.infstudio.foodcraftreloaded.recipe.DrinkRecipe;
+import net.infstudio.foodcraftreloaded.recipe.DrinkRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -18,9 +21,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHandlerModifiable, ITickable {
-    private IItemHandlerModifiable itemHandler = new ItemStackHandler(7);
+    private static final int DRINK_ENERGY_NEED = 500;
+
+    private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
     private EnergyStorage energyStorage = new EnergyStorage(2000);
     private FluidTank fluidTank = new FluidTank(1000);
+
+    private int energyTaken = 0;
+
+    @Nullable
+    private DrinkRecipe currentRecipe = null;
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
@@ -29,7 +39,7 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHan
 
     @Override
     public int getSlots() {
-        return 7;
+        return 2;
     }
 
     @Nonnull
@@ -83,12 +93,36 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHan
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) return (T) energyStorage;
         else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return (T) fluidTank;
-        else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T) itemHandler;
+        else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            switch (facing) {
+                case UP:
+                    return (T) new ItemStackHandler(NonNullList.withSize(1, itemHandler.getStackInSlot(0)));
+                case DOWN:
+                    return (T) new ItemStackHandler(NonNullList.withSize(1, itemHandler.getStackInSlot(1)));
+                default:
+                    return (T) itemHandler;
+            }
+        }
         else return super.getCapability(capability, facing);
     }
 
     @Override
     public void update() {
-        //Update Crafting
+        // Update Crafting
+        if (currentRecipe != null) {
+            if (energyTaken == DRINK_ENERGY_NEED) {
+                itemHandler.extractItem(0, 1, false);
+                itemHandler.insertItem(1, currentRecipe.getRubbish(), false);
+                fluidTank.fill(currentRecipe.getOutput(), true);
+                currentRecipe = null;
+            } else if (energyStorage.getEnergyStored() > 0) {
+                energyStorage.extractEnergy(1, false);
+                ++energyTaken;
+            } else {
+                currentRecipe = null;
+            }
+        } else {
+            currentRecipe = DrinkRecipeManager.getInstance().getRecipeNullable(itemHandler.getStackInSlot(0));
+        }
     }
 }
