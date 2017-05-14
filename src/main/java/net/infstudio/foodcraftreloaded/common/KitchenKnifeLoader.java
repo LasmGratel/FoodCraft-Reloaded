@@ -3,7 +3,7 @@ package net.infstudio.foodcraftreloaded.common;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.item.tool.EnumKitchenKnifeType;
 import net.infstudio.foodcraftreloaded.item.tool.ItemKitchenKnife;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;

@@ -2,9 +2,9 @@ package net.infstudio.foodcraftreloaded.item.food;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRFoods;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.RegFood;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.RegFood;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;

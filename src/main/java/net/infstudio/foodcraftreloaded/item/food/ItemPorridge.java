@@ -1,6 +1,6 @@
 package net.infstudio.foodcraftreloaded.item.food;
 
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class ItemPorridge extends ItemPFood {

@@ -2,7 +2,7 @@ package net.infstudio.foodcraftreloaded.common;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRAchievements;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.fml.common.LoaderState;

@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.recipe;
+package net.infstudio.foodcraftreloaded.api.recipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

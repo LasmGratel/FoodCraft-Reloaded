@@ -1,6 +1,6 @@
 package net.infstudio.foodcraftreloaded.item.tool;
 
-import net.infstudio.foodcraftreloaded.utils.masking.IColorable;
+import net.infstudio.foodcraftreloaded.util.masking.IColorable;
 
 import java.awt.Color;
 

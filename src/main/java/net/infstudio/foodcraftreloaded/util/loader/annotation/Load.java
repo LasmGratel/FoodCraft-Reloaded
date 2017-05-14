@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils.loader.annotation;
+package net.infstudio.foodcraftreloaded.util.loader.annotation;
 
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;

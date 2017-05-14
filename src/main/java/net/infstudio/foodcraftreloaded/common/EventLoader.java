@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.common;
 
 import net.infstudio.foodcraftreloaded.init.FCRBlocks;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;

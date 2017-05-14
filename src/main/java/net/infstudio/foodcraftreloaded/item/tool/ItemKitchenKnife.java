@@ -2,7 +2,7 @@ package net.infstudio.foodcraftreloaded.item.tool;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

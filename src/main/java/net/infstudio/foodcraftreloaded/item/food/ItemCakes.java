@@ -2,18 +2,24 @@ package net.infstudio.foodcraftreloaded.item.food;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
-import net.infstudio.foodcraftreloaded.init.FCRItems;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +36,43 @@ public class ItemCakes extends FCRItemFood {
     }
 
     @Nonnull
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        Block block = iblockstate.getBlock();
+        EnumFruitType fruitType = EnumFruitType.values()[player.getHeldItem(hand).getMetadata()];
+        Block cake = Block.REGISTRY.getObject(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "cake")));
+
+        if (block == Blocks.SNOW_LAYER && iblockstate.getValue(BlockSnow.LAYERS) < 1)
+            facing = EnumFacing.UP;
+        else if (!block.isReplaceable(worldIn, pos))
+            pos = pos.offset(facing);
+
+        ItemStack itemstack = player.getHeldItem(hand);
+
+        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(cake, pos, false, facing, (Entity)null)) {
+            IBlockState iblockstate1 = cake.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, 0, player, hand);
+
+            if (!worldIn.setBlockState(pos, iblockstate1, 11))
+                return EnumActionResult.FAIL;
+            else {
+                iblockstate1 = worldIn.getBlockState(pos);
+
+                if (iblockstate1.getBlock() == cake) {
+                    ItemBlock.setTileEntityNBT(worldIn, player, pos, itemstack);
+                    iblockstate1.getBlock().onBlockPlacedBy(worldIn, pos, iblockstate1, player, itemstack);
+                }
+
+                SoundType soundtype = iblockstate1.getBlock().getSoundType(iblockstate1, worldIn, pos, player);
+                worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+                itemstack.shrink(1);
+                return EnumActionResult.SUCCESS;
+            }
+        }
+        else
+            return EnumActionResult.FAIL;
+    }
+
+    @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, @Nullable World worldIn, EntityLivingBase entityLiving) {
         if (entityLiving instanceof EntityPlayer) {
@@ -39,13 +82,7 @@ public class ItemCakes extends FCRItemFood {
             this.onFoodEaten(stack, worldIn, entityplayer);
             entityplayer.addStat(StatList.getObjectUseStats(this));
         }
-        return new ItemStack(FCRItems.GLASS_BOTTLE);
-    }
-
-    @Nonnull
-    @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.DRINK;
+        return ItemStack.EMPTY;
     }
 
     @Override

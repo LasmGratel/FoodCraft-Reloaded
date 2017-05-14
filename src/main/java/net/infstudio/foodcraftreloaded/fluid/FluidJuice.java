@@ -2,7 +2,7 @@ package net.infstudio.foodcraftreloaded.fluid;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.item.food.EnumFruitType;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 

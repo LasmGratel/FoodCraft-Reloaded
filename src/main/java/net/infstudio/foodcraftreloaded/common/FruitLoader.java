@@ -3,13 +3,15 @@ package net.infstudio.foodcraftreloaded.common;
 import biomesoplenty.common.world.generator.tree.GeneratorBasicTree;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.block.BlockFluidJuice;
+import net.infstudio.foodcraftreloaded.block.BlockFruitCake;
 import net.infstudio.foodcraftreloaded.block.BlockFruitLeaves;
 import net.infstudio.foodcraftreloaded.block.BlockFruitSapling;
 import net.infstudio.foodcraftreloaded.fluid.FluidJuice;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.item.food.*;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
+import net.minecraft.block.BlockCake;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -32,10 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 public class FruitLoader {
     private Map<EnumFruitType, BlockFruitLeaves> leavesMap = new EnumMap<>(EnumFruitType.class);
@@ -43,6 +42,7 @@ public class FruitLoader {
     private Map<EnumFruitType, BlockFruitSapling> saplingMap = new EnumMap<>(EnumFruitType.class);
     private Map<EnumFruitType, GeneratorBasicTree> generatorTreeMap = new EnumMap<>(EnumFruitType.class);
     private Map<EnumFruitType, BlockFluidJuice> fluidJuiceMap = new EnumMap<>(EnumFruitType.class);
+    private Map<EnumFruitType, BlockFruitCake> blockFruitCakeMap = new EnumMap<>(EnumFruitType.class);
     private ItemFruits fruits;
     private ItemJuices juices;
     private ItemSodas sodas;
@@ -73,6 +73,9 @@ public class FruitLoader {
                 .placeOn(Material.GRASS, Material.GROUND).replace(Material.AIR, Material.LEAVES, Material.WOOD)
                 .log(BlockPlanks.EnumType.JUNGLE)
                 .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(fruitLeaves.getDefaultState()).create());
+            BlockFruitCake fruitCake = new BlockFruitCake(fruitType);
+            GameRegistry.register(fruitCake);
+            blockFruitCakeMap.put(fruitType, fruitCake);
         });
         juices = new ItemJuices();
         GameRegistry.register(juices);
@@ -105,6 +108,13 @@ public class FruitLoader {
             registerRender(Item.getItemFromBlock(leavesMap.get(EnumFruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "inventory"));
             ModelLoader.setCustomStateMapper(saplingMap.get(EnumFruitType.values()[i]), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "normal")));
             registerRender(Item.getItemFromBlock(saplingMap.get(EnumFruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "inventory"));
+            ModelLoader.setCustomStateMapper(blockFruitCakeMap.get(EnumFruitType.values()[i]), blockIn -> {
+                Map<IBlockState, ModelResourceLocation> map = new HashMap<>();
+                map.put(blockIn.getDefaultState().withProperty(BlockCake.BITES, 0), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake_uneaten"), "normal"));
+                for (int j = 1; j <= 6; j++)
+                    map.put(blockIn.getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake_slice" + j), "normal"));
+                return map;
+            });
             registerFluidRender(fluidJuiceMap.get(EnumFruitType.values()[i]), fluidJuiceMap.get(EnumFruitType.values()[i]).getRegistryName().getResourcePath());
         }
     }
@@ -127,6 +137,7 @@ public class FruitLoader {
     public void loadColors() {
         leavesMap.values().forEach((leaves) -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> tintIndex == 0 ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : tintIndex == 1 ? ((BlockFruitLeaves) state.getBlock()).getFruitType().getColor().getRGB() : -1, leaves));
         fluidJuiceMap.values().forEach(block -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> (tintIndex == 0 ? ((BlockFluidJuice) state.getBlock()).getFruitType().getColor().getRGB() : -1)));
+        blockFruitCakeMap.values().forEach(blockFruitCake -> Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((state, worldIn, pos, tintIndex) -> tintIndex == 0 ? ((BlockFruitCake) state.getBlock()).getFruitType().getColor().getRGB() : -1));
         saplingMap.values().forEach((sapling) -> Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (stack.getItem() == Item.getItemFromBlock(sapling) && tintIndex == 0)
                 return EnumFruitType.values()[stack.getMetadata()].getColor().getRGB();

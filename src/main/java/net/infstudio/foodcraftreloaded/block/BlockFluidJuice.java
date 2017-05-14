@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.block;
 
 import net.infstudio.foodcraftreloaded.item.food.EnumFruitType;
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fluids.BlockFluidClassic;

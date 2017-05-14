@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils.masking;
+package net.infstudio.foodcraftreloaded.util.masking;
 
 import java.awt.*;
 

@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.common.container.slot;
 
 import net.infstudio.foodcraftreloaded.api.event.DrinkMadeEvent;
-import net.infstudio.foodcraftreloaded.recipe.DrinkRecipeManager;
+import net.infstudio.foodcraftreloaded.api.recipe.DrinkRecipeManager;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

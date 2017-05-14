@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils;
+package net.infstudio.foodcraftreloaded.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,6 +1,7 @@
-package net.infstudio.foodcraftreloaded.utils.loader.annotation;
+package net.infstudio.foodcraftreloaded.util.loader.annotation;
 
-import net.infstudio.foodcraftreloaded.utils.NameBuilder;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
+import net.minecraft.item.ItemBlock;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface RegItem {
+public @interface RegBlock {
     /**
      * The params to build registryName and unlocalizedName.
      * @see NameBuilder
@@ -21,9 +22,15 @@ public @interface RegItem {
      */
     String[] oreDict() default {};
 
+
     /**
      * Add prefix on modifier
-     * Example: wandIron -> itemWandIron
+     * Example: gold -> blockGold
      */
-    //String prefix() default "item";
+    //String prefix() default "block";
+
+    /**
+     *
+     */
+    Class<? extends ItemBlock> itemClass() default ItemBlock.class;
 }

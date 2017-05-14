@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils.loader.annotation;
+package net.infstudio.foodcraftreloaded.util.loader.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

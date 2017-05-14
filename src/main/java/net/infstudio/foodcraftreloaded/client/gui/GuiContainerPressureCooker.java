@@ -2,7 +2,7 @@ package net.infstudio.foodcraftreloaded.client.gui;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.common.container.ContainerPressureCooker;
-import net.infstudio.foodcraftreloaded.utils.client.GuiUtils;
+import net.infstudio.foodcraftreloaded.util.client.GuiUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils;
+package net.infstudio.foodcraftreloaded.util;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;

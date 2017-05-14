@@ -22,7 +22,7 @@ package net.infstudio.foodcraftreloaded.common;
 import net.infstudio.foodcraftreloaded.block.BlockLoader;
 import net.infstudio.foodcraftreloaded.item.ItemLoader;
 import net.infstudio.foodcraftreloaded.item.food.PropertiedFoodLoader;
-import net.infstudio.foodcraftreloaded.utils.loader.LoaderManager;
+import net.infstudio.foodcraftreloaded.util.loader.LoaderManager;
 import net.infstudio.foodcraftreloaded.worldgen.FruitTreeGenerator;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.event.*;

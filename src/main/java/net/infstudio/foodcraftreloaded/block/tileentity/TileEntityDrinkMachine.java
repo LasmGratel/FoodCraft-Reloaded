@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.block.tileentity;
 
-import net.infstudio.foodcraftreloaded.recipe.DrinkRecipe;
-import net.infstudio.foodcraftreloaded.recipe.DrinkRecipeManager;
+import net.infstudio.foodcraftreloaded.api.recipe.DrinkRecipe;
+import net.infstudio.foodcraftreloaded.api.recipe.DrinkRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

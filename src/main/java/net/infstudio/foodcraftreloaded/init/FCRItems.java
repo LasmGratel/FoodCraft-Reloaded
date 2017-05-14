@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.init;
 
 import net.infstudio.foodcraftreloaded.item.food.ItemRice;
-import net.infstudio.foodcraftreloaded.utils.loader.annotation.RegItem;
+import net.infstudio.foodcraftreloaded.util.loader.annotation.RegItem;
 import net.minecraft.item.Item;
 
 public interface FCRItems {

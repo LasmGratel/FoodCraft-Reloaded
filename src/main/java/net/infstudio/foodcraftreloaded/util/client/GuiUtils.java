@@ -1,4 +1,4 @@
-package net.infstudio.foodcraftreloaded.utils.client;
+package net.infstudio.foodcraftreloaded.util.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
