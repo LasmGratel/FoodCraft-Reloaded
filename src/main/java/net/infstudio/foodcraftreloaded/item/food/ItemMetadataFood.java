@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -38,7 +38,7 @@ public class ItemMetadataFood extends FCRItemFood implements IMetadatable {
     }
 
     public void register() {
-        foodMap.values().forEach(GameRegistry::register);
+        foodMap.values().forEach(ForgeRegistries.ITEMS::register);
     }
 
     @SideOnly(Side.CLIENT)

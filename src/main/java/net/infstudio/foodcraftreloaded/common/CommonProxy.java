@@ -24,6 +24,7 @@ import net.infstudio.foodcraftreloaded.item.ItemLoader;
 import net.infstudio.foodcraftreloaded.item.food.PropertiedFoodLoader;
 import net.infstudio.foodcraftreloaded.util.loader.LoaderManager;
 import net.infstudio.foodcraftreloaded.worldgen.FruitTreeGenerator;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,15 +38,16 @@ public class CommonProxy {
     public CommonProxy() {
         Arrays.asList(
             BlockLoader.class, ItemLoader.class,
-            FruitLoader.class, KitchenKnifeLoader.class,
-            PropertiedFoodLoader.class,
-            AchievementLoader.class, RecipeLoader.class,
+            FruitLoader.class, VegetableLoader.class,
+            KitchenKnifeLoader.class, PropertiedFoodLoader.class,
+            AdvancementLoader.class, RecipeLoader.class,
             EventLoader.class
         ).forEach(loaderManager::addLoader);
     }
 
     @OverridingMethodsMustInvokeSuper
     public void construct(FMLConstructionEvent event) {
+        FluidRegistry.enableUniversalBucket();
         loaderManager.invoke(event, LoaderState.CONSTRUCTING, Side.SERVER);
     }
 

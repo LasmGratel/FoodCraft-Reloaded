@@ -1,10 +1,10 @@
 package net.infstudio.foodcraftreloaded.item.tool;
 
-import net.infstudio.foodcraftreloaded.util.masking.IColorable;
+import net.infstudio.foodcraftreloaded.util.masking.Colorable;
 
 import java.awt.Color;
 
-public enum EnumKitchenKnifeType implements IColorable {
+public enum EnumKitchenKnifeType implements Colorable {
     STONE(100, new Color(128, 128, 128)),
     IRON(300, new Color(234, 234, 234)),
     GOLD(500, new Color(254, 254, 5)),

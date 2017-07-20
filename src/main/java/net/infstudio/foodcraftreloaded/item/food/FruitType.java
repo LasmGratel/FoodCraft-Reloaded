@@ -1,10 +1,10 @@
 package net.infstudio.foodcraftreloaded.item.food;
 
-import net.infstudio.foodcraftreloaded.util.masking.IColorable;
+import net.infstudio.foodcraftreloaded.util.masking.Colorable;
 
 import java.awt.*;
 
-public enum EnumFruitType implements IColorable {
+public enum FruitType implements Colorable {
     /**
      * Pear
      * 梨
@@ -97,7 +97,7 @@ public enum EnumFruitType implements IColorable {
 
     private Color color;
 
-    EnumFruitType(Color color) {
+    FruitType(Color color) {
         this.color = color;
     }
 

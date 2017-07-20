@@ -29,7 +29,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = FoodCraftReloaded.MODID, name = FoodCraftReloaded.NAME, version = FoodCraftReloaded.VERSION,
-acceptedMinecraftVersions = "[1.11.2,)", dependencies = "required-after:biomesoplenty",
+acceptedMinecraftVersions = "[1.12,)", dependencies = "required-after:biomesoplenty",
 updateJSON = "http://infinitystudio.github.io/FoodCraft/update.json")
 public class FoodCraftReloaded {
     public static final String MODID = "foodcraftreloaded";

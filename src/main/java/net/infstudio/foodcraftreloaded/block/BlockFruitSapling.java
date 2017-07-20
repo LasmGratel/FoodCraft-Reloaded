@@ -1,20 +1,20 @@
 package net.infstudio.foodcraftreloaded.block;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
-import net.infstudio.foodcraftreloaded.item.food.EnumFruitType;
+import net.infstudio.foodcraftreloaded.item.food.FruitType;
 import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.block.BlockSapling;
 
 public class BlockFruitSapling extends BlockSapling {
-    private EnumFruitType fruitType;
+    private FruitType fruitType;
 
-    public BlockFruitSapling(EnumFruitType fruitType) {
+    public BlockFruitSapling(FruitType fruitType) {
         this.fruitType = fruitType;
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "sapling"));
         setUnlocalizedName(NameBuilder.buildUnlocalizedName(fruitType.toString(), "sapling"));
     }
 
-    public EnumFruitType getFruitType() {
+    public FruitType getFruitType() {
         return fruitType;
     }
 }

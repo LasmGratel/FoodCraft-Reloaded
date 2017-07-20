@@ -8,7 +8,7 @@ import net.infstudio.foodcraftreloaded.util.loader.annotation.RegItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -26,9 +26,9 @@ public class ItemLoader {
                     continue;
 
                 Item item = (Item) field.get(null);
-                GameRegistry.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
+                ForgeRegistries.ITEMS.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
 
-                Arrays.asList(annoItem.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
+                Arrays.stream(annoItem.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
             } catch (Throwable e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);
             }

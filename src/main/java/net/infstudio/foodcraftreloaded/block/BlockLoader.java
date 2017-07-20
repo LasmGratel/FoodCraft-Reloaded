@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
@@ -29,13 +30,13 @@ public class BlockLoader {
 
             try {
                 Block block = (Block) field.get(null);
-                GameRegistry.register(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
+                ForgeRegistries.BLOCKS.register(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
 
                 //Register item block.
                 Class<? extends ItemBlock> itemClass = anno.itemClass();
                 Constructor<? extends ItemBlock> con = itemClass.getConstructor(Block.class);
                 con.setAccessible(true);
-                GameRegistry.register(con.newInstance(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+                ForgeRegistries.ITEMS.register(con.newInstance(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
 
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, block));
             } catch (Exception e) {

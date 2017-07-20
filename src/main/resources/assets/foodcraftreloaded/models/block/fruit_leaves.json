@@ -3,8 +3,7 @@
     "textures": {
         "all": "foodcraftreloaded:blocks/fruit_leaves",
         "overlay": "foodcraftreloaded:blocks/fruit_leaves_overlay",
-        "particle": "#all"
-
+        "particle": "foodcraftreloaded:blocks/fruit_leaves"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

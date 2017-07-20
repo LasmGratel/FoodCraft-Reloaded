@@ -3,7 +3,7 @@ package net.infstudio.foodcraftreloaded.util.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -17,7 +17,7 @@ public interface GuiUtils {
     /** Renders the given texture tiled into a GUI */
     static void renderTiledTextureAtlas(int x, int y, int width, int height, float depth, TextureAtlasSprite sprite) {
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer worldrenderer = tessellator.getBuffer();
+        BufferBuilder worldrenderer = tessellator.getBuffer();
         worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
         Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
@@ -62,7 +62,7 @@ public interface GuiUtils {
     }
 
     /** Adds a quad to the rendering pipeline. Call startDrawingQuads beforehand. You need to call draw() yourself. */
-    static void putTiledTextureQuads(VertexBuffer renderer, int x, int y, int width, int height, float depth, TextureAtlasSprite sprite) {
+    static void putTiledTextureQuads(BufferBuilder renderer, int x, int y, int width, int height, float depth, TextureAtlasSprite sprite) {
         float u1 = sprite.getMinU();
         float v1 = sprite.getMinV();
 

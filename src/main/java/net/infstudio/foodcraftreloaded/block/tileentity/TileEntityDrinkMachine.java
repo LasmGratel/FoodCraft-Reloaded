@@ -2,7 +2,6 @@ package net.infstudio.foodcraftreloaded.block.tileentity;
 
 import net.infstudio.foodcraftreloaded.api.recipe.DrinkRecipe;
 import net.infstudio.foodcraftreloaded.api.recipe.DrinkRecipeManager;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -20,7 +19,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHandlerModifiable, ITickable {
+public class TileEntityDrinkMachine extends TileFluidHandler implements ITickable {
     private static final int DRINK_ENERGY_NEED = 500;
 
     private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
@@ -31,41 +30,6 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHan
 
     @Nullable
     private DrinkRecipe currentRecipe = null;
-
-    @Override
-    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-        itemHandler.setStackInSlot(slot, stack);
-    }
-
-    @Override
-    public int getSlots() {
-        return 2;
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack getStackInSlot(int slot) {
-        return itemHandler.getStackInSlot(slot);
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        if (slot == 1)
-            return stack;
-        return itemHandler.insertItem(slot, stack, simulate);
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return itemHandler.extractItem(slot, amount, simulate);
-    }
-
-    @Override
-    public int getSlotLimit(int slot) {
-        return itemHandler.getSlotLimit(slot);
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -94,6 +58,8 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements IItemHan
         if (capability == CapabilityEnergy.ENERGY) return (T) energyStorage;
         else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return (T) fluidTank;
         else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (facing == null)
+                return (T) itemHandler;
             switch (facing) {
                 case UP:
                     return (T) new ItemStackHandler(NonNullList.withSize(1, itemHandler.getStackInSlot(0)));

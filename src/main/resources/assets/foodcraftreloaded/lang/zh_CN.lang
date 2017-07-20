@@ -30,6 +30,36 @@ item.fruitCherry=樱桃
 item.fruitCoconut=椰子
 item.fruitBanana=香蕉
 
+# Vegetable
+item.vegetableEggplant=茄子
+item.vegetableCucumber=黄瓜
+item.vegetableCabbage=白菜
+item.vegetableLettuce=莴苣
+item.vegetableArtemisiaStalk=蒿子杆
+item.vegetableSpinach=菠菜
+item.vegetableCelery=芹菜
+item.vegetableTomato=番茄
+item.vegetableRice=大米
+item.vegetableGlutinousRice=糯米
+item.vegetableBlackRice=黑米
+item.vegetableCorn=玉米
+item.vegetablePeanut=花生
+item.vegetableRadish=水萝卜
+item.vegetableWhiteRadish=白萝卜
+item.vegetableRedPepper=红椒
+item.vegetableGreenPepper=青椒
+item.vegetableFacingHeavenPepper=朝天椒
+item.vegetablePepper=胡椒
+item.vegetableZanthoxylum=花椒
+item.vegetableRedSweetPotato=红薯
+item.vegetableWhiteSweetPotato=白薯
+item.vegetablePurpleSweetPotato=紫薯
+item.vegetableSesame=芝麻
+item.vegetableGarlic=蒜
+item.vegetableGinger=姜
+item.vegetableOnion=洋葱
+item.vegetableGreenOnion=葱
+
 # Kitchen knife
 item.kitchenKnifeStone.name=石刀
 item.kitchenKnifeIron.name=铁刀
@@ -42,6 +72,7 @@ item.cake=%s蛋糕
 
 # Juice
 item.juice=%s果汁
+item.vegetableJuice=%s菜汁
 
 # Soda
 item.soda=%s苏打水

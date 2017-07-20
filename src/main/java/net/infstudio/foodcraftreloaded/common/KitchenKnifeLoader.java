@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.EnumMap;
@@ -23,7 +23,7 @@ public class KitchenKnifeLoader {
     public void loadKitchenKnifes() {
         for (EnumKitchenKnifeType knifeType : EnumKitchenKnifeType.values())
             kitchenKnifeMap.put(knifeType, new ItemKitchenKnife(knifeType));
-        kitchenKnifeMap.forEach((type, item) -> GameRegistry.register(item));
+        kitchenKnifeMap.forEach((type, item) -> ForgeRegistries.ITEMS.register(item));
     }
 
     @Load(side = Side.CLIENT)

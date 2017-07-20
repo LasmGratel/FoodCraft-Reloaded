@@ -3,6 +3,7 @@ package net.infstudio.foodcraftreloaded.item.food;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.init.FCRItems;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,15 +15,14 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemSodas extends FCRItemFood {
-    public ItemSodas() {
+public class ItemVegetableSodas extends FCRItemFood {
+    public ItemVegetableSodas() {
         super(5, 1.0f, false);
-        setRegistryName(FoodCraftReloaded.MODID, "soda");
+        setRegistryName(FoodCraftReloaded.MODID, "vegetable_soda");
         setCreativeTab(FCRCreativeTabs.DRINK);
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -48,14 +48,14 @@ public class ItemSodas extends FCRItemFood {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (FruitType fruitType : FruitType.values())
-            subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems) {
+        for (VegetableType vegetableType : VegetableType.values())
+            subItems.add(new ItemStack(this, 1, vegetableType.ordinal()));
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.soda", I18n.format("item.fruit" + StringUtils.capitalize(FruitType.values()[stack.getMetadata()].toString())));
+        return I18n.format("item.soda", I18n.format(NameBuilder.buildUnlocalizedName("item.vegetable", VegetableType.values()[stack.getMetadata()].toString())));
     }
 }

@@ -3,6 +3,7 @@ package net.infstudio.foodcraftreloaded.item.food;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.init.FCRItems;
+import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,15 +15,14 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemSodas extends FCRItemFood {
-    public ItemSodas() {
-        super(5, 1.0f, false);
-        setRegistryName(FoodCraftReloaded.MODID, "soda");
+public class ItemVegetableJuices extends FCRItemFood {
+    public ItemVegetableJuices() {
+        super(4, 1.0f, false);
+        setRegistryName(FoodCraftReloaded.MODID, "vegetable_juice");
         setCreativeTab(FCRCreativeTabs.DRINK);
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -34,7 +34,7 @@ public class ItemSodas extends FCRItemFood {
         if (entityLiving instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             entityplayer.getFoodStats().addStats(this, stack);
-            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            worldIn.playSound(entityplayer, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
             this.onFoodEaten(stack, worldIn, entityplayer);
             entityplayer.addStat(StatList.getObjectUseStats(this));
         }
@@ -48,14 +48,14 @@ public class ItemSodas extends FCRItemFood {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (FruitType fruitType : FruitType.values())
-            subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems) {
+        for (VegetableType vegetableType : VegetableType.values())
+            subItems.add(new ItemStack(this, 1, vegetableType.ordinal()));
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.soda", I18n.format("item.fruit" + StringUtils.capitalize(FruitType.values()[stack.getMetadata()].toString())));
+        return I18n.format("item.vegetableJuice", I18n.format(NameBuilder.buildUnlocalizedName("item.vegetable", VegetableType.values()[stack.getMetadata()].toString())));
     }
 }

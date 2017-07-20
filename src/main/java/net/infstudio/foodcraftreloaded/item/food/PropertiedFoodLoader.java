@@ -8,7 +8,7 @@ import net.infstudio.foodcraftreloaded.util.loader.annotation.RegFood;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -25,7 +25,7 @@ public class PropertiedFoodLoader {
                 if (anno == null) {
                     if (field.getDeclaringClass().equals(ItemPorridge.class)) {
                         ItemPorridge porridge = (ItemPorridge) field.get(null);
-                        GameRegistry.register(porridge);
+                        ForgeRegistries.ITEMS.register(porridge);
                         OreDictionary.registerOre("foodPorridge" + porridge.getUnlocalizedName().substring(0, porridge.getUnlocalizedName().lastIndexOf("Porridge")), porridge);
                         OreDictionary.registerOre("listAllporridge", porridge);
                         OreDictionary.registerOre("listAllfoods", porridge);
@@ -35,7 +35,7 @@ public class PropertiedFoodLoader {
 
                 ItemPFood item = (ItemPFood) field.get(null);
                 item.setProperties(anno.modifier());
-                GameRegistry.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.name())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.name())));
+                ForgeRegistries.ITEMS.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.name())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.name())));
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
                 OreDictionary.registerOre("listAllfoods", item);
             } catch (IllegalAccessException | NullPointerException e) {

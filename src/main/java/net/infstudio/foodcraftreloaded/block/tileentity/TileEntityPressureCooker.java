@@ -1,6 +1,5 @@
 package net.infstudio.foodcraftreloaded.block.tileentity;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -18,45 +17,10 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityPressureCooker extends TileFluidHandler implements IItemHandlerModifiable, ITickable {
+public class TileEntityPressureCooker extends TileFluidHandler implements ITickable {
     private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
     private EnergyStorage energyStorage = new EnergyStorage(2000);
     private FluidTank fluidTank = new FluidTank(FluidRegistry.WATER, 10, 1000);
-
-    @Override
-    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-        itemHandler.setStackInSlot(slot, stack);
-    }
-
-    @Override
-    public int getSlots() {
-        return 2;
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack getStackInSlot(int slot) {
-        return itemHandler.getStackInSlot(slot);
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-        if (slot == 1)
-            return stack;
-        return itemHandler.insertItem(slot, stack, simulate);
-    }
-
-    @Nonnull
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return itemHandler.extractItem(slot, amount, simulate);
-    }
-
-    @Override
-    public int getSlotLimit(int slot) {
-        return itemHandler.getSlotLimit(slot);
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {

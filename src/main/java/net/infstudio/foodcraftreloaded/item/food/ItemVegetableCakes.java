@@ -20,15 +20,14 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemCakes extends FCRItemFood {
-    public ItemCakes() {
+public class ItemVegetableCakes extends FCRItemFood {
+    public ItemVegetableCakes() {
         super(4, 1.0f, false);
-        setRegistryName(FoodCraftReloaded.MODID, "cake");
+        setRegistryName(FoodCraftReloaded.MODID, "vegetable_cake");
         setCreativeTab(FCRCreativeTabs.INGREDIENTS);
         setMaxDamage(0);
         setHasSubtypes(true);
@@ -38,8 +37,8 @@ public class ItemCakes extends FCRItemFood {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState iblockstate = worldIn.getBlockState(pos);
         Block block = iblockstate.getBlock();
-        FruitType fruitType = FruitType.values()[player.getHeldItem(hand).getMetadata()];
-        Block cake = Block.REGISTRY.getObject(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "cake")));
+        VegetableType vegetableType = VegetableType.values()[player.getHeldItem(hand).getMetadata()];
+        Block cake = Block.REGISTRY.getObject(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "cake")));
 
         if (block == Blocks.SNOW_LAYER && iblockstate.getValue(BlockSnow.LAYERS) < 1)
             facing = EnumFacing.UP;
@@ -86,13 +85,13 @@ public class ItemCakes extends FCRItemFood {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (FruitType fruitType : FruitType.values())
-            subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
+        for (VegetableType vegetableType : VegetableType.values())
+            subItems.add(new ItemStack(this, 1, vegetableType.ordinal()));
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(FruitType.values()[stack.getMetadata()].toString())));
+        return I18n.format("item.cake", I18n.format(NameBuilder.buildUnlocalizedName("item.vegetable", VegetableType.values()[stack.getMetadata()].toString())));
     }
 }

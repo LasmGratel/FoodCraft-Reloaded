@@ -9,10 +9,9 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
@@ -86,88 +85,5 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
-    }
-}
-
-// Default Model Generator
-// See http://www.minecraftforum.net/forums/mapping-and-modding/mapping-and-modding-tutorials/2689001-
-ext.args = [:]
-
-ext.requireArgument = {String property, String displayValue ->
-    def value = args[property]
-    if (value == null) {
-        throw new InvalidUserDataException("$property must be set with \'$property=$displayValue\'")
-    }
-    return value
-}
-
-tasks.addRule("Pattern: <property>=<modifier>: Passes arguments to the scripts") { String taskName ->
-    def match = taskName =~ /(.*?)=(.*?$)/
-    if (match) {
-        def property = match[0][1]
-        def value = match[0][2]
-        ext.args[property] = value;
-        task(taskName) << {
-            println "Passes modifier \'$value\' to args[\'$property\']"
-        }
-    }
-}
-
-import org.apache.tools.ant.filters.FixCrLfFilter
-
-class CopyJsonTemplate extends DefaultTask {
-    @Input
-    def template
-
-    @Input
-    def arguments
-
-    @Input
-    def jsonRename
-
-    @TaskAction
-    def build() {
-        def args = arguments()
-        project.copy {
-            from("templates/${template}") {
-                expand(args)
-                filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
-            }
-            into 'src/main/resources'
-            rename { String filename ->
-                def match = filename =~ /(.*)\.json/
-                if (match) {
-                    def prevFilename = match[0][1]
-                    def newFilename = jsonRename.call(prevFilename)
-                    return "${newFilename}.json"
-                }
-                else {
-                    return filename
-                }
-            }
-        }
-    }
-}
-
-
-task generateBlockModel(type: CopyJsonTemplate) {
-    template 'block'
-    arguments {
-        def blockName = requireArgument('blockName', 'block_name')
-        return ['modid':archivesBaseName, 'block_name':blockName]
-    }
-    jsonRename {
-        return args['blockName']
-    }
-}
-
-task generateItemModel(type: CopyJsonTemplate) {
-    template 'item'
-    arguments {
-        def itemName = requireArgument('itemName', 'item_name')
-        return ['modid':archivesBaseName, 'item_name':itemName]
-    }
-    jsonRename {
-        return args['itemName']
     }
 }

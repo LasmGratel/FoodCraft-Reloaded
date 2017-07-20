@@ -2,7 +2,7 @@ package net.infstudio.foodcraftreloaded.block;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.common.FruitLoader;
-import net.infstudio.foodcraftreloaded.item.food.EnumFruitType;
+import net.infstudio.foodcraftreloaded.item.food.FruitType;
 import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockFruitLeaves extends Block implements IShearable {
-    private EnumFruitType fruitType;
+    private FruitType fruitType;
 
-    public BlockFruitLeaves(EnumFruitType fruitType) {
+    public BlockFruitLeaves(FruitType fruitType) {
         super(Material.LEAVES);
         this.setTickRandomly(true);
         this.fruitType = fruitType;
@@ -33,7 +33,7 @@ public class BlockFruitLeaves extends Block implements IShearable {
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "leaves"));
     }
 
-    public EnumFruitType getFruitType() {
+    public FruitType getFruitType() {
         return fruitType;
     }
 

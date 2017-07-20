@@ -5,7 +5,6 @@ import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.block.BlockFruitSapling;
 import net.infstudio.foodcraftreloaded.common.FruitLoader;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
@@ -19,12 +18,12 @@ public class FruitTreeGenerator {
 
     @SubscribeEvent
     public void generateFruitTree(DecorateBiomeEvent.Decorate event) {
-        Biome biome = event.getWorld().getBiome(event.getPos());
-        if (event.getType() == DecorateBiomeEvent.Decorate.EventType.TREE && (biome.getTempCategory() == Biome.TempCategory.MEDIUM || biome.getTempCategory() == Biome.TempCategory.WARM)) {
+        if (event.getType() == DecorateBiomeEvent.Decorate.EventType.TREE) {
             GeneratorBasicTree[] generatorBasicTrees = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().values().toArray(new GeneratorBasicTree[0]);
             GeneratorBasicTree generator = generatorBasicTrees[MathHelper.getInt(event.getRand(),0, generatorBasicTrees.length - 1)];
             if (generator.generate(event.getWorld(), event.getRand(), event.getPos())) {
-                FoodCraftReloaded.getLogger().debug("[FoodCraft]Generated fruit tree " + generator.getIdentifier() +" at " + event.getPos());
+                FoodCraftReloaded.getLogger().info("Generated fruit tree at " + event.getPos());
+                event.setResult(Event.Result.DENY);
             }
         }
     }

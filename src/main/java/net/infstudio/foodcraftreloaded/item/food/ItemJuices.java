@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.NonNullList;
@@ -49,15 +48,14 @@ public class ItemJuices extends FCRItemFood {
     }
 
     @Override
-    public void getSubItems(@Nonnull Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (EnumFruitType fruitType : EnumFruitType.values())
-            subItems.add(new ItemStack(itemIn, 1, fruitType.ordinal()));
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        for (FruitType fruitType : FruitType.values())
+            subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
     }
 
     @Nonnull
     @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack)
-    {
-        return I18n.format("item.juice", I18n.format("item.fruit" + StringUtils.capitalize(EnumFruitType.values()[stack.getMetadata()].toString())));
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+        return I18n.format("item.juice", I18n.format("item.fruit" + StringUtils.capitalize(FruitType.values()[stack.getMetadata()].toString())));
     }
 }

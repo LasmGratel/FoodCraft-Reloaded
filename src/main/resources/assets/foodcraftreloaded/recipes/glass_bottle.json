@@ -1,0 +1,17 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "# #",
+        "# #",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "blockGlass"
+        }
+    },
+    "result": {
+        "item": "foodcraftreloaded:glass_bottle"
+    }
+}
