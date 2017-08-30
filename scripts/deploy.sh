@@ -34,7 +34,7 @@ rm -rf build/libs/**/* || exit 0
 doCompile
 
 # Now let's go have some fun with the cloned repo
-cd build/libs
+cd ../build/libs
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
