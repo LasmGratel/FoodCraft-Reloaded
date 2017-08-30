@@ -5,7 +5,7 @@ SOURCE_BRANCH="1.12"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
-  ../scripts/compile.sh
+  scripts/compile.sh
 }
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
@@ -25,7 +25,7 @@ SHA=`git rev-parse --verify HEAD`
 git clone $REPO build/libs/
 cd build/libs
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-cd ..
+cd ../..
 
 # Clean out existing contents
 rm -rf build/libs/**/* || exit 0
@@ -34,7 +34,7 @@ rm -rf build/libs/**/* || exit 0
 doCompile
 
 # Now let's go have some fun with the cloned repo
-cd ../build/libs
+cd build/libs
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
