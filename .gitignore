@@ -24,3 +24,5 @@
 # other important files
 !.editorconfig
 !.travis.yml
+!deploy_key.enc
+!scripts/

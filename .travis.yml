@@ -1,1 +1,7 @@
 language: java
+
+script: bash ./scripts/deploy.sh
+env:
+  global:
+  - ENCRYPTION_LABEL: "5eee3d1fa080"
+  - COMMIT_AUTHOR_EMAIL: "lasm_gratel@hotmail.com"
