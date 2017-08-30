@@ -5,7 +5,7 @@ SOURCE_BRANCH="1.12"
 TARGET_BRANCH="gh-pages"
 
 function doCompile {
-  ./scripts/compile.sh
+  ../scripts/compile.sh
 }
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
