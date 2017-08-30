@@ -1,2 +1,3 @@
 #!/bin/bash
-../gradlew assemble
+cd ..
+./gradlew assemble
