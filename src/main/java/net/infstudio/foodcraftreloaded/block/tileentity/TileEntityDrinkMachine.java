@@ -36,6 +36,7 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements ITickabl
         super.readFromNBT(tag);
         CapabilityEnergy.ENERGY.getStorage().readNBT(CapabilityEnergy.ENERGY, energyStorage, null, tag.getTag("energy"));
         CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null, tag.getTag("inv"));
+        energyTaken = tag.getInteger("energyTaken");
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -43,6 +44,7 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements ITickabl
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
         tag.setTag("energy", CapabilityEnergy.ENERGY.getStorage().writeNBT(CapabilityEnergy.ENERGY, energyStorage, null));
         tag.setTag("inv", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null));
+        tag.setInteger("energyTaken", energyTaken);
         return super.writeToNBT(tag);
     }
 

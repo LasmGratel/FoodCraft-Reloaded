@@ -1,9 +1,9 @@
 package net.infstudio.foodcraftreloaded.util.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -17,17 +17,23 @@ public interface GuiUtils {
     /** Renders the given texture tiled into a GUI */
     static void renderTiledTextureAtlas(int x, int y, int width, int height, float depth, TextureAtlasSprite sprite) {
         Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder worldrenderer = tessellator.getBuffer();
-        worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        BufferBuilder worldRenderer = tessellator.getBuffer();
+        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
         Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-        putTiledTextureQuads(worldrenderer, x, y, width, height, depth, sprite);
+        putTiledTextureQuads(worldRenderer, x, y, width, height, depth, sprite);
 
         tessellator.draw();
     }
 
     static void renderTiledFluid(int x, int y, int width, int height, float depth, FluidStack fluidStack) {
-        TextureAtlasSprite fluidSprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(fluidStack.getFluid().getStill(fluidStack).toString());
+        TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
+        TextureAtlasSprite fluidSprite = map.getTextureExtry(fluidStack.getFluid().getStill().toString());
+        if (fluidSprite == null) {
+            fluidSprite = map.getTextureExtry(TextureMap.LOCATION_MISSING_TEXTURE.toString());
+            if (fluidSprite == null)
+                return;
+        }
         setColorRGBA(fluidStack.getFluid().getColor(fluidStack));
         renderTiledTextureAtlas(x, y, width, height, depth, fluidSprite);
     }

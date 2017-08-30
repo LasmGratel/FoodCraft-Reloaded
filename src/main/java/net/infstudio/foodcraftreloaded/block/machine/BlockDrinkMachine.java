@@ -12,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -46,6 +47,8 @@ public class BlockDrinkMachine extends BlockMachine {
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-        return new TileEntityDrinkMachine();
+        TileEntityDrinkMachine drinkMachine = new TileEntityDrinkMachine();
+        FMLCommonHandler.instance().getMinecraftServerInstance().registerTickable(drinkMachine);
+        return drinkMachine;
     }
 }
