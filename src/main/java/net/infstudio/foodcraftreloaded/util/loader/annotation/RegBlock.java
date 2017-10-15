@@ -23,10 +23,6 @@ public @interface RegBlock {
     String[] oreDict() default {};
 
 
-    /**
-     * Add prefix on modifier
-     * Example: gold -> blockGold
-     */
     //String prefix() default "block";
 
     /**
