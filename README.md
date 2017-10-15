@@ -1,4 +1,4 @@
 # FoodCraft
-[![Build Status](https://travis-ci.org/InfinityStudio/FoodCraft.svg?branch=1.12)](https://travis-ci.org/InfinityStudio/FoodCraft)
+[![Build Status](https://travis-ci.org/LasmGratel/FoodCraft-Reloaded.svg?branch=master)](https://travis-ci.org/LasmGratel/FoodCraft-Reloaded)
 
 Add more foods to your Minecraft!
