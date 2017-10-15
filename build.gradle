@@ -33,7 +33,7 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDirs = ['src/main/java', 'RedstoneFlux-API/src/main/java']
+            srcDirs = ['src/main/java']
         }
 
         resources {
