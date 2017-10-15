@@ -40,6 +40,7 @@ public class CommonProxy {
             BlockLoader.class, ItemLoader.class,
             FruitLoader.class, VegetableLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,
+            LiqueurLoader.class,
             AdvancementLoader.class, RecipeLoader.class,
             EventLoader.class
         ).forEach(loaderManager::addLoader);

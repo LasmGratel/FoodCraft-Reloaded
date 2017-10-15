@@ -81,6 +81,12 @@ item.soda=%s苏打水
 item.originalIceCream.name=原味冰激凌
 item.iceCream=%s冰激凌
 
+# Liqueur
+item.fruitLiqueur=%s酒
+
+# Yogurt
+item.fruitYogurt=%s酸奶
+
 # Blocks
 tile.rice.name=水稻块
 
@@ -98,3 +104,8 @@ itemGroup.foodcraftreloaded.snack=食物工艺|小吃
 # Tooltip
 tooltip.fcrfood.heal=饱食度回复: %s
 tooltip.fcrfood.duration=需要食用时间: %s秒
+tooltip.fcrfood.liqueur.type=酒种: %s
+tooltip.fcrfood.liqueur.type.0=普通
+tooltip.fcrfood.liqueur.type.1=陈酿
+tooltip.fcrfood.liqueur.type.2=鸡尾
+

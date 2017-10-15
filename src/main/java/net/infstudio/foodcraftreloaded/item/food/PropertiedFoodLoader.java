@@ -1,7 +1,7 @@
 package net.infstudio.foodcraftreloaded.item.food;
 
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
-import net.infstudio.foodcraftreloaded.init.food.FCRFoods;
+import net.infstudio.foodcraftreloaded.init.FCRFoods;
 import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
 import net.infstudio.foodcraftreloaded.util.loader.annotation.RegFood;
@@ -30,11 +30,17 @@ public class PropertiedFoodLoader {
                         registerSoup((ItemSoup) food);
                     else if (food instanceof ItemNoodles)
                         registerNoodles((ItemNoodles) food);
+                    else if (food instanceof ItemLiqueur)
+                        registerLiqueur((ItemLiqueur) food);
                     continue;
                 }
 
                 ItemPFood item = (ItemPFood) field.get(null);
                 item.setProperties(anno.modifier());
+                if (anno.amount() == Integer.MIN_VALUE)
+                    item.calcHealAmount();
+                else
+                    item.setHealAmount(anno.amount());
                 ForgeRegistries.ITEMS.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.name())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.name())));
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
                 OreDictionary.registerOre("listAllfoods", item);
@@ -70,6 +76,13 @@ public class PropertiedFoodLoader {
         OreDictionary.registerOre("foodRice" + rice.getUnlocalizedName().substring(0, rice.getUnlocalizedName().lastIndexOf("Rice")), rice);
         OreDictionary.registerOre("listAllrice", rice);
         OreDictionary.registerOre("listAllfoods", rice);
+    }
+
+    private void registerLiqueur(ItemLiqueur liqueur) {
+        ForgeRegistries.ITEMS.register(liqueur);
+        OreDictionary.registerOre("foodLiqueur" + liqueur.getUnlocalizedName().substring(0, liqueur.getUnlocalizedName().lastIndexOf("Liqueur")), liqueur);
+        OreDictionary.registerOre("listAllliqueur", liqueur);
+        OreDictionary.registerOre("listAllfoods", liqueur);
     }
 
     @Load(side = Side.CLIENT)

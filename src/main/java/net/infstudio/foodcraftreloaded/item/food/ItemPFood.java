@@ -19,10 +19,9 @@ public class ItemPFood extends FCRItemFood {
     public void setProperties(float... properties) {
         Validate.validIndex(ArrayUtils.toObject(properties), 4);
         this.properties = properties;
-
     }
 
-    private void calcHealAmount() {
+    public void calcHealAmount() {
         float sour = properties[0] * -10f;
         float sweet = properties[1] * 30f;
         float bitter = properties[2] * -15f;

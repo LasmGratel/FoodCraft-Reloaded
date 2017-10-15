@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -97,8 +98,8 @@ public class FCRItemFood extends ItemFood {
         this.saturationModifier = saturationModifier;
     }
 
-    public ItemFood setPotionEffect(PotionEffect effect, float probability)
-    {
+    @Nonnull
+    public ItemFood setPotionEffect(@Nonnull PotionEffect effect, float probability) {
         this.potionId = effect;
         this.potionEffectProbability = probability;
         return this;
@@ -107,8 +108,8 @@ public class FCRItemFood extends ItemFood {
     /**
      * Set the field 'alwaysEdible' to true, and make the food edible even if the player don't need to eat.
      */
-    public ItemFood setAlwaysEdible()
-    {
+    @Nonnull
+    public ItemFood setAlwaysEdible() {
         this.alwaysEdible = true;
         return this;
     }

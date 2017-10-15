@@ -1,7 +1,9 @@
-package net.infstudio.foodcraftreloaded.init.food;
+package net.infstudio.foodcraftreloaded.init;
 
+import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.item.food.*;
 import net.infstudio.foodcraftreloaded.util.loader.annotation.RegFood;
+import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
 public interface FCRFoods {
@@ -73,4 +75,34 @@ public interface FCRFoods {
     ItemNoodles PORK_FRIED_RIVER_FLOUR_NOODLES = new ItemNoodles(10, "pork", "fried", "river", "flour");
     ItemNoodles PORK_FRIED_RICE_FLOUR_NOODLES = new ItemNoodles(10, "pork", "fried", "rice", "flour");
     ItemNoodles SAUCE_NOODLES = new ItemNoodles(10, "sauce");
+
+    // <------ SNACKS ------>
+    // Juice
+    @RegFood(amount = 4, name = {"carrot", "juice"}, oreDict = {"foodCarrotjuice", "listAlljuice"})
+    ItemPFood CARROT_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"potato", "juice"}, oreDict = {"foodPotatojuice", "listAlljuice"})
+    ItemPFood POTATO_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"cactus", "juice"}, oreDict = {"foodCactusjuice", "listAlljuice"})
+    ItemPFood CACTUS_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"wheat", "juice"}, oreDict = {"foodWheatjuice", "listAlljuice"})
+    ItemPFood WHEAT_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"watermelon", "juice"}, oreDict = {"foodWatermelonjuice", "listAlljuice"})
+    ItemPFood WATERMELON_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"pumpkin", "juice"}, oreDict = {"foodPumpkinjuice", "listAlljuice"})
+    ItemPFood PUMPKIN_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"apple", "juice"}, oreDict = {"foodApplejuice", "listAlljuice"})
+    ItemPFood APPLE_JUICE = new ItemPFood();
+
+    @RegFood(amount = 4, name = {"sugar", "cane", "juice"}, oreDict = {"foodSugarCanejuice", "listAlljuice"})
+    ItemPFood SUGAR_CANE_JUICE = new ItemPFood();
+
+    // Liqueur
+    Item BEER = new ItemLiqueur(5).setUnlocalizedName("beer").setRegistryName(FoodCraftReloaded.MODID, "beer_liqueur");
+    Item WHITE_WINE = new ItemLiqueur(5).setUnlocalizedName("whiteWine").setRegistryName(FoodCraftReloaded.MODID, "white_wine_liqueur");
 }

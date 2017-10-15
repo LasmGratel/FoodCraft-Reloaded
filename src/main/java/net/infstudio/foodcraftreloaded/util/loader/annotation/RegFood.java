@@ -8,7 +8,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface RegFood {
-    float[] modifier();
+    int amount() default Integer.MIN_VALUE;
+    float[] modifier() default {};
     String[] name();
     String[] oreDict() default {};
 }

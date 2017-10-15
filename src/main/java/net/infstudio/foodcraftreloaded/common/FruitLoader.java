@@ -43,6 +43,8 @@ public class FruitLoader {
     private Map<FruitType, GeneratorBasicTree> generatorTreeMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, BlockFluidJuice> fluidJuiceMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, BlockFruitCake> blockFruitCakeMap = new EnumMap<>(FruitType.class);
+    private Map<FruitType, ItemFruitLiqueur> fruitLiqueurMap = new EnumMap<>(FruitType.class);
+    private Map<FruitType, ItemFruitYogurt> fruitYogurtMap = new EnumMap<>(FruitType.class);
     private ItemFruits fruits;
     private ItemJuices juices;
     private ItemSodas sodas;
@@ -76,6 +78,12 @@ public class FruitLoader {
             BlockFruitCake fruitCake = new BlockFruitCake(fruitType);
             ForgeRegistries.BLOCKS.register(fruitCake);
             blockFruitCakeMap.put(fruitType, fruitCake);
+            ItemFruitLiqueur fruitLiqueur = new ItemFruitLiqueur(fruitType);
+            ForgeRegistries.ITEMS.register(fruitLiqueur);
+            fruitLiqueurMap.put(fruitType, fruitLiqueur);
+            ItemFruitYogurt fruitYogurt = new ItemFruitYogurt(fruitType);
+            ForgeRegistries.ITEMS.register(fruitYogurt);
+            fruitYogurtMap.put(fruitType, fruitYogurt);
         });
         juices = new ItemJuices();
         ForgeRegistries.ITEMS.register(juices);
@@ -86,19 +94,37 @@ public class FruitLoader {
         cakes = new ItemCakes();
         ForgeRegistries.ITEMS.register(cakes);
         for (int i = 0; i < FruitType.values().length; i++) {
-            OreDictionary.registerOre("listAllfruit", new ItemStack(fruits, 1, i));
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("crop", FruitType.values()[i].toString()), new ItemStack(fruits, 1, i));
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("fruit", FruitType.values()[i].toString()), new ItemStack(fruits, 1, i));
-            OreDictionary.registerOre("listAlljuice", new ItemStack(juices, 1, i));
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "juice", new ItemStack(juices, 1, i));
-            OreDictionary.registerOre("listAllicecream", new ItemStack(icecreams, 1, i));
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "icecream", new ItemStack(juices, 1, i));
+            ItemStack fruit = new ItemStack(fruits, 1, i);
+            ItemStack juice = new ItemStack(juices, 1, i);
+            ItemStack icecream = new ItemStack(icecreams, 1, i);
+            ItemStack liqueur = new ItemStack(fruitLiqueurMap.get(FruitType.values()[i]));
+            ItemStack yogurt = new ItemStack(fruitYogurtMap.get(FruitType.values()[i]));
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("crop", FruitType.values()[i].toString()), fruit);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("fruit", FruitType.values()[i].toString()), fruit);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "juice", juice);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "icecream", juice);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "liqueur", liqueur);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "yogurt", yogurt);
+            OreDictionary.registerOre("listAllfruit", fruit);
+            OreDictionary.registerOre("listAlljuice", juice);
+            OreDictionary.registerOre("listAllicecream", icecream);
+            OreDictionary.registerOre("listAllliqueur", liqueur);
+            OreDictionary.registerOre("listAllyogurt", yogurt);
+            OreDictionary.registerOre("listAllfoods", fruit);
+            OreDictionary.registerOre("listAllfoods", juice);
+            OreDictionary.registerOre("listAllfoods", icecream);
+            OreDictionary.registerOre("listAllfoods", liqueur);
+            OreDictionary.registerOre("listAllfoods", yogurt);
         }
     }
 
     @Load(side = Side.CLIENT)
     public void loadRenders() {
         for (int i = 0; i < FruitType.values().length; i++) {
+            Item liqueur = fruitLiqueurMap.get(FruitType.values()[i]);
+            Item yogurt = fruitYogurtMap.get(FruitType.values()[i]);
+            registerRender(liqueur, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", FruitType.values()[i].toString(), "liqueur")), "inventory"));
+            registerRender(yogurt, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "yogurt"), "inventory"));
             registerRender(fruits, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", FruitType.values()[i].toString())), "inventory"));
             registerRender(juices, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory"));
             registerRender(sodas, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
