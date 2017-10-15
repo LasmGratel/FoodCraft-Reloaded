@@ -13,44 +13,53 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CakeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
     @Override
     public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World worldIn) {
-        ItemStack[] firstRow = new ItemStack[]{inv.getStackInRowAndColumn(0, 0), inv.getStackInRowAndColumn(0, 1), inv.getStackInRowAndColumn(0, 2)};
-        int meta = firstRow[0].getMetadata();
-        for (ItemStack stack : firstRow)
-            if (stack.getMetadata() != meta || !(stack.getItem() instanceof ItemJuices) || !(stack.getItem() instanceof ItemVegetableJuices))
+        boolean cakes = false;
+        boolean juices = false;
+        for (int i = 0; i < inv.getSizeInventory(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (!stack.isEmpty() && (stack.getItem() != Items.CAKE ||
+                !(stack.getItem() instanceof ItemJuices) && !(stack.getItem() instanceof ItemVegetableJuices)))
                 return false;
-        if (inv.getStackInRowAndColumn(1, 0)
-            .isItemEqual(inv.getStackInRowAndColumn(1, 2)) &&
-            inv.getStackInRowAndColumn(1, 0).getItem().equals(Items.SUGAR) &&
-            inv.getStackInRowAndColumn(1, 1).getItem().equals(Items.EGG))
-            if (inv.getStackInRowAndColumn(2, 0)
-                .isItemEqual(inv.getStackInRowAndColumn(2, 1)) &&
-                inv.getStackInRowAndColumn(2, 2).isItemEqual(inv.getStackInRowAndColumn(2, 1))
-                && inv.getStackInRowAndColumn(2, 0).getItem().equals(Items.WHEAT))
-                return true;
-        return false;
+            if (stack.getItem() == Items.CAKE)
+                if (cakes)
+                    return false;
+                else
+                    cakes = true;
+            if (stack.getItem() instanceof ItemJuices || stack.getItem() instanceof ItemVegetableJuices)
+                if (juices)
+                    return false;
+                else
+                    juices = true;
+        }
+        return cakes && juices;
     }
 
     @Nonnull
     @Override
+    @SuppressWarnings("ConstantConditions")
     public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
-        ItemStack result;
-        if (inv.getStackInRowAndColumn(0, 0).getItem() instanceof ItemJuices) {
-            result = new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getCakes(), inv.getStackInRowAndColumn(0, 0).getMetadata());
-        } else if (inv.getStackInRowAndColumn(0, 0).getItem() instanceof ItemVegetableJuices) {
-            result = new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableLoader.class).get().getCakes(), inv.getStackInRowAndColumn(0, 0).getMetadata());
-        } else {
-            result = ItemStack.EMPTY;
-        }
-        return result;
+        ItemStack[] invArray = new ItemStack[inv.getSizeInventory()];
+        for (int i = 0; i < inv.getSizeInventory(); i++)
+            invArray[i] = inv.getStackInSlot(i);
+        AtomicReference<ItemStack> ret = new AtomicReference<>(ItemStack.EMPTY);
+        Arrays.stream(invArray).filter(itemStack -> itemStack.getItem() instanceof ItemJuices || itemStack.getItem() instanceof ItemVegetableJuices).findAny().ifPresent(juice -> {
+            if (juice.getItem() instanceof ItemJuices)
+                ret.set(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getCakes(), 1, juice.getMetadata()));
+            else if (juice.getItem() instanceof ItemVegetableJuices)
+                ret.set(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableLoader.class).get().getCakes(), 1, juice.getMetadata()));
+        });
+        return ret.get();
     }
 
     @Override
     public boolean canFit(int width, int height) {
-        return width >= 3 && height >= 3;
+        return width >= 2 && height >= 1;
     }
 
     @Nonnull
