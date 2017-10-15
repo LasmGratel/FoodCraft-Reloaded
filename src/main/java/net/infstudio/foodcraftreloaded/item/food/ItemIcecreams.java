@@ -23,7 +23,7 @@ public class ItemIcecreams extends FCRItemFood implements IItemColor {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems) {
         for (FruitType fruitType : FruitType.values())
             subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
     }
@@ -37,7 +37,7 @@ public class ItemIcecreams extends FCRItemFood implements IItemColor {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
+    public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
         if (tintIndex == 1 && stack.getItem() instanceof ItemIcecreams)
             return FruitType.values()[stack.getMetadata()].getColor().getRGB();
         return -1;

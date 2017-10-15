@@ -9,7 +9,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -48,7 +47,7 @@ public class ItemCakes extends FCRItemFood {
 
         ItemStack itemstack = player.getHeldItem(hand);
 
-        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(cake, pos, false, facing, (Entity)null)) {
+        if (!itemstack.isEmpty() && player.canPlayerEdit(pos, facing, itemstack) && worldIn.mayPlace(cake, pos, false, facing, null)) {
             IBlockState iblockstate1 = cake.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, 0, player, hand);
 
             if (!worldIn.setBlockState(pos, iblockstate1, 11))
@@ -77,7 +76,7 @@ public class ItemCakes extends FCRItemFood {
         if (entityLiving instanceof EntityPlayer) {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             entityplayer.getFoodStats().addStats(this, stack);
-            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            worldIn.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
             this.onFoodEaten(stack, worldIn, entityplayer);
             entityplayer.addStat(StatList.getObjectUseStats(this));
         }
@@ -85,7 +84,7 @@ public class ItemCakes extends FCRItemFood {
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems) {
         for (FruitType fruitType : FruitType.values())
             subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
     }

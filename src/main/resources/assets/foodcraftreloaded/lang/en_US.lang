@@ -56,3 +56,7 @@ itemGroup.foodcraftreloaded.drink=FoodCraft|Drinks
 itemGroup.foodcraftreloaded.staple=FoodCraft|Staples
 itemGroup.foodcraftreloaded.ingredient=FoodCraft|Ingredients
 itemGroup.foodcraftreloaded.snack=FoodCraft|Snacks
+
+# Tooltip
+tooltip.fcrfood.heal=Heal amount: %s
+tooltip.fcrfood.duration=Eat duration: %s second(s)

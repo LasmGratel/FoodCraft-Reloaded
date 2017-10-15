@@ -24,7 +24,7 @@ public enum VegetableType implements Colorable {
     CABBAGE(new Color(0xe2ffe6)),
 
     /**
-     * 莴苣
+     * 莴苣(生菜)
      * Lettuce
      */
     LETTUCE(new Color(0x98f9a7)),

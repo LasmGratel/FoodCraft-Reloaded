@@ -36,7 +36,7 @@ public class ItemVegetableIcecreams extends FCRItemFood implements IItemColor {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
+    public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
         if (tintIndex == 1 && stack.getItem() instanceof ItemVegetableIcecreams)
             return VegetableType.values()[stack.getMetadata()].getColor().getRGB();
         return -1;

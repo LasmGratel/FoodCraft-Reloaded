@@ -94,3 +94,7 @@ itemGroup.foodcraftreloaded.drink=食物工艺|饮品
 itemGroup.foodcraftreloaded.staple=食物工艺|主食
 itemGroup.foodcraftreloaded.ingredient=食物工艺|食材
 itemGroup.foodcraftreloaded.snack=食物工艺|小吃
+
+# Tooltip
+tooltip.fcrfood.heal=饱食度回复: %s
+tooltip.fcrfood.duration=需要食用时间: %s秒

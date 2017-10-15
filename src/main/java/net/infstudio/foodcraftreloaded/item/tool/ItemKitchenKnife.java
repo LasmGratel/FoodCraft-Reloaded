@@ -33,7 +33,7 @@ public class ItemKitchenKnife extends Item implements IItemColor {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public int getColorFromItemstack(@Nonnull ItemStack stack, int tintIndex) {
+    public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
         if (tintIndex == 0 && stack.getItem() instanceof ItemKitchenKnife)
             return ((ItemKitchenKnife) stack.getItem()).getType().getColor().getRGB();
         return -1;

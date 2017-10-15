@@ -1,11 +1,20 @@
 package net.infstudio.foodcraftreloaded.item.food;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class FCRItemFood extends ItemFood {
     /** Number of ticks to run while 'EnumAction'ing until result. */
-    public int itemUseDuration;
+    public int itemUseDuration = 32;
     /** The amount this food item heals the player. */
     private int healAmount;
     private float saturationModifier;
@@ -102,5 +111,13 @@ public class FCRItemFood extends ItemFood {
     {
         this.alwaysEdible = true;
         return this;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        FCRItemFood item = (FCRItemFood) stack.getItem();
+        tooltip.add(I18n.format("tooltip.fcrfood.heal", item.healAmount));
+        tooltip.add(I18n.format("tooltip.fcrfood.duration", (item.itemUseDuration / 20.0)));
     }
 }
