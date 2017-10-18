@@ -1,16 +1,23 @@
 [
-{
-  "modid": "foodcraftreloaded",
-  "name": "FoodCraft Reloaded",
-  "description": "A China and foreign food Minecraft mod(Reloaded!)",
-  "version": "1.0.0-SNAPSHOT",
-  "credits": "Infinity Studio",
-  "logoFile": "",
-  "url": "",
-  "updateUrl": "",
-  "authors": [ "Darost" , "Lasm_Gratel", "ustc_zzzz"],
-  "parent":"",
-  "screenshots": [],
-  "dependencies": ["mod_MinecraftForge", "biomesoplenty"]
-}
+    {
+        "modid": "foodcraftreloaded",
+        "name": "FoodCraft Reloaded",
+        "description": "A China and foreign food Minecraft mod(Reloaded!)",
+        "version": "1.0.0-SNAPSHOT",
+        "credits": "Lasm Gratel",
+        "logoFile": "",
+        "url": "",
+        "updateUrl": "",
+        "authors": [
+            "Darost",
+            "Lasm_Gratel",
+            "ustc_zzzz",
+            "EntropyIncreaser"
+        ],
+        "parent": "",
+        "screenshots": [],
+        "dependencies": [
+            "mod_MinecraftForge"
+        ]
+    }
 ]
