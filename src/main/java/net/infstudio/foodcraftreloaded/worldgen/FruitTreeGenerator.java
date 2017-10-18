@@ -20,7 +20,6 @@
 
 package net.infstudio.foodcraftreloaded.worldgen;
 
-import biomesoplenty.common.world.generator.tree.GeneratorBasicTree;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.block.BlockFruitSapling;
 import net.infstudio.foodcraftreloaded.common.FruitLoader;
@@ -39,8 +38,8 @@ public class FruitTreeGenerator {
     @SubscribeEvent
     public void generateFruitTree(DecorateBiomeEvent.Decorate event) {
         if (event.getType() == DecorateBiomeEvent.Decorate.EventType.TREE) {
-            GeneratorBasicTree[] generatorBasicTrees = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().values().toArray(new GeneratorBasicTree[0]);
-            GeneratorBasicTree generator = generatorBasicTrees[MathHelper.getInt(event.getRand(),0, generatorBasicTrees.length - 1)];
+            BaseTreeGenerator[] generatorBasicTrees = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().values().toArray(new BaseTreeGenerator[0]);
+            BaseTreeGenerator generator = generatorBasicTrees[MathHelper.getInt(event.getRand(),0, generatorBasicTrees.length - 1)];
             if (generator.generate(event.getWorld(), event.getRand(), event.getPos())) {
                 FoodCraftReloaded.getLogger().info("Generated fruit tree at " + event.getPos());
                 event.setResult(Event.Result.DENY);

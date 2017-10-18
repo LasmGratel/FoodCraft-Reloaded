@@ -20,7 +20,6 @@
 
 package net.infstudio.foodcraftreloaded.common;
 
-import biomesoplenty.common.world.generator.tree.GeneratorBasicTree;
 import net.infstudio.foodcraftreloaded.FoodCraftReloaded;
 import net.infstudio.foodcraftreloaded.block.BlockFluidJuice;
 import net.infstudio.foodcraftreloaded.block.BlockFruitCake;
@@ -31,9 +30,9 @@ import net.infstudio.foodcraftreloaded.init.FCRCreativeTabs;
 import net.infstudio.foodcraftreloaded.item.food.*;
 import net.infstudio.foodcraftreloaded.util.NameBuilder;
 import net.infstudio.foodcraftreloaded.util.loader.annotation.Load;
+import net.infstudio.foodcraftreloaded.worldgen.BaseTreeGenerator;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -60,7 +59,7 @@ public class FruitLoader {
     private Map<FruitType, BlockFruitLeaves> leavesMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, FluidJuice> juiceMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, BlockFruitSapling> saplingMap = new EnumMap<>(FruitType.class);
-    private Map<FruitType, GeneratorBasicTree> generatorTreeMap = new EnumMap<>(FruitType.class);
+    private Map<FruitType, BaseTreeGenerator> generatorTreeMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, BlockFluidJuice> fluidJuiceMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, BlockFruitCake> blockFruitCakeMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, ItemFruitLiqueur> fruitLiqueurMap = new EnumMap<>(FruitType.class);
@@ -91,10 +90,9 @@ public class FruitLoader {
             leavesMap.put(fruitType, fruitLeaves);
             juiceMap.put(fruitType, fluidJuice);
             saplingMap.put(fruitType, sapling);
-            generatorTreeMap.put(fruitType, new GeneratorBasicTree.Builder().amountPerChunk(2f).minHeight(4).maxHeight(7)
-                .placeOn(Material.GRASS, Material.GROUND).replace(Material.AIR, Material.LEAVES, Material.WOOD)
+            generatorTreeMap.put(fruitType, new BaseTreeGenerator.Builder().minHeight(4).maxHeight(7)
                 .log(BlockPlanks.EnumType.OAK)
-                .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(fruitLeaves.getDefaultState()).create());
+                .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(fruitLeaves.getDefaultState()).build());
             BlockFruitCake fruitCake = new BlockFruitCake(fruitType);
             ForgeRegistries.BLOCKS.register(fruitCake);
             blockFruitCakeMap.put(fruitType, fruitCake);
@@ -250,7 +248,7 @@ public class FruitLoader {
         return saplingMap;
     }
 
-    public Map<FruitType, GeneratorBasicTree> getGeneratorTreeMap() {
+    public Map<FruitType, BaseTreeGenerator> getGeneratorTreeMap() {
         return generatorTreeMap;
     }
 
