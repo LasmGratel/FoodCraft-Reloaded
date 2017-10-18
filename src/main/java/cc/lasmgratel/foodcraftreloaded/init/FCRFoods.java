@@ -23,7 +23,6 @@ package cc.lasmgratel.foodcraftreloaded.init;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.item.food.*;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.RegFood;
-import net.infstudio.foodcraftreloaded.item.food.*;
 import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")

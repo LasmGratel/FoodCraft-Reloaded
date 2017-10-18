@@ -25,8 +25,6 @@ import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerPressureCooker;
-import net.infstudio.foodcraftreloaded.client.gui.*;
-import net.infstudio.foodcraftreloaded.common.container.*;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

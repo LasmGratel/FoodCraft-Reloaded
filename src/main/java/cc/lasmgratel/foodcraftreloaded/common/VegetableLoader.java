@@ -27,7 +27,6 @@ import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.block.BlockVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.fluid.FluidVegetableJuice;
-import net.infstudio.foodcraftreloaded.item.food.*;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

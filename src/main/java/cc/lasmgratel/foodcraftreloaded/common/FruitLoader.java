@@ -31,7 +31,6 @@ import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.worldgen.BaseTreeGenerator;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFruitSapling;
-import net.infstudio.foodcraftreloaded.item.food.*;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
