@@ -22,6 +22,8 @@ package cc.lasmgratel.foodcraftreloaded.block;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntityDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntityPressureCooker;
+import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntitySmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.RegBlock;
@@ -68,6 +70,8 @@ public class BlockLoader {
     @Load
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityDrinkMachine.class, "drink_machine");
+        GameRegistry.registerTileEntity(TileEntityPressureCooker.class, "pressure_cooker");
+        GameRegistry.registerTileEntity(TileEntitySmeltingDrinkMachine.class, "smelting_drink_machine");
     }
 
     @Load(side = Side.CLIENT)

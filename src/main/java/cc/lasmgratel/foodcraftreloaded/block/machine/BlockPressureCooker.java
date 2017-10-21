@@ -21,8 +21,9 @@
 package cc.lasmgratel.foodcraftreloaded.block.machine;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntityDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntityPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.init.FCRBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -52,12 +53,12 @@ public class BlockPressureCooker extends BlockMachine {
     @Nonnull
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, @Nonnull IBlockState state) {
-        return new ItemStack(new BlockPressureCooker());
+        return new ItemStack(FCRBlocks.PRESSURE_COOKER);
     }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-        return new TileEntityDrinkMachine();
+        return new TileEntityPressureCooker();
     }
 }

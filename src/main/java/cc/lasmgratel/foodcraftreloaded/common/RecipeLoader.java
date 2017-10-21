@@ -21,13 +21,16 @@
 package cc.lasmgratel.foodcraftreloaded.common;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipeManager;
-import cc.lasmgratel.foodcraftreloaded.item.food.FruitType;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
+import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
 import cc.lasmgratel.foodcraftreloaded.item.crafting.CakeRecipe;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -37,8 +40,10 @@ public class RecipeLoader {
     @Load(LoaderState.AVAILABLE)
     public void loadDrinkRecipes() {
         loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get();
-        for (FruitType fruitType : FruitType.values())
-            DrinkRecipeManager.getInstance().addRecipes("fruit" + StringUtils.capitalize(fruitType.toString()), new FluidStack(loader.getJuiceMap().get(fruitType), 500));
+        for (FruitType fruitType : FruitType.values()) {
+            for (ItemStack stack : OreDictionary.getOres("fruit" + StringUtils.capitalize(fruitType.toString())))
+                RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{stack}, new FluidStack(loader.getJuiceMap().get(fruitType), 1000)));
+        }
         ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
     }
 }

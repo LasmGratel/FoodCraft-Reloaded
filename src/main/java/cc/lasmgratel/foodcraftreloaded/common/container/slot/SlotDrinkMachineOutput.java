@@ -21,11 +21,8 @@
 package cc.lasmgratel.foodcraftreloaded.common.container.slot;
 
 import cc.lasmgratel.foodcraftreloaded.api.event.DrinkMadeEvent;
-import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipeManager;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -83,25 +80,25 @@ public class SlotDrinkMachineOutput extends SlotItemHandler {
     protected void onCrafting(ItemStack stack) {
         stack.onCrafting(this.player.world, this.player, this.removeCount);
 
-        if (!this.player.world.isRemote) {
-            int i = this.removeCount;
-            float f = DrinkRecipeManager.getInstance().getXp(stack);
-
-            if (f == 0.0F)
-                i = 0;
-            else if (f < 1.0F) {
-                int j = MathHelper.floor((float)i * f);
-                if (j < MathHelper.ceil((float)i * f) && Math.random() < (double)((float)i * f - (float)j))
-                    ++j;
-                i = j;
-            }
-
-            while (i > 0) {
-                int k = EntityXPOrb.getXPSplit(i);
-                i -= k;
-                this.player.world.spawnEntity(new EntityXPOrb(this.player.world, this.player.posX, this.player.posY + 0.5D, this.player.posZ + 0.5D, k));
-            }
-        }
+//        if (!this.player.world.isRemote) {
+//            int i = this.removeCount;
+//            float f = RecipeManager.getInstance().getXp(stack);
+//
+//            if (f == 0.0F)
+//                i = 0;
+//            else if (f < 1.0F) {
+//                int j = MathHelper.floor((float)i * f);
+//                if (j < MathHelper.ceil((float)i * f) && Math.random() < (double)((float)i * f - (float)j))
+//                    ++j;
+//                i = j;
+//            }
+//
+//            while (i > 0) {
+//                int k = EntityXPOrb.getXPSplit(i);
+//                i -= k;
+//                this.player.world.spawnEntity(new EntityXPOrb(this.player.world, this.player.posX, this.player.posY + 0.5D, this.player.posZ + 0.5D, k));
+//            }
+//        }
 
         this.removeCount = 0;
 

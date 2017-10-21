@@ -115,6 +115,8 @@ public class PropertiedFoodLoader {
                     continue;
 
                 ItemPFood item = (ItemPFood) field.get(null);
+                if (item.getRegistryName() == null)
+                    item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.name())).setUnlocalizedName(NameBuilder.buildRegistryName(anno.name()));
                 registerRender(item, 0);
             } catch (Exception e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);

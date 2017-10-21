@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.block;
 
-import cc.lasmgratel.foodcraftreloaded.item.food.FruitType;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;

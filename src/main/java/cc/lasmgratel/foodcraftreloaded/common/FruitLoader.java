@@ -24,13 +24,13 @@ import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFluidJuice;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFruitCake;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFruitLeaves;
+import cc.lasmgratel.foodcraftreloaded.block.BlockFruitSapling;
 import cc.lasmgratel.foodcraftreloaded.fluid.FluidJuice;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
-import cc.lasmgratel.foodcraftreloaded.item.food.*;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.*;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.worldgen.BaseTreeGenerator;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFruitSapling;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
@@ -64,11 +64,11 @@ public class FruitLoader {
     private Map<FruitType, BlockFruitCake> blockFruitCakeMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, ItemFruitLiqueur> fruitLiqueurMap = new EnumMap<>(FruitType.class);
     private Map<FruitType, ItemFruitYogurt> fruitYogurtMap = new EnumMap<>(FruitType.class);
+    private Map<FruitType, ItemFruitCake> fruitCakeMap = new EnumMap<>(FruitType.class);
     private ItemFruits fruits;
     private ItemJuices juices;
     private ItemSodas sodas;
     private ItemIcecreams icecreams;
-    private ItemCakes cakes;
 
     @Load
     public void loadFruits() {
@@ -76,29 +76,51 @@ public class FruitLoader {
         ForgeRegistries.ITEMS.register(fruits);
         Arrays.stream(FruitType.values()).forEach(fruitType -> {
             MinecraftForge.addGrassSeed(new ItemStack(fruits, 1, fruitType.ordinal()), 4);
+
+            // Blocks
+            // Leaves
             BlockFruitLeaves fruitLeaves = new BlockFruitLeaves(fruitType);
             ForgeRegistries.BLOCKS.register(fruitLeaves);
-            FluidJuice fluidJuice = new FluidJuice(fruitType);
-            FluidRegistry.registerFluid(fluidJuice);
-            FluidRegistry.addBucketForFluid(fluidJuice);
-            BlockFluidJuice blockFluidJuice = new BlockFluidJuice(fruitType);
-            ForgeRegistries.BLOCKS.register(blockFluidJuice);
-            fluidJuiceMap.put(fruitType, blockFluidJuice);
+            leavesMap.put(fruitType, fruitLeaves);
+
+            // Sapling
             BlockFruitSapling sapling = new BlockFruitSapling(fruitType);
             ForgeRegistries.BLOCKS.register(sapling);
             ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setUnlocalizedName(NameBuilder.buildUnlocalizedName(fruitType.toString(), "sapling")).setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE));
-            leavesMap.put(fruitType, fruitLeaves);
-            juiceMap.put(fruitType, fluidJuice);
             saplingMap.put(fruitType, sapling);
-            generatorTreeMap.put(fruitType, new BaseTreeGenerator.Builder().minHeight(4).maxHeight(7)
-                .log(BlockPlanks.EnumType.OAK)
-                .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(fruitLeaves.getDefaultState()).build());
+
+            // Fluids
+            FluidJuice fluidJuice = new FluidJuice(fruitType);
+            FluidRegistry.registerFluid(fluidJuice);
+            FluidRegistry.addBucketForFluid(fluidJuice);
+            juiceMap.put(fruitType, fluidJuice);
+
+            // Block Fluids
+            BlockFluidJuice blockFluidJuice = new BlockFluidJuice(fruitType);
+            ForgeRegistries.BLOCKS.register(blockFluidJuice);
+            fluidJuiceMap.put(fruitType, blockFluidJuice);
+
+            // Cake Block
             BlockFruitCake fruitCake = new BlockFruitCake(fruitType);
             ForgeRegistries.BLOCKS.register(fruitCake);
             blockFruitCakeMap.put(fruitType, fruitCake);
+
+            // Tree Generator
+            generatorTreeMap.put(fruitType, new BaseTreeGenerator.Builder().minHeight(4).maxHeight(7)
+                .log(BlockPlanks.EnumType.OAK)
+                .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(fruitLeaves.getDefaultState()).build());
+
+            // Cake
+            ItemFruitCake itemFruitCake = new ItemFruitCake(fruitType);
+            ForgeRegistries.ITEMS.register(itemFruitCake);
+            fruitCakeMap.put(fruitType, itemFruitCake);
+
+            // Fruit Liqueur
             ItemFruitLiqueur fruitLiqueur = new ItemFruitLiqueur(fruitType);
             ForgeRegistries.ITEMS.register(fruitLiqueur);
             fruitLiqueurMap.put(fruitType, fruitLiqueur);
+
+            // Fruit Yogurt
             ItemFruitYogurt fruitYogurt = new ItemFruitYogurt(fruitType);
             ForgeRegistries.ITEMS.register(fruitYogurt);
             fruitYogurtMap.put(fruitType, fruitYogurt);
@@ -109,20 +131,19 @@ public class FruitLoader {
         ForgeRegistries.ITEMS.register(sodas);
         icecreams = new ItemIcecreams();
         ForgeRegistries.ITEMS.register(icecreams);
-        cakes = new ItemCakes();
-        ForgeRegistries.ITEMS.register(cakes);
         for (int i = 0; i < FruitType.values().length; i++) {
+            FruitType fruitType = FruitType.values()[i];
             ItemStack fruit = new ItemStack(fruits, 1, i);
             ItemStack juice = new ItemStack(juices, 1, i);
             ItemStack icecream = new ItemStack(icecreams, 1, i);
-            ItemStack liqueur = new ItemStack(fruitLiqueurMap.get(FruitType.values()[i]));
-            ItemStack yogurt = new ItemStack(fruitYogurtMap.get(FruitType.values()[i]));
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("crop", FruitType.values()[i].toString()), fruit);
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("fruit", FruitType.values()[i].toString()), fruit);
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "juice", juice);
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "icecream", juice);
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "liqueur", liqueur);
-            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", FruitType.values()[i].toString()) + "yogurt", yogurt);
+            ItemStack liqueur = new ItemStack(fruitLiqueurMap.get(fruitType));
+            ItemStack yogurt = new ItemStack(fruitYogurtMap.get(fruitType));
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("crop", fruitType.toString()), fruit);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("fruit", fruitType.toString()), fruit);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", fruitType.toString()) + "juice", juice);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", fruitType.toString()) + "icecream", juice);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", fruitType.toString()) + "liqueur", liqueur);
+            OreDictionary.registerOre(NameBuilder.buildUnlocalizedName("food", fruitType.toString()) + "yogurt", yogurt);
             OreDictionary.registerOre("listAllfruit", fruit);
             OreDictionary.registerOre("listAlljuice", juice);
             OreDictionary.registerOre("listAllicecream", icecream);
@@ -139,27 +160,28 @@ public class FruitLoader {
     @Load(side = Side.CLIENT)
     public void loadRenders() {
         for (int i = 0; i < FruitType.values().length; i++) {
-            Item liqueur = fruitLiqueurMap.get(FruitType.values()[i]);
-            Item yogurt = fruitYogurtMap.get(FruitType.values()[i]);
-            registerRender(liqueur, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", FruitType.values()[i].toString(), "liqueur")), "inventory"));
+            FruitType fruitType = FruitType.values()[i];
+            Item liqueur = fruitLiqueurMap.get(fruitType);
+            Item yogurt = fruitYogurtMap.get(fruitType);
+            registerRender(liqueur, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString(), "liqueur")), "inventory"));
             registerRender(yogurt, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "yogurt"), "inventory"));
-            registerRender(fruits, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", FruitType.values()[i].toString())), "inventory"));
+            registerRender(fruits, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString())), "inventory"));
             registerRender(juices, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory"));
             registerRender(sodas, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
             registerRender(icecreams, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory"));
-            registerRender(cakes, i, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
-            ModelLoader.setCustomStateMapper(leavesMap.get(FruitType.values()[i]), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "normal")));
-            registerRender(Item.getItemFromBlock(leavesMap.get(FruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "inventory"));
-            ModelLoader.setCustomStateMapper(saplingMap.get(FruitType.values()[i]), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "normal")));
-            registerRender(Item.getItemFromBlock(saplingMap.get(FruitType.values()[i])), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "inventory"));
-            ModelLoader.setCustomStateMapper(blockFruitCakeMap.get(FruitType.values()[i]), blockIn -> {
+            registerRender(fruitCakeMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
+            ModelLoader.setCustomStateMapper(leavesMap.get(fruitType), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "normal")));
+            registerRender(Item.getItemFromBlock(leavesMap.get(fruitType)), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "inventory"));
+            ModelLoader.setCustomStateMapper(saplingMap.get(fruitType), blockIn -> Collections.singletonMap(blockIn.getDefaultState(), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "normal")));
+            registerRender(Item.getItemFromBlock(saplingMap.get(fruitType)), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "inventory"));
+            ModelLoader.setCustomStateMapper(blockFruitCakeMap.get(fruitType), blockIn -> {
                 Map<IBlockState, ModelResourceLocation> map = new HashMap<>();
                 map.put(blockIn.getDefaultState().withProperty(BlockCake.BITES, 0), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=0"));
                 for (int j = 1; j <= 6; j++)
                     map.put(blockIn.getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + j));
                 return map;
             });
-            registerFluidRender(fluidJuiceMap.get(FruitType.values()[i]), fluidJuiceMap.get(FruitType.values()[i]).getRegistryName().getResourcePath());
+            registerFluidRender(fluidJuiceMap.get(fruitType), fluidJuiceMap.get(fruitType).getRegistryName().getResourcePath());
         }
     }
 
@@ -196,6 +218,11 @@ public class FruitLoader {
             else return -1;
         }, juices);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+            if (tintIndex == 0 && stack.getItem() instanceof ItemFruitYogurt)
+                return ((ItemFruitYogurt) stack.getItem()).getType().getColor().getRGB();
+            else return -1;
+        }, fruitYogurtMap.values().toArray(new Item[0]));
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof ItemSodas)
                 return FruitType.values()[stack.getMetadata()].getColor().getRGB();
             else return -1;
@@ -206,10 +233,10 @@ public class FruitLoader {
             else return -1;
         }, icecreams);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-            if (tintIndex == 0 && stack.getItem() instanceof ItemCakes)
-                return FruitType.values()[stack.getMetadata()].getColor().getRGB();
+            if (tintIndex == 0 && stack.getItem() instanceof ItemFruitCake)
+                return ((ItemFruitCake) stack.getItem()).getFruitType().getColor().getRGB();
             else return -1;
-        }, cakes);
+        }, fruitCakeMap.values().toArray(new Item[0]));
     }
 
     private void registerRender(Item item, int meta, ModelResourceLocation location) {
@@ -232,8 +259,20 @@ public class FruitLoader {
         return icecreams;
     }
 
-    public ItemCakes getCakes() {
-        return cakes;
+    public Map<FruitType, BlockFruitCake> getBlockFruitCakeMap() {
+        return blockFruitCakeMap;
+    }
+
+    public Map<FruitType, ItemFruitLiqueur> getFruitLiqueurMap() {
+        return fruitLiqueurMap;
+    }
+
+    public Map<FruitType, ItemFruitYogurt> getFruitYogurtMap() {
+        return fruitYogurtMap;
+    }
+
+    public Map<FruitType, ItemFruitCake> getFruitCakeMap() {
+        return fruitCakeMap;
     }
 
     public Map<FruitType, BlockFruitLeaves> getLeavesMap() {

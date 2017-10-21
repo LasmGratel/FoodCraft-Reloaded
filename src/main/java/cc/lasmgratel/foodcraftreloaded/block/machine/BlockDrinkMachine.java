@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.block.machine;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.block.tileentity.TileEntityDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +33,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -61,14 +61,12 @@ public class BlockDrinkMachine extends BlockMachine {
     @Nonnull
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, @Nonnull IBlockState state) {
-        return new ItemStack(new BlockDrinkMachine());
+        return new ItemStack(FCRBlocks.DRINK_MACHINE);
     }
 
     @Nullable
     @Override
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-        TileEntityDrinkMachine drinkMachine = new TileEntityDrinkMachine();
-        FMLCommonHandler.instance().getMinecraftServerInstance().registerTickable(drinkMachine);
-        return drinkMachine;
+        return new TileEntityDrinkMachine();
     }
 }

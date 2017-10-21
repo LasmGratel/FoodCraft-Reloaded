@@ -23,4 +23,5 @@ package cc.lasmgratel.foodcraftreloaded.client;
 public interface GuiID {
     int DRINK_MACHINE = 0;
     int PRESSURE_COOKER = 1;
+    int SMELTING_PRESSURE_COOKER = 2;
 }

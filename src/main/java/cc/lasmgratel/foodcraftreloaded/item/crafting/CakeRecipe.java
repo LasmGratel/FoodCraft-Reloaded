@@ -23,8 +23,9 @@ package cc.lasmgratel.foodcraftreloaded.item.crafting;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.VegetableLoader;
 import cc.lasmgratel.foodcraftreloaded.common.FruitLoader;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemJuices;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemVegetableJuices;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.ItemJuices;
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.ItemVegetableJuices;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -70,7 +71,7 @@ public class CakeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
         AtomicReference<ItemStack> ret = new AtomicReference<>(ItemStack.EMPTY);
         Arrays.stream(invArray).filter(itemStack -> itemStack.getItem() instanceof ItemJuices || itemStack.getItem() instanceof ItemVegetableJuices).findAny().ifPresent(juice -> {
             if (juice.getItem() instanceof ItemJuices)
-                ret.set(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getCakes(), 1, juice.getMetadata()));
+                ret.set(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getFruitCakeMap().get(FruitType.values()[juice.getMetadata()])));
             else if (juice.getItem() instanceof ItemVegetableJuices)
                 ret.set(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableLoader.class).get().getCakes(), 1, juice.getMetadata()));
         });

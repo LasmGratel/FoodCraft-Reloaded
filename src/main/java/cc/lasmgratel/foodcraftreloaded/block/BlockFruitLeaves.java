@@ -23,7 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.block;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.FruitLoader;
-import cc.lasmgratel.foodcraftreloaded.item.food.FruitType;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

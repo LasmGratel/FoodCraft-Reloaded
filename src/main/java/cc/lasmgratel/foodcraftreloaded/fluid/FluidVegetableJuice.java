@@ -21,7 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.fluid;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.food.VegetableType;
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;

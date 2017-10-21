@@ -21,7 +21,9 @@
 package cc.lasmgratel.foodcraftreloaded.block.tileentity;
 
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
-import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipeManager;
+import cc.lasmgratel.foodcraftreloaded.api.recipe.Recipe;
+import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeInput;
+import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -29,7 +31,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.TileFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -40,16 +41,21 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityDrinkMachine extends TileFluidHandler implements ITickable {
-    private static final int DRINK_ENERGY_NEED = 500;
+    public static final int DRINK_ENERGY_NEED = 500;
+    public static final int ENERGY_CAPACITY = 2000;
+    public static final int FLUID_CAPACITY = 8000;
 
     private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
-    private EnergyStorage energyStorage = new EnergyStorage(2000);
-    private FluidTank fluidTank = new FluidTank(1000);
+    private EnergyStorage energyStorage = new EnergyStorage(ENERGY_CAPACITY);
 
     private int energyTaken = 0;
 
     @Nullable
-    private DrinkRecipe currentRecipe = null;
+    private Recipe currentRecipe = null;
+
+    public TileEntityDrinkMachine() {
+        tank.setCapacity(FLUID_CAPACITY);
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
@@ -78,7 +84,6 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements ITickabl
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityEnergy.ENERGY) return (T) energyStorage;
-        else if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return (T) fluidTank;
         else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (facing == null)
                 return (T) itemHandler;
@@ -97,11 +102,11 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements ITickabl
     @Override
     public void update() {
         // Update Crafting
-        if (currentRecipe != null) {
+        if (currentRecipe != null && tank.canFillFluidType(currentRecipe.getOutput().first())) {
             if (energyTaken == DRINK_ENERGY_NEED) {
                 itemHandler.extractItem(0, 1, false);
-                itemHandler.insertItem(1, currentRecipe.getRubbish(), false);
-                fluidTank.fill(currentRecipe.getOutput(), true);
+                itemHandler.insertItem(1, currentRecipe.getOutput().second(), false);
+                tank.fill(currentRecipe.getOutput().first(), true);
                 currentRecipe = null;
             } else if (energyStorage.getEnergyStored() > 0) {
                 energyStorage.extractEnergy(1, false);
@@ -110,7 +115,7 @@ public class TileEntityDrinkMachine extends TileFluidHandler implements ITickabl
                 currentRecipe = null;
             }
         } else {
-            currentRecipe = DrinkRecipeManager.getInstance().getRecipeNullable(itemHandler.getStackInSlot(0));
+            currentRecipe = RecipeManager.getInstance().getRecipeNullable(DrinkRecipe.class, new RecipeInput(itemHandler.getStackInSlot(0)));
         }
     }
 }

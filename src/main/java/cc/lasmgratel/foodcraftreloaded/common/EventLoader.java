@@ -21,12 +21,12 @@
 package cc.lasmgratel.foodcraftreloaded.common;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.init.FCRItems;
-import cc.lasmgratel.foodcraftreloaded.item.food.FruitType;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemCakes;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemVegetableCakes;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.ItemFruitCake;
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.ItemVegetableCakes;
+import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -66,7 +66,7 @@ public class EventLoader {
 
     @SubscribeEvent
     public void onCraftingCake(PlayerEvent.ItemCraftedEvent event) {
-        if (event.crafting.getItem() instanceof ItemCakes || event.crafting.getItem() instanceof ItemVegetableCakes)
+        if (event.crafting.getItem() instanceof ItemFruitCake || event.crafting.getItem() instanceof ItemVegetableCakes)
             event.craftMatrix.setInventorySlotContents(1, new ItemStack(FCRItems.GLASS_BOTTLE));
     }
 }

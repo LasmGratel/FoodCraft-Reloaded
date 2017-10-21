@@ -23,8 +23,10 @@ package cc.lasmgratel.foodcraftreloaded.client;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerPressureCooker;
+import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerSmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerPressureCooker;
+import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -48,6 +50,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
             case GuiID.PRESSURE_COOKER:
                 return new ContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            case GuiID.SMELTING_PRESSURE_COOKER:
+                return new ContainerSmeltingDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -60,6 +64,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
             case GuiID.PRESSURE_COOKER:
                 return new GuiContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            case GuiID.SMELTING_PRESSURE_COOKER:
+                return new GuiContainerSmeltingDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }

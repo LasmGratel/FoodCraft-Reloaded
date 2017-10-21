@@ -101,6 +101,9 @@ itemGroup.foodcraftreloaded.staple=食物工艺|主食
 itemGroup.foodcraftreloaded.ingredient=食物工艺|食材
 itemGroup.foodcraftreloaded.snack=食物工艺|小吃
 
+# Fluid
+fluid.juice=%s汁
+
 # Tooltip
 tooltip.fcrfood.heal=饱食度回复: %s
 tooltip.fcrfood.duration=需要食用时间: %s秒
@@ -108,4 +111,3 @@ tooltip.fcrfood.liqueur.type=酒种: %s
 tooltip.fcrfood.liqueur.type.0=普通
 tooltip.fcrfood.liqueur.type.1=陈酿
 tooltip.fcrfood.liqueur.type.2=鸡尾
-

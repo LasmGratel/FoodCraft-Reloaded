@@ -28,6 +28,16 @@ archivesBaseName = mod_id
 
 repositories {
     jcenter()
+	maven {
+		// location of the maven that hosts JEI files
+		name = "Progwml6 maven"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "modmaven.k-4u.nl"
+	}
 }
 
 sourceSets {
@@ -52,18 +62,11 @@ minecraft {
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+	// compile against the JEI API but do not include it at runtime
+	deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
+	
+	// at runtime, use the full JEI jar
+	runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
 }
 
 processResources

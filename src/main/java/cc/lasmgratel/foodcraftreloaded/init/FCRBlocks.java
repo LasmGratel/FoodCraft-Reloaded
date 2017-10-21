@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.init;
 import cc.lasmgratel.foodcraftreloaded.block.BlockRiceCrop;
 import cc.lasmgratel.foodcraftreloaded.block.machine.BlockDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.block.machine.BlockPressureCooker;
+import cc.lasmgratel.foodcraftreloaded.block.machine.BlockSmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.RegBlock;
 
 public interface FCRBlocks {
@@ -34,4 +35,7 @@ public interface FCRBlocks {
 
     @RegBlock({"pressure", "cooker"})
     BlockPressureCooker PRESSURE_COOKER = new BlockPressureCooker();
+
+    @RegBlock({"smelting", "drink", "machine"})
+    BlockSmeltingDrinkMachine SMELTING_DRINK_MACHINE = new BlockSmeltingDrinkMachine();
 }

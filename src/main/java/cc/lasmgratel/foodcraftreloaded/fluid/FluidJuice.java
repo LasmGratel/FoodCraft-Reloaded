@@ -21,10 +21,13 @@
 package cc.lasmgratel.foodcraftreloaded.fluid;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.food.FruitType;
+import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.util.Translator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import org.apache.commons.lang3.StringUtils;
 
 public class FluidJuice extends Fluid {
     private FruitType fruitType;
@@ -39,5 +42,10 @@ public class FluidJuice extends Fluid {
     @Override
     public int getColor() {
         return fruitType.getColor().getRGB();
+    }
+
+    @Override
+    public String getLocalizedName(FluidStack stack) {
+        return Translator.format("fluid.juice", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
 }

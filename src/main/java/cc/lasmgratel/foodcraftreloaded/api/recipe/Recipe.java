@@ -20,22 +20,12 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.recipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.fluids.FluidStack;
+public interface Recipe<T> {
+    T getInput();
 
-public abstract class Recipe {
-    protected final NonNullList<ItemStack> inputStacks = NonNullList.create();
-    protected final NonNullList<ItemStack> outputStacks = NonNullList.create();
-    protected final NonNullList<FluidStack> inputFluids = NonNullList.create();
-    protected final NonNullList<FluidStack> outputFluids = NonNullList.create();
-    private float xp = 0f;
+    RecipeOutput getOutput();
 
-    public float getXp() {
-        return xp;
-    }
-
-    public void setXp(float xp) {
-        this.xp = xp;
+    default boolean matches(T input) {
+        return input.equals(getInput());
     }
 }

@@ -21,7 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.common;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.food.*;
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.*;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFluidVegetableJuice;
