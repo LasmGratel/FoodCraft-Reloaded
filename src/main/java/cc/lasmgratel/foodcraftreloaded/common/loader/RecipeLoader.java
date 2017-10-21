@@ -18,18 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
-import cc.lasmgratel.foodcraftreloaded.item.crafting.CakeRecipe;
 import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,6 +42,6 @@ public class RecipeLoader {
             for (ItemStack stack : OreDictionary.getOres("fruit" + StringUtils.capitalize(fruitType.toString())))
                 RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{stack}, new FluidStack(loader.getJuiceMap().get(fruitType), 1000)));
         }
-        ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
+//        ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
     }
 }

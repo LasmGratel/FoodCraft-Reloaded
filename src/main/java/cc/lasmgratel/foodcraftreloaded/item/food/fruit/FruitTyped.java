@@ -18,13 +18,8 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
 
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
-
-public class AdvancementLoader {
-    @Load
-    public void loadAdvances() {
-
-    }
+public interface FruitTyped {
+    FruitType getFruitType();
 }

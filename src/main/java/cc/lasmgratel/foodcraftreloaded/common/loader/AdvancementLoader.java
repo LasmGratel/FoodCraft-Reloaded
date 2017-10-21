@@ -18,32 +18,13 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.block;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.init.FCRItems;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 
-public class BlockRiceCrop extends BlockCrops {
-    public BlockRiceCrop() {
-        super();
-    }
+public class AdvancementLoader {
+    @Load
+    public void loadAdvances() {
 
-    @Override
-    protected Item getSeed() {
-        return FCRItems.RICE;
-    }
-
-    @Override
-    protected Item getCrop() {
-        return FCRItems.RICE;
-    }
-
-    @Override
-    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return getDefaultState();
     }
 }

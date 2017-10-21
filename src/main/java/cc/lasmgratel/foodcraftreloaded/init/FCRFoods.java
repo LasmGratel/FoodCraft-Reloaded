@@ -32,7 +32,7 @@ public interface FCRFoods {
 
     // <------ MEAL ------>
     // Rice
-    ItemRiceF WHITE_RICE = new ItemRiceF(2, "white");
+    ItemRice WHITE_RICE = new ItemRice(2, "white");
 
     // Porridge
     ItemPorridge RICE_PORRIDGE = new ItemPorridge(3, "rice");

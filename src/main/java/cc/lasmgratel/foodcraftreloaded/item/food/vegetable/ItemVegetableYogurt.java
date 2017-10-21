@@ -18,7 +18,7 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
+package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
@@ -29,10 +29,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruitYogurt extends ItemDrink implements FruitTyped {
-    private FruitType type;
+public class ItemVegetableYogurt extends ItemDrink implements VegetableTyped {
+    private VegetableType type;
 
-    public ItemFruitYogurt(FruitType type) {
+    public ItemVegetableYogurt(VegetableType type) {
         super(6);
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(type.toString(), "yogurt"));
         this.type = type;
@@ -45,7 +45,7 @@ public class ItemFruitYogurt extends ItemDrink implements FruitTyped {
     }
 
     @Override
-    public FruitType getFruitType() {
+    public VegetableType getVegetableType() {
         return type;
     }
 }

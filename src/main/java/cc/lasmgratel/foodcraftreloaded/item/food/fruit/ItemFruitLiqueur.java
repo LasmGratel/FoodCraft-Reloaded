@@ -29,20 +29,23 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruitLiqueur extends ItemLiqueur {
+public class ItemFruitLiqueur extends ItemLiqueur implements FruitTyped {
     private FruitType type;
 
     public ItemFruitLiqueur(FruitType type) {
         super(5);
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(type.toString(), "liqueur"));
-        setMaxDamage(0);
-        setHasSubtypes(false);
         this.type = type;
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.fruitLiqueur", I18n.format("item.fruit" + StringUtils.capitalize(type.toString())));
+        return I18n.format("item.liqueur", I18n.format("item.fruit" + StringUtils.capitalize(type.toString())));
+    }
+
+    @Override
+    public FruitType getFruitType() {
+        return type;
     }
 }

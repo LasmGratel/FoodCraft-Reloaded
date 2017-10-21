@@ -21,35 +21,31 @@
 package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
-import cc.lasmgratel.foodcraftreloaded.item.food.FCRItemFood;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
+import cc.lasmgratel.foodcraftreloaded.util.Translator;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruits extends FCRItemFood {
-    public ItemFruits() {
-        super(1, 1.0f, false);
-        setHasSubtypes(true);
-        setAlwaysEdible(true);
-        setMaxDamage(0);
-        setRegistryName(FoodCraftReloaded.MODID, "fruit");
-        setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+public class ItemFruitSoda extends ItemDrink implements FruitTyped {
+
+    private FruitType fruitType;
+
+    public ItemFruitSoda(FruitType fruitType) {
+        super(4, 1.0f);
+        setRegistryName(FoodCraftReloaded.MODID, fruitType.toString() + "_soda");
+        this.fruitType = fruitType;
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.fruit" + StringUtils.capitalize(FruitType.values()[stack.getMetadata()].toString()));
+        return Translator.format("item.soda", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (FruitType fruitType : FruitType.values())
-            subItems.add(new ItemStack(this, 1, fruitType.ordinal()));
+    public FruitType getFruitType() {
+        return fruitType;
     }
 }

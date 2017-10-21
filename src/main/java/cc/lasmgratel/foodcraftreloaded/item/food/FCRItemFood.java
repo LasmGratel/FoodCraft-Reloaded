@@ -38,11 +38,11 @@ public class FCRItemFood extends ItemFood {
     public int itemUseDuration = 32;
     /** The amount this food item heals the player. */
     private int healAmount;
-    private float saturationModifier;
+    private float saturationModifier = 0.6f;
     /** Whether wolves like this food (true for raw and cooked porkchop). */
-    private boolean isWolfsFavoriteMeat;
+    private boolean isWolfsFavoriteMeat = false;
     /** If this field is true, the food can be consumed even if the player don't need to eat. */
-    private boolean alwaysEdible;
+    private boolean alwaysEdible = false;
     /** represents the potion effect that will occurr upon eating this food. Set by setPotionEffect */
     private PotionEffect potionId;
     /** probably of the set potion effect occurring */

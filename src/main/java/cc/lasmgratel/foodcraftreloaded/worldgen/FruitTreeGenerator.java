@@ -22,7 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.worldgen;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.common.FruitLoader;
+import cc.lasmgratel.foodcraftreloaded.common.loader.FruitLoader;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;

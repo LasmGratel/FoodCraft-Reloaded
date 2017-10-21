@@ -21,31 +21,33 @@
 package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
-import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
-import net.minecraft.client.resources.I18n;
+import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.item.food.FCRItemFood;
+import cc.lasmgratel.foodcraftreloaded.util.Translator;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruitYogurt extends ItemDrink implements FruitTyped {
-    private FruitType type;
+public class ItemFruit extends FCRItemFood implements FruitTyped {
+    private FruitType fruitType;
 
-    public ItemFruitYogurt(FruitType type) {
-        super(6);
-        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(type.toString(), "yogurt"));
-        this.type = type;
+    public ItemFruit(FruitType fruitType) {
+        super(1, 1.0f, false);
+        setAlwaysEdible(true);
+        setRegistryName(FoodCraftReloaded.MODID, fruitType.toString());
+        setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+        this.fruitType = fruitType;
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.fruitYogurt", I18n.format("item.fruit" + StringUtils.capitalize(type.toString())));
+        return Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString()));
     }
 
     @Override
     public FruitType getFruitType() {
-        return type;
+        return fruitType;
     }
 }

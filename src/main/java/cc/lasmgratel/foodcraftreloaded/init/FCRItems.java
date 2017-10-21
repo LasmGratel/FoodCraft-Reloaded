@@ -20,7 +20,6 @@
 
 package cc.lasmgratel.foodcraftreloaded.init;
 
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemRice;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.RegItem;
 import net.minecraft.item.Item;
 
@@ -30,7 +29,4 @@ public interface FCRItems {
 
     @RegItem(value = {"original", "ice", "cream"}, oreDict = {"foodIcecream", "listAllicecream"})
     Item ORIGINAL_ICE_CREAM = new Item().setCreativeTab(FCRCreativeTabs.INGREDIENTS).setHasSubtypes(false);
-
-    @RegItem(value = {"rice"}, oreDict = {"cropRice"})
-    ItemRice RICE = new ItemRice();
 }

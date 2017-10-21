@@ -22,9 +22,11 @@ package cc.lasmgratel.foodcraftreloaded.util;
 
 import net.minecraft.util.text.translation.I18n;
 
+import javax.annotation.Nonnull;
 import java.util.Locale;
 
 public interface Translator {
+    @Nonnull
     static String format(String key, Object... params) {
         return I18n.canTranslate(key) ? I18n.translateToLocalFormatted(key, params) : String.format(Locale.US, I18n.translateToFallback(key), params);
     }

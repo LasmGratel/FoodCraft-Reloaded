@@ -20,16 +20,12 @@
 
 package cc.lasmgratel.foodcraftreloaded.init;
 
-import cc.lasmgratel.foodcraftreloaded.block.BlockRiceCrop;
 import cc.lasmgratel.foodcraftreloaded.block.machine.BlockDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.block.machine.BlockPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.block.machine.BlockSmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.RegBlock;
 
 public interface FCRBlocks {
-    @RegBlock({"rice", "plant"})
-    BlockRiceCrop RICE_PLANT = new BlockRiceCrop();
-
     @RegBlock({"drink", "machine"})
     BlockDrinkMachine DRINK_MACHINE = new BlockDrinkMachine();
 

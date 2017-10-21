@@ -24,6 +24,8 @@ import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
@@ -50,6 +52,20 @@ public interface FCRCreativeTabs {
         @Override
         public ItemStack getTabIconItem() {
             return OreDictionary.getOres("foodLemonjuice").get(0);
+        }
+    };
+
+    CreativeTabs SNACK = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloaded.MODID + ".snack") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(FoodCraftReloaded.MODID, "banana_cake")));
+        }
+    };
+
+    CreativeTabs MEAL = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloaded.MODID + ".meal") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(FCRFoods.WHITE_RICE);
         }
     };
 }

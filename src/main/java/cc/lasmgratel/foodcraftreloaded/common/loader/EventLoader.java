@@ -18,16 +18,14 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.init.FCRItems;
 import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.item.food.fruit.ItemFruitCake;
-import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.ItemVegetableCakes;
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
@@ -50,9 +48,9 @@ public class EventLoader {
 
     @SubscribeEvent
     public void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
-        if (event.getWorld().getBlockState(event.getPos().up()).getBlock() == FCRBlocks.RICE_PLANT &&
-            event.getState().getBlock() != Blocks.FARMLAND)
-            event.getWorld().destroyBlock(event.getPos().up(), true);
+//        if (event.getWorld().getBlockState(event.getPos().up()).getBlock() == FCRBlocks.RICE_PLANT &&
+//            event.getState().getBlock() != Blocks.FARMLAND)
+//            event.getWorld().destroyBlock(event.getPos().up(), true);
     }
 
     @SubscribeEvent
@@ -60,13 +58,13 @@ public class EventLoader {
         FruitLoader loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
             event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getSaplingMap().get(fruitType)), " F ", "FXF", " F ", 'F', "crop" + StringUtils.capitalize(fruitType.toString()), 'X', "treeSapling").setRegistryName("fruit_sapling"));
-            event.getRegistry().register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getIcecreams(), 1, fruitType.ordinal()), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
+            event.getRegistry().register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getFruitIcecreamMap().get(fruitType)), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
         }
     }
 
     @SubscribeEvent
     public void onCraftingCake(PlayerEvent.ItemCraftedEvent event) {
-        if (event.crafting.getItem() instanceof ItemFruitCake || event.crafting.getItem() instanceof ItemVegetableCakes)
+        if (event.crafting.getItem() instanceof ItemFruitCake || event.crafting.getItem() instanceof ItemVegetableCake)
             event.craftMatrix.setInventorySlotContents(1, new ItemStack(FCRItems.GLASS_BOTTLE));
     }
 }

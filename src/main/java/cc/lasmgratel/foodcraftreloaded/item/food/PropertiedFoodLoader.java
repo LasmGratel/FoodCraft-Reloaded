@@ -72,28 +72,28 @@ public class PropertiedFoodLoader {
 
     private void registerPorridge(ItemPorridge porridge) {
         ForgeRegistries.ITEMS.register(porridge);
-        OreDictionary.registerOre("foodPorridge" + porridge.getUnlocalizedName().substring(0, porridge.getUnlocalizedName().lastIndexOf("Porridge")), porridge);
+        OreDictionary.registerOre("foodPorridge" + NameBuilder.buildUnlocalizedName(porridge.getName()), porridge);
         OreDictionary.registerOre("listAllporridge", porridge);
         OreDictionary.registerOre("listAllfoods", porridge);
     }
 
     private void registerSoup(ItemSoup soup) {
         ForgeRegistries.ITEMS.register(soup);
-        OreDictionary.registerOre("foodSoup" + soup.getUnlocalizedName().substring(0, soup.getUnlocalizedName().lastIndexOf("Soup")), soup);
+        OreDictionary.registerOre("foodSoup" + NameBuilder.buildUnlocalizedName(soup.getName()), soup);
         OreDictionary.registerOre("listAllsoup", soup);
         OreDictionary.registerOre("listAllfoods", soup);
     }
 
     private void registerNoodles(ItemNoodles noodles) {
         ForgeRegistries.ITEMS.register(noodles);
-        OreDictionary.registerOre("foodNoodles" + noodles.getUnlocalizedName().substring(0, noodles.getUnlocalizedName().lastIndexOf("Noodles")), noodles);
+        OreDictionary.registerOre("foodNoodles" + NameBuilder.buildUnlocalizedName(noodles.getName()), noodles);
         OreDictionary.registerOre("listAllnoodles", noodles);
         OreDictionary.registerOre("listAllfoods", noodles);
     }
 
-    private void registerRice(ItemRiceF rice) {
+    private void registerRice(ItemRice rice) {
         ForgeRegistries.ITEMS.register(rice);
-        OreDictionary.registerOre("foodRice" + rice.getUnlocalizedName().substring(0, rice.getUnlocalizedName().lastIndexOf("Rice")), rice);
+        OreDictionary.registerOre("foodRice" + NameBuilder.buildUnlocalizedName(rice.getName()), rice);
         OreDictionary.registerOre("listAllrice", rice);
         OreDictionary.registerOre("listAllfoods", rice);
     }

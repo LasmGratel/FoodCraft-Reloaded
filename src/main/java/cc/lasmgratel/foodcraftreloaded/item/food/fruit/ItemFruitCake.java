@@ -40,13 +40,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruitCake extends Item {
+public class ItemFruitCake extends Item implements FruitTyped {
     private FruitType fruitType;
 
     public ItemFruitCake(FruitType fruitType) {
         this.fruitType = fruitType;
         setRegistryName(FoodCraftReloaded.MODID, fruitType.toString() + "_cake");
-        setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+        setCreativeTab(FCRCreativeTabs.SNACK);
     }
 
     @Nonnull
@@ -91,6 +91,7 @@ public class ItemFruitCake extends Item {
         return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
 
+    @Override
     public FruitType getFruitType() {
         return fruitType;
     }

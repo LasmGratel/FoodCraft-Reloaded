@@ -21,35 +21,30 @@
 package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
-import cc.lasmgratel.foodcraftreloaded.item.food.FCRItemFood;
-import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
+import cc.lasmgratel.foodcraftreloaded.util.Translator;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemVegetables extends FCRItemFood {
-    public ItemVegetables() {
-        super(1, 1.0f, false);
-        setHasSubtypes(true);
-        setAlwaysEdible(true);
-        setMaxDamage(0);
-        setRegistryName(FoodCraftReloaded.MODID, "vegetable");
-        setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+public class ItemVegetableSoda extends ItemDrink implements VegetableTyped {
+    private VegetableType vegetableType;
+
+    public ItemVegetableSoda(VegetableType vegetableType) {
+        super(4, 1.0f);
+        setRegistryName(FoodCraftReloaded.MODID, vegetableType.toString() + "_soda");
+        this.vegetableType = vegetableType;
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format(NameBuilder.buildUnlocalizedName("item.vegetable", VegetableType.values()[stack.getMetadata()].toString()));
+        return Translator.format("item.soda", Translator.format("item.vegetable" + StringUtils.capitalize(vegetableType.toString())));
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (VegetableType vegetableType : VegetableType.values())
-            subItems.add(new ItemStack(this, 1, vegetableType.ordinal()));
+    public VegetableType getVegetableType() {
+        return vegetableType;
     }
 }

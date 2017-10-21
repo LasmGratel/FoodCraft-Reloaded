@@ -21,6 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.util;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -29,6 +30,8 @@ import java.util.List;
 public interface NameBuilder {
     @Nonnull
     static String buildRegistryName(String... params) {
+        if (ArrayUtils.isEmpty(params))
+            return "";
         if (Arrays.stream(params).anyMatch(s -> s.contains("_"))) {
             List<String> temp = Lists.newArrayList();
             for (String param : params) {
@@ -55,6 +58,8 @@ public interface NameBuilder {
 
     @Nonnull
     static String buildUnlocalizedName(String... params) {
+        if (ArrayUtils.isEmpty(params))
+            return "";
         if (Arrays.stream(params).anyMatch(s -> s.contains("_"))) {
             List<String> temp = Lists.newArrayList();
             for (String param : params) {

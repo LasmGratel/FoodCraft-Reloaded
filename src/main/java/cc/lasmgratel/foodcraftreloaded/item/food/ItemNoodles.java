@@ -24,10 +24,17 @@ import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class ItemNoodles extends ItemPFood {
+    private String[] name;
+
     public ItemNoodles(int healAmount, String... name) {
         setHealAmount(healAmount);
         setProperties(0f, 0.4f, 0f, 0f, 0.3f);
         setRegistryName(NameBuilder.buildRegistryName(ArrayUtils.add(name, "noodles")));
         setUnlocalizedName(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "noodles")));
+        this.name = name;
+    }
+
+    public String[] getName() {
+        return name;
     }
 }

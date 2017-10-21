@@ -18,7 +18,7 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.item.food.ItemLiqueur;
@@ -36,7 +36,7 @@ public class LiqueurLoader {
                 .setRegistryName(liqueur.getRegistryName().getResourceDomain(), "aged_" + liqueur.getRegistryName().getResourcePath())
                 .setUnlocalizedName(liqueur.getUnlocalizedName());
             ForgeRegistries.ITEMS.register(agedLiqueur);
-            OreDictionary.registerOre("foodAgedLiqueur" + agedLiqueur.getUnlocalizedName().substring(0, agedLiqueur.getUnlocalizedName().lastIndexOf("Liqueur")), agedLiqueur);
+//            OreDictionary.registerOre("foodAgedLiqueur" + agedLiqueur.getUnlocalizedName().substring(0, agedLiqueur.getUnlocalizedName().lastIndexOf("Liqueur")), agedLiqueur);
             OreDictionary.registerOre("listAllAgedliqueur", agedLiqueur);
             OreDictionary.registerOre("listAllliqueur", agedLiqueur);
             OreDictionary.registerOre("listAllfoods", agedLiqueur);
@@ -45,7 +45,7 @@ public class LiqueurLoader {
                 .setRegistryName(liqueur.getRegistryName().getResourceDomain(), "cocktail_" + liqueur.getRegistryName().getResourcePath())
                 .setUnlocalizedName(liqueur.getUnlocalizedName());
             ForgeRegistries.ITEMS.register(cocktailLiqueur);
-            OreDictionary.registerOre("foodCocktailLiqueur" + cocktailLiqueur.getUnlocalizedName().substring(0, cocktailLiqueur.getUnlocalizedName().lastIndexOf("Liqueur")), cocktailLiqueur);
+//            OreDictionary.registerOre("foodCocktailLiqueur" + cocktailLiqueur.getUnlocalizedName().substring(0, cocktailLiqueur.getUnlocalizedName().lastIndexOf("Liqueur")), cocktailLiqueur);
             OreDictionary.registerOre("listAllCocktailliqueur", cocktailLiqueur);
             OreDictionary.registerOre("listAllliqueur", cocktailLiqueur);
             OreDictionary.registerOre("listAllfoods", cocktailLiqueur);

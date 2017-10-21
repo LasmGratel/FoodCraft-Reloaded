@@ -18,10 +18,10 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
+package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
+import cc.lasmgratel.foodcraftreloaded.item.food.ItemLiqueur;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -29,23 +29,23 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class ItemFruitYogurt extends ItemDrink implements FruitTyped {
-    private FruitType type;
+public class ItemVegetableLiqueur extends ItemLiqueur implements VegetableTyped {
+    private VegetableType type;
 
-    public ItemFruitYogurt(FruitType type) {
-        super(6);
-        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(type.toString(), "yogurt"));
+    public ItemVegetableLiqueur(VegetableType type) {
+        super(5);
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(type.toString(), "liqueur"));
         this.type = type;
     }
 
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.fruitYogurt", I18n.format("item.fruit" + StringUtils.capitalize(type.toString())));
+        return I18n.format("item.liqueur", I18n.format("item.vegetable" + StringUtils.capitalize(type.toString())));
     }
 
     @Override
-    public FruitType getFruitType() {
+    public VegetableType getVegetableType() {
         return type;
     }
 }

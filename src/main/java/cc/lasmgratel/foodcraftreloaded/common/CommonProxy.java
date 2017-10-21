@@ -21,6 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.common;
 
 import cc.lasmgratel.foodcraftreloaded.block.BlockLoader;
+import cc.lasmgratel.foodcraftreloaded.common.loader.*;
 import cc.lasmgratel.foodcraftreloaded.worldgen.FruitTreeGenerator;
 import cc.lasmgratel.foodcraftreloaded.item.ItemLoader;
 import cc.lasmgratel.foodcraftreloaded.item.food.PropertiedFoodLoader;
