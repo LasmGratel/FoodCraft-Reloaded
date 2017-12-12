@@ -31,6 +31,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -56,7 +57,8 @@ public class PropertiedFoodLoader {
                 }
 
                 ItemPFood item = (ItemPFood) field.get(null);
-                item.setProperties(anno.modifier());
+                if (ArrayUtils.isNotEmpty(anno.modifier()))
+                    item.setProperties(anno.modifier());
                 if (anno.amount() == Integer.MIN_VALUE)
                     item.calcHealAmount();
                 else
@@ -100,7 +102,7 @@ public class PropertiedFoodLoader {
 
     private void registerLiqueur(ItemLiqueur liqueur) {
         ForgeRegistries.ITEMS.register(liqueur);
-        OreDictionary.registerOre("foodLiqueur" + liqueur.getUnlocalizedName().substring(0, liqueur.getUnlocalizedName().lastIndexOf("Liqueur")), liqueur);
+//        OreDictionary.registerOre("foodLiqueur" + liqueur.getUnlocalizedName().substring(0, liqueur.getUnlocalizedName().lastIndexOf("Liqueur")), liqueur);
         OreDictionary.registerOre("listAllliqueur", liqueur);
         OreDictionary.registerOre("listAllfoods", liqueur);
     }

@@ -35,11 +35,11 @@ public class ItemLiqueur extends ItemDrink {
         super(amount);
     }
 
-    public LiqueurType getType() {
+    public LiqueurType getLiqueurType() {
         return type;
     }
 
-    public ItemLiqueur setType(LiqueurType type) {
+    public ItemLiqueur setLiqueurType(LiqueurType type) {
         this.type = type;
         return this;
     }

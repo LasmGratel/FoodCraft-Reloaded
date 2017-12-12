@@ -23,11 +23,14 @@ package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.VegetableTyped;
+import cc.lasmgratel.foodcraftreloaded.util.masking.CustomModelMasking;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -39,8 +42,9 @@ import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemVegetableCake extends Item implements VegetableTyped {
+public class ItemVegetableCake extends Item implements VegetableTyped, CustomModelMasking {
     private VegetableType vegetableType;
 
     public ItemVegetableCake(VegetableType vegetableType) {
@@ -88,11 +92,22 @@ public class ItemVegetableCake extends Item implements VegetableTyped {
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.cake", I18n.format("item.vegetable" + StringUtils.capitalize(vegetableType.toString())));
+        return Translator.format("item.cake", Translator.format("item.vegetable" + StringUtils.capitalize(NameBuilder.buildUnlocalizedName(vegetableType.toString()))));
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory");
     }
 
     @Override
-    public VegetableType getVegetableType() {
+    public int getTintIndex() {
+        return 0;
+    }
+
+    @Override
+    public VegetableType getType() {
         return vegetableType;
     }
 }

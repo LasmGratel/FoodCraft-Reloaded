@@ -32,7 +32,7 @@ public class LiqueurLoader {
     public void loadLiqueurs() {
         ForgeRegistries.ITEMS.getKeys().stream().filter(s -> s.getResourcePath().contains("liqueur")).map(ForgeRegistries.ITEMS::getValue).forEach(liqueur -> {
             Item agedLiqueur = new ItemLiqueur(6)
-                .setType(LiqueurType.AGED)
+                .setLiqueurType(LiqueurType.AGED)
                 .setRegistryName(liqueur.getRegistryName().getResourceDomain(), "aged_" + liqueur.getRegistryName().getResourcePath())
                 .setUnlocalizedName(liqueur.getUnlocalizedName());
             ForgeRegistries.ITEMS.register(agedLiqueur);
@@ -41,7 +41,7 @@ public class LiqueurLoader {
             OreDictionary.registerOre("listAllliqueur", agedLiqueur);
             OreDictionary.registerOre("listAllfoods", agedLiqueur);
             Item cocktailLiqueur = new ItemLiqueur(7)
-                .setType(LiqueurType.COCKTAIL)
+                .setLiqueurType(LiqueurType.COCKTAIL)
                 .setRegistryName(liqueur.getRegistryName().getResourceDomain(), "cocktail_" + liqueur.getRegistryName().getResourcePath())
                 .setUnlocalizedName(liqueur.getUnlocalizedName());
             ForgeRegistries.ITEMS.register(cocktailLiqueur);

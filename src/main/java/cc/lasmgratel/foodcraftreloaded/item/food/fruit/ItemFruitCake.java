@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.FruitTyped;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
@@ -92,7 +93,7 @@ public class ItemFruitCake extends Item implements FruitTyped {
     }
 
     @Override
-    public FruitType getFruitType() {
+    public FruitType getType() {
         return fruitType;
     }
 }

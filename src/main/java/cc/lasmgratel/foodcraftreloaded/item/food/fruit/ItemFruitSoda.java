@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
 import cc.lasmgratel.foodcraftreloaded.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.FruitTyped;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,7 +46,7 @@ public class ItemFruitSoda extends ItemDrink implements FruitTyped {
     }
 
     @Override
-    public FruitType getFruitType() {
+    public FruitType getType() {
         return fruitType;
     }
 }

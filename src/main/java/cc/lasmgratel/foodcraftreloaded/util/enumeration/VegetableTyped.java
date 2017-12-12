@@ -18,8 +18,9 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.item.food.fruit;
+package cc.lasmgratel.foodcraftreloaded.util.enumeration;
 
-public interface FruitTyped {
-    FruitType getFruitType();
+import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.VegetableType;
+
+public interface VegetableTyped extends EnumTyped<VegetableType>, EnumColorable<VegetableType> {
 }

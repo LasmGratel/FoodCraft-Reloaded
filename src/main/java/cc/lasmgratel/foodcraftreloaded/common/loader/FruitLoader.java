@@ -29,6 +29,7 @@ import cc.lasmgratel.foodcraftreloaded.fluid.FluidJuice;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.item.food.fruit.*;
 import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.FruitTyped;
 import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.worldgen.BaseTreeGenerator;
 import net.minecraft.block.BlockCake;
@@ -179,6 +180,7 @@ public class FruitLoader {
             registerRender(yogurt, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "yogurt"), "inventory"));
             registerRender(fruitMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString())), "inventory"));
             registerRender(fruitJuiceMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory"));
+            registerRender(fruitLiqueurMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "liqueur"), "inventory"));
             registerRender(fruitSodaMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory"));
             registerRender(fruitIcecreamMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory"));
             registerRender(fruitCakeMap.get(fruitType), 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory"));
@@ -226,12 +228,12 @@ public class FruitLoader {
         }, sapling));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof FruitTyped)
-                return ((FruitTyped) stack.getItem()).getFruitType().getColor().getRGB();
+                return ((FruitTyped) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, fruitJuiceMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 0 && stack.getItem() instanceof FruitTyped)
-                return ((FruitTyped) stack.getItem()).getFruitType().getColor().getRGB();
+                return ((FruitTyped) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, fruitYogurtMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
@@ -243,10 +245,15 @@ public class FruitLoader {
             if (tintIndex == 1 && stack.getItem() instanceof FruitTyped)
                 return FruitType.values()[stack.getMetadata()].getColor().getRGB();
             else return -1;
+        }, fruitLiqueurMap.values().toArray(new Item[0]));
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+            if (tintIndex == 1 && stack.getItem() instanceof FruitTyped)
+                return FruitType.values()[stack.getMetadata()].getColor().getRGB();
+            else return -1;
         }, fruitIcecreamMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 0 && stack.getItem() instanceof ItemFruitCake)
-                return ((ItemFruitCake) stack.getItem()).getFruitType().getColor().getRGB();
+                return ((ItemFruitCake) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, fruitCakeMap.values().toArray(new Item[0]));
     }

@@ -167,27 +167,27 @@ public class VegetableLoader {
             ));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof ItemVegetableJuice)
-                return ((ItemVegetableJuice) stack.getItem()).getVegetableType().getColor().getRGB();
+                return ((ItemVegetableJuice) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, vegetableJuiceMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof ItemVegetableSoda)
-                return ((ItemVegetableSoda) stack.getItem()).getVegetableType().getColor().getRGB();
+                return ((ItemVegetableSoda) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, vegetableSodaMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 1 && stack.getItem() instanceof ItemVegetableIcecream)
-                return ((ItemVegetableIcecream) stack.getItem()).getVegetableType().getColor().getRGB();
+                return ((ItemVegetableIcecream) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, vegetableIcecreamMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 0 && stack.getItem() instanceof ItemVegetableCake)
-                return ((ItemVegetableCake) stack.getItem()).getVegetableType().getColor().getRGB();
+                return ((ItemVegetableCake) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, vegetableCakeMap.values().toArray(new Item[0]));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
             if (tintIndex == 0 && stack.getItem() instanceof ItemVegetableYogurt)
-                return ((ItemVegetableYogurt) stack.getItem()).getVegetableType().getColor().getRGB();
+                return ((ItemVegetableYogurt) stack.getItem()).getType().getColor().getRGB();
             else return -1;
         }, vegetableYogurtMap.values().toArray(new Item[0]));
     }

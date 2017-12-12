@@ -21,25 +21,28 @@
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.util.masking.Colorable;
+import cc.lasmgratel.foodcraftreloaded.util.masking.CustomModelMasking;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionType;
-import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EnumLoader<T extends Enum<T>> {
@@ -51,34 +54,21 @@ public class EnumLoader<T extends Enum<T>> {
      */
     public void register() {
         enumInstanceMap.forEach((instanceClass, enumMap) -> {
-            if (Item.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Item) o).forEach(ForgeRegistries.ITEMS::register);
-            else if (Block.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Block) o).forEach(ForgeRegistries.BLOCKS::register);
-            else if (Potion.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Potion) o).forEach(ForgeRegistries.POTIONS::register);
-            else if (PotionType.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (PotionType) o).forEach(ForgeRegistries.POTION_TYPES::register);
-            else if (SoundEvent.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (SoundEvent) o).forEach(ForgeRegistries.SOUND_EVENTS::register);
-            else if (Enchantment.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Enchantment) o).forEach(ForgeRegistries.ENCHANTMENTS::register);
-            else if (VillagerRegistry.VillagerProfession.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (VillagerRegistry.VillagerProfession) o).forEach(ForgeRegistries.VILLAGER_PROFESSIONS::register);
-            else if (EntityEntry.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (EntityEntry) o).forEach(ForgeRegistries.ENTITIES::register);
-            else if (IRecipe.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (IRecipe) o).forEach(ForgeRegistries.RECIPES::register);
-            else if (Fluid.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Fluid) o).forEach(fluid -> {
-                    FluidRegistry.registerFluid(fluid);
-                    FluidRegistry.addBucketForFluid(fluid);
-                });
+            if (IForgeRegistryEntry.class.isAssignableFrom(instanceClass))
+                enumMap.values().stream().map(o -> (IForgeRegistryEntry<? extends IForgeRegistryEntry<?>>) o)
+//                    .map(o -> new RegisterHandler(o))
+                    .forEach(o -> {
+//                    TODO RegisterManager.getInstance().putRegister(o);
+                        if (o instanceof Item) ForgeRegistries.ITEMS.register((Item) o);
+                        else if (o instanceof Block) ForgeRegistries.BLOCKS.register((Block) o);
+                    });
+            if (Fluid.class.isAssignableFrom(instanceClass))
+                enumMap.values().stream().map(o -> (Fluid) o).forEach(FluidRegistry::addBucketForFluid);
         });
     }
 
     public Class<T> getType() {
-        return (Class<T>) new TypeToken<T>(){}.getRawType();
+        return (Class<T>) new TypeToken<T>(getClass()){}.getRawType();
     }
 
     public <V> Map<T, V> getInstanceMap(Class<V> containerClass) {
@@ -119,11 +109,83 @@ public class EnumLoader<T extends Enum<T>> {
 
     public <V> void putValue(T enumInstance, V value) {
         Map enumMap;
-        Class<V> valueClass = (Class<V>) new TypeToken<V>(){}.getRawType();
-        if (enumInstanceMap.containsKey(valueClass)) enumMap = enumInstanceMap.get(valueClass);
+        if (enumInstanceMap.containsKey(value.getClass())) enumMap = enumInstanceMap.get(value.getClass());
         else enumMap = new EnumMap<>(getType());
         enumMap.put(enumInstance, value);
-        enumInstanceMap.put(valueClass, enumMap);
+        enumInstanceMap.put(value.getClass(), enumMap);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerColors() {
+        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> {
+            entries.forEach(entry -> {
+                if (entry.getValue() instanceof Item) {
+                    FoodCraftReloaded.getLogger().info("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                        try {
+                            if (((CustomModelMasking) entry.getValue()).getTintIndex() != -1)
+                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                                    return ((Colorable) entry.getKey()).getColor().getRGB();
+                        } catch (ClassCastException ignored) {
+                            try {
+                                if (tintIndex == 1)
+                                    return ((Colorable) entry.getKey()).getColor().getRGB();
+                            } catch (ClassCastException ignored2) { }
+                        }
+                        return -1;
+                    }, (Item) entry.getValue());
+                } else if (entry.getValue() instanceof Block)
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                        if (entry.getKey() instanceof Colorable)
+                            if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
+                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                                    return ((Colorable) entry.getKey()).getColor().getRGB();
+                            } else if (tintIndex == 1)
+                                return ((Colorable) entry.getKey()).getColor().getRGB();
+                        return -1;
+                    }, (Block) entry.getValue());
+            });
+        });
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerRenders() {
+        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> {
+            entries.forEach(entry -> {
+                if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
+                    if (entry.getValue() instanceof CustomModelMasking) {
+                        registerRender((Item) entry.getValue(), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
+                        FoodCraftReloaded.getLogger().info("Registered custom model " + entry.getValue().getClass() + " as " + ((CustomModelMasking) entry.getValue()).getModelLocation());
+                    } else if (((Item) entry.getValue()).getRegistryName() != null) {
+                        registerRender((Item) entry.getValue(), 0, new ModelResourceLocation(((Item) entry.getValue()).getRegistryName(), "inventory"));
+                    }
+                } else if (BlockFluidBase.class.isAssignableFrom(entry.getValue().getClass())) {
+                    // TODO Null condition
+                    registerFluidRender((BlockFluidBase) entry.getValue(), ((Block)entry.getValue()).getRegistryName().getResourcePath());
+                }
+            });
+        });
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected void registerRender(Item item, int meta, ModelResourceLocation location) {
+        ModelBakery.registerItemVariants(item, location);
+        ModelLoader.setCustomModelResourceLocation(item, meta, location);
+        ModelLoader.setCustomMeshDefinition(item, stack -> location);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected void registerFluidRender(BlockFluidBase blockFluid, String blockStateName) {
+        final String location = FoodCraftReloaded.MODID + ":" + blockStateName;
+        final Item itemFluid = Item.getItemFromBlock(blockFluid);
+        ModelLoader.setCustomMeshDefinition(itemFluid, stack -> new ModelResourceLocation(location, "fluid"));
+        ModelLoader.setCustomStateMapper(blockFluid, new StateMapperBase() {
+            @Nonnull
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(location, "fluid");
+            }
+        });
     }
 
 }

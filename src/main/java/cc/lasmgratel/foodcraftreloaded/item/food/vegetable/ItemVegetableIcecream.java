@@ -23,13 +23,19 @@ package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.item.food.FCRItemFood;
+import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.VegetableTyped;
+import cc.lasmgratel.foodcraftreloaded.util.masking.CustomModelMasking;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemVegetableIcecream extends FCRItemFood implements VegetableTyped {
+public class ItemVegetableIcecream extends FCRItemFood implements VegetableTyped, CustomModelMasking {
     private VegetableType vegetableType;
 
     public ItemVegetableIcecream(VegetableType vegetableType) {
@@ -42,11 +48,22 @@ public class ItemVegetableIcecream extends FCRItemFood implements VegetableTyped
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return Translator.format("item.iceCream", Translator.format("item.vegetable" + StringUtils.capitalize(vegetableType.toString())));
+        return Translator.format("item.iceCream", Translator.format("item.vegetable" + StringUtils.capitalize(NameBuilder.buildUnlocalizedName(vegetableType.toString()))));
     }
 
     @Override
-    public VegetableType getVegetableType() {
+    public VegetableType getType() {
         return vegetableType;
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "ice_cream"), "inventory");
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 1;
     }
 }

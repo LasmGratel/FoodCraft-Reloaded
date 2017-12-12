@@ -24,6 +24,7 @@ import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.item.food.FCRItemFood;
 import cc.lasmgratel.foodcraftreloaded.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.FruitTyped;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.StringUtils;
 
@@ -46,7 +47,7 @@ public class ItemFruitIcecream extends FCRItemFood implements FruitTyped {
     }
 
     @Override
-    public FruitType getFruitType() {
+    public FruitType getType() {
         return fruitType;
     }
 }

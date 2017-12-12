@@ -66,7 +66,7 @@ itemGroup.foodcraftreloaded.snack=FoodCraft|Snacks
 # Tooltip
 tooltip.fcrfood.heal=Heal amount: %s
 tooltip.fcrfood.duration=Eat duration: %s second(s)
-tooltip.fcrfood.liqueur.vegetableType=Type: %s
-tooltip.fcrfood.liqueur.vegetableType.0=Normal
-tooltip.fcrfood.liqueur.vegetableType.1=Aged
-tooltip.fcrfood.liqueur.vegetableType.2=Cocktail
+tooltip.fcrfood.liqueur.type=Type: %s
+tooltip.fcrfood.liqueur.type.0=Normal
+tooltip.fcrfood.liqueur.type.1=Aged
+tooltip.fcrfood.liqueur.type.2=Cocktail

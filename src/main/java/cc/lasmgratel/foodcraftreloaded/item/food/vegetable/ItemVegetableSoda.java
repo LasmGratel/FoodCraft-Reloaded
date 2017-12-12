@@ -22,13 +22,19 @@ package cc.lasmgratel.foodcraftreloaded.item.food.vegetable;
 
 import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.item.food.ItemDrink;
+import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.util.enumeration.VegetableTyped;
+import cc.lasmgratel.foodcraftreloaded.util.masking.CustomModelMasking;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemVegetableSoda extends ItemDrink implements VegetableTyped {
+public class ItemVegetableSoda extends ItemDrink implements VegetableTyped, CustomModelMasking {
     private VegetableType vegetableType;
 
     public ItemVegetableSoda(VegetableType vegetableType) {
@@ -40,11 +46,22 @@ public class ItemVegetableSoda extends ItemDrink implements VegetableTyped {
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return Translator.format("item.soda", Translator.format("item.vegetable" + StringUtils.capitalize(vegetableType.toString())));
+        return Translator.format("item.soda", Translator.format("item.vegetable" + StringUtils.capitalize(NameBuilder.buildUnlocalizedName(vegetableType.toString()))));
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "soda"), "inventory");
     }
 
     @Override
-    public VegetableType getVegetableType() {
+    public int getTintIndex() {
+        return 1;
+    }
+
+    @Override
+    public VegetableType getType() {
         return vegetableType;
     }
 }
