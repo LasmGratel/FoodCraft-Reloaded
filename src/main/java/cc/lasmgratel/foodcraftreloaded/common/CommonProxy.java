@@ -20,13 +20,13 @@
 
 package cc.lasmgratel.foodcraftreloaded.common;
 
-import cc.lasmgratel.foodcraftreloaded.block.BlockLoader;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockLoader;
 import cc.lasmgratel.foodcraftreloaded.common.loader.*;
 import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterLoader;
-import cc.lasmgratel.foodcraftreloaded.item.ItemLoader;
-import cc.lasmgratel.foodcraftreloaded.item.food.PropertiedFoodLoader;
-import cc.lasmgratel.foodcraftreloaded.util.loader.LoaderManager;
-import cc.lasmgratel.foodcraftreloaded.worldgen.FruitTreeGenerator;
+import cc.lasmgratel.foodcraftreloaded.common.item.ItemLoader;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.PropertiedFoodLoader;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.LoaderManager;
+import cc.lasmgratel.foodcraftreloaded.common.worldgen.FruitTreeGenerator;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.event.*;
@@ -43,7 +43,6 @@ public class CommonProxy {
             BlockLoader.class, ItemLoader.class,
             FruitLoader.class, VegetableEnumLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,
-            LiqueurLoader.class,
             AdvancementLoader.class, RecipeLoader.class,
             EventLoader.class, RegisterLoader.class
         ).forEach(loaderManager::addLoader);

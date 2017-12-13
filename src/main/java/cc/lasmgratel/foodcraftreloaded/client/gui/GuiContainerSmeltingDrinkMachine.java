@@ -20,9 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.client.gui;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.util.client.FluidStackRenderer;
+import cc.lasmgratel.foodcraftreloaded.client.util.FluidStackRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

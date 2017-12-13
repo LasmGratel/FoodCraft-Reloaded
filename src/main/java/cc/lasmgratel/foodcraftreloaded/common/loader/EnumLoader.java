@@ -20,9 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.util.masking.Colorable;
-import cc.lasmgratel.foodcraftreloaded.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

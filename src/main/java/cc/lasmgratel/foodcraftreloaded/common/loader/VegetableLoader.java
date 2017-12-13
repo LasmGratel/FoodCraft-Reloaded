@@ -20,13 +20,13 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFluidVegetableJuice;
-import cc.lasmgratel.foodcraftreloaded.block.BlockVegetableCake;
-import cc.lasmgratel.foodcraftreloaded.fluid.FluidVegetableJuice;
-import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.*;
-import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidVegetableJuice;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCake;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidVegetableJuice;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.*;
+import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

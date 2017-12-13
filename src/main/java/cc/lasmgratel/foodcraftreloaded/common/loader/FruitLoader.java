@@ -20,18 +20,19 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFluidJuice;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFruitCake;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFruitLeaves;
-import cc.lasmgratel.foodcraftreloaded.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.fluid.FluidJuice;
-import cc.lasmgratel.foodcraftreloaded.init.FCRCreativeTabs;
-import cc.lasmgratel.foodcraftreloaded.item.food.fruit.*;
-import cc.lasmgratel.foodcraftreloaded.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.util.enumeration.FruitTyped;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
-import cc.lasmgratel.foodcraftreloaded.worldgen.BaseTreeGenerator;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidJuice;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitCake;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitLeaves;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidJuice;
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.*;
+import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
+import cc.lasmgratel.foodcraftreloaded.common.util.item.LiqueurUtils;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.worldgen.BaseTreeGenerator;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
@@ -117,6 +118,7 @@ public class FruitLoader {
             ItemFruitLiqueur fruitLiqueur = new ItemFruitLiqueur(fruitType);
             ForgeRegistries.ITEMS.register(fruitLiqueur);
             fruitLiqueurMap.put(fruitType, fruitLiqueur);
+            fruitLiqueurMap.putAll(LiqueurUtils.generateLiqueurMap(fruitLiqueurMap));
 
             // Fruit Yogurt
             ItemFruitYogurt fruitYogurt = new ItemFruitYogurt(fruitType);

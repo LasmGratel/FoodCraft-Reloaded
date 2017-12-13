@@ -20,9 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.client.gui;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerPressureCooker;
-import cc.lasmgratel.foodcraftreloaded.util.client.GuiUtils;
+import cc.lasmgratel.foodcraftreloaded.client.util.GuiUtils;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

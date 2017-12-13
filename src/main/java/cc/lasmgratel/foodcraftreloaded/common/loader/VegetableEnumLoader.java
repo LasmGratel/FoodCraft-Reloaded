@@ -20,9 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.block.BlockVegetableCake;
-import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.*;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCake;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.*;
+import cc.lasmgratel.foodcraftreloaded.common.util.item.LiqueurUtils;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -36,6 +37,7 @@ public class VegetableEnumLoader extends EnumLoader<VegetableType> {
             ItemVegetableIcecream.class, ItemVegetableJuice.class, ItemVegetableLiqueur.class, ItemVegetableSoda.class
         };
         Arrays.stream(values).forEach(this::putValue);
+        getInstanceMap(ItemVegetableLiqueur.class).putAll(LiqueurUtils.generateLiqueurMap(getInstanceMap(ItemVegetableLiqueur.class)));
         register();
     }
 

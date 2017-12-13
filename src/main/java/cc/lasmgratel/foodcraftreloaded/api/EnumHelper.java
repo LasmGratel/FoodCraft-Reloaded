@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.api;
 
-import cc.lasmgratel.foodcraftreloaded.item.tool.EnumKitchenKnifeType;
+import cc.lasmgratel.foodcraftreloaded.common.item.tool.EnumKitchenKnifeType;
 
 import java.awt.*;
 

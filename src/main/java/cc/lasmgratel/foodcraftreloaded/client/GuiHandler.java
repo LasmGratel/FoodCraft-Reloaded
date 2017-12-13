@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.client;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerSmeltingDrinkMachine;

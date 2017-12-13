@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader.register;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 

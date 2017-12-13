@@ -20,10 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.item.tool.EnumKitchenKnifeType;
-import cc.lasmgratel.foodcraftreloaded.item.tool.ItemKitchenKnife;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.item.tool.EnumKitchenKnifeType;
+import cc.lasmgratel.foodcraftreloaded.common.item.tool.ItemKitchenKnife;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;

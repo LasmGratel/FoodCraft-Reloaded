@@ -20,11 +20,11 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
-import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.LoaderState;

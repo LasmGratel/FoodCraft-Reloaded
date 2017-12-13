@@ -20,12 +20,12 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.init.FCRItems;
-import cc.lasmgratel.foodcraftreloaded.item.food.fruit.FruitType;
-import cc.lasmgratel.foodcraftreloaded.item.food.fruit.ItemFruitCake;
-import cc.lasmgratel.foodcraftreloaded.item.food.vegetable.ItemVegetableCake;
-import cc.lasmgratel.foodcraftreloaded.util.loader.annotation.Load;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableCake;
+import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
