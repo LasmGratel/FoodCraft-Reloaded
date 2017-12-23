@@ -21,9 +21,10 @@
 package cc.lasmgratel.foodcraftreloaded.common.block;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.common.loader.FruitLoader;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruit;
+import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
+import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -70,7 +71,7 @@ public class BlockFruitLeaves extends Block implements IShearable {
     @Nonnull
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getFruitMap().get(fruitType);
+        return FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(ItemFruit.class).get(fruitType);
     }
 
     @Override
@@ -96,6 +97,6 @@ public class BlockFruitLeaves extends Block implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return Collections.singletonList(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getFruitMap().get(fruitType), MathHelper.ceil(quantityDroppedWithBonus(fortune, ((World) world).rand) * 1.5)));
+        return Collections.singletonList(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(ItemFruit.class).get(fruitType), MathHelper.ceil(quantityDroppedWithBonus(fortune, ((World) world).rand) * 1.5)));
     }
 }

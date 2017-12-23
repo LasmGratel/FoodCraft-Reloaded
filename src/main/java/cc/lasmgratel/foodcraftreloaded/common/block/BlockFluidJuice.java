@@ -22,6 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.block;
 
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -47,6 +48,6 @@ public class BlockFluidJuice extends BlockFluidClassic {
     @Nonnull
     @Override
     public String getLocalizedName() {
-        return I18n.format("item.juice", net.minecraft.client.resources.I18n.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
+        return I18n.format("item.juice", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
 }

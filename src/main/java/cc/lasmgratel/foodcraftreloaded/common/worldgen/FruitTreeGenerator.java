@@ -21,8 +21,11 @@
 package cc.lasmgratel.foodcraftreloaded.common.worldgen;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitLeaves;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.common.loader.FruitLoader;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -30,15 +33,26 @@ import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class FruitTreeGenerator {
+    private Map<FruitType, BaseTreeGenerator> generatorTreeMap = new EnumMap<>(FruitType.class);
+
     public FruitTreeGenerator() {
         MinecraftForge.TERRAIN_GEN_BUS.register(this);
+
+        for (FruitType fruitType : FruitType.values()) {
+            generatorTreeMap.put(fruitType, new BaseTreeGenerator.Builder().minHeight(4).maxHeight(7)
+                .log(BlockPlanks.EnumType.OAK)
+                .altLeaves(BlockPlanks.EnumType.JUNGLE).leaves(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(BlockFruitLeaves.class).get(fruitType).getDefaultState()).build());
+        }
     }
 
     @SubscribeEvent
     public void generateFruitTree(DecorateBiomeEvent.Decorate event) {
         if (event.getType() == DecorateBiomeEvent.Decorate.EventType.TREE) {
-            BaseTreeGenerator[] generatorBasicTrees = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().values().toArray(new BaseTreeGenerator[0]);
+            BaseTreeGenerator[] generatorBasicTrees = generatorTreeMap.values().toArray(new BaseTreeGenerator[0]);
             BaseTreeGenerator generator = generatorBasicTrees[MathHelper.getInt(event.getRand(),0, generatorBasicTrees.length - 1)];
             if (generator.generate(event.getWorld(), event.getRand(), event.getPos())) {
                 FoodCraftReloaded.getLogger().info("Generated fruit tree at " + event.getPos());
@@ -51,7 +65,7 @@ public class FruitTreeGenerator {
     public void fruitTreeGrow(SaplingGrowTreeEvent event) {
         if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockFruitSapling) {
             BlockFruitSapling sapling = (BlockFruitSapling) event.getWorld().getBlockState(event.getPos()).getBlock();
-            FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getGeneratorTreeMap().get(sapling.getFruitType()).generate(event.getWorld(), event.getRand(), event.getPos());
+            generatorTreeMap.get(sapling.getFruitType()).generate(event.getWorld(), event.getRand(), event.getPos());
         }
         event.setResult(Event.Result.DENY);
     }

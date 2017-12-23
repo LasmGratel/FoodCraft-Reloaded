@@ -40,8 +40,10 @@ public class CommonProxy {
 
     public CommonProxy() {
         Arrays.asList(
+            CapabilityLoader.class,
             BlockLoader.class, ItemLoader.class,
-            FruitLoader.class, VegetableEnumLoader.class,
+            FruitEnumLoader.class, VegetableEnumLoader.class,
+            LiqueurLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,
             AdvancementLoader.class, RecipeLoader.class,
             EventLoader.class, RegisterLoader.class

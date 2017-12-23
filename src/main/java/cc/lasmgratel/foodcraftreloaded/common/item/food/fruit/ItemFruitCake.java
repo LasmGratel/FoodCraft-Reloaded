@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food.fruit;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
@@ -28,6 +29,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -40,8 +42,9 @@ import net.minecraft.world.World;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemFruitCake extends Item implements FruitTyped {
+public class ItemFruitCake extends Item implements FruitTyped, CustomModelMasking {
     private FruitType fruitType;
 
     public ItemFruitCake(FruitType fruitType) {
@@ -90,6 +93,18 @@ public class ItemFruitCake extends Item implements FruitTyped {
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
+    }
+
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "cake"), "inventory");
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 0;
     }
 
     @Override

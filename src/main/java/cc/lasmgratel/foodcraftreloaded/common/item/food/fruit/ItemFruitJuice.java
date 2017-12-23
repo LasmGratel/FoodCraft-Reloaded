@@ -25,10 +25,13 @@ import cc.lasmgratel.foodcraftreloaded.common.item.food.ItemDrink;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ItemFruitJuice extends ItemDrink implements FruitTyped, CustomModelMasking {
     private FruitType fruitType;
@@ -43,6 +46,12 @@ public class ItemFruitJuice extends ItemDrink implements FruitTyped, CustomModel
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         return Translator.format("item.juice", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory");
     }
 
     @Override

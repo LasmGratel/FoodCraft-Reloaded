@@ -21,8 +21,9 @@
 package cc.lasmgratel.foodcraftreloaded.common.block;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.loader.FruitLoader;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
+import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
@@ -52,6 +53,6 @@ public class BlockFruitCake extends BlockCake {
     @Nonnull
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get().getFruitCakeMap().get(fruitType));
+        return new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(ItemFruitCake.class).get(fruitType));
     }
 }

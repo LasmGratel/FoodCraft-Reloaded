@@ -23,21 +23,28 @@ package cc.lasmgratel.foodcraftreloaded.common.fluid;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import org.apache.commons.lang3.StringUtils;
 
 public class FluidVegetableJuice extends Fluid {
-    private VegetableType fruitType;
+    private VegetableType vegetableType;
 
     public FluidVegetableJuice(VegetableType vegetableType) {
         super(NameBuilder.buildRegistryName(vegetableType.toString(), "juice"), new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_still"),  new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_flow"));
-        this.fruitType = vegetableType;
+        this.vegetableType = vegetableType;
         setViscosity(2000);
-
     }
 
     @Override
     public int getColor() {
-        return fruitType.getColor().getRGB();
+        return vegetableType.getColor().getRGB();
+    }
+
+    @Override
+    public String getLocalizedName(FluidStack stack) {
+        return Translator.format("fluid.juice", Translator.format("item.vegetable" + StringUtils.capitalize(NameBuilder.buildUnlocalizedName(vegetableType.toString()))));
     }
 }

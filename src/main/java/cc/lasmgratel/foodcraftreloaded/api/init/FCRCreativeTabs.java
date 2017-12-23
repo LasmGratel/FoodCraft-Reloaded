@@ -26,7 +26,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 
@@ -51,7 +50,7 @@ public interface FCRCreativeTabs {
         @Nonnull
         @Override
         public ItemStack getTabIconItem() {
-            return OreDictionary.getOres("foodLemonjuice").get(0);
+            return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(FoodCraftReloaded.MODID, "lemon_juice")));
         }
     };
 

@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 public class LoaderManager {
-    private final Map<Class<?>, Object> loaderInstanceMap = new HashMap<>();
+    private final Map<Class<?>, Object> loaderInstanceMap = new LinkedHashMap<>();
     private final Map<LoaderState, Collection<Method>> stateLoaderMap = new HashMap<>();
 
     public void addLoader(Class<?> loaderClass) {

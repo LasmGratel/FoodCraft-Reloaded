@@ -22,34 +22,47 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidJuice;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitCake;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitLeaves;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitLiqueur;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitYogurt;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidJuice;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.*;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.common.util.item.LiqueurUtils;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 
 public class FruitEnumLoader extends EnumLoader<FruitType> {
+    private EnumMap<FruitType, FluidJuice> fluidJuiceEnumMap = new EnumMap<>(FruitType.class);
+
+    public EnumMap<FruitType, FluidJuice> getFluidJuiceEnumMap() {
+        return fluidJuiceEnumMap;
+    }
+
     @Load
     public void loadFruits() {
+        for (FruitType fruitType : FruitType.values()) {
+            FluidJuice fluid = new FluidJuice(fruitType);
+            FluidRegistry.registerFluid(fluid);
+            FluidRegistry.addBucketForFluid(fluid);
+            fluidJuiceEnumMap.put(fruitType, fluid);
+        }
         Class[] values = new Class[] {
-            BlockFruitLeaves.class, BlockFruitSapling.class, // FluidJuice.class, BlockFluidJuice.class,
+            ItemFruit.class,
+            BlockFluidJuice.class,
+            BlockFruitLeaves.class, BlockFruitSapling.class,
             BlockFruitCake.class, ItemFruitCake.class, ItemFruitLiqueur.class, ItemFruitYogurt.class
         };
         Arrays.stream(values).forEach(this::putValue);
-        getInstanceMap(ItemFruitLiqueur.class).putAll(LiqueurUtils.generateLiqueurMap(getInstanceMap(ItemFruitLiqueur.class)));
         register();
-        this.<BlockFruitSapling>getValue().forEach(sapling -> ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setUnlocalizedName(NameBuilder.buildUnlocalizedName(sapling.getFruitType().toString(), "sapling")).setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(sapling.getFruitType().toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE)));
+        getInstanceMap(BlockFruitSapling.class).values().forEach(sapling -> ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setUnlocalizedName(NameBuilder.buildUnlocalizedName(sapling.getFruitType().toString(), "sapling")).setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(sapling.getFruitType().toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE)));
     }
 
     @Load(side = Side.CLIENT)

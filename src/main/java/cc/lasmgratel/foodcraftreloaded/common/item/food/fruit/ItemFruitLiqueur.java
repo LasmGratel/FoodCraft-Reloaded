@@ -20,17 +20,21 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food.fruit;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.ItemLiqueur;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemFruitLiqueur extends ItemLiqueur implements FruitTyped {
+public class ItemFruitLiqueur extends ItemLiqueur implements FruitTyped, CustomModelMasking {
     private FruitType type;
 
     public ItemFruitLiqueur(FruitType type) {
@@ -48,5 +52,16 @@ public class ItemFruitLiqueur extends ItemLiqueur implements FruitTyped {
     @Override
     public FruitType getType() {
         return type;
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "liqueur"), "inventory");
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 1;
     }
 }

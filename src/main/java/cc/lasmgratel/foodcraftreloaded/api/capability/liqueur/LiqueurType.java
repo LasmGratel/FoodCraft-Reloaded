@@ -18,8 +18,21 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.item.food;
+package cc.lasmgratel.foodcraftreloaded.api.capability.liqueur;
 
-public enum LiqueurType {
-    NORMAL, AGED, COCKTAIL
+import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public interface LiqueurType {
+    String getUnlocalizedName();
+    void setUnlocalizedName(String unlocalizedName);
+
+    float getHealModifier();
+    void setHealModifier(float healModifier);
+
+    @SideOnly(Side.CLIENT)
+    default String getLocalizedName() {
+        return Translator.format(getUnlocalizedName());
+    }
 }

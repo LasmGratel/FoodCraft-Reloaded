@@ -22,8 +22,10 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitIcecream;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
@@ -55,10 +57,10 @@ public class EventLoader {
 
     @SubscribeEvent
     public void onRegister(RegistryEvent.Register<IRecipe> event) {
-        FruitLoader loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get();
+        FruitEnumLoader loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
-            event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getSaplingMap().get(fruitType)), " F ", "FXF", " F ", 'F', "crop" + StringUtils.capitalize(fruitType.toString()), 'X', "treeSapling").setRegistryName("fruit_sapling"));
-            event.getRegistry().register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getFruitIcecreamMap().get(fruitType)), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
+            event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getInstanceMap(BlockFruitSapling.class).get(fruitType)), " F ", "FXF", " F ", 'F', "crop" + StringUtils.capitalize(fruitType.toString()), 'X', "treeSapling").setRegistryName("fruit_sapling"));
+            event.getRegistry().register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getInstanceMap(ItemFruitIcecream.class).get(fruitType)), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
         }
     }
 

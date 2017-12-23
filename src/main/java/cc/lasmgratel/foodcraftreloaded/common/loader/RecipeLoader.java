@@ -20,27 +20,32 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruit;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetable;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 public class RecipeLoader {
-    private FruitLoader loader;
+    private FruitEnumLoader fruitLoader;
+    private VegetableEnumLoader vegetableLoader;
 
     @Load(LoaderState.AVAILABLE)
     public void loadDrinkRecipes() {
-        loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitLoader.class).get();
+        fruitLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
+        vegetableLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
-            for (ItemStack stack : OreDictionary.getOres("fruit" + StringUtils.capitalize(fruitType.toString())))
-                RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{stack}, new FluidStack(loader.getJuiceMap().get(fruitType), 1000)));
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{new ItemStack(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType))}, new FluidStack(fruitLoader.getFluidJuiceEnumMap().get(fruitType), 1000)));
+        }
+        for (VegetableType vegetableType : VegetableType.values()) {
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{new ItemStack(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType))}, new FluidStack(vegetableLoader.getFluidJuiceEnumMap().get(vegetableType), 1000)));
         }
 //        ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
     }

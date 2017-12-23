@@ -20,24 +20,39 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCake;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.*;
-import cc.lasmgratel.foodcraftreloaded.common.util.item.LiqueurUtils;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 
 public class VegetableEnumLoader extends EnumLoader<VegetableType> {
+    private EnumMap<VegetableType, FluidVegetableJuice> fluidJuiceEnumMap = new EnumMap<>(VegetableType.class);
+
+    public EnumMap<VegetableType, FluidVegetableJuice> getFluidJuiceEnumMap() {
+        return fluidJuiceEnumMap;
+    }
+
     @Load
     public void loadVegetables() {
+        for (VegetableType vegetableType : VegetableType.values()) {
+            FluidVegetableJuice fluid = new FluidVegetableJuice(vegetableType);
+            FluidRegistry.registerFluid(fluid);
+            FluidRegistry.addBucketForFluid(fluid);
+            fluidJuiceEnumMap.put(vegetableType, fluid);
+        }
         Class[] values = new Class[] {
+            BlockFluidVegetableJuice.class,
             BlockVegetableCake.class, ItemVegetable.class, ItemVegetableYogurt.class, ItemVegetableCake.class,
             ItemVegetableIcecream.class, ItemVegetableJuice.class, ItemVegetableLiqueur.class, ItemVegetableSoda.class
         };
         Arrays.stream(values).forEach(this::putValue);
-        getInstanceMap(ItemVegetableLiqueur.class).putAll(LiqueurUtils.generateLiqueurMap(getInstanceMap(ItemVegetableLiqueur.class)));
         register();
     }
 

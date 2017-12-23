@@ -60,10 +60,14 @@ public class EnumLoader<T extends Enum<T>> {
                     .forEach(o -> {
 //                    TODO RegisterManager.getInstance().putRegister(o);
                         if (o instanceof Item) ForgeRegistries.ITEMS.register((Item) o);
-                        else if (o instanceof Block) ForgeRegistries.BLOCKS.register((Block) o);
+                        else if (o instanceof Block)
+                            ForgeRegistries.BLOCKS.register((Block) o);
                     });
-            if (Fluid.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Fluid) o).forEach(FluidRegistry::addBucketForFluid);
+            else if (Fluid.class.isAssignableFrom(instanceClass))
+                enumMap.values().stream().map(o -> (Fluid) o).forEach(fluid -> {
+                    FluidRegistry.registerFluid(fluid);
+                    FluidRegistry.addBucketForFluid(fluid);
+                });
         });
     }
 
@@ -120,7 +124,7 @@ public class EnumLoader<T extends Enum<T>> {
         enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> {
             entries.forEach(entry -> {
                 if (entry.getValue() instanceof Item) {
-                    FoodCraftReloaded.getLogger().info("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
+                    FoodCraftReloaded.getLogger().debug("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
                     Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
                         try {
                             if (((CustomModelMasking) entry.getValue()).getTintIndex() != -1)
@@ -155,7 +159,7 @@ public class EnumLoader<T extends Enum<T>> {
                 if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
                     if (entry.getValue() instanceof CustomModelMasking) {
                         registerRender((Item) entry.getValue(), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
-                        FoodCraftReloaded.getLogger().info("Registered custom model " + entry.getValue().getClass() + " as " + ((CustomModelMasking) entry.getValue()).getModelLocation());
+                        FoodCraftReloaded.getLogger().debug("Registered custom model " + entry.getValue().getClass() + " as " + ((CustomModelMasking) entry.getValue()).getModelLocation());
                     } else if (((Item) entry.getValue()).getRegistryName() != null) {
                         registerRender((Item) entry.getValue(), 0, new ModelResourceLocation(((Item) entry.getValue()).getRegistryName(), "inventory"));
                     }
