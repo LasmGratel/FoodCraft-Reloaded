@@ -20,21 +20,20 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.tool;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
-import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.ResourceLocation;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class ItemKitchenKnife extends Item implements IItemColor {
-    private EnumKitchenKnifeType type;
+public class ItemKitchenKnife extends Item implements CustomModelMasking {
+    private KitchenKnifeType type;
 
-    public ItemKitchenKnife(EnumKitchenKnifeType type) {
+    public ItemKitchenKnife(KitchenKnifeType type) {
         this.type = type;
         setMaxDamage(type.getMaxDamage());
         setMaxStackSize(1);
@@ -43,19 +42,22 @@ public class ItemKitchenKnife extends Item implements IItemColor {
         setCreativeTab(FCRCreativeTabs.BASE);
     }
 
-    public EnumKitchenKnifeType getType() {
+    public KitchenKnifeType getType() {
         return type;
     }
 
-    public void setType(EnumKitchenKnifeType type) {
+    public void setType(KitchenKnifeType type) {
         this.type = type;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Nullable
     @Override
-    public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
-        if (tintIndex == 0 && stack.getItem() instanceof ItemKitchenKnife)
-            return ((ItemKitchenKnife) stack.getItem()).getType().getColor().getRGB();
-        return -1;
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "kitchen_knife"), "inventory");
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 0;
     }
 }

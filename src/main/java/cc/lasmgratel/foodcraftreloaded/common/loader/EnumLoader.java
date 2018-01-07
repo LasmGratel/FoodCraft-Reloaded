@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +32,8 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -38,9 +41,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -59,9 +64,16 @@ public class EnumLoader<T extends Enum<T>> {
 //                    .map(o -> new RegisterHandler(o))
                     .forEach(o -> {
 //                    TODO RegisterManager.getInstance().putRegister(o);
-                        if (o instanceof Item) ForgeRegistries.ITEMS.register((Item) o);
-                        else if (o instanceof Block)
+                        if (o instanceof Item) {
+                            ForgeRegistries.ITEMS.register((Item) o);
+                            if (o instanceof OreDictated)
+                                Arrays.stream(((OreDictated) o).getOreDictNames()).forEach(s -> OreDictionary.registerOre(s, (Item) o));
+                        }
+                        else if (o instanceof Block) {
                             ForgeRegistries.BLOCKS.register((Block) o);
+                            if (o instanceof OreDictated)
+                                Arrays.stream(((OreDictated) o).getOreDictNames()).forEach(s -> OreDictionary.registerOre(s, (Block) o));
+                        }
                     });
             else if (Fluid.class.isAssignableFrom(instanceClass))
                 enumMap.values().stream().map(o -> (Fluid) o).forEach(fluid -> {
@@ -121,54 +133,53 @@ public class EnumLoader<T extends Enum<T>> {
 
     @SideOnly(Side.CLIENT)
     public void registerColors() {
-        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> {
-            entries.forEach(entry -> {
-                if (entry.getValue() instanceof Item) {
-                    FoodCraftReloaded.getLogger().debug("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
-                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-                        try {
-                            if (((CustomModelMasking) entry.getValue()).getTintIndex() != -1)
-                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
-                                    return ((Colorable) entry.getKey()).getColor().getRGB();
-                        } catch (ClassCastException ignored) {
-                            try {
-                                if (tintIndex == 1)
-                                    return ((Colorable) entry.getKey()).getColor().getRGB();
-                            } catch (ClassCastException ignored2) { }
-                        }
-                        return -1;
-                    }, (Item) entry.getValue());
-                } else if (entry.getValue() instanceof Block)
-                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-                        if (entry.getKey() instanceof Colorable)
-                            if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
-                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
-                                    return ((Colorable) entry.getKey()).getColor().getRGB();
-                            } else if (tintIndex == 1)
+        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
+            if (entry.getValue() instanceof Item) {
+                FoodCraftReloaded.getLogger().debug("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
+                Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                    try {
+                        if (((CustomModelMasking) entry.getValue()).getTintIndex() != -1)
+                            if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
                                 return ((Colorable) entry.getKey()).getColor().getRGB();
-                        return -1;
-                    }, (Block) entry.getValue());
-            });
-        });
+                    } catch (ClassCastException ignored) {
+                        try {
+                            if (tintIndex == 1)
+                                return ((Colorable) entry.getKey()).getColor().getRGB();
+                        } catch (ClassCastException ignored2) { }
+                    }
+                    return -1;
+                }, (Item) entry.getValue());
+            } else if (entry.getValue() instanceof Block)
+                Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
+                    if (entry.getKey() instanceof Colorable)
+                        if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
+                            if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                                return ((Colorable) entry.getKey()).getColor().getRGB();
+                        } else if (tintIndex == 1)
+                            return ((Colorable) entry.getKey()).getColor().getRGB();
+                    return -1;
+                }, (Block) entry.getValue());
+        }));
     }
 
     @SideOnly(Side.CLIENT)
     public void registerRenders() {
-        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> {
-            entries.forEach(entry -> {
-                if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
-                    if (entry.getValue() instanceof CustomModelMasking) {
-                        registerRender((Item) entry.getValue(), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
-                        FoodCraftReloaded.getLogger().debug("Registered custom model " + entry.getValue().getClass() + " as " + ((CustomModelMasking) entry.getValue()).getModelLocation());
-                    } else if (((Item) entry.getValue()).getRegistryName() != null) {
-                        registerRender((Item) entry.getValue(), 0, new ModelResourceLocation(((Item) entry.getValue()).getRegistryName(), "inventory"));
-                    }
-                } else if (BlockFluidBase.class.isAssignableFrom(entry.getValue().getClass())) {
-                    // TODO Null condition
-                    registerFluidRender((BlockFluidBase) entry.getValue(), ((Block)entry.getValue()).getRegistryName().getResourcePath());
+        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
+            if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
+                if (entry.getValue() instanceof CustomModelMasking) {
+                    registerRender((Item) entry.getValue(), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
+                    FoodCraftReloaded.getLogger().debug("Registered custom model " + entry.getValue().getClass() + " as " + ((CustomModelMasking) entry.getValue()).getModelLocation());
+                } else if (((Item) entry.getValue()).getRegistryName() != null) {
+                    registerRender((Item) entry.getValue(), 0, new ModelResourceLocation(((Item) entry.getValue()).getRegistryName(), "inventory"));
                 }
-            });
-        });
+            } else if (BlockFluidBase.class.isAssignableFrom(entry.getValue().getClass())) {
+                // TODO Null condition
+                registerFluidRender((BlockFluidBase) entry.getValue(), ((Block)entry.getValue()).getRegistryName().getResourcePath());
+            } else if (Block.class.isAssignableFrom(entry.getValue().getClass())) {
+                if (entry.getValue() instanceof CustomModelMasking)
+                    ModelLoader.setCustomStateMapper((Block) entry.getValue(), block -> ((CustomModelMasking) entry.getValue()).getStateModelLocations());
+            }
+        }));
     }
 
     @SideOnly(Side.CLIENT)

@@ -34,13 +34,11 @@ import net.minecraftforge.fml.common.LoaderState;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 public class RecipeLoader {
-    private FruitEnumLoader fruitLoader;
-    private VegetableEnumLoader vegetableLoader;
 
     @Load(LoaderState.AVAILABLE)
     public void loadDrinkRecipes() {
-        fruitLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
-        vegetableLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get();
+        FruitEnumLoader fruitLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
+        VegetableEnumLoader vegetableLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
             RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{new ItemStack(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType))}, new FluidStack(fruitLoader.getFluidJuiceEnumMap().get(fruitType), 1000)));
         }

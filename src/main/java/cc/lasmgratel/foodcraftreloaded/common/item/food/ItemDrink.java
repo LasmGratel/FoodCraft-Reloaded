@@ -22,6 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -34,7 +35,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemDrink extends FCRItemFood {
+public class ItemDrink extends FCRItemFood implements OreDictated {
     public ItemDrink(int amount) {
         this(amount, 0.6f);
     }
@@ -55,6 +56,11 @@ public class ItemDrink extends FCRItemFood {
             entityplayer.addStat(StatList.getObjectUseStats(this));
         }
         return new ItemStack(FCRItems.GLASS_BOTTLE);
+    }
+
+    @Override
+    public String[] getOreDictNames() {
+        return new String[]{"listAlldrink"};
     }
 
     @Nonnull

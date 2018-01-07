@@ -17,11 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package cc.lasmgratel.foodcraftreloaded.common.item.crafting;
-
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-
-public abstract class CakeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
-}
+/**
+ * Custom recipe in 1.12+.
+ * Finding replacement.
+ */
+package cc.lasmgratel.foodcraftreloaded.common.recipe;

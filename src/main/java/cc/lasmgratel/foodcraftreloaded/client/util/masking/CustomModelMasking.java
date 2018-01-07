@@ -20,14 +20,23 @@
 
 package cc.lasmgratel.foodcraftreloaded.client.util.masking;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.Map;
 
 public interface CustomModelMasking {
     @Nullable
     default ModelResourceLocation getModelLocation() {
         return null;
+    }
+
+    @Nonnull
+    default Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
+        return Collections.emptyMap();
     }
 
     default int getTintIndex() {

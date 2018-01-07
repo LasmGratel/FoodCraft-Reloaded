@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
@@ -27,13 +28,17 @@ import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BlockFruitCake extends BlockCake {
+public class BlockFruitCake extends BlockCake implements CustomModelMasking {
     private FruitType fruitType;
 
     public BlockFruitCake(FruitType fruitType) {
@@ -48,6 +53,21 @@ public class BlockFruitCake extends BlockCake {
 
     public void setFruitType(FruitType fruitType) {
         this.fruitType = fruitType;
+    }
+
+    @Nonnull
+    @Override
+    public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
+        Map<IBlockState, ModelResourceLocation> map = new HashMap<>();
+        map.put(getDefaultState().withProperty(BlockCake.BITES, 0), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=0"));
+        for (int j = 1; j <= 6; j++)
+            map.put(getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + j));
+        return map;
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 0;
     }
 
     @Nonnull

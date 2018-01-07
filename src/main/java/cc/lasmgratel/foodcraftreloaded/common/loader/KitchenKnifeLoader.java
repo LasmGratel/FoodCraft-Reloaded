@@ -20,55 +20,28 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.item.tool.EnumKitchenKnifeType;
 import cc.lasmgratel.foodcraftreloaded.common.item.tool.ItemKitchenKnife;
+import cc.lasmgratel.foodcraftreloaded.common.item.tool.KitchenKnifeType;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.function.BiConsumer;
-
-public class KitchenKnifeLoader {
-    private Map<EnumKitchenKnifeType, ItemKitchenKnife> kitchenKnifeMap = new EnumMap<>(EnumKitchenKnifeType.class);
-
+public class KitchenKnifeLoader extends EnumLoader<KitchenKnifeType> {
     @Load
     public void loadKitchenKnifes() {
-        for (EnumKitchenKnifeType knifeType : EnumKitchenKnifeType.values())
-            kitchenKnifeMap.put(knifeType, new ItemKitchenKnife(knifeType));
-        kitchenKnifeMap.forEach((type, item) -> ForgeRegistries.ITEMS.register(item));
+        putValue(ItemKitchenKnife.class);
+        register();
+        getInstanceMap(ItemKitchenKnife.class).values().forEach(item -> OreDictionary.registerOre("knifeKitchen", item));
     }
 
     @Load(side = Side.CLIENT)
     public void loadKitchenKnifeRender() {
-        kitchenKnifeMap.forEach((type, item) -> ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "kitchen_knife"), "inventory")));
+        registerRenders();
     }
 
     @Load(value = LoaderState.POSTINITIALIZATION, side = Side.CLIENT)
     public void loadKitchenKnifeColor() {
-        kitchenKnifeMap.forEach((type, item) -> Minecraft.getMinecraft().getItemColors().registerItemColorHandler(item, item));
-    }
-
-    public ItemKitchenKnife get(EnumKitchenKnifeType key) {
-        return kitchenKnifeMap.get(key);
-    }
-
-    public ItemKitchenKnife put(EnumKitchenKnifeType key, ItemKitchenKnife value) {
-        return kitchenKnifeMap.put(key, value);
-    }
-
-    public void forEach(BiConsumer<? super EnumKitchenKnifeType, ? super ItemKitchenKnife> action) {
-        kitchenKnifeMap.forEach(action);
-    }
-
-    public Map<EnumKitchenKnifeType, ItemKitchenKnife> getKitchenKnifeMap() {
-        return kitchenKnifeMap;
+        registerColors();
     }
 }

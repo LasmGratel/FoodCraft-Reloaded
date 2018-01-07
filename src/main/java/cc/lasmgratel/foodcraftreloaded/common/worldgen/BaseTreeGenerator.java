@@ -387,7 +387,7 @@ public class BaseTreeGenerator extends WorldGenerator {
     }
 
     private IBlockState getVineStateForSide(EnumFacing side) {
-        return this.vine.getBlock() instanceof BlockVine ? this.vine.withProperty(BlockVine.getPropertyFor(side), Boolean.valueOf(true)) : this.vine;
+        return this.vine.getBlock() instanceof BlockVine ? this.vine.withProperty(BlockVine.getPropertyFor(side), Boolean.TRUE) : this.vine;
     }
 
     private void extendVines(World world, BlockPos pos, EnumFacing side) {

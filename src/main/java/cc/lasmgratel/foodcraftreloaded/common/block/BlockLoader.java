@@ -90,8 +90,7 @@ public class BlockLoader {
         }
     }
 
-    private void registerRender(Block block, int meta)
-    {
+    private void registerRender(Block block, int meta) {
         Item item = Item.getItemFromBlock(block);
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }

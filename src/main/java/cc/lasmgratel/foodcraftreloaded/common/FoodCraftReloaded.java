@@ -28,6 +28,8 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
+
 @Mod(modid = FoodCraftReloaded.MODID, name = FoodCraftReloaded.NAME, version = FoodCraftReloaded.VERSION,
 acceptedMinecraftVersions = "[1.12.2,)",
 updateJSON = "http://lasmgratel.github.io/FoodCraft-Reloaded/update.json")
@@ -50,6 +52,10 @@ public class FoodCraftReloaded {
 
     public static CommonProxy getProxy() {
         return proxy;
+    }
+
+    public static <T> Optional<T> getLoader(Class<T> loaderClass) {
+        return getProxy().getLoaderManager().getLoader(loaderClass);
     }
 
     @EventHandler
