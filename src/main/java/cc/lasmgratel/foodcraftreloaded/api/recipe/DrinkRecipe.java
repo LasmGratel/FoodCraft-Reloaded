@@ -20,14 +20,13 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.recipe;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DrinkRecipe extends AbstractRecipe {
-    public DrinkRecipe(ItemStack[] input, FluidStack output) {
-        super(input, output);
-        if (input.length == 1) {
-            getOutput().setValue(output, ItemStack.EMPTY);
-        }
+    public DrinkRecipe(Item input, FluidStack output) {
+        super(new Item[]{input}, output);
+        getOutput().setValue(output, ItemStack.EMPTY);
     }
 }

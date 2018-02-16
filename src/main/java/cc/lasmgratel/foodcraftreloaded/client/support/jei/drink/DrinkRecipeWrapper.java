@@ -18,19 +18,26 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.support.jei;
+package cc.lasmgratel.foodcraftreloaded.client.support.jei.drink;
 
 import cc.lasmgratel.foodcraftreloaded.api.recipe.AbstractRecipe;
-import mezz.jei.api.recipe.IRecipeWrapper;
+import cc.lasmgratel.foodcraftreloaded.client.support.jei.FCRRecipeWrapper;
+import mezz.jei.api.ingredients.IIngredients;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
-public abstract class FCRRecipeWrapper implements IRecipeWrapper {
-    private final AbstractRecipe recipe;
+import javax.annotation.Nonnull;
 
-    public FCRRecipeWrapper(AbstractRecipe recipe) {
-        this.recipe = recipe;
+public class DrinkRecipeWrapper extends FCRRecipeWrapper {
+    public DrinkRecipeWrapper(AbstractRecipe recipe) {
+        super(recipe);
     }
 
-    public AbstractRecipe getRecipe() {
-        return recipe;
+    @Override
+    public void getIngredients(@Nonnull IIngredients ingredients) {
+        ingredients.setInput(ItemStack.class, new ItemStack(getRecipe().getInput().<Item>first()));
+        ingredients.setOutput(FluidStack.class, getRecipe().getOutput().first());
+        ingredients.setOutput(ItemStack.class, getRecipe().getOutput().second());
     }
 }

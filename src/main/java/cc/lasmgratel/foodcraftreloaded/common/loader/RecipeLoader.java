@@ -40,10 +40,10 @@ public class RecipeLoader {
         FruitEnumLoader fruitLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
         VegetableEnumLoader vegetableLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
-            RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{new ItemStack(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType))}, new FluidStack(fruitLoader.getFluidJuiceEnumMap().get(fruitType), 1000)));
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType), new FluidStack(fruitLoader.getFluidJuiceEnumMap().get(fruitType), 1000)));
         }
         for (VegetableType vegetableType : VegetableType.values()) {
-            RecipeManager.getInstance().addRecipe(new DrinkRecipe(new ItemStack[]{new ItemStack(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType))}, new FluidStack(vegetableLoader.getFluidJuiceEnumMap().get(vegetableType), 1000)));
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType), new FluidStack(vegetableLoader.getFluidJuiceEnumMap().get(vegetableType), 1000)));
         }
 //        ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
     }

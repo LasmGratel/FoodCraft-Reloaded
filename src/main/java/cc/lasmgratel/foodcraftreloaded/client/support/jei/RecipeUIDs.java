@@ -18,18 +18,10 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.support.jei;
+package cc.lasmgratel.foodcraftreloaded.client.support.jei;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.IRecipeWrapper;
 
-import javax.annotation.Nonnull;
-
-public interface FCRRecipeCategory<T extends IRecipeWrapper> extends IRecipeCategory<T> {
-    @Nonnull
-    @Override
-    default String getModName() {
-        return FoodCraftReloaded.NAME;
-    }
+public interface RecipeUIDs {
+    String DRINK = FoodCraftReloaded.MODID + ".drink";
 }

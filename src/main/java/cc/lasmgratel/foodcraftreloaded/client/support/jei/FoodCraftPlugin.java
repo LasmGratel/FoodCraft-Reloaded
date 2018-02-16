@@ -18,14 +18,14 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.support.jei;
+package cc.lasmgratel.foodcraftreloaded.client.support.jei;
 
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerSmeltingDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.common.support.jei.drink.DrinkRecipeCategory;
-import cc.lasmgratel.foodcraftreloaded.common.support.jei.drink.DrinkRecipeWrapper;
+import cc.lasmgratel.foodcraftreloaded.client.support.jei.drink.DrinkRecipeCategory;
+import cc.lasmgratel.foodcraftreloaded.client.support.jei.drink.DrinkRecipeWrapper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;

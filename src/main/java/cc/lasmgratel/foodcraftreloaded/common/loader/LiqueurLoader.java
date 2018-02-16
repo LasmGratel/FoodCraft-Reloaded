@@ -46,13 +46,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LiqueurLoader {
     private List<ItemLiqueur> cachedLiqueurs = new ArrayList<>();
 
     @Load
     public void loadLiqueurs() {
-        ForgeRegistries.ITEMS.getKeys().stream().filter(s -> s.getResourcePath().contains("liqueur")).map(ForgeRegistries.ITEMS::getValue).forEach(liqueur -> {
+        ForgeRegistries.ITEMS.getKeys().stream().filter(s -> s.getResourcePath().contains("liqueur")).map(ForgeRegistries.ITEMS::getValue).collect(Collectors.toList()).forEach(liqueur -> {
             for (LiqueurType liqueurType : LiqueurTypes.values()) {
                 if (liqueurType == LiqueurTypes.NORMAL)
                     continue;

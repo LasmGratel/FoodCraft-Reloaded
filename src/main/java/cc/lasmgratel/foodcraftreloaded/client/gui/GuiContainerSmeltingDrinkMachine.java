@@ -20,38 +20,73 @@
 
 package cc.lasmgratel.foodcraftreloaded.client.gui;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.util.FluidStackRenderer;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.client.config.GuiUtils;
+import org.lwjgl.util.Rectangle;
 
 public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloaded.MODID, "textures/gui/container/drink_machine_furnace.png");
 
     private InventoryPlayer inventoryPlayer;
     private IFluidTank fluidTank;
+    private TileEntity tileEntity;
+    private FluidStackRenderer renderer;
+    private Rectangle rectangle;
 
     public GuiContainerSmeltingDrinkMachine(InventoryPlayer inventoryPlayer, TileEntity tileEntity) {
         super(new ContainerSmeltingDrinkMachine(inventoryPlayer, tileEntity));
         this.inventoryPlayer = inventoryPlayer;
         this.fluidTank = (FluidTank) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        this.tileEntity = tileEntity;
+
+        int i = (this.width - this.xSize) / 2;
+        int j = (this.height - this.ySize) / 2;
+
+        rectangle = new Rectangle(22, 14, 16, 58);
+
+        FoodCraftReloaded.getLogger().info(i + "," + j);
+
+        renderer = new FluidStackRenderer(fluidTank.getCapacity(), true, 16, 58);
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = I18n.format("container.drink_machine");
+
+        int i = (this.width - this.xSize) / 2;
+        int j = (this.height - this.ySize) / 2;
+
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
-        this.fontRenderer.drawString(this.inventoryPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
-        new FluidStackRenderer(fluidTank.getCapacity(), true, 16, 58).render(Minecraft.getMinecraft(), 22, 14, fluidTank.getFluid());
+        this.fontRenderer.drawString(this.inventoryPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 3, 4210752);
+        renderer.render(Minecraft.getMinecraft(), 22, 14, fluidTank.getFluid());
+        if (rectangle.contains(mouseX + i, mouseY + j) && fluidTank.getFluidAmount() != 0) {
+            FoodCraftReloaded.getLogger().info("Hovered fluid tank!");
+            ScaledResolution scaledresolution = new ScaledResolution(mc);
+            GuiUtils.drawHoveringText(ItemStack.EMPTY, renderer.getTooltip(mc, fluidTank.getFluid(), ITooltipFlag.TooltipFlags.NORMAL), mouseX, mouseY, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight(), -1, fontRenderer);
+        }
     }
 
     @Override
@@ -61,5 +96,28 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+
+        if (TileEntitySmeltingDrinkMachine.isBurning(tileEntity)) {
+            int k = this.getBurnLeftScaled(13);
+            this.drawTexturedModalRect(i + 68, j + 48 - k, 176, 12 - k, 14, k + 1);
+        }
+
+        int l = this.getCookProgressScaled(24);
+        this.drawTexturedModalRect(i + 91, j + 34, 176, 14, l + 1, 16);
+    }
+
+    private int getCookProgressScaled(int pixels) {
+        int i = TileEntitySmeltingDrinkMachine.getProgress(tileEntity);
+        int j = TileEntitySmeltingDrinkMachine.BURN_TIME;
+        return i != 0 ? i * pixels / j : 0;
+    }
+
+    private int getBurnLeftScaled(int pixels) {
+        int i = TileEntitySmeltingDrinkMachine.getCurrentItemBurnTime(tileEntity);
+
+        if (i == 0)
+            i = 200;
+
+        return TileEntitySmeltingDrinkMachine.getFuelTime(tileEntity) * pixels / i;
     }
 }

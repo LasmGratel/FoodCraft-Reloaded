@@ -20,11 +20,11 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.client.GuiID;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,6 +33,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,8 +55,24 @@ public class BlockSmeltingDrinkMachine extends BlockMachine {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (worldIn.getTileEntity(pos) == null)
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity == null)
             createNewTileEntity(worldIn, getMetaFromState(state));
+        // Is player handling a fluid container?
+        if (playerIn.getHeldItem(hand).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+            // Gets handler capability from container
+            IFluidHandlerItem bucket = playerIn.getHeldItem(hand).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
+                FluidTank tank = (FluidTank) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+                int filled = bucket.fill(tank.getFluid(), true);
+                if (filled != 0) {
+                    tank.drain(filled, true);
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
         playerIn.openGui(FoodCraftReloaded.INSTANCE, GuiID.SMELTING_PRESSURE_COOKER, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }

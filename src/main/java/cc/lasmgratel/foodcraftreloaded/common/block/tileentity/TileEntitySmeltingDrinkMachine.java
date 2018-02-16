@@ -20,12 +20,13 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeInput;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -37,7 +38,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
 
 public class TileEntitySmeltingDrinkMachine extends TileFluidHandler implements ITickable {
     public static final int BURN_TIME = 200;
@@ -47,9 +47,32 @@ public class TileEntitySmeltingDrinkMachine extends TileFluidHandler implements 
     private int fuel = 0;
     private ItemStack output = ItemStack.EMPTY;
     private FluidStack fluidStack = null;
+    private int currentItemBurnTime = 0;
 
     public TileEntitySmeltingDrinkMachine() {
         tank.setCapacity(TileEntityDrinkMachine.FLUID_CAPACITY);
+    }
+
+    public static int getProgress(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntitySmeltingDrinkMachine)
+            return BURN_TIME - ((TileEntitySmeltingDrinkMachine) tileEntity).progress;
+        return 0;
+    }
+
+    public static int getFuelTime(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntitySmeltingDrinkMachine)
+            return ((TileEntitySmeltingDrinkMachine) tileEntity).fuel;
+        return 0;
+    }
+
+    public static int getCurrentItemBurnTime(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntitySmeltingDrinkMachine)
+            return ((TileEntitySmeltingDrinkMachine) tileEntity).currentItemBurnTime;
+        return 0;
+    }
+
+    public static boolean isBurning(TileEntity tileEntity) {
+        return tileEntity instanceof TileEntitySmeltingDrinkMachine && ((TileEntitySmeltingDrinkMachine) tileEntity).fluidStack != null;
     }
 
     @Override
@@ -66,12 +89,13 @@ public class TileEntitySmeltingDrinkMachine extends TileFluidHandler implements 
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
+        super.readFromNBT(tag.getCompoundTag("Tank"));
         CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemStackHandler, null, tag.getTag("Items"));
         progress = tag.getInteger("progress");
         fuel = tag.getInteger("fuel");
         output = new ItemStack(tag.getCompoundTag("output"));
         fluidStack = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidOutput"));
+        currentItemBurnTime = TileEntityFurnace.getItemBurnTime(itemStackHandler.getStackInSlot(2));
     }
 
     @Override
@@ -82,35 +106,43 @@ public class TileEntitySmeltingDrinkMachine extends TileFluidHandler implements 
         tag.setTag("output", output.serializeNBT());
         if (fluidStack != null)
             tag.setTag("fluidOutput", fluidStack.writeToNBT(new NBTTagCompound()));
-        return super.writeToNBT(tag);
+        tag.setTag("Tank", super.writeToNBT(new NBTTagCompound()));
+        return tag;
     }
 
     @Override
     public void update() {
-        if (progress < BURN_TIME && fluidStack != null) {
-            ++progress;
-            --fuel;
-        } else if (progress >= BURN_TIME) {
-            progress = 0;
-            itemStackHandler.insertItem(1, output, false);
-            tank.fill(fluidStack, false);
-            output = ItemStack.EMPTY;
-            fluidStack = null;
-            return;
-        }
-        if (fuel <= 0) {
-            int burnTime = TileEntityFurnace.getItemBurnTime(itemStackHandler.getStackInSlot(2));
-            if (burnTime != 0) {
-                fuel += burnTime;
-            } else
-                progress = 0;
-        }
-        if (progress == 0) {
-            DrinkRecipe recipe = RecipeManager.getInstance().getRecipeNullable(DrinkRecipe.class, new RecipeInput(itemStackHandler.getStackInSlot(0)));
+        if (fluidStack != null) {
+            if (fuel <= 0) {
+                int burnTime = TileEntityFurnace.getItemBurnTime(itemStackHandler.getStackInSlot(2));
+                if (burnTime != 0) {
+                    FoodCraftReloaded.getLogger().info("Smelting drink machine gets fuel: " + burnTime);
+                    fuel += burnTime;
+                    itemStackHandler.getStackInSlot(2).splitStack(1);
+                } else {
+                    progress = 0;
+                    return;
+                }
+            }
+            if (progress > 0) {
+                --progress;
+                --fuel;
+            } else {
+                FoodCraftReloaded.getLogger().info("Progressed! " + fluidStack.getFluid().getName());
+                progress = BURN_TIME;
+                itemStackHandler.insertItem(1, output, false);
+                tank.fill(fluidStack, true);
+                output = ItemStack.EMPTY;
+                fluidStack = null;
+            }
+        } else {
+            DrinkRecipe recipe = RecipeManager.getInstance().getRecipeNullable(DrinkRecipe.class, new RecipeInput(itemStackHandler.getStackInSlot(0).getItem()));
             if (recipe != null) {
-                FoodCraftReloaded.getLogger().info("Smelting machine: Found recipe " + Arrays.toString(recipe.getOutput().getValue()));
+                FoodCraftReloaded.getLogger().info("Smelting machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
                 fluidStack = recipe.getOutput().first();
                 output = recipe.getOutput().second();
+                itemStackHandler.getStackInSlot(0).splitStack(1);
+                progress = BURN_TIME;
             }
         }
     }

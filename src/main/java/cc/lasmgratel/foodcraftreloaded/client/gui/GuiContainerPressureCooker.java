@@ -57,6 +57,13 @@ public class GuiContainerPressureCooker extends GuiContainer {
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = I18n.format("container.pressure_cooker");
         Optional.ofNullable(fluidTank.getFluid()).ifPresent(fluidStack -> {
