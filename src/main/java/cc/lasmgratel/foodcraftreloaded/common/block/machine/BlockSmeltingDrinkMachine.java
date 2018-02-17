@@ -36,6 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -50,6 +52,11 @@ public class BlockSmeltingDrinkMachine extends BlockMachine {
 
     @Override
     public void breakBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        if (worldIn.getTileEntity(pos).hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            IItemHandler itemHandler = worldIn.getTileEntity(pos).getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            for (int i = 0; i < itemHandler.getSlots(); i++)
+                spawnAsEntity(worldIn, pos, itemHandler.getStackInSlot(i));
+        }
         worldIn.removeTileEntity(pos);
     }
 
@@ -59,13 +66,18 @@ public class BlockSmeltingDrinkMachine extends BlockMachine {
         if (tileEntity == null)
             createNewTileEntity(worldIn, getMetaFromState(state));
         // Is player handling a fluid container?
-        if (playerIn.getHeldItem(hand).hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+        ItemStack stack = playerIn.getHeldItem(hand).copy();
+        stack.setCount(1);
+        if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
             // Gets handler capability from container
-            IFluidHandlerItem bucket = playerIn.getHeldItem(hand).getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            FoodCraftReloaded.getLogger().info(stack + " is a fluid handler item!");
+            IFluidHandlerItem bucket = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
             if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
                 FluidTank tank = (FluidTank) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
                 int filled = bucket.fill(tank.getFluid(), true);
                 if (filled != 0) {
+                    playerIn.getHeldItem(hand).splitStack(1);
+                    playerIn.inventory.addItemStackToInventory(bucket.getContainer());
                     tank.drain(filled, true);
                     return true;
                 }

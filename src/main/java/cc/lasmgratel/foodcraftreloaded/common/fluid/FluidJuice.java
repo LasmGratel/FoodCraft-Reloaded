@@ -48,4 +48,8 @@ public class FluidJuice extends Fluid {
     public String getLocalizedName(FluidStack stack) {
         return Translator.format("fluid.juice", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
+
+    public FruitType getType() {
+        return fruitType;
+    }
 }

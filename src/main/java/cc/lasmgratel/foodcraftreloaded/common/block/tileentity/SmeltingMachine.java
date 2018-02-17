@@ -20,37 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
-/**
- * Machines' behavior definition.
- */
-public interface Machine {
+public interface SmeltingMachine {
     /**
-     * Returns whether machine can be started.
+     * Called when all fuel has been consumed.
      */
-    boolean canStart();
-
-    /**
-     * Returns whether machine can continue progressing at this tick.
-     */
-    boolean canProgress();
-
-    /**
-     * Called when machine started progressing.
-     */
-    void startProgress();
-
-    /**
-     * Called when machine is progressing.
-     */
-    void progress();
-
-    /**
-     * Called when machine has progressed completely.
-     */
-    void progressCompleted();
-
-    /**
-     * Reset current progress.
-     */
-    void resetProgress();
+    int progressFuel();
 }

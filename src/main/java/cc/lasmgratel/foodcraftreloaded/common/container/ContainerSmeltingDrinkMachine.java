@@ -26,6 +26,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -54,5 +55,11 @@ public class ContainerSmeltingDrinkMachine extends Container {
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         return true;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        return super.transferStackInSlot(playerIn, index);
     }
 }

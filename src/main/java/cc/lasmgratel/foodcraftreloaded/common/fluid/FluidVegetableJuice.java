@@ -47,4 +47,8 @@ public class FluidVegetableJuice extends Fluid {
     public String getLocalizedName(FluidStack stack) {
         return Translator.format("fluid.juice", Translator.format("item.vegetable" + StringUtils.capitalize(NameBuilder.buildUnlocalizedName(vegetableType.toString()))));
     }
+
+    public VegetableType getType() {
+        return vegetableType;
+    }
 }

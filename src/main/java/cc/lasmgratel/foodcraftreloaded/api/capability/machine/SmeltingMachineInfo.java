@@ -18,39 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
+package cc.lasmgratel.foodcraftreloaded.api.capability.machine;
 
 /**
- * Machines' behavior definition.
+ * Stores current running info for smelting machines.
  */
-public interface Machine {
-    /**
-     * Returns whether machine can be started.
-     */
-    boolean canStart();
-
-    /**
-     * Returns whether machine can continue progressing at this tick.
-     */
-    boolean canProgress();
-
-    /**
-     * Called when machine started progressing.
-     */
-    void startProgress();
-
-    /**
-     * Called when machine is progressing.
-     */
-    void progress();
-
-    /**
-     * Called when machine has progressed completely.
-     */
-    void progressCompleted();
-
-    /**
-     * Reset current progress.
-     */
-    void resetProgress();
+public interface SmeltingMachineInfo extends MachineInfo {
+    int getFuel();
+    void setFuel(int fuel);
 }

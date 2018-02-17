@@ -60,8 +60,6 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
 
         rectangle = new Rectangle(22, 14, 16, 58);
 
-        FoodCraftReloaded.getLogger().info(i + "," + j);
-
         renderer = new FluidStackRenderer(fluidTank.getCapacity(), true, 16, 58);
     }
 
@@ -76,16 +74,14 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = I18n.format("container.drink_machine");
 
-        int i = (this.width - this.xSize) / 2;
-        int j = (this.height - this.ySize) / 2;
-
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.inventoryPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 3, 4210752);
         renderer.render(Minecraft.getMinecraft(), 22, 14, fluidTank.getFluid());
-        if (rectangle.contains(mouseX + i, mouseY + j) && fluidTank.getFluidAmount() != 0) {
-            FoodCraftReloaded.getLogger().info("Hovered fluid tank!");
+//        FoodCraftReloaded.getLogger().info(guiLeft + " " + guiTop + " " + mouseX + " " + mouseY + " " + (mouseX - guiLeft) + " " + (mouseY - guiTop));
+        if (rectangle.contains(mouseX - guiLeft, mouseY - guiTop) && fluidTank.getFluidAmount() != 0) {
+//            FoodCraftReloaded.getLogger().info("Hovered fluid tank!");
             ScaledResolution scaledresolution = new ScaledResolution(mc);
-            GuiUtils.drawHoveringText(ItemStack.EMPTY, renderer.getTooltip(mc, fluidTank.getFluid(), ITooltipFlag.TooltipFlags.NORMAL), mouseX, mouseY, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight(), -1, fontRenderer);
+            GuiUtils.drawHoveringText(ItemStack.EMPTY, renderer.getTooltip(mc, fluidTank.getFluid(), ITooltipFlag.TooltipFlags.NORMAL), mouseX - guiLeft, mouseY - guiTop, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight(), -1, fontRenderer);
         }
     }
 
