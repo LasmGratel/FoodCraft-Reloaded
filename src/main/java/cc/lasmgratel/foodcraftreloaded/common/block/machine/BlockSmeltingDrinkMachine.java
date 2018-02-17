@@ -22,9 +22,11 @@ package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
 import cc.lasmgratel.foodcraftreloaded.client.GuiID;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.common.item.FluidGlassBottleWrapper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -68,10 +70,17 @@ public class BlockSmeltingDrinkMachine extends BlockMachine {
         // Is player handling a fluid container?
         ItemStack stack = playerIn.getHeldItem(hand).copy();
         stack.setCount(1);
-        if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
+        if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
+            || stack.getItem() == FCRItems.GLASS_BOTTLE // TODO use capability injecting so that these can be migrated into one condition
+            ) {
             // Gets handler capability from container
-            FoodCraftReloaded.getLogger().info(stack + " is a fluid handler item!");
-            IFluidHandlerItem bucket = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+            IFluidHandlerItem bucket;
+
+            if (stack.getItem() == FCRItems.GLASS_BOTTLE)
+                bucket = new FluidGlassBottleWrapper(stack);
+            else
+
+                bucket = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
             if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
                 FluidTank tank = (FluidTank) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
                 int filled = bucket.fill(tank.getFluid(), true);

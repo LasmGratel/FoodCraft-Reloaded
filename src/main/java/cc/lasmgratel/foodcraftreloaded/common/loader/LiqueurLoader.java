@@ -22,14 +22,13 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurType;
 import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurTypes;
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.ItemGeneratedLiqueur;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.ItemLiqueur;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.EnumColorable;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.Item;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
@@ -39,17 +38,14 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IRegistryDelegate;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LiqueurLoader {
-    private List<ItemLiqueur> cachedLiqueurs = new ArrayList<>();
+    private Map<ItemLiqueur, CustomModelMasking> liqueurCustomModelMap = new HashMap<>();
 
     @Load
     public void loadLiqueurs() {
@@ -57,15 +53,17 @@ public class LiqueurLoader {
             for (LiqueurType liqueurType : LiqueurTypes.values()) {
                 if (liqueurType == LiqueurTypes.NORMAL)
                     continue;
-                ItemLiqueur typedLiqueur = new ItemLiqueur(MathHelper.floor(liqueurType.getHealModifier() * ((ItemFood) liqueur).getHealAmount(new ItemStack(liqueur))));
+                ItemGeneratedLiqueur typedLiqueur = new ItemGeneratedLiqueur(MathHelper.floor(liqueurType.getHealModifier() * ((ItemFood) liqueur).getHealAmount(new ItemStack(liqueur))));
                 typedLiqueur.setLiqueurType(liqueurType);
+                typedLiqueur.setItemStackDisplayNameCallback(liqueur::getItemStackDisplayName);
                 typedLiqueur.setRegistryName(liqueur.getRegistryName().getResourceDomain(), liqueurType.getUnlocalizedName() + "_" + liqueur.getRegistryName().getResourcePath());
                 typedLiqueur.setUnlocalizedName(liqueur.getUnlocalizedName());
                 ForgeRegistries.ITEMS.register(typedLiqueur);
                 OreDictionary.registerOre("listAll" + StringUtils.capitalize(liqueurType.getUnlocalizedName()) + "liqueur", typedLiqueur);
                 OreDictionary.registerOre("listAllliqueur", typedLiqueur);
                 OreDictionary.registerOre("listAllfoods", typedLiqueur);
-                cachedLiqueurs.add(typedLiqueur);
+                if (liqueur instanceof CustomModelMasking)
+                    liqueurCustomModelMap.put(typedLiqueur, (CustomModelMasking) liqueur);
             }
         });
     }
@@ -73,29 +71,33 @@ public class LiqueurLoader {
     @Load(side = Side.CLIENT)
     @SideOnly(Side.CLIENT)
     public void loadRenders() {
-        try {
-            Field field = ModelLoader.class.getDeclaredField("customMeshDefinitions");
-            field.setAccessible(true);
-            Map<IRegistryDelegate<Item>, ItemMeshDefinition> customMeshDefinitions = (Map<IRegistryDelegate<Item>, ItemMeshDefinition>) field.get(null);
-            cachedLiqueurs.forEach(liqueur -> {
-                if (customMeshDefinitions.containsKey(liqueur))
-                    ModelLoader.setCustomModelResourceLocation(liqueur, 0, customMeshDefinitions.get(liqueur).getModelLocation(new ItemStack(liqueur)));
-            });
-        } catch (Exception e) {
-            FoodCraftReloaded.getLogger().error("Cannot get custom mesh definitions", e);
-        }
+        liqueurCustomModelMap.forEach((itemLiqueur, customModelMasking) -> {
+            if (customModelMasking.getModelLocation() != null) {
+                ModelBakery.registerItemVariants(itemLiqueur, customModelMasking.getModelLocation());
+                ModelLoader.setCustomModelResourceLocation(itemLiqueur, 0, customModelMasking.getModelLocation());
+            }
+        });
     }
 
     @Load(side = Side.CLIENT, value = LoaderState.POSTINITIALIZATION)
     @SideOnly(Side.CLIENT)
     public void loadColors() {
-        try {
-            Field field = ItemColors.class.getDeclaredField("itemColorMap");
-            field.setAccessible(true);
-            Map<IRegistryDelegate<Item>, IItemColor> itemColorMap = (Map<IRegistryDelegate<Item>, IItemColor>) field.get(Minecraft.getMinecraft().getItemColors());
-            cachedLiqueurs.forEach(liqueur -> itemColorMap.entrySet().stream().filter(entry -> entry.getKey().get().equals(liqueur)).forEach(entry -> Minecraft.getMinecraft().getItemColors().registerItemColorHandler(entry.getValue(), entry.getKey().get())));
-        } catch (Exception e) {
-            FoodCraftReloaded.getLogger().error("Cannot get custom mesh definitions", e);
-        }
+        liqueurCustomModelMap.forEach((itemLiqueur, customModelMasking) -> {
+            if (customModelMasking.getTintIndex() != -1 && customModelMasking instanceof EnumColorable) {
+                Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                    try {
+                        if (customModelMasking.getTintIndex() != -1)
+                            if (tintIndex == customModelMasking.getTintIndex())
+                                return ((EnumColorable) customModelMasking).getColor().getRGB();
+                    } catch (ClassCastException ignored) {
+                        try {
+                            if (tintIndex == 1)
+                                return ((EnumColorable) customModelMasking).getColor().getRGB();
+                        } catch (ClassCastException ignored2) { }
+                    }
+                    return -1;
+                }, itemLiqueur);
+            }
+        });
     }
 }

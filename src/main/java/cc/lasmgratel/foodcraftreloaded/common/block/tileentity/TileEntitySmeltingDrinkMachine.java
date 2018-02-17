@@ -123,7 +123,7 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
     public void startProgress() {
         DrinkRecipe recipe = RecipeManager.getInstance().getRecipeNullable(DrinkRecipe.class, new RecipeInput(itemStackHandler.getStackInSlot(0).getItem()));
         if (recipe != null) {
-            FoodCraftReloaded.getLogger().info("Smelting machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
+            FoodCraftReloaded.getLogger().debug("Smelting machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
             fluidStack = recipe.getOutput().first();
             output = recipe.getOutput().second();
             itemStackHandler.getStackInSlot(0).splitStack(1);

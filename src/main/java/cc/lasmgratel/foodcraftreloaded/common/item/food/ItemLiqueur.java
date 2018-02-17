@@ -24,10 +24,16 @@ import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurType;
 import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurTypes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public class ItemLiqueur extends ItemDrink {
@@ -50,5 +56,15 @@ public class ItemLiqueur extends ItemDrink {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(I18n.format("tooltip.fcrfood.liqueur.type", type.getLocalizedName()));
+    }
+
+    @Override
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+        if (this.isInCreativeTab(tab)) {
+            ItemStack stack = new ItemStack(this);
+            if (getLiqueurType() != LiqueurTypes.NORMAL)
+                EnchantmentHelper.setEnchantments(Collections.singletonMap(Enchantments.UNBREAKING, 1), stack);
+            items.add(stack);
+        }
     }
 }

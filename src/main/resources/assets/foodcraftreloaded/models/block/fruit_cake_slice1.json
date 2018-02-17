@@ -5,7 +5,9 @@
         "bottom": "foodcraftreloaded:blocks/cake_bottom",
         "top": "foodcraftreloaded:blocks/cake_top",
         "side": "foodcraftreloaded:blocks/cake_side",
+        "side_overlay": "foodcraftreloaded:blocks/cake_side_overlay",
         "inside": "foodcraftreloaded:blocks/cake_inner",
+        "inside_overlay": "foodcraftreloaded:blocks/cake_inner_overlay",
         "overlay": "foodcraftreloaded:blocks/cake_overlay"
     },
     "elements": [
@@ -23,7 +25,11 @@
         {   "from": [ 3, 0, 1 ],
             "to": [ 15, 8, 15 ],
             "faces": {
-                "up":    { "texture": "#overlay", "tintindex": 0 }
+                "up":    { "texture": "#overlay", "tintindex": 0 },
+                "north": { "texture": "#side_overlay", "tintindex": 0 },
+                "south": { "texture": "#side_overlay", "tintindex": 0 },
+                "west": { "texture": "#inside_overlay", "tintindex": 0 },
+                "east": { "texture": "#side_overlay", "tintindex": 0 }
             }
         }
     ]

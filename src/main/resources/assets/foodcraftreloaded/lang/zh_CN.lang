@@ -69,10 +69,11 @@ item.kitchenKnifeEmerald.name=绿宝石刀
 
 # Cake
 item.cake=%s蛋糕
+item.cake.name=蛋糕
 
 # Juice
-item.juice=%s果汁
-item.vegetableJuice=%s菜汁
+item.juice=%s汁
+item.vegetableJuice=%s汁
 
 # Soda
 item.soda=%s苏打水

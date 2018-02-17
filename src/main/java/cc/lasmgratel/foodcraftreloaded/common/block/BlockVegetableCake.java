@@ -22,15 +22,19 @@ package cc.lasmgratel.foodcraftreloaded.common.block;
 
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.VegetableType;
+import cc.lasmgratel.foodcraftreloaded.common.loader.VegetableEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +56,12 @@ public class BlockVegetableCake extends BlockCake implements CustomModelMasking 
         for (int j = 1; j <= 6; j++)
             map.put(getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + j));
         return map;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get().getInstanceMap(ItemVegetableCake.class).get(vegetableType));
     }
 
     @Override

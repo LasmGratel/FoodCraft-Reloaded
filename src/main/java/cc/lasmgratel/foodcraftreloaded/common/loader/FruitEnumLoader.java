@@ -56,6 +56,7 @@ public class FruitEnumLoader extends EnumLoader<FruitType> {
         }
         Class[] values = new Class[] {
             ItemFruit.class,
+            ItemFruitJuice.class,
             BlockFluidJuice.class,
             BlockFruitLeaves.class, BlockFruitSapling.class,
             BlockFruitCake.class, ItemFruitCake.class, ItemFruitLiqueur.class, ItemFruitYogurt.class
