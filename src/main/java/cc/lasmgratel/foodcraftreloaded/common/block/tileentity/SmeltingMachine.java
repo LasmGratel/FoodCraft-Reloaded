@@ -20,9 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
-public interface SmeltingMachine {
+public interface SmeltingMachine extends Machine {
     /**
-     * Called when all fuel has been consumed.
+     * Called when all fuel has been consumed, and attempt to fetch new fuel.
+     * @return Fuel amount
      */
     int progressFuel();
 }

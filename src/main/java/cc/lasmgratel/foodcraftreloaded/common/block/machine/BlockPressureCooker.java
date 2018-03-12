@@ -22,7 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityPressureCooker;
-import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.client.EnumGui;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class BlockPressureCooker extends BlockMachine {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getTileEntity(pos) == null)
             createNewTileEntity(worldIn, getMetaFromState(state));
-        playerIn.openGui(FoodCraftReloaded.INSTANCE, GuiID.PRESSURE_COOKER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(FoodCraftReloaded.INSTANCE, EnumGui.PRESSURE_COOKER.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

@@ -18,12 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.client.support.jei.drink;
+package cc.lasmgratel.foodcraftreloaded.client.interaction.jei.drink;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.client.support.jei.FCRRecipeCategory;
-import cc.lasmgratel.foodcraftreloaded.client.support.jei.RecipeUIDs;
+import cc.lasmgratel.foodcraftreloaded.client.interaction.jei.FCRRecipeCategory;
+import cc.lasmgratel.foodcraftreloaded.client.interaction.jei.RecipeUIDs;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;

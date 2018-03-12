@@ -22,8 +22,11 @@ package cc.lasmgratel.foodcraftreloaded.client.gui;
 
 import cc.lasmgratel.foodcraftreloaded.client.util.FluidStackRenderer;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityProgressiveMachine;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingMachine;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.common.util.AutomatedGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -40,7 +43,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.util.Rectangle;
 
-public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
+public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements AutomatedGui  {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloaded.MODID, "textures/gui/container/drink_machine_furnace.png");
 
     private InventoryPlayer inventoryPlayer;
@@ -93,7 +96,7 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntitySmeltingDrinkMachine.isBurning(tileEntity)) {
+        if (TileEntityProgressiveMachine.isProgressing(tileEntity)) {
             int k = this.getBurnLeftScaled(13);
             this.drawTexturedModalRect(i + 68, j + 48 - k, 176, 12 - k, 14, k + 1);
         }
@@ -103,17 +106,17 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer {
     }
 
     private int getCookProgressScaled(int pixels) {
-        int i = TileEntitySmeltingDrinkMachine.getProgress(tileEntity);
+        int i = TileEntityProgressiveMachine.getProgress(tileEntity);
         int j = TileEntitySmeltingDrinkMachine.BURN_TIME;
         return i != 0 ? i * pixels / j : 0;
     }
 
     private int getBurnLeftScaled(int pixels) {
-        int i = TileEntitySmeltingDrinkMachine.getCurrentItemBurnTime(tileEntity);
+        int i = TileEntitySmeltingMachine.getCurrentItemBurnTime(tileEntity);
 
         if (i == 0)
             i = 200;
 
-        return TileEntitySmeltingDrinkMachine.getFuelTime(tileEntity) * pixels / i;
+        return TileEntitySmeltingMachine.getFuelTime(tileEntity) * pixels / i;
     }
 }

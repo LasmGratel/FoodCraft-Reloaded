@@ -39,6 +39,16 @@ public abstract class TileEntityProgressiveMachine extends TileEntity implements
         this.maxProgress = maxProgress;
     }
 
+    public static int getProgress(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntityProgressiveMachine && ((TileEntityProgressiveMachine) tileEntity).isStarted())
+            return ((TileEntityProgressiveMachine) tileEntity).getMaxProgress() - ((TileEntityProgressiveMachine) tileEntity).getProgress();
+        return 0;
+    }
+
+    public static boolean isProgressing(TileEntity tileEntity) {
+        return tileEntity instanceof TileEntityProgressiveMachine && ((TileEntityProgressiveMachine) tileEntity).isStarted();
+    }
+
     @Override
     public void update() {
         if (isStarted()) {

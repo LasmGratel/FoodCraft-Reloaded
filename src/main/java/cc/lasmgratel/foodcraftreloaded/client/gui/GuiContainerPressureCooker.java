@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.client.gui;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.client.util.GuiUtils;
+import cc.lasmgratel.foodcraftreloaded.common.util.AutomatedGui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -38,7 +39,7 @@ import org.lwjgl.util.Rectangle;
 
 import java.util.Optional;
 
-public class GuiContainerPressureCooker extends GuiContainer {
+public class GuiContainerPressureCooker extends GuiContainer implements AutomatedGui  {
     private static final ResourceLocation PRESSURE_COOKER_TEXTURE = new ResourceLocation(FoodCraftReloaded.MODID, "textures/gui/container/pressure_cooker.png");
     protected Rectangle fluidBar = new Rectangle(11, 11, 16, 58);
 

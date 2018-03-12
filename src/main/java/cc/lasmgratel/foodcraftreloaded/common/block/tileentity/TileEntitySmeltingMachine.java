@@ -21,6 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -34,6 +35,18 @@ public abstract class TileEntitySmeltingMachine extends TileEntityProgressiveMac
 
     public TileEntitySmeltingMachine(int maxProgress) {
         super(maxProgress);
+    }
+
+    public static int getFuelTime(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntitySmeltingMachine)
+            return ((TileEntitySmeltingMachine) tileEntity).getFuel();
+        return 0;
+    }
+
+    public static int getCurrentItemBurnTime(TileEntity tileEntity) {
+        if (tileEntity instanceof TileEntitySmeltingMachine)
+            return ((TileEntitySmeltingMachine) tileEntity).getCurrentFuelAmount();
+        return 0;
     }
 
     @Override

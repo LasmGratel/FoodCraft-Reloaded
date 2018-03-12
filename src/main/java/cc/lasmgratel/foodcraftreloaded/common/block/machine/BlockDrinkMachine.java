@@ -22,7 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.client.EnumGui;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import net.minecraft.block.state.IBlockState;
@@ -54,7 +54,7 @@ public class BlockDrinkMachine extends BlockMachine {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getTileEntity(pos) == null)
             createNewTileEntity(worldIn, getMetaFromState(state));
-        playerIn.openGui(FoodCraftReloaded.INSTANCE, GuiID.DRINK_MACHINE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(FoodCraftReloaded.INSTANCE, EnumGui.DRINK_MACHINE.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.client.gui;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.container.ContainerDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.client.util.GuiUtils;
+import cc.lasmgratel.foodcraftreloaded.common.util.AutomatedGui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -38,7 +39,7 @@ import org.lwjgl.util.Rectangle;
 
 import java.util.Optional;
 
-public class GuiContainerDrinkMachine extends GuiContainer {
+public class GuiContainerDrinkMachine extends GuiContainer implements AutomatedGui {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloaded.MODID, "textures/gui/container/drink_machine.png");
     protected Rectangle fluidBar = new Rectangle(26, 11, 16, 58);
 

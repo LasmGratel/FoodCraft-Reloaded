@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.container;
 
+import cc.lasmgratel.foodcraftreloaded.common.util.AutomatedGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -31,7 +32,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerPressureCooker extends Container {
+public class ContainerPressureCooker extends Container implements AutomatedGui {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 

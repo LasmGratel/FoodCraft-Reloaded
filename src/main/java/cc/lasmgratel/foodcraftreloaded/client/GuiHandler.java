@@ -21,21 +21,19 @@
 package cc.lasmgratel.foodcraftreloaded.client;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerPressureCooker;
-import cc.lasmgratel.foodcraftreloaded.client.gui.GuiContainerSmeltingDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.common.container.ContainerDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.common.container.ContainerPressureCooker;
-import cc.lasmgratel.foodcraftreloaded.common.container.ContainerSmeltingDrinkMachine;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nullable;
+
+import static cc.lasmgratel.foodcraftreloaded.client.EnumGui.values;
 
 public class GuiHandler implements IGuiHandler {
     public GuiHandler() {
@@ -45,13 +43,12 @@ public class GuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch (ID) {
-            case GuiID.DRINK_MACHINE:
-                return new ContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
-            case GuiID.PRESSURE_COOKER:
-                return new ContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
-            case GuiID.SMELTING_PRESSURE_COOKER:
-                return new ContainerSmeltingDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+        if (values().length >= ID) {
+            try {
+                return (Container) EnumGui.values()[ID].getContainerClass().getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            } catch (Exception e) {
+                FoodCraftReloaded.getLogger().error("Cannot create container instance!", e);
+            }
         }
         return null;
     }
@@ -59,13 +56,12 @@ public class GuiHandler implements IGuiHandler {
     @Nullable
     @Override
     public Gui getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch (ID) {
-            case GuiID.DRINK_MACHINE:
-                return new GuiContainerDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
-            case GuiID.PRESSURE_COOKER:
-                return new GuiContainerPressureCooker(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
-            case GuiID.SMELTING_PRESSURE_COOKER:
-                return new GuiContainerSmeltingDrinkMachine(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+        if (values().length >= ID) {
+            try {
+                return (Gui) EnumGui.values()[ID].getGuiClass().getConstructor(InventoryPlayer.class, TileEntity.class).newInstance(player.inventory, world.getTileEntity(new BlockPos(x, y, z)));
+            } catch (Exception e) {
+                FoodCraftReloaded.getLogger().error("Cannot create container instance!", e);
+            }
         }
         return null;
     }

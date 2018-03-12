@@ -21,6 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.common.container;
 
 import cc.lasmgratel.foodcraftreloaded.common.container.slot.SlotDrinkMachineOutput;
+import cc.lasmgratel.foodcraftreloaded.common.util.AutomatedGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -32,7 +33,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerDrinkMachine extends Container {
+public class ContainerDrinkMachine extends Container implements AutomatedGui {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 

@@ -23,7 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
-import cc.lasmgratel.foodcraftreloaded.client.GuiID;
+import cc.lasmgratel.foodcraftreloaded.client.EnumGui;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.item.FluidGlassBottleWrapper;
@@ -94,7 +94,7 @@ public class BlockSmeltingDrinkMachine extends BlockMachine {
             }
             return false;
         }
-        playerIn.openGui(FoodCraftReloaded.INSTANCE, GuiID.SMELTING_PRESSURE_COOKER, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(FoodCraftReloaded.INSTANCE, EnumGui.SMELTING_PRESSURE_COOKER.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

@@ -18,10 +18,7 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.client;
+package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
-public interface GuiID {
-    int DRINK_MACHINE = 0;
-    int PRESSURE_COOKER = 1;
-    int SMELTING_PRESSURE_COOKER = 2;
+public interface EnergizedMachine extends Machine {
 }

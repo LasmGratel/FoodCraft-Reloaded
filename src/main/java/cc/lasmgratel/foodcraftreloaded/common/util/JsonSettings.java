@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class JsonSettings implements ISettings, Flushable {
+public class JsonSettings implements Settings, Flushable {
     private Map<String, JsonObject> domainConfigMap = new ConcurrentHashMap<>();
     private final File configFolder;
 

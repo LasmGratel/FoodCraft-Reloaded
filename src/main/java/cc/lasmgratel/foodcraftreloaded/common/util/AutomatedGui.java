@@ -20,20 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.util;
 
-import com.google.gson.JsonElement;
-
-import java.io.File;
-import java.util.Map;
-import java.util.Set;
-
-public interface ISettings {
-    File getConfigFolder();
-    File getConfigFile(String domain);
-    Object remove(String domain, String property);
-    void addProperty(String domain, String property, String value);
-    void addProperty(String domain, String property, Number value);
-    void addProperty(String domain, String property, boolean value);
-    void addProperty(String domain, String property, char value);
-    Object getProperty(String domain, String property);
-    Set<Map.Entry<String, JsonElement>> entrySet(String domain);
+/**
+ * A automated gui container has a constructor which contains two params: ({@link net.minecraft.entity.player.InventoryPlayer}, {@link net.minecraft.tileentity.TileEntity})
+ * They are inventory of current player and current tile entity.
+ */
+public interface AutomatedGui {
 }
