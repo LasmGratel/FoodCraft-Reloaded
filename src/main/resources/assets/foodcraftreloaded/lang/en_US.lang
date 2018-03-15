@@ -30,6 +30,9 @@ item.fruitCherry=Cherry
 item.fruitCoconut=Coconut
 item.fruitBanana=Banana
 
+# Sapling
+item.foodcraftreloaded.sapling=%s Sapling
+
 # Cake
 item.cake=%s Cake
 item.cake.name=Cake

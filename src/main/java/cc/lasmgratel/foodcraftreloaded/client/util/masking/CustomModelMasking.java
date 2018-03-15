@@ -22,6 +22,8 @@ package cc.lasmgratel.foodcraftreloaded.client.util.masking;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -41,5 +43,15 @@ public interface CustomModelMasking {
 
     default int getTintIndex() {
         return -1;
+    }
+
+    @Nullable
+    default IBlockColor getBlockColorMultiplier() {
+        return null;
+    }
+
+    @Nullable
+    default IItemColor getItemColorMultiplier() {
+        return null;
     }
 }

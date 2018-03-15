@@ -25,17 +25,19 @@ import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.FCRItemFood;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMasking {
+public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMasking, OreDictated {
     private FruitType fruitType;
 
     public ItemFruit(FruitType fruitType) {
@@ -43,6 +45,9 @@ public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMas
         setAlwaysEdible(true);
         setRegistryName(FoodCraftReloaded.MODID, fruitType.toString());
         setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+
+        MinecraftForge.addGrassSeed(new ItemStack(this), 6);
+
         this.fruitType = fruitType;
     }
 
@@ -56,6 +61,12 @@ public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMas
     @Override
     public ModelResourceLocation getModelLocation() {
         return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString())), "inventory");
+    }
+
+    @Nullable
+    @Override
+    public String[] getOreDictNames() {
+        return new String[]{NameBuilder.buildUnlocalizedName("crop", fruitType.toString()), "listAllfruit"};
     }
 
     @Override

@@ -20,12 +20,29 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-public class BlockFruitSapling extends BlockSapling {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+public class BlockFruitSapling extends BlockSapling implements FruitTyped, CustomModelMasking {
     private FruitType fruitType;
 
     public BlockFruitSapling(FruitType fruitType) {
@@ -34,7 +51,39 @@ public class BlockFruitSapling extends BlockSapling {
         setUnlocalizedName(NameBuilder.buildUnlocalizedName(fruitType.toString(), "sapling"));
     }
 
-    public FruitType getFruitType() {
+    @Override
+    public FruitType getType() {
         return fruitType;
+    }
+
+    @Nonnull
+    @Override
+    public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
+        Map<IBlockState, ModelResourceLocation> locationMap = new HashMap<>();
+        for (int i : BlockSapling.STAGE.getAllowedValues())
+            locationMap.put(getDefaultState().withProperty(BlockSapling.STAGE, i),
+                new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "normal"));
+        return locationMap;
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this).setStackDisplayName(Translator.format("item.foodcraftreloaded.sapling", Translator.format(NameBuilder.buildUnlocalizedName("item.fruit", fruitType.toString())))));
+    }
+
+    @Nullable
+    @Override
+    public ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_sapling"), "normal");
+    }
+
+    @Override
+    public int getTintIndex() {
+        return 0;
+    }
+
+    @Override
+    public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+        return worldIn.rand.nextDouble() < 0.7;
     }
 }

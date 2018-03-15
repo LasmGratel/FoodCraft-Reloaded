@@ -22,6 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCake;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCrop;
 import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.*;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
@@ -50,7 +51,8 @@ public class VegetableEnumLoader extends EnumLoader<VegetableType> {
         Class[] values = new Class[] {
             BlockFluidVegetableJuice.class,
             BlockVegetableCake.class, ItemVegetable.class, ItemVegetableYogurt.class, ItemVegetableCake.class,
-            ItemVegetableIcecream.class, ItemVegetableJuice.class, ItemVegetableLiqueur.class, ItemVegetableSoda.class
+            ItemVegetableIcecream.class, ItemVegetableJuice.class, ItemVegetableLiqueur.class, ItemVegetableSoda.class,
+            BlockVegetableCrop.class
         };
         Arrays.stream(values).forEach(this::putValue);
         register();

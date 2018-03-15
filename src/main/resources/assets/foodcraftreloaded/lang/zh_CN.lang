@@ -1,3 +1,8 @@
+# Blocks
+# Machines
+tile.smeltingDrinkMachine.name=烧炼饮料制作机
+tile.drinkMachine.name=饮料制作机
+
 # Items
 # Vegetables
 # Beans
@@ -66,6 +71,9 @@ item.kitchenKnifeIron.name=铁刀
 item.kitchenKnifeGold.name=金刀
 item.kitchenKnifeDiamond.name=钻石刀
 item.kitchenKnifeEmerald.name=绿宝石刀
+
+# Sapling
+item.foodcraftreloaded.sapling=%s树苗
 
 # Cake
 item.cake=%s蛋糕

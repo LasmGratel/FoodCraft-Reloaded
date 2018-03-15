@@ -1,0 +1,21 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "###",
+        "#X#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "cropRice"
+        },
+        "X": {
+            "type": "forge:ore_dict",
+            "ore": "blockIron"
+        }
+    },
+    "result": {
+        "item": "foodcraftreloaded:smelting_drink_machine"
+    }
+}

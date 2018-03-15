@@ -51,7 +51,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class EnumLoader<T extends Enum<T>> {
-    private final Map<Class<?>, Map<T, ?>> enumInstanceMap = new HashMap<>();
+    private final Map<Class<?>, Map<T, ?>> enumInstanceMap = new LinkedHashMap<>();
 
     /**
      * Attempt to register all entries from {@link #enumInstanceMap} to {@link ForgeRegistries}.
@@ -150,15 +150,33 @@ public class EnumLoader<T extends Enum<T>> {
                     return -1;
                 }, (Item) entry.getValue());
             } else if (entry.getValue() instanceof Block)
-                Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
-                    if (entry.getKey() instanceof Colorable)
-                        if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
-                            if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                if (entry.getValue() instanceof CustomModelMasking
+                    && ((CustomModelMasking) entry.getValue()).getBlockColorMultiplier() != null
+                    && ((CustomModelMasking) entry.getValue()).getItemColorMultiplier() != null) {
+                    Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(((CustomModelMasking) entry.getValue()).getBlockColorMultiplier(), (Block) entry.getValue());
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(((CustomModelMasking) entry.getValue()).getItemColorMultiplier(), (Block) entry.getValue());
+                } else {
+                    Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
+                        if (entry.getKey() instanceof Colorable)
+                            if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
+                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                                    return ((Colorable) entry.getKey()).getColor().getRGB();
+                            } else if (tintIndex == 1) {
                                 return ((Colorable) entry.getKey()).getColor().getRGB();
-                        } else if (tintIndex == 1)
-                            return ((Colorable) entry.getKey()).getColor().getRGB();
-                    return -1;
-                }, (Block) entry.getValue());
+                            }
+                        return -1;
+                    }, (Block) entry.getValue());
+                    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+                        if (entry.getKey() instanceof Colorable)
+                            if (entry.getValue() instanceof CustomModelMasking && ((CustomModelMasking) entry.getValue()).getTintIndex() != -1) {
+                                if (tintIndex == ((CustomModelMasking) entry.getValue()).getTintIndex())
+                                    return ((Colorable) entry.getKey()).getColor().getRGB();
+                            } else if (tintIndex == 1) {
+                                return ((Colorable) entry.getKey()).getColor().getRGB();
+                            }
+                        return -1;
+                    }, (Block) entry.getValue());
+                }
         }));
     }
 
@@ -176,8 +194,11 @@ public class EnumLoader<T extends Enum<T>> {
                 // TODO Null condition
                 registerFluidRender((BlockFluidBase) entry.getValue(), ((Block)entry.getValue()).getRegistryName().getResourcePath());
             } else if (Block.class.isAssignableFrom(entry.getValue().getClass())) {
-                if (entry.getValue() instanceof CustomModelMasking)
+                if (entry.getValue() instanceof CustomModelMasking) {
                     ModelLoader.setCustomStateMapper((Block) entry.getValue(), block -> ((CustomModelMasking) entry.getValue()).getStateModelLocations());
+                    if (((CustomModelMasking) entry.getValue()).getModelLocation() != null)
+                        registerRender(Item.getItemFromBlock((Block) entry.getValue()), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
+                }
             }
         }));
     }

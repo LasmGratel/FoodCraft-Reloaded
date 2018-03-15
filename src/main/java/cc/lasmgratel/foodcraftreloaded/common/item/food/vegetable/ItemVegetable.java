@@ -20,22 +20,36 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.BlockVegetableCrop;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.FCRItemFood;
+import cc.lasmgratel.foodcraftreloaded.common.loader.VegetableEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.VegetableTyped;
-import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemVegetable extends FCRItemFood implements VegetableTyped, CustomModelMasking {
+public class ItemVegetable extends FCRItemFood implements VegetableTyped, CustomModelMasking, IPlantable, OreDictated {
     private VegetableType vegetableType;
 
     public ItemVegetable(VegetableType vegetableType) {
@@ -43,6 +57,9 @@ public class ItemVegetable extends FCRItemFood implements VegetableTyped, Custom
         setAlwaysEdible(true);
         setRegistryName(FoodCraftReloaded.MODID, vegetableType.toString());
         setCreativeTab(FCRCreativeTabs.INGREDIENTS);
+
+        MinecraftForge.addGrassSeed(new ItemStack(this), 8);
+
         this.vegetableType = vegetableType;
     }
 
@@ -61,5 +78,37 @@ public class ItemVegetable extends FCRItemFood implements VegetableTyped, Custom
     @Override
     public VegetableType getType() {
         return vegetableType;
+    }
+
+    @Nullable
+    @Override
+    public String[] getOreDictNames() {
+        return new String[]{NameBuilder.buildUnlocalizedName("crop", vegetableType.toString()), "listAllveggie"};
+    }
+
+    /**
+     * Called when a Block is right-clicked with this Item
+     */
+    @Nonnull
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        ItemStack itemstack = player.getHeldItem(hand);
+        IBlockState state = worldIn.getBlockState(pos);
+        if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up())) {
+            worldIn.setBlockState(pos.up(), getPlant(worldIn, pos), 11);
+            itemstack.shrink(1);
+            return EnumActionResult.SUCCESS;
+        }
+        else
+            return EnumActionResult.FAIL;
+    }
+
+    @Override
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
+        return EnumPlantType.Crop;
+    }
+
+    @Override
+    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
+        return FoodCraftReloaded.getLoader(VegetableEnumLoader.class).get().getInstanceMap(BlockVegetableCrop.class).get(vegetableType).getDefaultState();
     }
 }

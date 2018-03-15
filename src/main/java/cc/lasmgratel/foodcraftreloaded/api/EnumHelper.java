@@ -21,12 +21,13 @@
 package cc.lasmgratel.foodcraftreloaded.api;
 
 import cc.lasmgratel.foodcraftreloaded.common.item.tool.KitchenKnifeType;
+import net.minecraft.item.ItemStack;
 
 import java.awt.*;
 
 public class EnumHelper extends net.minecraftforge.common.util.EnumHelper {
 
-    public static KitchenKnifeType addKitchenKnifeType(String enumName, Color knifeColor) {
-        return addEnum(KitchenKnifeType.class, enumName, new Class[]{Color.class}, knifeColor);
+    public static KitchenKnifeType addKitchenKnifeType(String enumName, int maxDamage, Color knifeColor, ItemStack repairMaterial) {
+        return addEnum(KitchenKnifeType.class, enumName, new Class[]{int.class, Color.class, ItemStack.class}, maxDamage, knifeColor, repairMaterial);
     }
 }

@@ -20,29 +20,38 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruit;
 import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.common.IShearable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
-public class BlockFruitLeaves extends Block implements IShearable {
+public class BlockFruitLeaves extends Block implements FruitTyped, IShearable, CustomModelMasking {
     private FruitType fruitType;
 
     public BlockFruitLeaves(FruitType fruitType) {
@@ -54,7 +63,8 @@ public class BlockFruitLeaves extends Block implements IShearable {
         setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "leaves"));
     }
 
-    public FruitType getFruitType() {
+    @Override
+    public FruitType getType() {
         return fruitType;
     }
 
@@ -98,5 +108,25 @@ public class BlockFruitLeaves extends Block implements IShearable {
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
         return Collections.singletonList(new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(ItemFruit.class).get(fruitType), MathHelper.ceil(quantityDroppedWithBonus(fortune, ((World) world).rand) * 1.5)));
+    }
+
+    @Nonnull
+    @Override
+    public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
+        return Collections.singletonMap(getDefaultState(),
+            new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_leaves"), "normal"));
+    }
+
+    @Nullable
+    @Override
+    public IBlockColor getBlockColorMultiplier() {
+        return (IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) -> {
+            if (tintIndex == 0)
+                return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
+            else if (tintIndex == 1)
+                return fruitType.getColor().getRGB();
+            else
+                return -1;
+        };
     }
 }

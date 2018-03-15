@@ -20,17 +20,17 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food.fruit;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -39,7 +39,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,7 +48,7 @@ public class ItemFruitCake extends Item implements FruitTyped, CustomModelMaskin
 
     public ItemFruitCake(FruitType fruitType) {
         this.fruitType = fruitType;
-        setRegistryName(FoodCraftReloaded.MODID, fruitType.toString() + "_cake");
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "cake"));
         setCreativeTab(FCRCreativeTabs.SNACK);
     }
 
@@ -92,7 +91,7 @@ public class ItemFruitCake extends Item implements FruitTyped, CustomModelMaskin
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        return I18n.format("item.cake", I18n.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
+        return Translator.format("item.cake", Translator.format(NameBuilder.buildUnlocalizedName("item.fruit", fruitType.toString())));
     }
 
 

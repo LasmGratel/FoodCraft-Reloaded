@@ -52,8 +52,7 @@ public class BlockVegetableCake extends BlockCake implements CustomModelMasking 
     @Override
     public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
         Map<IBlockState, ModelResourceLocation> map = new HashMap<>();
-        map.put(getDefaultState().withProperty(BlockCake.BITES, 0), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=0"));
-        for (int j = 1; j <= 6; j++)
+        for (int j = 0; j <= 6; j++)
             map.put(getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + j));
         return map;
     }

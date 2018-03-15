@@ -1,5 +1,5 @@
 {
-    "parent": "block/generated",
+    "parent": "block/cube",
     "ambientocclusion": false,
     "textures": {
         "all": "foodcraftreloaded:blocks/fruit_sapling",

@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -31,6 +32,7 @@ public class ItemNoodles extends ItemPFood {
         setProperties(0f, 0.4f, 0f, 0f, 0.3f);
         setRegistryName(NameBuilder.buildRegistryName(ArrayUtils.add(name, "noodles")));
         setUnlocalizedName(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "noodles")));
+        setCreativeTab(FCRCreativeTabs.MEAL);
         this.name = name;
     }
 

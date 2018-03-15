@@ -22,29 +22,19 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitIcecream;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.common.recipe.CakeRecipe;
 import cc.lasmgratel.foodcraftreloaded.common.recipe.KitchenKnifeRecipe;
-import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.*;
-import org.apache.commons.lang3.StringUtils;
 
 public class EventLoader {
 
@@ -63,22 +53,9 @@ public class EventLoader {
     @SubscribeEvent
     public void onRegisterRecipe(RegistryEvent.Register<IRecipe> event) {
         FruitEnumLoader loader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
-        OreDictionary.registerOre("cakeOriginal", Items.CAKE);
-        for (FruitType fruitType : FruitType.values()) {
-            event.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getInstanceMap(BlockFruitSapling.class).get(fruitType)), " F ", "FXF", " F ", 'F', "crop" + StringUtils.capitalize(fruitType.toString()), 'X', "treeSapling").setRegistryName("fruit_sapling"));
-            event.getRegistry().register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(loader.getInstanceMap(ItemFruitIcecream.class).get(fruitType)), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
-            GameRegistry.addShapelessRecipe(
-                new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("cake", "fruit", fruitType.toString())),
-                new ResourceLocation(FoodCraftReloaded.MODID, "cake"),
-                new ItemStack(loader.getInstanceMap(ItemFruitCake.class).get(fruitType)),
-                OreIngredient.fromItem(loader.getInstanceMap(ItemFruitJuice.class).get(fruitType)),
-                new OreIngredient("cakeOriginal")
-            );
-        }
 
         event.getRegistry().register(new KitchenKnifeRecipe().setRegistryName(FoodCraftReloaded.MODID, "kitchen_knife_recipe"));
         event.getRegistry().register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake"));
-        RecipeSorter.register("foodcraftreloaded:cake", CakeRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
     }
 
     @SubscribeEvent
