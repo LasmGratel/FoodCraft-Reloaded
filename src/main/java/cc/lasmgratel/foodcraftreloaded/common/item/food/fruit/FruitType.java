@@ -21,10 +21,14 @@
 package cc.lasmgratel.foodcraftreloaded.common.item.food.fruit;
 
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.EffectiveItem;
+import net.minecraft.potion.PotionEffect;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
-public enum FruitType implements Colorable {
+public enum FruitType implements Colorable, EffectiveItem {
     /**
      * Pear
      * 梨
@@ -116,9 +120,15 @@ public enum FruitType implements Colorable {
     BANANA(new Color(0xf7eb6a));
 
     private Color color;
+    private List<PotionEffect> effects;
 
     FruitType(Color color) {
         this.color = color;
+    }
+
+    FruitType(Color color, PotionEffect... effects) {
+        this(color);
+        this.effects = Arrays.asList(effects);
     }
 
     @Override
@@ -134,5 +144,10 @@ public enum FruitType implements Colorable {
     @Override
     public String toString() {
         return name().toLowerCase();
+    }
+
+    @Override
+    public List<PotionEffect> getEffects() {
+        return effects;
     }
 }

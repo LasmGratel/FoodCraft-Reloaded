@@ -18,10 +18,11 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.item;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
+import cc.lasmgratel.foodcraftreloaded.common.item.IMetadatable;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.RegItem;

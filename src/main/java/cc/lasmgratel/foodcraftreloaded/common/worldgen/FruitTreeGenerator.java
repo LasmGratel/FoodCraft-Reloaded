@@ -60,7 +60,7 @@ public class FruitTreeGenerator {
             BaseTreeGenerator[] generatorBasicTrees = generatorTreeMap.values().toArray(new BaseTreeGenerator[0]);
             BaseTreeGenerator generator = generatorBasicTrees[MathHelper.getInt(event.getRand(),0, generatorBasicTrees.length - 1)];
             if (generator.generate(event.getWorld(), event.getRand(), event.getPos())) {
-                FoodCraftReloaded.getLogger().info("Generated fruit tree at " + event.getPos());
+                FoodCraftReloaded.getLogger().debug("Generated fruit tree at " + event.getPos());
                 event.setResult(Event.Result.DENY);
             }
         }
@@ -70,7 +70,7 @@ public class FruitTreeGenerator {
     public void fruitTreeGrow(SaplingGrowTreeEvent event) {
         if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockFruitSapling) {
             BlockFruitSapling sapling = (BlockFruitSapling) event.getWorld().getBlockState(event.getPos()).getBlock();
-            FoodCraftReloaded.getLogger().info(generatorTreeMap.get(sapling.getType()).generate(event.getWorld(), event.getRand(), event.getPos()));
+            FoodCraftReloaded.getLogger().debug(generatorTreeMap.get(sapling.getType()).generate(event.getWorld(), event.getRand(), event.getPos()));
             event.setResult(Event.Result.DENY);
         }
     }

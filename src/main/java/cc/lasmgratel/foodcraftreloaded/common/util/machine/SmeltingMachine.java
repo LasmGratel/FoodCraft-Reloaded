@@ -18,7 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
+package cc.lasmgratel.foodcraftreloaded.common.util.machine;
 
-public interface EnergizedMachine extends Machine {
+public interface SmeltingMachine extends Machine {
+    /**
+     * Called when all fuel has been consumed, and attempt to fetch new fuel.
+     * @return Fuel amount
+     */
+    int progressFuel();
 }

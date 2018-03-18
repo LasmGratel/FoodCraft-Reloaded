@@ -18,23 +18,39 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.loader.register;
+package cc.lasmgratel.foodcraftreloaded.common.util.machine;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+/**
+ * Machines' behavior definition.
+ */
+public interface Machine {
+    /**
+     * Returns whether machine can be started.
+     */
+    boolean canStart();
 
-public class RegisterLoader {
-    @Load
-    public void load() {
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+    /**
+     * Returns whether machine can continue progressing at this tick.
+     */
+    boolean canProgress();
 
-    @SubscribeEvent
-    public void register(RegistryEvent.Register event) {
-        FoodCraftReloaded.getLogger().info(event.getGenericType());
-        RegisterManager.getInstance().register(event.getGenericType(), event.getRegistry());
-    }
+    /**
+     * Called when machine started progressing.
+     */
+    void startProgress();
+
+    /**
+     * Called when machine is progressing.
+     */
+    void progress();
+
+    /**
+     * Called when machine has progressed completely.
+     */
+    void progressCompleted();
+
+    /**
+     * Reset current progress.
+     */
+    void resetProgress();
 }

@@ -66,7 +66,7 @@ public class RegisterManager {
     }
 
     public <T extends IForgeRegistryEntry<T>> void register(Type type, IForgeRegistry<T> registry) {
-        FoodCraftReloaded.getLogger().info("[FoodCraft Reloaded Register Manager] Registering type " + type);
+        FoodCraftReloaded.getLogger().debug("[FoodCraft Reloaded Register Manager] Registering type " + type);
         for (Map.Entry<Type, Set<RegisterHandler<? extends IForgeRegistryEntry<?>>>> entry : registerMap.entrySet())
             if (((Class<?>) type).isAssignableFrom((Class<?>) entry.getKey()))
                 entry.getValue().stream().map(handler -> (RegisterHandler<T>) handler).forEach(handler -> handler.register(registry));

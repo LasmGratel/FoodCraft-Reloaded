@@ -71,7 +71,7 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         tank.readFromNBT(tag.getCompoundTag("tank"));
-        CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemStackHandler, null, tag.getTag("items"));
+        CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(itemStackHandler, null, tag.getTag("items"));
         output = new ItemStack(tag.getCompoundTag("output"));
         fluidOutput = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidOutput"));
     }
@@ -80,7 +80,7 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
         super.writeToNBT(tag);
-        tag.setTag("items", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemStackHandler, null));
+        tag.setTag("items", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(itemStackHandler, null));
         tag.setTag("output", output.serializeNBT());
         if (fluidOutput != null)
             tag.setTag("fluidOutput", fluidOutput.writeToNBT(new NBTTagCompound()));

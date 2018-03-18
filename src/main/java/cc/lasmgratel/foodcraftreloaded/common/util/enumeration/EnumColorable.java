@@ -22,10 +22,10 @@ package cc.lasmgratel.foodcraftreloaded.common.util.enumeration;
 
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
 
-import java.awt.Color;
+import java.awt.*;
 
 public interface EnumColorable<T extends Enum<T>> extends EnumTyped<T> {
-    default Color getColor() {
+    default Color getColor(int tintIndex) {
         if (getType() instanceof Colorable)
             return ((Colorable) getType()).getColor();
         else

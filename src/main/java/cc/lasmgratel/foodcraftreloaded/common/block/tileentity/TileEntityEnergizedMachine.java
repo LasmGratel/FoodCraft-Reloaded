@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
+import cc.lasmgratel.foodcraftreloaded.common.util.machine.EnergizedMachine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

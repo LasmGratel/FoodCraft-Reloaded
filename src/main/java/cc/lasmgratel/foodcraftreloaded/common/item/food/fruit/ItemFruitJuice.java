@@ -21,34 +21,33 @@
 package cc.lasmgratel.foodcraftreloaded.common.item.food.fruit;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
-import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitCake;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.ItemDrink;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.Juice;
 import cc.lasmgratel.foodcraftreloaded.common.loader.FruitEnumLoader;
+import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.block.BlockCake;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class ItemFruitJuice extends ItemDrink implements FruitTyped, CustomModelMasking {
+public class ItemFruitJuice extends ItemDrink implements FruitTyped, Juice {
     private FruitType fruitType;
 
     public ItemFruitJuice(FruitType fruitType) {
         super(4, 1.0f);
-        setRegistryName(FoodCraftReloaded.MODID, fruitType.toString() + "_juice");
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "juice"));
         this.fruitType = fruitType;
     }
 
@@ -69,24 +68,13 @@ public class ItemFruitJuice extends ItemDrink implements FruitTyped, CustomModel
         return Translator.format("item.juice", Translator.format("item.fruit" + StringUtils.capitalize(fruitType.toString())));
     }
 
-    @Nullable
-    @Override
-    public ModelResourceLocation getModelLocation() {
-        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory");
-    }
-
     @Override
     public String[] getOreDictNames() {
-        return new String[]{"listAlldrink"};
+        return ArrayUtils.addAll(super.getOreDictNames(), "listAlljuice");
     }
 
     @Override
     public FruitType getType() {
         return fruitType;
-    }
-
-    @Override
-    public int getTintIndex() {
-        return 1;
     }
 }

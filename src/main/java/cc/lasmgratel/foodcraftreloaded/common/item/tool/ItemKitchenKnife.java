@@ -24,13 +24,15 @@ import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.EnumColorable;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.EnumTyped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class ItemKitchenKnife extends Item implements CustomModelMasking {
+public class ItemKitchenKnife extends Item implements CustomModelMasking, EnumTyped<KitchenKnifeType>, EnumColorable<KitchenKnifeType> {
     private KitchenKnifeType type;
 
     public ItemKitchenKnife(KitchenKnifeType type) {

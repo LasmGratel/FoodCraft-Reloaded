@@ -24,12 +24,13 @@ import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.VegetableTyped;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.StringUtils;
 
-public class FluidVegetableJuice extends Fluid {
+public class FluidVegetableJuice extends Fluid implements VegetableTyped {
     private VegetableType vegetableType;
 
     public FluidVegetableJuice(VegetableType vegetableType) {

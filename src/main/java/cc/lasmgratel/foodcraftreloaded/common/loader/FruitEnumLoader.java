@@ -26,40 +26,25 @@ import cc.lasmgratel.foodcraftreloaded.common.block.BlockFluidJuice;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitCake;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitLeaves;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
-import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidJuice;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidFruitJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.*;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 
 public class FruitEnumLoader extends EnumLoader<FruitType> {
-    private EnumMap<FruitType, FluidJuice> fluidJuiceEnumMap = new EnumMap<>(FruitType.class);
-
-    public EnumMap<FruitType, FluidJuice> getFluidJuiceEnumMap() {
-        return fluidJuiceEnumMap;
-    }
-
     @Load
     public void loadFruits() {
-        for (FruitType fruitType : FruitType.values()) {
-            FluidJuice fluid = new FluidJuice(fruitType);
-            FluidRegistry.registerFluid(fluid);
-            FluidRegistry.addBucketForFluid(fluid);
-            fluidJuiceEnumMap.put(fruitType, fluid);
-        }
         Class[] values = new Class[] {
-            ItemFruit.class,
-            ItemFruitJuice.class,
-            BlockFluidJuice.class,
+            FluidFruitJuice.class,
+            ItemFruit.class, ItemFruitJuice.class, BlockFluidJuice.class,
             BlockFruitLeaves.class, BlockFruitSapling.class,
-            BlockFruitCake.class, ItemFruitCake.class, ItemFruitLiqueur.class, ItemFruitYogurt.class
+            BlockFruitCake.class, ItemFruitCake.class, ItemFruitLiqueur.class, ItemFruitYogurt.class, ItemFruitIcecream.class, ItemFruitSoda.class
         };
         Arrays.stream(values).forEach(this::putValue);
         register();

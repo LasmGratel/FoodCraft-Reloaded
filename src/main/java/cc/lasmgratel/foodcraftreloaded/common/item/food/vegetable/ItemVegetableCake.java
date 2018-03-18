@@ -49,7 +49,7 @@ public class ItemVegetableCake extends Item implements VegetableTyped, CustomMod
 
     public ItemVegetableCake(VegetableType vegetableType) {
         this.vegetableType = vegetableType;
-        setRegistryName(FoodCraftReloaded.MODID, vegetableType.toString() + "_cake");
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "cake"));
         setCreativeTab(FCRCreativeTabs.SNACK);
     }
 

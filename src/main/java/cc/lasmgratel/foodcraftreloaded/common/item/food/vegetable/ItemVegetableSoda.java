@@ -39,7 +39,7 @@ public class ItemVegetableSoda extends ItemDrink implements VegetableTyped, Cust
 
     public ItemVegetableSoda(VegetableType vegetableType) {
         super(4, 1.0f);
-        setRegistryName(FoodCraftReloaded.MODID, vegetableType.toString() + "_soda");
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "soda"));
         this.vegetableType = vegetableType;
     }
 

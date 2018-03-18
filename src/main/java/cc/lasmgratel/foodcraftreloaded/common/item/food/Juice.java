@@ -18,23 +18,30 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.loader.register;
+package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
-public class RegisterLoader {
-    @Load
-    public void load() {
-        MinecraftForge.EVENT_BUS.register(this);
+import javax.annotation.Nullable;
+
+public interface Juice extends OreDictated, CustomModelMasking {
+    @Nullable
+    @Override
+    default ModelResourceLocation getModelLocation() {
+        return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "juice"), "inventory");
     }
 
-    @SubscribeEvent
-    public void register(RegistryEvent.Register event) {
-        FoodCraftReloaded.getLogger().info(event.getGenericType());
-        RegisterManager.getInstance().register(event.getGenericType(), event.getRegistry());
+    @Override
+    default String[] getOreDictNames() {
+        return new String[]{"listAlljuice"};
+    }
+
+    @Override
+    default int getTintIndex() {
+        return 1;
     }
 }

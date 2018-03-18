@@ -34,6 +34,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class ItemDrink extends FCRItemFood implements OreDictated {
     public ItemDrink(int amount) {
@@ -43,19 +44,21 @@ public class ItemDrink extends FCRItemFood implements OreDictated {
     public ItemDrink(int amount, float saturation) {
         super(amount, saturation, false);
         setCreativeTab(FCRCreativeTabs.DRINK);
+        setContainerItem(FCRItems.GLASS_BOTTLE);
     }
 
     @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, @Nullable World worldIn, EntityLivingBase entityLiving) {
-        if (entityLiving instanceof EntityPlayer) {
-            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
-            entityplayer.getFoodStats().addStats(this, stack);
-            worldIn.playSound(entityplayer, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
-            this.onFoodEaten(stack, worldIn, entityplayer);
-            entityplayer.addStat(StatList.getObjectUseStats(this));
+        if (entityLiving instanceof EntityPlayer && worldIn != null) {
+            EntityPlayer entityPlayer = (EntityPlayer)entityLiving;
+            entityPlayer.getFoodStats().addStats(this, stack);
+            worldIn.playSound(entityPlayer, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            this.onFoodEaten(stack, worldIn, entityPlayer);
+            Optional.ofNullable(StatList.getObjectUseStats(this)).ifPresent(entityPlayer::addStat);
+            entityPlayer.addItemStackToInventory(new ItemStack(FCRItems.GLASS_BOTTLE));
         }
-        return new ItemStack(FCRItems.GLASS_BOTTLE);
+        return stack.splitStack(1);
     }
 
     @Override

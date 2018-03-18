@@ -45,14 +45,14 @@ public class TileEntityPressureCooker extends TileFluidHandler implements ITicka
     @Override
     public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
-        CapabilityEnergy.ENERGY.getStorage().readNBT(CapabilityEnergy.ENERGY, energyStorage, null, tag.getTag("energy"));
+        CapabilityEnergy.ENERGY.readNBT(energyStorage, null, tag.getTag("energy"));
         CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().readNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null, tag.getTag("inv"));
     }
 
     @SuppressWarnings("ConstantConditions")
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-        tag.setTag("energy", CapabilityEnergy.ENERGY.getStorage().writeNBT(CapabilityEnergy.ENERGY, energyStorage, null));
+        tag.setTag("energy", CapabilityEnergy.ENERGY.writeNBT(energyStorage, null));
         tag.setTag("inv", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.getStorage().writeNBT(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemHandler, null));
         return super.writeToNBT(tag);
     }

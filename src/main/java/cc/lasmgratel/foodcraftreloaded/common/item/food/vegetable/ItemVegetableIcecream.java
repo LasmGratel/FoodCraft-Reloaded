@@ -40,7 +40,7 @@ public class ItemVegetableIcecream extends FCRItemFood implements VegetableTyped
 
     public ItemVegetableIcecream(VegetableType vegetableType) {
         super(5, 1.0f, false);
-        setRegistryName(FoodCraftReloaded.MODID, vegetableType.toString() + "_icecream");
+        setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "icecream"));
         setCreativeTab(FCRCreativeTabs.SNACK);
         this.vegetableType = vegetableType;
     }

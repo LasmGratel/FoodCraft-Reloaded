@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
 
+import cc.lasmgratel.foodcraftreloaded.common.util.machine.SmeltingMachine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -49,6 +50,10 @@ public abstract class TileEntitySmeltingMachine extends TileEntityProgressiveMac
         return 0;
     }
 
+    public static boolean isSmelting(TileEntity tileEntity) {
+        return tileEntity instanceof TileEntitySmeltingMachine && ((TileEntitySmeltingMachine) tileEntity).fuel > 0;
+    }
+
     @Override
     public boolean canStart() {
         if (fuel <= 0) {
@@ -67,9 +72,12 @@ public abstract class TileEntitySmeltingMachine extends TileEntityProgressiveMac
     }
 
     @Override
-    @OverridingMethodsMustInvokeSuper
-    public void progress() {
-        if (fuel <= 0) {
+    public void progress() {}
+
+    @Override
+    public void update() {
+        super.update();
+        if (fuel <= 0 && isStarted()) {
             int progressed = progressFuel();
             if (progressed == 0)
                 resetProgress();

@@ -20,13 +20,15 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.api.recipe.RecipeManager;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.BlockFruitSapling;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidFruitJuice;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.*;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetable;
-import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.VegetableType;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.*;
 import cc.lasmgratel.foodcraftreloaded.common.item.tool.ItemKitchenKnife;
 import cc.lasmgratel.foodcraftreloaded.common.item.tool.KitchenKnifeType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
@@ -37,12 +39,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.LoaderState;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
-import org.apache.commons.lang3.StringUtils;
 
 @SuppressWarnings("OptionalGetWithoutIsPresent")
 public class RecipeLoader {
@@ -52,7 +50,7 @@ public class RecipeLoader {
         FruitEnumLoader fruitLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get();
         VegetableEnumLoader vegetableLoader = FoodCraftReloaded.getProxy().getLoaderManager().getLoader(VegetableEnumLoader.class).get();
         for (FruitType fruitType : FruitType.values()) {
-            RecipeManager.getInstance().addRecipe(new DrinkRecipe(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType), new FluidStack(fruitLoader.getFluidJuiceEnumMap().get(fruitType), 1000)));
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType), new FluidStack(fruitLoader.getInstance(FluidFruitJuice.class, fruitType), 1000)));
             GameRegistry.addShapedRecipe(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "sapling")),
                 new ResourceLocation(FoodCraftReloaded.MODID, "sapling"),
                 new ItemStack(fruitLoader.getInstanceMap(BlockFruitSapling.class).get(fruitType)).setStackDisplayName(Translator.format("item.foodcraftreloaded.sapling", Translator.format(NameBuilder.buildUnlocalizedName("item.fruit", fruitType.toString())))),
@@ -62,8 +60,12 @@ public class RecipeLoader {
                 'X', fruitLoader.getInstanceMap(ItemFruit.class).get(fruitType),
                 'S', "treeSapling"
             );
-            ForgeRegistries.RECIPES.register(new ShapedOreRecipe(new ResourceLocation("food"), new ItemStack(fruitLoader.getInstanceMap(BlockFruitSapling.class).get(fruitType)), " F ", "FXF", " F ", 'F', "crop" + StringUtils.capitalize(fruitType.toString()), 'X', "treeSapling").setRegistryName("fruit_sapling"));
-            ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(new ResourceLocation("food"), new ItemStack(fruitLoader.getInstanceMap(ItemFruitIcecream.class).get(fruitType)), "food" + StringUtils.capitalize(fruitType.toString()) + "juice", "foodIcecream").setRegistryName("fruit_icecream"));
+            GameRegistry.addShapelessRecipe(
+                new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "icecream")),
+                new ResourceLocation(FoodCraftReloaded.MODID, "icecream"),
+                new ItemStack(fruitLoader.getInstanceMap(ItemFruitIcecream.class).get(fruitType)),
+                OreIngredient.fromItem(FCRItems.ORIGINAL_ICE_CREAM),
+                OreIngredient.fromItem(fruitLoader.getInstanceMap(ItemFruitJuice.class).get(fruitType)));
             GameRegistry.addShapelessRecipe(
                 new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("cake", "fruit", fruitType.toString())),
                 new ResourceLocation(FoodCraftReloaded.MODID, "cake"),
@@ -85,7 +87,20 @@ public class RecipeLoader {
             );
         }
         for (VegetableType vegetableType : VegetableType.values()) {
-            RecipeManager.getInstance().addRecipe(new DrinkRecipe(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType), new FluidStack(vegetableLoader.getFluidJuiceEnumMap().get(vegetableType), 1000)));
+            RecipeManager.getInstance().addRecipe(new DrinkRecipe(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType), new FluidStack(vegetableLoader.getInstance(FluidVegetableJuice.class, vegetableType), 1000)));
+            GameRegistry.addShapelessRecipe(
+                new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "icecream")),
+                new ResourceLocation(FoodCraftReloaded.MODID, "icecream"),
+                new ItemStack(vegetableLoader.getInstanceMap(ItemVegetableIcecream.class).get(vegetableType)),
+                OreIngredient.fromItem(FCRItems.ORIGINAL_ICE_CREAM),
+                OreIngredient.fromItem(vegetableLoader.getInstanceMap(ItemVegetableJuice.class).get(vegetableType)));
+            GameRegistry.addShapelessRecipe(
+                new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("cake", "vegetable", vegetableType.toString())),
+                new ResourceLocation(FoodCraftReloaded.MODID, "cake"),
+                new ItemStack(vegetableLoader.getInstanceMap(ItemVegetableCake.class).get(vegetableType)),
+                OreIngredient.fromItem(vegetableLoader.getInstanceMap(ItemVegetableJuice.class).get(vegetableType)),
+                OreIngredient.fromItem(Items.CAKE)
+            );
         }
 //        ForgeRegistries.RECIPES.register(new CakeRecipe().setRegistryName(FoodCraftReloaded.MODID, "cake_recipe"));
     }

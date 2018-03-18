@@ -20,11 +20,11 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.client.EnumGui;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.client.EnumGui;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

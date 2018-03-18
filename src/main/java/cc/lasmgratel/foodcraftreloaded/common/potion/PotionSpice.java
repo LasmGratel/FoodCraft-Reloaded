@@ -18,23 +18,24 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.loader.register;
+package cc.lasmgratel.foodcraftreloaded.common.potion;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 
-public class RegisterLoader {
-    @Load
-    public void load() {
-        MinecraftForge.EVENT_BUS.register(this);
+import javax.annotation.Nonnull;
+import java.awt.*;
+
+/**
+ * SPICYYYYYYYYY!
+ */
+public class PotionSpice extends Potion {
+    public PotionSpice() {
+        super(true, Color.RED.getRGB());
     }
 
-    @SubscribeEvent
-    public void register(RegistryEvent.Register event) {
-        FoodCraftReloaded.getLogger().info(event.getGenericType());
-        RegisterManager.getInstance().register(event.getGenericType(), event.getRegistry());
+    @Override
+    public void performEffect(@Nonnull EntityLivingBase entityLivingBaseIn, int amplifier) {
+        entityLivingBaseIn.setFire(amplifier * 20 * 3);
     }
 }

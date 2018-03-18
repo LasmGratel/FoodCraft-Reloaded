@@ -96,7 +96,7 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements Au
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
 
-        if (TileEntityProgressiveMachine.isProgressing(tileEntity)) {
+        if (TileEntitySmeltingMachine.isSmelting(tileEntity)) {
             int k = this.getBurnLeftScaled(13);
             this.drawTexturedModalRect(i + 68, j + 48 - k, 176, 12 - k, 14, k + 1);
         }

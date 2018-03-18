@@ -20,11 +20,16 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRPotions;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.EffectiveItem;
+import net.minecraft.potion.PotionEffect;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
-public enum VegetableType implements Colorable {
+public enum VegetableType implements Colorable, EffectiveItem {
     /**
      * 茄子
      * Eggplant
@@ -131,7 +136,7 @@ public enum VegetableType implements Colorable {
      * 朝天椒
      * Facing heaven pepper
      */
-    FACING_HEAVEN_PEPPER(new Color(0xb21816)),
+    FACING_HEAVEN_PEPPER(new Color(0xb21816), new PotionEffect(FCRPotions.SPICE, 20 * 3, 1)),
 
     /**
      * 胡椒
@@ -194,9 +199,15 @@ public enum VegetableType implements Colorable {
     GREEN_ONION(new Color(0x84F941));
 
     private Color color;
+    private List<PotionEffect> effects;
 
     VegetableType(Color color) {
         this.color = color;
+    }
+
+    VegetableType(Color color, PotionEffect... effects) {
+        this(color);
+        this.effects = Arrays.asList(effects);
     }
 
     @Override
@@ -212,5 +223,10 @@ public enum VegetableType implements Colorable {
     @Override
     public String toString() {
         return name().toLowerCase();
+    }
+
+    @Override
+    public List<PotionEffect> getEffects() {
+        return effects;
     }
 }

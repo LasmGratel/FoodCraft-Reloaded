@@ -88,11 +88,11 @@ public class LiqueurLoader {
                     try {
                         if (customModelMasking.getTintIndex() != -1)
                             if (tintIndex == customModelMasking.getTintIndex())
-                                return ((EnumColorable) customModelMasking).getColor().getRGB();
+                                return ((EnumColorable) customModelMasking).getColor(tintIndex).getRGB();
                     } catch (ClassCastException ignored) {
                         try {
                             if (tintIndex == 1)
-                                return ((EnumColorable) customModelMasking).getColor().getRGB();
+                                return ((EnumColorable) customModelMasking).getColor(tintIndex).getRGB();
                         } catch (ClassCastException ignored2) { }
                     }
                     return -1;

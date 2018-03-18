@@ -18,23 +18,10 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.loader.register;
+package cc.lasmgratel.foodcraftreloaded.api.init;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import cc.lasmgratel.foodcraftreloaded.common.potion.PotionSpice;
 
-public class RegisterLoader {
-    @Load
-    public void load() {
-        MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    @SubscribeEvent
-    public void register(RegistryEvent.Register event) {
-        FoodCraftReloaded.getLogger().info(event.getGenericType());
-        RegisterManager.getInstance().register(event.getGenericType(), event.getRegistry());
-    }
+public interface FCRPotions {
+    PotionSpice SPICE = new PotionSpice();
 }

@@ -18,8 +18,9 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.block;
+package cc.lasmgratel.foodcraftreloaded.common.loader;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityPressureCooker;
@@ -54,7 +55,7 @@ public class BlockLoader {
                 Block block = (Block) field.get(null);
                 ForgeRegistries.BLOCKS.register(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
 
-                //Register item block.
+                // Register item block.
                 Class<? extends ItemBlock> itemClass = anno.itemClass();
                 Constructor<? extends ItemBlock> con = itemClass.getConstructor(Block.class);
                 con.setAccessible(true);
@@ -83,6 +84,11 @@ public class BlockLoader {
 
             try {
                 Block block = (Block) field.get(null);
+                if (block instanceof CustomModelMasking) {
+                    ModelLoader.setCustomStateMapper(block, b -> ((CustomModelMasking) b).getStateModelLocations());
+                    if (((CustomModelMasking) block).getModelLocation() != null)
+                        registerRender(Item.getItemFromBlock(block), 0, ((CustomModelMasking) block).getModelLocation());
+                }
                 registerRender(block,0);
             } catch (Exception e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register block " + field.toGenericString(), e);
@@ -90,8 +96,12 @@ public class BlockLoader {
         }
     }
 
+    private void registerRender(Item item, int meta, ModelResourceLocation location) {
+        ModelLoader.setCustomModelResourceLocation(item, meta, location);
+    }
+
     private void registerRender(Block block, int meta) {
         Item item = Item.getItemFromBlock(block);
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+        registerRender(item, meta, new ModelResourceLocation(block.getRegistryName(), "inventory"));
     }
 }

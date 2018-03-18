@@ -18,23 +18,21 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.loader.register;
+package cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 
-public class RegisterLoader {
-    @Load
-    public void load() {
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    @SubscribeEvent
-    public void register(RegistryEvent.Register event) {
-        FoodCraftReloaded.getLogger().info(event.getGenericType());
-        RegisterManager.getInstance().register(event.getGenericType(), event.getRegistry());
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface RegPotion {
+    /**
+     * The params to build registryName and unlocalizedName.
+     * @see NameBuilder
+     */
+    String[] value();
 }

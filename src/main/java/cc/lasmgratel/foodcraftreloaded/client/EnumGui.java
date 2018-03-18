@@ -41,7 +41,7 @@ public enum EnumGui {
     @Nonnull
     private Class<? extends AutomatedGui> guiClass;
 
-    EnumGui(@Nonnull Class<? extends AutomatedGui> guiClass, @Nonnull Class<? extends AutomatedGui> containerClass) {
+    EnumGui(@Nonnull Class<? extends AutomatedGui> containerClass, @Nonnull Class<? extends AutomatedGui> guiClass) {
         this.guiClass = guiClass;
         this.containerClass = containerClass;
     }

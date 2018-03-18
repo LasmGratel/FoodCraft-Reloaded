@@ -47,7 +47,6 @@ public class CakeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
                 flagCake = !flagCake;
             else if (inv.getStackInSlot(i).getItem() instanceof ItemFruitJuice || inv.getStackInSlot(i).getItem() instanceof ItemVegetableJuice)
                 flagJuice = !flagJuice;
-            FoodCraftReloaded.getLogger().info(inv + ": ", inv.getStackInSlot(i));
         }
         return flagCake && flagJuice;
     }

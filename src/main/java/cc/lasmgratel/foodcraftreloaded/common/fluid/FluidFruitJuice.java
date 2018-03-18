@@ -24,15 +24,16 @@ import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.FruitType;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.FruitTyped;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.StringUtils;
 
-public class FluidJuice extends Fluid {
+public class FluidFruitJuice extends Fluid implements FruitTyped {
     private FruitType fruitType;
 
-    public FluidJuice(FruitType fruitType) {
+    public FluidFruitJuice(FruitType fruitType) {
         super(NameBuilder.buildRegistryName(fruitType.toString(), "juice"), new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_still"),  new ResourceLocation(FoodCraftReloaded.MODID, "fluids/juice_flow"));
         this.fruitType = fruitType;
         setViscosity(2000);

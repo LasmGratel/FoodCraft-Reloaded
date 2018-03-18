@@ -18,12 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.block.tileentity;
+package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
-public interface SmeltingMachine extends Machine {
-    /**
-     * Called when all fuel has been consumed, and attempt to fetch new fuel.
-     * @return Fuel amount
-     */
-    int progressFuel();
+import net.minecraft.potion.PotionEffect;
+
+import java.util.List;
+
+public interface EffectiveItem {
+    List<PotionEffect> getEffects();
 }

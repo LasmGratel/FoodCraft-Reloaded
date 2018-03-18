@@ -22,6 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -31,11 +32,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FCRItemFood extends ItemFood {
     /** Number of ticks to run while 'EnumAction'ing until result. */
-    public int itemUseDuration = 32;
+    private int itemUseDuration = 32;
     /** The amount this food item heals the player. */
     private int healAmount;
     private float saturationModifier = 0.6f;
@@ -43,10 +46,7 @@ public class FCRItemFood extends ItemFood {
     private boolean isWolfsFavoriteMeat = false;
     /** If this field is true, the food can be consumed even if the player don't need to eat. */
     private boolean alwaysEdible = false;
-    /** represents the potion effect that will occurr upon eating this food. Set by setPotionEffect */
-    private PotionEffect potionId;
-    /** probably of the set potion effect occurring */
-    private float potionEffectProbability;
+    private Map<PotionEffect, Float> effectMap = new HashMap<>();
 
     public FCRItemFood(int amount, boolean isWolfFood) {
         super(amount, isWolfFood);
@@ -82,6 +82,18 @@ public class FCRItemFood extends ItemFood {
         return isWolfsFavoriteMeat;
     }
 
+    public Map<PotionEffect, Float> getEffectMap() {
+        return effectMap;
+    }
+
+    public void addEffect(PotionEffect effect) {
+        addEffect(effect, 1.0f);
+    }
+
+    public void addEffect(PotionEffect effect, float probability) {
+        getEffectMap().put(effect, probability);
+    }
+
     public void setWolfsFavoriteMeat(boolean wolfsFavoriteMeat) {
         isWolfsFavoriteMeat = wolfsFavoriteMeat;
     }
@@ -94,22 +106,6 @@ public class FCRItemFood extends ItemFood {
         this.itemUseDuration = itemUseDuration;
     }
 
-    public float getPotionEffectProbability() {
-        return potionEffectProbability;
-    }
-
-    public void setPotionEffectProbability(float potionEffectProbability) {
-        this.potionEffectProbability = potionEffectProbability;
-    }
-
-    public PotionEffect getPotionId() {
-        return potionId;
-    }
-
-    public void setPotionId(PotionEffect potionId) {
-        this.potionId = potionId;
-    }
-
     public float getSaturationModifier() {
         return saturationModifier;
     }
@@ -118,11 +114,12 @@ public class FCRItemFood extends ItemFood {
         this.saturationModifier = saturationModifier;
     }
 
-    @Nonnull
-    public ItemFood setPotionEffect(@Nonnull PotionEffect effect, float probability) {
-        this.potionId = effect;
-        this.potionEffectProbability = probability;
-        return this;
+    @Override
+    protected void onFoodEaten(ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
+        if (!worldIn.isRemote) {
+            float f = worldIn.rand.nextFloat();
+            effectMap.entrySet().parallelStream().filter(entry -> f < entry.getValue()).forEach(entry -> player.addPotionEffect(entry.getKey()));
+        }
     }
 
     /**

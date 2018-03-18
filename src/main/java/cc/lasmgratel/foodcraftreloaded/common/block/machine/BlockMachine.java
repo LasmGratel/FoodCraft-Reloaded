@@ -21,14 +21,18 @@
 package cc.lasmgratel.foodcraftreloaded.common.block.machine;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -38,13 +42,16 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class BlockMachine extends BlockContainer {
+public abstract class BlockMachine extends BlockContainer implements CustomModelMasking {
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyBool STARTED = PropertyBool.create("started");
 
     public BlockMachine() {
         super(Material.ROCK);
-        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(STARTED, false));
         setHardness(3.5f);
         setCreativeTab(FCRCreativeTabs.BASE);
     }
@@ -153,14 +160,30 @@ public abstract class BlockMachine extends BlockContainer {
      */
     @Override
     @Nonnull
-    public IBlockState withMirror(@Nonnull IBlockState state, Mirror mirrorIn)
-    {
+    public IBlockState withMirror(@Nonnull IBlockState state, Mirror mirrorIn) {
         return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
     }
 
     @Override
     @Nonnull
+    public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
+
+    @Override
+    @Nonnull
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, FACING, STARTED);
+    }
+
+    @Nonnull
+    @Override
+    public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
+        Map<IBlockState, ModelResourceLocation> locationMap = new HashMap<>();
+        for (EnumFacing facing : FACING.getAllowedValues()) {
+            locationMap.put(getDefaultState().withProperty(FACING, facing), new ModelResourceLocation(getRegistryName(), "facing=" + facing.getName()));
+        }
+        return locationMap;
     }
 }

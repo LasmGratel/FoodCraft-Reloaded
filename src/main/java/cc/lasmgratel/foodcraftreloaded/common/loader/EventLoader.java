@@ -26,20 +26,16 @@ import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitCake;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.common.recipe.CakeRecipe;
 import cc.lasmgratel.foodcraftreloaded.common.recipe.KitchenKnifeRecipe;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class EventLoader {
-
-    @Load(value = LoaderState.INITIALIZATION)
-    public void register() {
+    public EventLoader() {
         MinecraftForge.EVENT_BUS.register(this);
     }
 

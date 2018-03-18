@@ -23,6 +23,8 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.Colorable;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.EffectiveItem;
+import cc.lasmgratel.foodcraftreloaded.common.item.food.FCRItemFood;
 import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
@@ -50,8 +52,9 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unchecked")
 public class EnumLoader<T extends Enum<T>> {
-    private final Map<Class<?>, Map<T, ?>> enumInstanceMap = new LinkedHashMap<>();
+    private final Map<Class<?>, Map<T, ?>> enumInstanceMap = new HashMap<>();
 
     /**
      * Attempt to register all entries from {@link #enumInstanceMap} to {@link ForgeRegistries}.
@@ -60,7 +63,14 @@ public class EnumLoader<T extends Enum<T>> {
     public void register() {
         enumInstanceMap.forEach((instanceClass, enumMap) -> {
             if (IForgeRegistryEntry.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (IForgeRegistryEntry<? extends IForgeRegistryEntry<?>>) o)
+                enumMap.entrySet().stream()
+                    .peek(o -> {
+                        if (o.getValue() instanceof FCRItemFood && o.getKey() instanceof EffectiveItem) {
+                            if (((EffectiveItem) o.getKey()).getEffects() != null)
+                            ((EffectiveItem) o.getKey()).getEffects().forEach(((FCRItemFood) o.getValue())::addEffect);
+                        }
+                    })
+                    .map(o -> (IForgeRegistryEntry<? extends IForgeRegistryEntry<?>>) o.getValue())
 //                    .map(o -> new RegisterHandler(o))
                     .forEach(o -> {
 //                    TODO RegisterManager.getInstance().putRegister(o);
@@ -75,11 +85,6 @@ public class EnumLoader<T extends Enum<T>> {
                                 Arrays.stream(((OreDictated) o).getOreDictNames()).forEach(s -> OreDictionary.registerOre(s, (Block) o));
                         }
                     });
-            else if (Fluid.class.isAssignableFrom(instanceClass))
-                enumMap.values().stream().map(o -> (Fluid) o).forEach(fluid -> {
-                    FluidRegistry.registerFluid(fluid);
-                    FluidRegistry.addBucketForFluid(fluid);
-                });
         });
     }
 
@@ -124,11 +129,23 @@ public class EnumLoader<T extends Enum<T>> {
     }
 
     public <V> void putValue(T enumInstance, V value) {
+        if (value instanceof Fluid) {
+            FluidRegistry.registerFluid((Fluid) value);
+            FluidRegistry.addBucketForFluid((Fluid) value);
+        }
         Map enumMap;
         if (enumInstanceMap.containsKey(value.getClass())) enumMap = enumInstanceMap.get(value.getClass());
         else enumMap = new EnumMap<>(getType());
         enumMap.put(enumInstance, value);
         enumInstanceMap.put(value.getClass(), enumMap);
+    }
+
+    public <V> V getInstance(T enumType) {
+        return getInstance((Class<V>) new TypeToken<V>(getClass()){}.getRawType(), enumType);
+    }
+
+    public <V> V getInstance(Class<V> vClass, T enumType) {
+        return getInstanceMap(vClass).get(enumType);
     }
 
     @SideOnly(Side.CLIENT)

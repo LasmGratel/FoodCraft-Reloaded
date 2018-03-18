@@ -59,8 +59,8 @@ public class BlockFruitCake extends BlockCake implements CustomModelMasking {
     @Override
     public Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
         Map<IBlockState, ModelResourceLocation> map = new HashMap<>();
-        for (int j = 0; j <= 6; j++)
-            map.put(getDefaultState().withProperty(BlockCake.BITES, j), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + j));
+        for (int bite : BlockCake.BITES.getAllowedValues())
+            map.put(getDefaultState().withProperty(BlockCake.BITES, bite), new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, "fruit_cake"), "bites=" + bite));
         return map;
     }
 
@@ -72,6 +72,6 @@ public class BlockFruitCake extends BlockCake implements CustomModelMasking {
     @Nonnull
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstanceMap(ItemFruitCake.class).get(fruitType));
+        return new ItemStack(FoodCraftReloaded.getProxy().getLoaderManager().getLoader(FruitEnumLoader.class).get().getInstance(ItemFruitCake.class, fruitType));
     }
 }

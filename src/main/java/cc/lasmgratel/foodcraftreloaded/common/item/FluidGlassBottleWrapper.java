@@ -22,7 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.item;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
-import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidJuice;
+import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidFruitJuice;
 import cc.lasmgratel.foodcraftreloaded.common.fluid.FluidVegetableJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.fruit.ItemFruitJuice;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.vegetable.ItemVegetableJuice;
@@ -46,7 +46,7 @@ public class FluidGlassBottleWrapper extends FluidBucketWrapper {
 
     @Override
     public boolean canFillFluidType(FluidStack fluid) {
-        return fluid.getFluid() instanceof FluidVegetableJuice || fluid.getFluid() instanceof FluidJuice;
+        return fluid.getFluid() instanceof FluidVegetableJuice || fluid.getFluid() instanceof FluidFruitJuice;
     }
 
     @Nullable
@@ -54,9 +54,9 @@ public class FluidGlassBottleWrapper extends FluidBucketWrapper {
     public FluidStack getFluid() {
         Item item = container.getItem();
         if (item instanceof FruitTyped)
-            return new FluidStack(FoodCraftReloaded.getLoader(FruitEnumLoader.class).get().getFluidJuiceEnumMap().get(((FruitTyped) item).getType()), Fluid.BUCKET_VOLUME);
+            return new FluidStack(FoodCraftReloaded.getLoader(FruitEnumLoader.class).get().getInstance(FluidFruitJuice.class, ((FruitTyped) item).getType()), Fluid.BUCKET_VOLUME);
         else if (item instanceof VegetableTyped)
-            return new FluidStack(FoodCraftReloaded.getLoader(VegetableEnumLoader.class).get().getFluidJuiceEnumMap().get(((VegetableTyped) item).getType()), Fluid.BUCKET_VOLUME);
+            return new FluidStack(FoodCraftReloaded.getLoader(VegetableEnumLoader.class).get().getInstance(FluidVegetableJuice.class, ((VegetableTyped) item).getType()), Fluid.BUCKET_VOLUME);
         else
             return null;
     }
@@ -65,9 +65,9 @@ public class FluidGlassBottleWrapper extends FluidBucketWrapper {
     protected void setFluid(@Nullable FluidStack fluidStack) {
         if (fluidStack == null)
             container = new ItemStack(FCRItems.GLASS_BOTTLE);
-        else if (fluidStack.getFluid() instanceof FluidJuice)
+        else if (fluidStack.getFluid() instanceof FluidFruitJuice)
             container = new ItemStack(FoodCraftReloaded.getLoader(FruitEnumLoader.class).get()
-                .getInstanceMap(ItemFruitJuice.class).get(((FluidJuice) fluidStack.getFluid()).getType()));
+                .getInstanceMap(ItemFruitJuice.class).get(((FluidFruitJuice) fluidStack.getFluid()).getType()));
         else if (fluidStack.getFluid() instanceof FluidVegetableJuice)
             container = new ItemStack(FoodCraftReloaded.getLoader(VegetableEnumLoader.class).get()
                 .getInstanceMap(ItemVegetableJuice.class).get(((FluidVegetableJuice) fluidStack.getFluid()).getType()));
