@@ -37,4 +37,9 @@ public class ItemRice extends ItemPFood {
     public String[] getName() {
         return name;
     }
+
+    @Override
+    public String[] getOreDictNames() {
+        return ArrayUtils.addAll(super.getOreDictNames(), "listAllrice", NameBuilder.buildFoodName("rice", name));
+    }
 }

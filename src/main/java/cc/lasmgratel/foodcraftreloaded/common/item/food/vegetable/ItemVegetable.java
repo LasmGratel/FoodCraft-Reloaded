@@ -44,6 +44,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -80,10 +81,9 @@ public class ItemVegetable extends FCRItemFood implements VegetableTyped, Custom
         return vegetableType;
     }
 
-    @Nullable
     @Override
     public String[] getOreDictNames() {
-        return new String[]{NameBuilder.buildUnlocalizedName("crop", vegetableType.toString()), "listAllveggie"};
+        return ArrayUtils.addAll(super.getOreDictNames(), NameBuilder.buildUnlocalizedName("crop", vegetableType.toString()), "listAllveggie");
     }
 
     /**

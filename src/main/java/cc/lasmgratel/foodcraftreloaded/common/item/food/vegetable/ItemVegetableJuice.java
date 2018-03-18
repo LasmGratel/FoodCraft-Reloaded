@@ -56,7 +56,7 @@ public class ItemVegetableJuice extends ItemDrink implements VegetableTyped, Jui
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getBlockState(pos).getBlock() instanceof BlockCake) {
             worldIn.setBlockState(pos, FoodCraftReloaded.getLoader(VegetableEnumLoader.class).get().getInstanceMap(BlockVegetableCake.class).get(vegetableType).getDefaultState().withProperty(BlockCake.BITES, worldIn.getBlockState(pos).getValue(BlockCake.BITES)));
-            player.setHeldItem(hand, player.getHeldItem(hand).splitStack(1));
+            player.getHeldItem(hand).splitStack(1);
             player.addItemStackToInventory(new ItemStack(FCRItems.GLASS_BOTTLE));
             return EnumActionResult.SUCCESS;
         }

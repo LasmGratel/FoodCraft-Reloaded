@@ -38,8 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import java.util.Arrays;
 
 public class FruitEnumLoader extends EnumLoader<FruitType> {
-    @Load
-    public void loadFruits() {
+    public FruitEnumLoader() {
         Class[] values = new Class[] {
             FluidFruitJuice.class,
             ItemFruit.class, ItemFruitJuice.class, BlockFluidJuice.class,
@@ -47,6 +46,10 @@ public class FruitEnumLoader extends EnumLoader<FruitType> {
             BlockFruitCake.class, ItemFruitCake.class, ItemFruitLiqueur.class, ItemFruitYogurt.class, ItemFruitIcecream.class, ItemFruitSoda.class
         };
         Arrays.stream(values).forEach(this::putValue);
+    }
+
+    @Load
+    public void loadFruits() {
         register();
         getInstanceMap(BlockFruitSapling.class).values().forEach(sapling -> ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setUnlocalizedName(NameBuilder.buildUnlocalizedName(sapling.getType().toString(), "sapling")).setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(sapling.getType().toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE)));
     }

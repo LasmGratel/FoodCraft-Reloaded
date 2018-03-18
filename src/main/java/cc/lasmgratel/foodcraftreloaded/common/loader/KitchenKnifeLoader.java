@@ -25,14 +25,12 @@ import cc.lasmgratel.foodcraftreloaded.common.item.tool.KitchenKnifeType;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class KitchenKnifeLoader extends EnumLoader<KitchenKnifeType> {
     @Load
     public void loadKitchenKnifes() {
         putValue(ItemKitchenKnife.class);
         register();
-        getInstanceMap(ItemKitchenKnife.class).values().forEach(item -> OreDictionary.registerOre("knifeKitchen", item));
     }
 
     @Load(side = Side.CLIENT)

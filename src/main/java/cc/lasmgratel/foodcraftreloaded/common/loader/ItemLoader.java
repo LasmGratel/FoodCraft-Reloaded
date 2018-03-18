@@ -20,16 +20,18 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
-import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.IMetadatable;
+import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterManager;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.RegItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -37,8 +39,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public class ItemLoader {
-    @Load
-    public void registerItems() {
+    public ItemLoader() {
         for (Field field : FCRItems.class.getFields()) {
             field.setAccessible(true);
             try {
@@ -47,9 +48,24 @@ public class ItemLoader {
                     continue;
 
                 Item item = (Item) field.get(null);
-                ForgeRegistries.ITEMS.register(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
+                RegisterManager.getInstance().putRegister(item.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
+            } catch (Throwable e) {
+                FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);
+            }
+        }
+    }
 
-                Arrays.stream(annoItem.oreDict()).forEach(s -> OreDictionary.registerOre(s, item));
+    @Load(LoaderState.AVAILABLE)
+    public void registerOre() {
+        for (Field field : FCRItems.class.getFields()) {
+            field.setAccessible(true);
+            try {
+                RegItem annoItem = field.getAnnotation(RegItem.class);
+                if (annoItem == null)
+                    continue;
+
+                Item item = (Item) field.get(null);
+                Arrays.asList(annoItem.oreDict()).parallelStream().forEach(s -> OreDictionary.registerOre(s, item));
             } catch (Throwable e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);
             }
@@ -66,6 +82,11 @@ public class ItemLoader {
                     continue;
 
                 Item item = (Item) field.get(null);
+
+                if (item instanceof CustomModelMasking && ((CustomModelMasking) item).getModelLocation() != null) {
+                    ModelLoader.setCustomModelResourceLocation(item, 0, ((CustomModelMasking) item).getModelLocation());
+                }
+
                 if (item.getHasSubtypes()) {
                     if (item instanceof IMetadatable) {
                         for (int i = 0; i < ((IMetadatable) item).getMaxMetadata(); i++)
@@ -80,8 +101,7 @@ public class ItemLoader {
         }
     }
 
-    private void registerRender(Item item, int meta)
-    {
+    private void registerRender(Item item, int meta) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 }

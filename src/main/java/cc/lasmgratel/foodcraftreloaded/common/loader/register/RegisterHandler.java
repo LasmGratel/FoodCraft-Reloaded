@@ -20,11 +20,26 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader.register;
 
+import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
     @Nonnull
@@ -50,6 +65,68 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
 
     public void register(IForgeRegistry<T> registry) {
         registry.register(value);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerRender() {
+        if (Item.class.isAssignableFrom(value.getClass())) {
+            if (value instanceof CustomModelMasking) {
+                registerRender((Item) value, 0, ((CustomModelMasking) value).getModelLocation());
+                FoodCraftReloaded.getLogger().debug("Registered custom model " + value.getClass() + " as " + ((CustomModelMasking) value).getModelLocation());
+            } else if (value.getRegistryName() != null) {
+                registerRender((Item) value, 0, new ModelResourceLocation(value.getRegistryName(), "inventory"));
+            }
+        } else if (BlockFluidBase.class.isAssignableFrom(value.getClass())) {
+            // TODO Null condition
+            registerFluidRender((BlockFluidBase) value, value.getRegistryName().getResourcePath());
+        } else if (Block.class.isAssignableFrom(value.getClass())) {
+            if (value instanceof CustomModelMasking) {
+                ModelLoader.setCustomStateMapper((Block) value, block -> ((CustomModelMasking) value).getStateModelLocations());
+                if (((CustomModelMasking) value).getModelLocation() != null)
+                    registerRender(Item.getItemFromBlock((Block) value), 0, ((CustomModelMasking) value).getModelLocation());
+            }
+        }
+    }
+
+    public void registerOre() {
+        if (value instanceof OreDictated) {
+            Arrays.stream(((OreDictated) value).getOreDictNames()).forEach(s -> {
+                if (value instanceof Block)
+                    OreDictionary.registerOre(s, (Block) value);
+                else if (value instanceof Item)
+                    OreDictionary.registerOre(s, (Item) value);
+            });
+        }
+    }
+
+    public void registerOre(String... names) {
+        Arrays.asList(names).parallelStream().forEach(s -> {
+            if (value instanceof Block)
+                OreDictionary.registerOre(s, (Block) value);
+            else if (value instanceof Item)
+                OreDictionary.registerOre(s, (Item) value);
+        });
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void registerRender(Item item, int meta, ModelResourceLocation location) {
+        ModelBakery.registerItemVariants(item, location);
+        ModelLoader.setCustomModelResourceLocation(item, meta, location);
+        ModelLoader.setCustomMeshDefinition(item, stack -> location);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void registerFluidRender(BlockFluidBase blockFluid, String blockStateName) {
+        final String location = FoodCraftReloaded.MODID + ":" + blockStateName;
+        final Item itemFluid = Item.getItemFromBlock(blockFluid);
+        ModelLoader.setCustomMeshDefinition(itemFluid, stack -> new ModelResourceLocation(location, "fluid"));
+        ModelLoader.setCustomStateMapper(blockFluid, new StateMapperBase() {
+            @Nonnull
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state) {
+                return new ModelResourceLocation(location, "fluid");
+            }
+        });
     }
 
     public Type getType() {

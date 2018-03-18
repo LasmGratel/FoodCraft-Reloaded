@@ -83,4 +83,9 @@ public interface NameBuilder {
         }
         return stringBuilder.toString();
     }
+
+    @Nonnull
+    static String buildFoodName(String suffix, String... name) {
+        return buildRegistryName(ArrayUtils.add(ArrayUtils.addAll(new String[]{"food"}, name), suffix));
+    }
 }

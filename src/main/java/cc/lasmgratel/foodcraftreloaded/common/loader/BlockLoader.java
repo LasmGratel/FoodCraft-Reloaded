@@ -20,21 +20,22 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.loader;
 
+import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntityPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.common.block.tileentity.TileEntitySmeltingDrinkMachine;
+import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterManager;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.RegBlock;
-import cc.lasmgratel.foodcraftreloaded.api.init.FCRBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.OreDictionary;
@@ -44,7 +45,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public class BlockLoader {
-    @Load
+    @Load(value = LoaderState.CONSTRUCTING)
     public void registerBlocks() {
         for (Field field : FCRBlocks.class.getFields()) {
             field.setAccessible(true);
@@ -53,13 +54,13 @@ public class BlockLoader {
 
             try {
                 Block block = (Block) field.get(null);
-                ForgeRegistries.BLOCKS.register(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
+                RegisterManager.getInstance().putRegister(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
 
                 // Register item block.
                 Class<? extends ItemBlock> itemClass = anno.itemClass();
                 Constructor<? extends ItemBlock> con = itemClass.getConstructor(Block.class);
                 con.setAccessible(true);
-                ForgeRegistries.ITEMS.register(con.newInstance(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+                RegisterManager.getInstance().putRegister(con.newInstance(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
 
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, block));
             } catch (Exception e) {
@@ -86,8 +87,10 @@ public class BlockLoader {
                 Block block = (Block) field.get(null);
                 if (block instanceof CustomModelMasking) {
                     ModelLoader.setCustomStateMapper(block, b -> ((CustomModelMasking) b).getStateModelLocations());
-                    if (((CustomModelMasking) block).getModelLocation() != null)
+                    if (((CustomModelMasking) block).getModelLocation() != null) {
                         registerRender(Item.getItemFromBlock(block), 0, ((CustomModelMasking) block).getModelLocation());
+                        return;
+                    }
                 }
                 registerRender(block,0);
             } catch (Exception e) {

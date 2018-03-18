@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FCRItemFood extends ItemFood {
+public class FCRItemFood extends ItemFood implements OreDictated {
     /** Number of ticks to run while 'EnumAction'ing until result. */
     private int itemUseDuration = 32;
     /** The amount this food item heals the player. */
@@ -137,5 +138,10 @@ public class FCRItemFood extends ItemFood {
         FCRItemFood item = (FCRItemFood) stack.getItem();
         tooltip.add(I18n.format("tooltip.fcrfood.heal", item.healAmount));
         tooltip.add(I18n.format("tooltip.fcrfood.duration", (item.itemUseDuration / 20.0)));
+    }
+
+    @Override
+    public String[] getOreDictNames() {
+        return new String[]{"listAllfoods"};
     }
 }

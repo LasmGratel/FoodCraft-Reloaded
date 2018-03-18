@@ -22,17 +22,15 @@ package cc.lasmgratel.foodcraftreloaded.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRPotions;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterManager;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
-import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.annotation.RegPotion;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.lang.reflect.Field;
 
 public class PotionLoader {
-    @Load
-    public void registerPotions() {
+    public PotionLoader() {
         for (Field field : FCRPotions.class.getFields()) {
             field.setAccessible(true);
             try {
@@ -42,7 +40,7 @@ public class PotionLoader {
                     continue;
                 potion.setRegistryName(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName(anno.value()));
                 potion.setPotionName(NameBuilder.buildUnlocalizedName(anno.value()));
-                ForgeRegistries.POTIONS.register(potion);
+                RegisterManager.getInstance().putRegister(potion);
             } catch (Exception e) {
                 FoodCraftReloaded.getLogger().error("Un-able to register potion!", e);
             }

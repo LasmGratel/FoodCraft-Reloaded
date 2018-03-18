@@ -32,6 +32,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -63,10 +64,12 @@ public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMas
         return new ModelResourceLocation(new ResourceLocation(FoodCraftReloaded.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString())), "inventory");
     }
 
+
+
     @Nullable
     @Override
     public String[] getOreDictNames() {
-        return new String[]{NameBuilder.buildUnlocalizedName("crop", fruitType.toString()), "listAllfruit"};
+        return ArrayUtils.addAll(super.getOreDictNames(), NameBuilder.buildUnlocalizedName("crop", fruitType.toString()), "listAllfruit");
     }
 
     @Override

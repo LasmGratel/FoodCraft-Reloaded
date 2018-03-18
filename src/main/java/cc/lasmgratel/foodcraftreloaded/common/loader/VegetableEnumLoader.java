@@ -32,8 +32,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import java.util.Arrays;
 
 public class VegetableEnumLoader extends EnumLoader<VegetableType> {
-    @Load
-    public void loadVegetables() {
+    public VegetableEnumLoader() {
         Class[] values = new Class[] {
             FluidVegetableJuice.class,
             BlockFluidVegetableJuice.class,
@@ -42,6 +41,10 @@ public class VegetableEnumLoader extends EnumLoader<VegetableType> {
             BlockVegetableCrop.class
         };
         Arrays.stream(values).forEach(this::putValue);
+    }
+
+    @Load
+    public void loadVegetables() {
         register();
     }
 

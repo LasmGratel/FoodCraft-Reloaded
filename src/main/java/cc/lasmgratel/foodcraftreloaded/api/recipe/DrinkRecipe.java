@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class DrinkRecipe extends AbstractRecipe {
     public DrinkRecipe(Item input, FluidStack output) {
         super(new Item[]{input}, output);
+
         getOutput().setValue(output, ItemStack.EMPTY);
     }
 }

@@ -24,6 +24,7 @@ import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.EnumColorable;
 import cc.lasmgratel.foodcraftreloaded.common.util.enumeration.EnumTyped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -32,7 +33,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class ItemKitchenKnife extends Item implements CustomModelMasking, EnumTyped<KitchenKnifeType>, EnumColorable<KitchenKnifeType> {
+public class ItemKitchenKnife extends Item implements CustomModelMasking, EnumTyped<KitchenKnifeType>, EnumColorable<KitchenKnifeType>, OreDictated {
     private KitchenKnifeType type;
 
     public ItemKitchenKnife(KitchenKnifeType type) {
@@ -61,5 +62,10 @@ public class ItemKitchenKnife extends Item implements CustomModelMasking, EnumTy
     @Override
     public int getTintIndex() {
         return 0;
+    }
+
+    @Override
+    public String[] getOreDictNames() {
+        return new String[]{"knifeKitchen"};
     }
 }

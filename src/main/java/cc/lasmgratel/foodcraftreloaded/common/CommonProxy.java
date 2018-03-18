@@ -20,9 +20,6 @@
 
 package cc.lasmgratel.foodcraftreloaded.common;
 
-import cc.lasmgratel.foodcraftreloaded.common.loader.BlockLoader;
-import cc.lasmgratel.foodcraftreloaded.common.loader.ItemLoader;
-import cc.lasmgratel.foodcraftreloaded.common.loader.PropertiedFoodLoader;
 import cc.lasmgratel.foodcraftreloaded.common.loader.*;
 import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterLoader;
 import cc.lasmgratel.foodcraftreloaded.common.util.loader.LoaderManager;
@@ -40,13 +37,14 @@ public class CommonProxy {
 
     public CommonProxy() {
         Arrays.asList(
+            RegisterLoader.class,
             CapabilityLoader.class,
             BlockLoader.class, ItemLoader.class,
             FruitEnumLoader.class, VegetableEnumLoader.class,
             LiqueurLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,
             AdvancementLoader.class, RecipeLoader.class,
-            EventLoader.class, RegisterLoader.class,
+            EventLoader.class,
             PotionLoader.class
         ).forEach(loaderManager::addLoader);
     }

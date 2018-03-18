@@ -82,7 +82,7 @@ public class RecipeLoader {
                 "XX ",
                 "XX ",
                 "  S",
-                'X', kitchenKnifeType.getRepairItemStack(),
+                'X', OreIngredient.fromStacks(kitchenKnifeType.getRepairItemStack()),
                 'S', "stickWood"
             );
         }

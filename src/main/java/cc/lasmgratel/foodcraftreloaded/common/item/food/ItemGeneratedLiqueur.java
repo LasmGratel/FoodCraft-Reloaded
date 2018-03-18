@@ -46,8 +46,8 @@ public class ItemGeneratedLiqueur extends ItemLiqueur {
     @Nonnull
     @Override
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
-        if (itemStackDisplayNameCallback != null)
-            return itemStackDisplayNameCallback.apply(stack);
+        if (getItemStackDisplayNameCallback() != null)
+            return getItemStackDisplayNameCallback().apply(stack);
         else
             return super.getItemStackDisplayName(stack);
     }

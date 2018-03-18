@@ -22,7 +22,6 @@ package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRCreativeTabs;
 import cc.lasmgratel.foodcraftreloaded.api.init.FCRItems;
-import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -31,12 +30,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class ItemDrink extends FCRItemFood implements OreDictated {
+public class ItemDrink extends FCRItemFood {
     public ItemDrink(int amount) {
         this(amount, 0.6f);
     }
@@ -63,7 +63,7 @@ public class ItemDrink extends FCRItemFood implements OreDictated {
 
     @Override
     public String[] getOreDictNames() {
-        return new String[]{"listAlldrink"};
+        return ArrayUtils.addAll(super.getOreDictNames(), "listAlldrink");
     }
 
     @Nonnull

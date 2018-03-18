@@ -21,9 +21,12 @@
 package cc.lasmgratel.foodcraftreloaded.common.loader.register;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,15 +42,12 @@ public class RegisterManager {
         return INSTANCE;
     }
 
+    public <T extends IForgeRegistryEntry<T>> void putRegister(@Nonnull T value) {
+        putRegister(new RegisterHandler<>(value));
+    }
+
     public <T extends IForgeRegistryEntry<T>> void putRegister(RegisterHandler<T> value) {
-        Set<RegisterHandler<? extends IForgeRegistryEntry<?>>> handlerSet;
-        Type valueType = value.getType();
-        if (registerMap.containsKey(valueType))
-            handlerSet = registerMap.get(valueType);
-        else
-            handlerSet = new HashSet<>();
-        handlerSet.add(value);
-        registerMap.put(valueType, handlerSet);
+        putRegister(value, value.getType());
     }
 
     public <T extends IForgeRegistryEntry<T>> void putRegister(RegisterHandler<T> value, Type valueType) {
@@ -66,9 +66,20 @@ public class RegisterManager {
     }
 
     public <T extends IForgeRegistryEntry<T>> void register(Type type, IForgeRegistry<T> registry) {
-        FoodCraftReloaded.getLogger().debug("[FoodCraft Reloaded Register Manager] Registering type " + type);
+        FoodCraftReloaded.getLogger().info("[FoodCraft Reloaded Register Manager] Registering type " + type);
         for (Map.Entry<Type, Set<RegisterHandler<? extends IForgeRegistryEntry<?>>>> entry : registerMap.entrySet())
             if (((Class<?>) type).isAssignableFrom((Class<?>) entry.getKey()))
                 entry.getValue().stream().map(handler -> (RegisterHandler<T>) handler).forEach(handler -> handler.register(registry));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerRender() {
+        for (Map.Entry<Type, Set<RegisterHandler<? extends IForgeRegistryEntry<?>>>> entry : registerMap.entrySet())
+            entry.getValue().forEach(RegisterHandler::registerRender);
+    }
+
+    public void registerOre() {
+        for (Map.Entry<Type, Set<RegisterHandler<? extends IForgeRegistryEntry<?>>>> entry : registerMap.entrySet())
+            entry.getValue().forEach(RegisterHandler::registerOre);
     }
 }

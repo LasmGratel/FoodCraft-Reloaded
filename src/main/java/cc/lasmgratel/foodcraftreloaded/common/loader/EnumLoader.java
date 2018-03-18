@@ -25,7 +25,7 @@ import cc.lasmgratel.foodcraftreloaded.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.EffectiveItem;
 import cc.lasmgratel.foodcraftreloaded.common.item.food.FCRItemFood;
-import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
+import cc.lasmgratel.foodcraftreloaded.common.loader.register.RegisterManager;
 import com.google.common.reflect.TypeToken;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -43,7 +43,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
@@ -63,26 +62,11 @@ public class EnumLoader<T extends Enum<T>> {
     public void register() {
         enumInstanceMap.forEach((instanceClass, enumMap) -> {
             if (IForgeRegistryEntry.class.isAssignableFrom(instanceClass))
-                enumMap.entrySet().stream()
-                    .peek(o -> {
+                enumMap.entrySet().parallelStream()
+                    .forEach(o -> {
                         if (o.getValue() instanceof FCRItemFood && o.getKey() instanceof EffectiveItem) {
                             if (((EffectiveItem) o.getKey()).getEffects() != null)
                             ((EffectiveItem) o.getKey()).getEffects().forEach(((FCRItemFood) o.getValue())::addEffect);
-                        }
-                    })
-                    .map(o -> (IForgeRegistryEntry<? extends IForgeRegistryEntry<?>>) o.getValue())
-//                    .map(o -> new RegisterHandler(o))
-                    .forEach(o -> {
-//                    TODO RegisterManager.getInstance().putRegister(o);
-                        if (o instanceof Item) {
-                            ForgeRegistries.ITEMS.register((Item) o);
-                            if (o instanceof OreDictated)
-                                Arrays.stream(((OreDictated) o).getOreDictNames()).forEach(s -> OreDictionary.registerOre(s, (Item) o));
-                        }
-                        else if (o instanceof Block) {
-                            ForgeRegistries.BLOCKS.register((Block) o);
-                            if (o instanceof OreDictated)
-                                Arrays.stream(((OreDictated) o).getOreDictNames()).forEach(s -> OreDictionary.registerOre(s, (Block) o));
                         }
                     });
         });
@@ -132,6 +116,9 @@ public class EnumLoader<T extends Enum<T>> {
         if (value instanceof Fluid) {
             FluidRegistry.registerFluid((Fluid) value);
             FluidRegistry.addBucketForFluid((Fluid) value);
+        }
+        if (value instanceof IForgeRegistryEntry) {
+            RegisterManager.getInstance().putRegister((IForgeRegistryEntry) value);
         }
         Map enumMap;
         if (enumInstanceMap.containsKey(value.getClass())) enumMap = enumInstanceMap.get(value.getClass());
@@ -198,7 +185,7 @@ public class EnumLoader<T extends Enum<T>> {
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerRenders() {
+    public void registerRenders() {/*
         enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
             if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
                 if (entry.getValue() instanceof CustomModelMasking) {
@@ -217,7 +204,7 @@ public class EnumLoader<T extends Enum<T>> {
                         registerRender(Item.getItemFromBlock((Block) entry.getValue()), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
                 }
             }
-        }));
+        }));*/
     }
 
     @SideOnly(Side.CLIENT)

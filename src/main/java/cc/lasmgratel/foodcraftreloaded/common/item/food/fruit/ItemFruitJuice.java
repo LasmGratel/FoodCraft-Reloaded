@@ -56,7 +56,8 @@ public class ItemFruitJuice extends ItemDrink implements FruitTyped, Juice {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (worldIn.getBlockState(pos).getBlock() instanceof BlockCake) {
             worldIn.setBlockState(pos, FoodCraftReloaded.getLoader(FruitEnumLoader.class).get().getInstanceMap(BlockFruitCake.class).get(fruitType).getDefaultState().withProperty(BlockCake.BITES, worldIn.getBlockState(pos).getValue(BlockCake.BITES)));
-            player.setHeldItem(hand, new ItemStack(FCRItems.GLASS_BOTTLE));
+            player.getHeldItem(hand).splitStack(1);
+            player.addItemStackToInventory(new ItemStack(FCRItems.GLASS_BOTTLE));
             return EnumActionResult.SUCCESS;
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

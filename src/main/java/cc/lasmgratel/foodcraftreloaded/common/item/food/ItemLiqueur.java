@@ -22,6 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.common.item.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurType;
 import cc.lasmgratel.foodcraftreloaded.api.capability.liqueur.LiqueurTypes;
+import cc.lasmgratel.foodcraftreloaded.common.util.OreDictated;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,13 +31,14 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class ItemLiqueur extends ItemDrink {
+public class ItemLiqueur extends ItemDrink implements OreDictated {
     private LiqueurType type = LiqueurTypes.NORMAL;
 
     public ItemLiqueur(int amount) {
@@ -66,5 +68,10 @@ public class ItemLiqueur extends ItemDrink {
                 EnchantmentHelper.setEnchantments(Collections.singletonMap(Enchantments.UNBREAKING, 1), stack);
             items.add(stack);
         }
+    }
+
+    @Override
+    public String[] getOreDictNames() {
+        return ArrayUtils.addAll(super.getOreDictNames(), "listAllliqueur");
     }
 }

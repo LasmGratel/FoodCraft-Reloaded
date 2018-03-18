@@ -39,4 +39,9 @@ public class ItemSoup extends ItemPFood {
     public String[] getName() {
         return name;
     }
+
+    @Override
+    public String[] getOreDictNames() {
+        return ArrayUtils.addAll(super.getOreDictNames(), "listAllsoup", NameBuilder.buildFoodName("soup", name));
+    }
 }
