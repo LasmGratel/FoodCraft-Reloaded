@@ -18,15 +18,11 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
-
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+/**
+ * A automated gui container has a constructor which contains two params: ({@link net.minecraft.entity.player.InventoryPlayer}, {@link net.minecraft.tileentity.TileEntity})
+ * They are inventory of current player and current tile entity.
+ */
+public interface AutomatedGui {
 }

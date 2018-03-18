@@ -18,15 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability.machine;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
-
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+/**
+ * Stores current running info for smelting machines.
+ */
+public interface SmeltingMachineInfo extends MachineInfo {
+    int getFuel();
+    void setFuel(int fuel);
 }

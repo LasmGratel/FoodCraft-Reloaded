@@ -18,15 +18,39 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.common.machine;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+/**
+ * Machines' behavior definition.
+ */
+public interface Machine {
+    /**
+     * Returns whether machine can be started.
+     */
+    boolean canStart();
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+    /**
+     * Returns whether machine can continue progressing at this tick.
+     */
+    boolean canProgress();
 
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+    /**
+     * Called when machine started progressing.
+     */
+    void startProgress();
+
+    /**
+     * Called when machine is progressing.
+     */
+    void progress();
+
+    /**
+     * Called when machine has progressed completely.
+     */
+    void progressCompleted();
+
+    /**
+     * Reset current progress.
+     */
+    void resetProgress();
 }

@@ -18,15 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+public class DrinkRecipe extends AbstractRecipe {
+    public DrinkRecipe(Item input, FluidStack output) {
+        super(new Item[]{input}, output);
 
-    public static Logger getLogger() {
-        return LOGGER;
+        getOutput().setValue(output, ItemStack.EMPTY);
     }
 }

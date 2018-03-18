@@ -18,15 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.tool.KitchenKnifeType;
+import net.minecraft.item.ItemStack;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+import java.awt.*;
 
-    public static Logger getLogger() {
-        return LOGGER;
+public class EnumHelper extends net.minecraftforge.common.util.EnumHelper {
+
+    public static KitchenKnifeType addKitchenKnifeType(String enumName, int maxDamage, Color knifeColor, ItemStack repairMaterial) {
+        return addEnum(KitchenKnifeType.class, enumName, new Class[]{int.class, Color.class, ItemStack.class}, maxDamage, knifeColor, repairMaterial);
     }
 }

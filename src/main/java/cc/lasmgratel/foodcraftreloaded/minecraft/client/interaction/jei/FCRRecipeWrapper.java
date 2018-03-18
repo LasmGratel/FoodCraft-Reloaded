@@ -18,15 +18,19 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.client.interaction.jei;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe.AbstractRecipe;
+import mezz.jei.api.recipe.IRecipeWrapper;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+public abstract class FCRRecipeWrapper implements IRecipeWrapper {
+    private final AbstractRecipe recipe;
 
-    public static Logger getLogger() {
-        return LOGGER;
+    public FCRRecipeWrapper(AbstractRecipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public AbstractRecipe getRecipe() {
+        return recipe;
     }
 }

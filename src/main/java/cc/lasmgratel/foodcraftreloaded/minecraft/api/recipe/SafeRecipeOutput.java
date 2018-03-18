@@ -18,15 +18,31 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+public class SafeRecipeOutput<T> extends RecipeOutput {
+    @SafeVarargs
+    public SafeRecipeOutput(T... value) {
+        this.value = value;
+    }
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+    @Override
+    public T[] getValue() {
+        return (T[]) value;
+    }
 
-    public static Logger getLogger() {
-        return LOGGER;
+    @Override
+    public T first() {
+        return (T) value[0];
+    }
+
+    @Override
+    public T second() {
+        return (T) value[1];
+    }
+
+    @Override
+    public T third() {
+        return (T) value[2];
     }
 }

@@ -18,15 +18,12 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.potion.PotionEffect;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+import java.util.List;
 
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+public interface EffectiveItem {
+    List<PotionEffect> getEffects();
 }

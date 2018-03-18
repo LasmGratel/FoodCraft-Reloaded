@@ -18,15 +18,25 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.event;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+import javax.annotation.Nonnull;
 
-    public static Logger getLogger() {
-        return LOGGER;
+public class DrinkMadeEvent extends PlayerEvent {
+    @Nonnull
+    private final ItemStack making;
+
+    public DrinkMadeEvent(EntityPlayer player, @Nonnull ItemStack making) {
+        super(player);
+        this.making = making;
+    }
+
+    @Nonnull
+    public ItemStack getMaking() {
+        return making;
     }
 }

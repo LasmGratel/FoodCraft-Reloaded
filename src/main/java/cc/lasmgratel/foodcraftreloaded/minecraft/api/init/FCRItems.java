@@ -18,15 +18,15 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.init;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.annotation.RegItem;
+import net.minecraft.item.Item;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+public interface FCRItems {
+    @RegItem({"glass", "bottle"})
+    Item GLASS_BOTTLE = new Item().setCreativeTab(FCRCreativeTabs.BASE).setHasSubtypes(false);
 
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+    @RegItem(value = {"original", "ice", "cream"}, oreDict = {"foodIcecream", "listAllicecream"})
+    Item ORIGINAL_ICE_CREAM = new Item().setCreativeTab(FCRCreativeTabs.INGREDIENTS).setHasSubtypes(false);
 }

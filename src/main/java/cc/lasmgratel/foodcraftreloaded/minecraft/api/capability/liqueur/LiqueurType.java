@@ -18,15 +18,21 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability.liqueur;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.Translator;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+public interface LiqueurType {
+    String getUnlocalizedName();
+    void setUnlocalizedName(String unlocalizedName);
 
-    public static Logger getLogger() {
-        return LOGGER;
+    float getHealModifier();
+    void setHealModifier(float healModifier);
+
+    @SideOnly(Side.CLIENT)
+    default String getLocalizedName() {
+        return Translator.format(getUnlocalizedName());
     }
 }

@@ -18,15 +18,24 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.potion;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+import javax.annotation.Nonnull;
+import java.awt.*;
 
-    public static Logger getLogger() {
-        return LOGGER;
+/**
+ * SPICYYYYYYYYY!
+ */
+public class PotionSpice extends Potion {
+    public PotionSpice() {
+        super(true, Color.RED.getRGB());
+    }
+
+    @Override
+    public void performEffect(@Nonnull EntityLivingBase entityLivingBaseIn, int amplifier) {
+        entityLivingBaseIn.setFire(amplifier * 20 * 3);
     }
 }

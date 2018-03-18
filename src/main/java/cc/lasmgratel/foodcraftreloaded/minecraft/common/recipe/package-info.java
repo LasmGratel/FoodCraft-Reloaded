@@ -17,16 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package cc.lasmgratel.foodcraftreloaded.common;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
-
-    public static Logger getLogger() {
-        return LOGGER;
-    }
-}
+/**
+ * Custom recipe in 1.12+.
+ * Finding replacement.
+ */
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.recipe;

@@ -18,15 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.item;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import cc.lasmgratel.foodcraftreloaded.minecraft.api.init.FCRCreativeTabs;
+import net.minecraft.item.Item;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
-
-    public static Logger getLogger() {
-        return LOGGER;
+/**
+ * Base item used by this mod.
+ */
+public class ItemBase extends Item {
+    public ItemBase() {
+        setCreativeTab(FCRCreativeTabs.BASE);
     }
 }

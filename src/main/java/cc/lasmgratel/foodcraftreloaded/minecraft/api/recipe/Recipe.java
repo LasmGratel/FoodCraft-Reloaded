@@ -18,15 +18,14 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+public interface Recipe<T> {
+    T getInput();
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+    RecipeOutput getOutput();
 
-    public static Logger getLogger() {
-        return LOGGER;
+    default boolean matches(T input) {
+        return input.equals(getInput());
     }
 }

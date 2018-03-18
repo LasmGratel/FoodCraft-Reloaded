@@ -18,15 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.util;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraft.util.text.translation.I18n;
 
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+import javax.annotation.Nonnull;
+import java.util.Locale;
 
-    public static Logger getLogger() {
-        return LOGGER;
+public interface Translator {
+    @Nonnull
+    static String format(String key, Object... params) {
+        return I18n.canTranslate(key) ? I18n.translateToLocalFormatted(key, params) : String.format(Locale.US, I18n.translateToFallback(key), params);
     }
 }

@@ -18,15 +18,18 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common;
+package cc.lasmgratel.foodcraftreloaded.common.food;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
-
-    public static Logger getLogger() {
-        return LOGGER;
-    }
+/**
+ * How food effect the player and the amplifier.
+ * For instance, spice is a category of property of food.
+ */
+public interface FoodProperty {
+    /**
+     * Multiplier between 0.0~1.0.
+     * Usually represents the multiplier of this property effected,
+     * but it is possible to treat it for other usages.
+     * The amount of property is given by {@link Food#getPropertyMap()}.
+     */
+    double getMultiplier();
 }
