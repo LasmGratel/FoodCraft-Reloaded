@@ -20,5 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.material;
 
+import cc.lasmgratel.foodcraftreloaded.common.food.FoodProperty;
+
+import java.util.Map;
+
 public interface Material {
+    Map<FoodProperty, Integer> getPropertyMap();
 }

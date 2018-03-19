@@ -33,7 +33,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityPressureCooker extends TileEntityEnergizedMachine {
+public class TileEntityPressureCooker extends TileEntityEnergizedMachine<TileEntityPressureCooker> {
     private IItemHandlerModifiable itemHandler = new ItemStackHandler(2);
     private FluidTank fluidTank = new FluidTank(FluidRegistry.WATER, 10, 1000);
 

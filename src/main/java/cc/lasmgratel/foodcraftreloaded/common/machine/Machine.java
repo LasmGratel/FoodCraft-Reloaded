@@ -20,10 +20,31 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.machine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Machines' behavior definition.
  */
-public interface Machine {
+public interface Machine<T extends Machine<T>> {
+    /**
+     * Get progress of first process.
+     */
+    static int getProgress(Machine<?> machine) {
+        return machine.getProcesses().stream().map(Process::getProgress).findAny().orElse(0);
+    }
+
+    /**
+     * Get maximum progress of first process.
+     */
+    static int getMaxProgress(Machine<?> machine) {
+        return machine.getProcesses().stream().map(Process::getMaxProgress).findAny().orElse(0);
+    }
+
+    default List<Process<T>> getProcesses() {
+        return new ArrayList<>();
+    }
+
     /**
      * Returns whether machine can be started.
      */
@@ -41,8 +62,11 @@ public interface Machine {
 
     /**
      * Called when machine is progressing.
+     * Use {@link Process#onProgress} instead.
      */
-    void progress();
+    default void progress() {
+        getProcesses().forEach(progress -> progress.update((T) this));
+    }
 
     /**
      * Called when machine has progressed completely.
@@ -52,5 +76,7 @@ public interface Machine {
     /**
      * Reset current progress.
      */
-    void resetProgress();
+    default void resetProgress() {
+        getProcesses().forEach(Process::reset);
+    }
 }

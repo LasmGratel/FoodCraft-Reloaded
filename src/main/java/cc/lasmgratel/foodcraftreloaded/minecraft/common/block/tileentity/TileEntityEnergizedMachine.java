@@ -32,7 +32,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
 
-public abstract class TileEntityEnergizedMachine extends TileEntityProgressiveMachine implements EnergizedMachine {
+public abstract class TileEntityEnergizedMachine<T extends TileEntityEnergizedMachine<T>> extends TileEntityProgressiveMachine<T> implements EnergizedMachine<T> {
     protected EnergyStorage energyStorage;
     private int energyPerTick;
 

@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.machine;
 
+import javax.annotation.Nonnegative;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -31,11 +32,17 @@ import java.util.function.Predicate;
 public class Process<T> {
     private int progress = 0;
     private int maxProgress;
+    private boolean started = false;
     private boolean completed = false;
     private Consumer<T> onCompleted = (T) -> {};
-    private Predicate<T> runnable = (T) -> false;
+    private Predicate<T> canStart = (T) -> false;
+    private Predicate<T> canProgress = (T) -> false;
+    private Consumer<T> onStarted = (T) -> {};
+    private Consumer<T> onProgress = (T) -> {};
 
-    public Process(int maxProgress) {
+    public Process(@Nonnegative int maxProgress) {
+        if (maxProgress <= 0)
+            throw new IllegalArgumentException("Max progress cannot be zero or negative! Current value: " + maxProgress);
         this.maxProgress = maxProgress;
     }
 
@@ -47,12 +54,12 @@ public class Process<T> {
         this.onCompleted = onCompleted;
     }
 
-    public Predicate<T> getRunnable() {
-        return runnable;
+    public Predicate<T> getCanProgress() {
+        return canProgress;
     }
 
-    public void setRunnable(Predicate<T> runnable) {
-        this.runnable = runnable;
+    public void setCanProgress(Predicate<T> canProgress) {
+        this.canProgress = canProgress;
     }
 
     public int getProgress() {
@@ -79,17 +86,102 @@ public class Process<T> {
         this.completed = completed;
     }
 
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
+
+    public Predicate<T> getCanStart() {
+        return canStart;
+    }
+
+    public void setCanStart(Predicate<T> canStart) {
+        this.canStart = canStart;
+    }
+
+    public double getCompletePercentage() {
+        return progress / maxProgress;
+    }
+
+    public Consumer<T> getOnStarted() {
+        return onStarted;
+    }
+
+    public void setOnStarted(Consumer<T> onStarted) {
+        this.onStarted = onStarted;
+    }
+
+    public Consumer<T> getOnProgress() {
+        return onProgress;
+    }
+
+    public void setOnProgress(Consumer<T> onProgress) {
+        this.onProgress = onProgress;
+    }
+
     public void update(T machine) {
-        if (!isCompleted()) {
-            if (runnable.test(machine)) {
-                ++progress;
-                if (progress >= getMaxProgress()) {
-                    progress = getMaxProgress();
-                    setCompleted(true);
+        if (isStarted()) {
+            if (!isCompleted()) {
+                if (getCanProgress().test(machine)) {
+                    setProgress(progress + 1);
+                    onProgress.accept(machine);
+                    if (getProgress() >= getMaxProgress()) {
+                        setProgress(getMaxProgress()); // Set to max value so that it wouldn't be over of maximum value.
+                        setCompleted(true);
+                    }
                 }
+            } else {
+                setCompleted(false);
+                setStarted(false);
+                onCompleted.accept(machine);
             }
         } else {
-            onCompleted.accept(machine);
+            if (getCanStart().test(machine)) {
+                setStarted(true);
+                setCompleted(false);
+                onStarted.accept(machine);
+            }
+        }
+    }
+
+    public void reset() {
+        setProgress(0);
+        setCompleted(false);
+        setStarted(false);
+    }
+
+    public static class Builder<T> {
+        private Process<T> process;
+
+        public Builder(int maxProgress) {
+            process = new Process<>(maxProgress);
+        }
+
+        public Builder<T> completed(Consumer<T> consumer) {
+            process.setOnCompleted(consumer);
+            return this;
+        }
+
+        public Builder<T> started(Consumer<T> consumer) {
+            process.setOnStarted(consumer);
+            return this;
+        }
+
+        public Builder<T> canStart(Predicate<T> predicate) {
+            process.setCanStart(predicate);
+            return this;
+        }
+
+        public Builder<T> canProgress(Predicate<T> predicate) {
+            process.setCanProgress(predicate);
+            return this;
+        }
+
+        public Process<T> build() {
+            return process;
         }
     }
 }

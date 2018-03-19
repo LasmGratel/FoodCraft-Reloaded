@@ -18,12 +18,13 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.machine;
+package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
 
-public interface SmeltingMachine<T extends Machine<T>> extends Machine<T> {
-    /**
-     * Called when all fuel has been consumed, and attempt to fetch new fuel.
-     * @return Fuel amount
-     */
-    int progressFuel();
+import cc.lasmgratel.foodcraftreloaded.common.food.Food;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
+
+public interface CapabilityFood {
+    @CapabilityInject(Food.class)
+    Capability<Food> FOOD_CAPABILITY = null;
 }

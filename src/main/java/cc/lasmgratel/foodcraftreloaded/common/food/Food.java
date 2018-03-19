@@ -20,8 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
+import cc.lasmgratel.foodcraftreloaded.common.material.Material;
+
 import javax.annotation.Nonnegative;
-import java.util.Map;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,7 +43,10 @@ public interface Food {
         return unit.convert(1600L * getWeight(), TimeUnit.MILLISECONDS);
     }
 
-    Map<FoodProperty, Integer> getPropertyMap();
+    /**
+     * Materials this food contains.
+     */
+    List<Material> getMaterials();
 
     /**
      * The weight of the food (in grams).

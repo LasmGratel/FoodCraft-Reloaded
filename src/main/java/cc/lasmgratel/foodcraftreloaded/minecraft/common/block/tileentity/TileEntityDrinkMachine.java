@@ -37,7 +37,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileEntityDrinkMachine extends TileEntityEnergizedMachine {
+public class TileEntityDrinkMachine extends TileEntityEnergizedMachine<TileEntityDrinkMachine> {
     public static final int ENERGY_PER_TICK = 20; // 20 RF/t
     public static final int ENERGY_CAPACITY = 2000;
     public static final int FLUID_CAPACITY = 8000;

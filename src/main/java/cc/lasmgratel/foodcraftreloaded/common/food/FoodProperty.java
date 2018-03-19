@@ -20,6 +20,8 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
+import cc.lasmgratel.foodcraftreloaded.common.material.Material;
+
 /**
  * How food effect the player and the amplifier.
  * For instance, spice is a category of property of food.
@@ -29,7 +31,7 @@ public interface FoodProperty {
      * Multiplier between 0.0~1.0.
      * Usually represents the multiplier of this property effected,
      * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Food#getPropertyMap()}.
+     * The amount of property is given by {@link Material#getPropertyMap()}.
      */
     double getMultiplier();
 }

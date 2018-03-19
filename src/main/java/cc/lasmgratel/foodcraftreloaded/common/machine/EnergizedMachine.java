@@ -20,5 +20,5 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.machine;
 
-public interface EnergizedMachine extends Machine {
+public interface EnergizedMachine<T extends Machine<T>> extends Machine<T> {
 }

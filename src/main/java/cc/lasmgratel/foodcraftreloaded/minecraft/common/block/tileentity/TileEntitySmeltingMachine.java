@@ -30,7 +30,7 @@ import javax.annotation.OverridingMethodsMustInvokeSuper;
 /**
  * Machine type that can use fuel to progress.
  */
-public abstract class TileEntitySmeltingMachine extends TileEntityProgressiveMachine implements SmeltingMachine {
+public abstract class TileEntitySmeltingMachine<T extends TileEntitySmeltingMachine<T>> extends TileEntityProgressiveMachine<T> implements SmeltingMachine<T> {
     private int fuel;
     private int currentFuelAmount;
 

@@ -18,12 +18,9 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.machine;
+package cc.lasmgratel.foodcraftreloaded.minecraft.common.item;
 
-public interface SmeltingMachine<T extends Machine<T>> extends Machine<T> {
-    /**
-     * Called when all fuel has been consumed, and attempt to fetch new fuel.
-     * @return Fuel amount
-     */
-    int progressFuel();
+import net.minecraft.item.Item;
+
+public class FoodWrapper extends Item {
 }

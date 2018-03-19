@@ -31,7 +31,7 @@ public interface ReflectionUtils {
         try {
             return (K) clz.getDeclaredField(fieldName).get(clzObj);
         } catch (IllegalAccessException | NoSuchFieldException e) {
-            FoodCraftReloaded.getLogger().error("[FoodCraft]Cannot access field " + clz + "#" + fieldName + "!", e);
+            FoodCraftReloaded.getLogger().error("[FoodCraft] Cannot access field " + clz + "#" + fieldName + "!", e);
         }
         return null;
     }
@@ -40,7 +40,7 @@ public interface ReflectionUtils {
         try {
             clz.getDeclaredField(fieldName).set(clzObj, objToSet);
         } catch (IllegalAccessException | NoSuchFieldException e) {
-            FoodCraftReloaded.getLogger().error("[FoodCraft]Cannot access field " + clz + "#" + fieldName + "!", e);
+            FoodCraftReloaded.getLogger().error("[FoodCraft] Cannot access field " + clz + "#" + fieldName + "!", e);
         }
     }
 }

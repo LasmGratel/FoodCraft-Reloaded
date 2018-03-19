@@ -21,28 +21,36 @@
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity;
 
 import cc.lasmgratel.foodcraftreloaded.common.machine.Machine;
+import cc.lasmgratel.foodcraftreloaded.common.machine.Process;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.OverridingMethodsMustInvokeSuper;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Machine type that can be progressed in tick.
  */
-public abstract class TileEntityProgressiveMachine extends TileEntity implements ITickable, Machine {
-    private int maxProgress;
-    private boolean started = false;
-    private int progress = 0;
+public abstract class TileEntityProgressiveMachine<T extends TileEntityProgressiveMachine<T>> extends TileEntity implements ITickable, Machine<T> {
+    private List<Process<T>> processes = new ArrayList<>();
 
     public TileEntityProgressiveMachine(int maxProgress) {
-        this.maxProgress = maxProgress;
+        getProcesses().add(new Process.Builder<T>(maxProgress)
+            .canProgress(ignored -> canProgress())
+            .canStart(ignored -> canStart())
+            .completed(ignored -> progressCompleted())
+            .started(ignored -> startProgress())
+            .build()
+        );
     }
 
     public static int getProgress(TileEntity tileEntity) {
         if (tileEntity instanceof TileEntityProgressiveMachine && ((TileEntityProgressiveMachine) tileEntity).isStarted())
-            return ((TileEntityProgressiveMachine) tileEntity).getMaxProgress() - ((TileEntityProgressiveMachine) tileEntity).getProgress();
+            return ((TileEntityProgressiveMachine) tileEntity).getProgress();
         return 0;
     }
 
@@ -51,39 +59,28 @@ public abstract class TileEntityProgressiveMachine extends TileEntity implements
     }
 
     @Override
-    public void update() {
-        if (isStarted()) {
-            if (getProgress() > 0) { // Progress is not completed
-                if (canProgress()) {
-                    progress();
-                    setProgress(getProgress() - 1);
-                }
-            } else {
-                setProgress(0);
-                progressCompleted();
-                setStarted(false);
-            }
-        } else {
-            if (canStart()) { // If machine can be started
-                setProgress(getMaxProgress());
-                setStarted(true);
-                startProgress();
-            }
-        }
+    public List<Process<T>> getProcesses() {
+        return processes;
     }
 
     @Override
-    public void resetProgress() {
-        setStarted(false);
-        setProgress(0);
+    public void update() {
+        processes.forEach(process -> process.update((T) this));
     }
 
     @Override
     @OverridingMethodsMustInvokeSuper
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        setProgress(compound.getInteger("progress"));
-        setStarted(compound.getBoolean("started"));
+        NBTTagList list = compound.getTagList("processes", 10);
+        for (int i = 0; i < list.tagCount(); i++) {
+            Process<T> process = getProcesses().get(i);
+            NBTTagCompound processNbt = list.getCompoundTagAt(i);
+            process.setProgress(processNbt.getInteger("progress"));
+            process.setMaxProgress(processNbt.getInteger("maxProgress"));
+            process.setStarted(processNbt.getBoolean("started"));
+            process.setCompleted(processNbt.getBoolean("completed"));
+        }
     }
 
     @Nonnull
@@ -91,32 +88,27 @@ public abstract class TileEntityProgressiveMachine extends TileEntity implements
     @OverridingMethodsMustInvokeSuper
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("progress", getProgress());
-        compound.setBoolean("started", isStarted());
+        NBTTagList list = new NBTTagList();
+        for (Process<T> process : getProcesses()) {
+            NBTTagCompound processNbt = new NBTTagCompound();
+            processNbt.setInteger("progress", process.getProgress());
+            processNbt.setInteger("maxProgress", process.getMaxProgress());
+            processNbt.setBoolean("completed", process.isCompleted());
+            processNbt.setBoolean("started", process.isStarted());
+            list.appendTag(processNbt);
+        }
         return compound;
     }
 
     public int getMaxProgress() {
-        return maxProgress;
-    }
-
-    public void setMaxProgress(int maxProgress) {
-        this.maxProgress = maxProgress;
+        return getProcesses().stream().findAny().map(Process::getMaxProgress).orElse(0);
     }
 
     public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
+        return getProcesses().stream().findAny().map(Process::getProgress).orElse(0);
     }
 
     public boolean isStarted() {
-        return started;
-    }
-
-    public void setStarted(boolean started) {
-        this.started = started;
+        return getProcesses().stream().findAny().map(Process::isStarted).orElse(false);
     }
 }
