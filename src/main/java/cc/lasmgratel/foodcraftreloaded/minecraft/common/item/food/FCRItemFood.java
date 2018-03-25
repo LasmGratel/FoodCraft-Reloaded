@@ -119,7 +119,7 @@ public class FCRItemFood extends ItemFood implements OreDictated {
     protected void onFoodEaten(ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
         if (!worldIn.isRemote) {
             float f = worldIn.rand.nextFloat();
-            effectMap.entrySet().parallelStream().filter(entry -> f < entry.getValue()).forEach(entry -> player.addPotionEffect(entry.getKey()));
+            effectMap.entrySet().stream().filter(entry -> f < entry.getValue() || entry.getValue() == 1.0f).forEach(entry -> player.addPotionEffect(entry.getKey()));
         }
     }
 

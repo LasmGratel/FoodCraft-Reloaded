@@ -22,13 +22,18 @@ package cc.lasmgratel.foodcraftreloaded.minecraft.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.minecraft.api.init.FCRFoods;
+import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking.CustomModelMasking;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.ItemPFood;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.loader.register.RegisterManager;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.annotation.Load;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.annotation.RegFood;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.LoaderState;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.apache.commons.lang3.ArrayUtils;
@@ -78,6 +83,24 @@ public class PropertiedFoodLoader {
                 OreDictionary.registerOre("listAllfoods", item);
             } catch (IllegalAccessException | NullPointerException e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register food " + field.toGenericString(), e);
+            }
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Load(value = LoaderState.POSTINITIALIZATION, side = Side.CLIENT)
+    public void registerColors() {
+        for (Field field : FCRFoods.class.getFields()) {
+            field.setAccessible(true);
+            try {
+                Item item = (Item) field.get(null);
+                if (item instanceof CustomModelMasking) {
+                    if (((CustomModelMasking) item).getItemColorMultiplier() != null) {
+                        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(((CustomModelMasking) item).getItemColorMultiplier(), item);
+                    }
+                }
+            } catch (Exception e) {
+                FoodCraftReloaded.getLogger().error("Cannot register color!", e);
             }
         }
     }

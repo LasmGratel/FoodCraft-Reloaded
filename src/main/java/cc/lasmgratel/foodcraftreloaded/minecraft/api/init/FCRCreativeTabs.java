@@ -67,4 +67,11 @@ public interface FCRCreativeTabs {
             return new ItemStack(FCRFoods.WHITE_RICE);
         }
     };
+
+    CreativeTabs EXTRA = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".extra") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return ItemStack.EMPTY;
+        }
+    };
 }

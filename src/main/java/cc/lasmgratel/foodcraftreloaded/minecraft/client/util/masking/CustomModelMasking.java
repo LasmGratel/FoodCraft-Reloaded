@@ -21,6 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -39,6 +40,10 @@ public interface CustomModelMasking {
     @Nonnull
     default Map<IBlockState, ModelResourceLocation> getStateModelLocations() {
         return Collections.emptyMap();
+    }
+
+    default ItemMeshDefinition getItemMeshDefinition() {
+        return null;
     }
 
     default int getTintIndex() {

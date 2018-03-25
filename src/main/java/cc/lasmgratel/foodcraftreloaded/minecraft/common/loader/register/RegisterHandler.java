@@ -113,7 +113,10 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
     private void registerRender(Item item, int meta, ModelResourceLocation location) {
         ModelBakery.registerItemVariants(item, location);
         ModelLoader.setCustomModelResourceLocation(item, meta, location);
-        ModelLoader.setCustomMeshDefinition(item, stack -> location);
+        if (item instanceof CustomModelMasking && ((CustomModelMasking) item).getItemMeshDefinition() != null)
+            ModelLoader.setCustomMeshDefinition(item, ((CustomModelMasking) item).getItemMeshDefinition());
+        else
+            ModelLoader.setCustomMeshDefinition(item, stack -> location);
     }
 
     @SideOnly(Side.CLIENT)

@@ -120,3 +120,12 @@ tooltip.fcrfood.liqueur.type=酒种: %s
 tooltip.fcrfood.liqueur.type.normal=普通
 tooltip.fcrfood.liqueur.type.aged=陈酿
 tooltip.fcrfood.liqueur.type.cocktail=鸡尾
+
+# Extra
+# Cyl18
+item.cyl18.name=Cy冰激凌
+item.cyl18.lore=变幻出随机的冰激凌效果~
+
+# Shp241
+item.shp241.name=Shp烤鱿鱼
+item.shp241.lore=鱿鱼先生, 我们以shp241的名义起誓

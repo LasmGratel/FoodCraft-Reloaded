@@ -23,6 +23,8 @@ package cc.lasmgratel.foodcraftreloaded.minecraft.api.init;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.*;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.annotation.RegFood;
+import cc.lasmgratel.foodcraftreloaded.minecraft.extra.item.ItemCY;
+import cc.lasmgratel.foodcraftreloaded.minecraft.extra.item.ItemShp;
 import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
@@ -125,4 +127,8 @@ public interface FCRFoods {
     // Liqueur
     Item BEER = new ItemLiqueur(5).setUnlocalizedName("beer").setRegistryName(FoodCraftReloadedMod.MODID, "beer_liqueur");
     Item WHITE_WINE = new ItemLiqueur(5).setUnlocalizedName("whiteWine").setRegistryName(FoodCraftReloadedMod.MODID, "white_wine_liqueur");
+
+    // Extra
+    ItemCY CY = new ItemCY();
+    ItemShp SHP = new ItemShp();
 }

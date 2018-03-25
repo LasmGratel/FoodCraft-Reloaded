@@ -39,6 +39,7 @@ public interface Food {
     /**
      * How many time to eat this food.
      */
+    @Nonnegative
     default long getDuration(TimeUnit unit) {
         return unit.convert(1600L * getWeight(), TimeUnit.MILLISECONDS);
     }
