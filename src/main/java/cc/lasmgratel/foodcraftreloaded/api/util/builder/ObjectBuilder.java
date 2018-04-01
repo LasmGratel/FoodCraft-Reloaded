@@ -18,13 +18,8 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
+package cc.lasmgratel.foodcraftreloaded.api.util.builder;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.Food;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-
-public interface CapabilityFood {
-    @CapabilityInject(Food.class)
-    Capability<Food> FOOD_CAPABILITY = null;
+public interface ObjectBuilder<T> {
+    T build();
 }

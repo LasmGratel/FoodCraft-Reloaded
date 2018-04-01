@@ -18,12 +18,29 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.machine;
+package cc.lasmgratel.foodcraftreloaded.common.material;
 
-public interface SmeltingMachine<T extends Machine<T>> extends Machine<T> {
-    /**
-     * Called when all fuel has been consumed, and attempt to fetch new fuel.
-     * @return Fuel amount
-     */
-    int progressFuel();
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
+import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
+
+import javax.annotation.Nonnull;
+
+public class MaterialBuilder implements NamedBuilder<MaterialBase> {
+    private MaterialBase materialBase = new MaterialBase();
+
+    @Override
+    public MaterialBuilder withName(@Nonnull String name) {
+        materialBase.setName(name);
+        return this;
+    }
+
+    public MaterialBuilder withProperty(FoodProperty property, int value) {
+        materialBase.getPropertyMap().put(property, value);
+        return this;
+    }
+
+    @Override
+    public MaterialBase build() {
+        return materialBase;
+    }
 }

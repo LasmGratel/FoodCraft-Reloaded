@@ -18,7 +18,7 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.machine;
+package cc.lasmgratel.foodcraftreloaded.api.machine;
 
 import javax.annotation.Nonnegative;
 import java.util.function.Consumer;

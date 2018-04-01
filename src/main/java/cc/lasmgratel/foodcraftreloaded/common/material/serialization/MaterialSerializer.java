@@ -18,13 +18,21 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
+package cc.lasmgratel.foodcraftreloaded.common.material.serialization;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.Food;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
+import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import com.google.gson.*;
 
-public interface CapabilityFood {
-    @CapabilityInject(Food.class)
-    Capability<Food> FOOD_CAPABILITY = null;
+import java.lang.reflect.Type;
+
+public class MaterialSerializer implements JsonSerializer<Material>, JsonDeserializer<Material> {
+    @Override
+    public Material deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(Material src, Type typeOfSrc, JsonSerializationContext context) {
+        return null;
+    }
 }

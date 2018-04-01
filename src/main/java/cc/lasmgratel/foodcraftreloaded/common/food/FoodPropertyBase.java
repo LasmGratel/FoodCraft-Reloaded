@@ -18,13 +18,20 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
+package cc.lasmgratel.foodcraftreloaded.common.food;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.Food;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
+import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
 
-public interface CapabilityFood {
-    @CapabilityInject(Food.class)
-    Capability<Food> FOOD_CAPABILITY = null;
+public class FoodPropertyBase extends NamedPropertyBase implements FoodProperty {
+    private double multiplier;
+
+    @Override
+    public double getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
+    }
 }

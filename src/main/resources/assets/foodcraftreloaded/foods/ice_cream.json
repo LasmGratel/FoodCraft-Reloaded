@@ -1,19 +1,4 @@
 {
-  "unlocalizedName": "ice_cream",
-  "foodLevel": 2,
-  "alwaysEdible": false,
-  "modifier": [
-    0.0,
-    1.0,
-    0.0,
-    0.0,
-    0.0
-  ],
-  "effects": [
-    {
-      "effectName": "foodcraftreloaded:freeze",
-      "duration": 10,
-      "probability": 0.7
-    }
-  ]
+    "name": "ice_cream",
+    "materials": [{"name": "cream", "weight": 6}]
 }

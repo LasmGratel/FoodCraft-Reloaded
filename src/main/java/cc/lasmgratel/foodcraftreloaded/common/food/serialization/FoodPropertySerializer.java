@@ -18,7 +18,21 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.machine;
+package cc.lasmgratel.foodcraftreloaded.common.food.serialization;
 
-public interface EnergizedMachine<T extends Machine<T>> extends Machine<T> {
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
+
+public class FoodPropertySerializer implements JsonSerializer<FoodProperty>, JsonDeserializer<FoodProperty> {
+    @Override
+    public FoodProperty deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        return null;
+    }
+
+    @Override
+    public JsonElement serialize(FoodProperty src, Type typeOfSrc, JsonSerializationContext context) {
+        return null;
+    }
 }

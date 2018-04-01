@@ -18,22 +18,28 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.util;
+package cc.lasmgratel.foodcraftreloaded.common.food;
 
-import com.google.gson.JsonElement;
+import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Set;
+import javax.annotation.Nonnull;
 
-public interface Settings {
-    File getConfigFolder();
-    File getConfigFile(String domain);
-    Object remove(String domain, String property);
-    void addProperty(String domain, String property, String value);
-    void addProperty(String domain, String property, Number value);
-    void addProperty(String domain, String property, boolean value);
-    void addProperty(String domain, String property, char value);
-    Object getProperty(String domain, String property);
-    Set<Map.Entry<String, JsonElement>> entrySet(String domain);
+public class FoodPropertyBuilder implements NamedBuilder<FoodPropertyBase> {
+    private FoodPropertyBase propertyBase = new FoodPropertyBase();
+
+    public FoodPropertyBuilder withMultiplier(double multiplier) {
+        propertyBase.setMultiplier(multiplier);
+        return this;
+    }
+
+    @Override
+    public FoodPropertyBuilder withName(@Nonnull String name) {
+        propertyBase.setName(name);
+        return this;
+    }
+
+    @Override
+    public FoodPropertyBase build() {
+        return propertyBase;
+    }
 }

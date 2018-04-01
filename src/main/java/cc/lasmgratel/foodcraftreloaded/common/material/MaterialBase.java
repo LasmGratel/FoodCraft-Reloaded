@@ -18,13 +18,24 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
+package cc.lasmgratel.foodcraftreloaded.common.material;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.Food;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
+import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
 
-public interface CapabilityFood {
-    @CapabilityInject(Food.class)
-    Capability<Food> FOOD_CAPABILITY = null;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MaterialBase extends NamedPropertyBase implements Material {
+    private Map<FoodProperty, Integer> propertyMap = new HashMap<>();
+
+    @Override
+    public Map<FoodProperty, Integer> getPropertyMap() {
+        return propertyMap;
+    }
+
+    public void setPropertyMap(Map<FoodProperty, Integer> propertyMap) {
+        this.propertyMap = propertyMap;
+    }
 }

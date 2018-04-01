@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity;
 
-import cc.lasmgratel.foodcraftreloaded.common.machine.SmeltingMachine;
+import cc.lasmgratel.foodcraftreloaded.api.machine.SmeltingMachine;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

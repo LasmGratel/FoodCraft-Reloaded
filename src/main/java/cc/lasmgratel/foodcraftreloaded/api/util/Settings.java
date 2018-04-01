@@ -18,20 +18,22 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.api.util;
 
-import cc.lasmgratel.foodcraftreloaded.common.material.Material;
+import com.google.gson.JsonElement;
 
-/**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
- */
-public interface FoodProperty {
-    /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
-     */
-    double getMultiplier();
+import java.io.File;
+import java.util.Map;
+import java.util.Set;
+
+public interface Settings {
+    File getConfigFolder();
+    File getConfigFile(String domain);
+    Object remove(String domain, String property);
+    void addProperty(String domain, String property, String value);
+    void addProperty(String domain, String property, Number value);
+    void addProperty(String domain, String property, boolean value);
+    void addProperty(String domain, String property, char value);
+    Object getProperty(String domain, String property);
+    Set<Map.Entry<String, JsonElement>> entrySet(String domain);
 }

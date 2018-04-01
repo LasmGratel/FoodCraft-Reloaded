@@ -18,7 +18,7 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.util;
+package cc.lasmgratel.foodcraftreloaded.api.util;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 

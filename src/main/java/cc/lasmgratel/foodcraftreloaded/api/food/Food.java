@@ -18,23 +18,30 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.api.food;
 
-import cc.lasmgratel.foodcraftreloaded.common.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
 
 import javax.annotation.Nonnegative;
-import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * A food which can be eaten by players.
  */
-public interface Food {
+public interface Food extends NamedProperty {
     /**
      * The amount food heals player.
      * In Minecraft, this is represented by "chicken leg" located in the right side of HUD.
+     * Calculated from material and weight by default.
      */
-    int getHealAmount();
+    default int getHealAmount() {
+        int healAmount = getWeight();
+        for (Map.Entry<Material, Integer> entry : getMaterialMap().entrySet())
+            healAmount += entry.getKey().calcMultiplier() * entry.getValue();
+        return healAmount;
+    }
 
     /**
      * How many time to eat this food.
@@ -45,9 +52,9 @@ public interface Food {
     }
 
     /**
-     * Materials this food contains.
+     * Materials and their weight.
      */
-    List<Material> getMaterials();
+    Map<Material, Integer> getMaterialMap();
 
     /**
      * The weight of the food (in grams).
@@ -55,6 +62,6 @@ public interface Food {
      */
     @Nonnegative
     default int getWeight() {
-        return 1;
+        return getMaterialMap().values().stream().mapToInt(Integer::intValue).sum();
     }
 }

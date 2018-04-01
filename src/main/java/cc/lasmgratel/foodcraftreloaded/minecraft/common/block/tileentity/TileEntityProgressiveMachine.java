@@ -20,8 +20,8 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity;
 
-import cc.lasmgratel.foodcraftreloaded.common.machine.Machine;
-import cc.lasmgratel.foodcraftreloaded.common.machine.Process;
+import cc.lasmgratel.foodcraftreloaded.api.machine.Machine;
+import cc.lasmgratel.foodcraftreloaded.api.machine.Process;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
