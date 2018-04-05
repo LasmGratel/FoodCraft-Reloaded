@@ -18,39 +18,25 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.util;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.builder;
 
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.FCRElement;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 
-public class NamedPropertyBase implements NamedProperty {
+public class ElementBuilder implements NamedBuilder<FCRElement> {
+    private FCRElement element = new FCRElement();
+
     @Nonnull
-    private String name;
-
     @Override
-    @Nonnull
-    public String getName() {
-        return name;
-    }
-
-    public void setName(@Nonnull String name) {
-        if (!name.toLowerCase().equals(name))
-            throw new IllegalArgumentException("Name " + name + " cannot be upper case!");
-        this.name = name;
+    public FCRElement build() {
+        return element;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof NamedPropertyBase)) return false;
-        NamedPropertyBase that = (NamedPropertyBase) o;
-        return Objects.equals(getName(), that.getName());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName());
+    public ElementBuilder withName(@Nonnull String name) {
+        element.setName(name);
+        return this;
     }
 }

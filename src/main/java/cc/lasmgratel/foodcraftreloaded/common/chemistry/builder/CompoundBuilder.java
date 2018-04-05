@@ -18,20 +18,26 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.builder;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecular.Molecular;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.compound.FCRCompound;
 
-public class FoodPropertyBase extends AbstractNamedProperty implements FoodProperty {
-    private double multiplier;
+import java.util.Map;
 
+public class CompoundBuilder extends MatterBuilder<FCRCompound, CompoundBuilder> {
     @Override
-    public double getMultiplier() {
-        return multiplier;
+    protected FCRCompound newInstance() {
+        return new FCRCompound();
     }
 
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
+    public CompoundBuilder withCompound(Molecular molecular, int size) {
+        matter.getComponents().put(molecular, size);
+        return this;
+    }
+
+    public CompoundBuilder withComponents(Map<? extends Molecular, ? extends Integer> components) {
+        matter.getComponents().putAll(components);
+        return this;
     }
 }

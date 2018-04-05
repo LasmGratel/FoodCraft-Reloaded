@@ -27,8 +27,9 @@ public interface Meltable {
 
     /**
      * Melting point in Kelvin(K).
+     * @return Melting point, or -1 if it's not fixed.
      */
-    default int getMeltingPoint() {
+    default double getMeltingPoint() {
         return -1;
     }
 }

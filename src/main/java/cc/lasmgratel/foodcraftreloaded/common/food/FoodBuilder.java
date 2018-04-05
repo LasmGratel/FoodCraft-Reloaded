@@ -44,6 +44,7 @@ public class FoodBuilder implements NamedBuilder<FoodBase> {
         return this;
     }
 
+    @Nonnull
     @Override
     public FoodBase build() {
         return foodBase;

@@ -22,7 +22,7 @@ package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.state.Meltable;
 
-public interface Matter extends Meltable {
+public interface Matter extends Meltable, ChemicalFormulated {
     /**
      * Density in kg/m².
      */

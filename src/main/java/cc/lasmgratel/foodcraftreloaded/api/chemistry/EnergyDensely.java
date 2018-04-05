@@ -28,5 +28,5 @@ public interface EnergyDensely {
      * Theoretically energy density.
      * Unit: J/kg
      */
-    int getEnergyDensity();
+    double getEnergyDensity();
 }

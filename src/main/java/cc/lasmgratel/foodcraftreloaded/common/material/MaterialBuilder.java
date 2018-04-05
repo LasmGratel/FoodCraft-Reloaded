@@ -39,6 +39,7 @@ public class MaterialBuilder implements NamedBuilder<MaterialBase> {
         return this;
     }
 
+    @Nonnull
     @Override
     public MaterialBase build() {
         return materialBase;

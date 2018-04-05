@@ -53,7 +53,7 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
         typeClass = cast(value.getClass());
     }
 
-    private Class<?> cast(Class<?> typeClass) {
+    private static Class<?> cast(Class<?> typeClass) {
         if (IForgeRegistryEntry.class.isAssignableFrom(typeClass.getSuperclass()) && typeClass.getSuperclass() != IForgeRegistryEntry.class && typeClass.getSuperclass() != IForgeRegistryEntry.Impl.class)
             return cast(typeClass.getSuperclass());
         return typeClass;
@@ -70,17 +70,16 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
 
     @SideOnly(Side.CLIENT)
     public void registerRender() {
-        if (Item.class.isAssignableFrom(value.getClass())) {
+        if (value instanceof Item) {
             if (value instanceof CustomModelMasking) {
                 registerRender((Item) value, 0, ((CustomModelMasking) value).getModelLocation());
                 FoodCraftReloaded.getLogger().debug("Registered custom model " + value.getClass() + " as " + ((CustomModelMasking) value).getModelLocation());
             } else if (value.getRegistryName() != null) {
                 registerRender((Item) value, 0, new ModelResourceLocation(value.getRegistryName(), "inventory"));
             }
-        } else if (BlockFluidBase.class.isAssignableFrom(value.getClass())) {
-            // TODO Null condition
+        } else if (value instanceof BlockFluidBase) {
             registerFluidRender((BlockFluidBase) value, value.getRegistryName().getResourcePath());
-        } else if (Block.class.isAssignableFrom(value.getClass())) {
+        } else if (value instanceof Block) {
             if (value instanceof CustomModelMasking) {
                 ModelLoader.setCustomStateMapper((Block) value, block -> ((CustomModelMasking) value).getStateModelLocations());
                 if (((CustomModelMasking) value).getModelLocation() != null)

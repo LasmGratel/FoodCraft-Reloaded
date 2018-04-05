@@ -18,20 +18,10 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.Element;
 import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
 
-public class FoodPropertyBase extends AbstractNamedProperty implements FoodProperty {
-    private double multiplier;
-
-    @Override
-    public double getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
-    }
+public class FCRElement extends AbstractNamedProperty implements Element {
 }

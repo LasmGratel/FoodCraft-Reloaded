@@ -30,7 +30,7 @@ import java.util.Optional;
 
 @Mod(modid = FoodCraftReloadedMod.MODID, name = FoodCraftReloadedMod.NAME, version = FoodCraftReloadedMod.VERSION,
 acceptedMinecraftVersions = "[1.12.2,)",
-updateJSON = "http://lasmgratel.github.io/FoodCraft-Reloaded/update.json")
+updateJSON = "https://lasmgratel.github.io/FoodCraft-Reloaded/update.json")
 public class FoodCraftReloadedMod {
     public static final String MODID = "foodcraftreloaded";
     public static final String NAME = "FoodCraft Reloaded";

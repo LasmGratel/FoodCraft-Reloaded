@@ -18,20 +18,20 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.organic.compound;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.compound.OrganicCompound;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.compound.FCRCompound;
 
-public class FoodPropertyBase extends AbstractNamedProperty implements FoodProperty {
-    private double multiplier;
+public class FCROrganicCompound extends FCRCompound implements OrganicCompound {
+    private double energyDensity;
 
     @Override
-    public double getMultiplier() {
-        return multiplier;
+    public double getEnergyDensity() {
+        return energyDensity;
     }
 
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
+    public void setEnergyDensity(double energyDensity) {
+        this.energyDensity = energyDensity;
     }
 }

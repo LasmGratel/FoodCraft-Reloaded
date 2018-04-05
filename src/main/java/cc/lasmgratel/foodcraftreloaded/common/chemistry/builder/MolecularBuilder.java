@@ -18,29 +18,32 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.builder;
 
-import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.Element;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.molecular.FCRMolecular;
 
-import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Collection;
 
-public class FoodPropertyBuilder implements NamedBuilder<FoodPropertyBase> {
-    private FoodPropertyBase propertyBase = new FoodPropertyBase();
+public class MolecularBuilder extends MatterBuilder<FCRMolecular, MolecularBuilder> {
+    @Override
+    protected FCRMolecular newInstance() {
+        return new FCRMolecular();
+    }
 
-    public FoodPropertyBuilder withMultiplier(double multiplier) {
-        propertyBase.setMultiplier(multiplier);
+    public MolecularBuilder withElement(Element element) {
+        matter.getElements().add(element);
         return this;
     }
 
-    @Override
-    public FoodPropertyBuilder withName(@Nonnull String name) {
-        propertyBase.setName(name);
+    public MolecularBuilder withElements(Element... elements) {
+        Arrays.stream(elements).forEach(this::withElement);
         return this;
     }
 
-    @Nonnull
-    @Override
-    public FoodPropertyBase build() {
-        return propertyBase;
+    public MolecularBuilder withElements(Collection<? extends Element> elements) {
+        matter.getElements().addAll(elements);
+        return this;
     }
 }
