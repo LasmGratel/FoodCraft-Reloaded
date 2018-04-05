@@ -18,24 +18,23 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.material;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.snapshot;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyReleasable;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.OrganicMatter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class MaterialBase extends NamedPropertyBase implements Material {
-    private Map<FoodProperty, Integer> propertyMap = new HashMap<>();
-
+public class OrganicMatterSnapshot extends MatterSnapshot implements EnergyReleasable {
     @Override
-    public Map<FoodProperty, Integer> getPropertyMap() {
-        return propertyMap;
+    public void setMatter(Matter matter) {
+        if (!(matter instanceof OrganicMatter))
+            throw new IllegalArgumentException("Matter " + matter + " is not a organic matter!");
+        super.setMatter(matter);
     }
 
-    public void setPropertyMap(Map<FoodProperty, Integer> propertyMap) {
-        this.propertyMap = propertyMap;
+    @Override
+    public double getEnergy() {
+        return ((EnergyDensely) getMatter()).getEnergyDensity() * getWeight();
     }
 }

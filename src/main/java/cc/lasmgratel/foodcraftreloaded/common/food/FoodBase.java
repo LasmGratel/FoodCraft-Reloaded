@@ -21,7 +21,7 @@
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.Food;
-import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
 import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
 
 import java.util.HashMap;

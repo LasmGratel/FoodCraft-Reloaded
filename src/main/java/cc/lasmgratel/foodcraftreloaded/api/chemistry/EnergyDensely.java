@@ -18,21 +18,15 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.food;
-
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
 /**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
+ * Releasable energy in respiration.
  */
-public interface FoodProperty extends NamedProperty {
+public interface EnergyDensely {
     /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
+     * Theoretically energy density.
+     * Unit: J/kg
      */
-    double getMultiplier();
+    int getEnergyDensity();
 }

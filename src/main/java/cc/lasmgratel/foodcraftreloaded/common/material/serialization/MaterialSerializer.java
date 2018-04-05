@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.material.serialization;
 
-import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;

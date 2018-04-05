@@ -18,21 +18,11 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.food;
-
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.state;
 
 /**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
+ * <a href="https://en.wikipedia.org/wiki/State_of_matter">Wikipedia</a>
  */
-public interface FoodProperty extends NamedProperty {
-    /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
-     */
-    double getMultiplier();
+public enum MatterState {
+    SOLID, MOLTEN, GAS, PLASMA
 }
