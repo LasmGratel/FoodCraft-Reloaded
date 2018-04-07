@@ -18,23 +18,17 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.material;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
-import com.google.common.util.concurrent.AtomicDouble;
-
-import java.util.Map;
-
-public interface Material extends NamedProperty {
+public interface Matter {
     /**
-     * Includes key and amount of a property.
+     * Weight in kilograms(KG).
      */
-    Map<FoodProperty, Integer> getPropertyMap();
+    double getWeight();
 
-    default double calcMultiplier() {
-        AtomicDouble multiplier = new AtomicDouble();
-        getPropertyMap().forEach((foodProperty, integer) -> multiplier.getAndAdd(foodProperty.getMultiplier() * integer));
-        return multiplier.get();
-    }
+    /**
+     * Formula.
+     * e.g. CO2
+     */
+    String getFormula();
 }

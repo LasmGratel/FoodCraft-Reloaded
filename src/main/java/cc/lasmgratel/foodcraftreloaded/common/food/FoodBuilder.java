@@ -20,7 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
-import cc.lasmgratel.foodcraftreloaded.api.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
 import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
 
 import javax.annotation.Nonnegative;

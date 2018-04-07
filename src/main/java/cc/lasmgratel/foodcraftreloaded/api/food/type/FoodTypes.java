@@ -18,21 +18,16 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.food;
+package cc.lasmgratel.foodcraftreloaded.api.food.type;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+import javax.annotation.Nonnull;
 
-/**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
- */
-public interface FoodProperty extends NamedProperty {
-    /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
-     */
-    double getMultiplier();
+public enum FoodTypes implements FoodType {
+    FRUIT, VEGETABLE, MEAT, FUNGUS, FLAVORING;
+
+    @Nonnull
+    @Override
+    public String getName() {
+        return name().toLowerCase();
+    }
 }

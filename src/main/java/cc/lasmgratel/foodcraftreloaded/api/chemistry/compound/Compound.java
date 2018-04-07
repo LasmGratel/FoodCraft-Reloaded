@@ -18,21 +18,23 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.food;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.compound;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecule.Molecule;
 
-/**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
- */
-public interface FoodProperty extends NamedProperty {
+import java.util.List;
+
+public interface Compound extends Matter {
     /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
+     * Molecules contained in this compound.
      */
-    double getMultiplier();
+    List<Molecule> getMolecules();
+
+    @Override
+    default String getFormula() {
+        StringBuilder stringBuilder = new StringBuilder();
+        getMolecules().stream().map(Matter::getFormula).forEach(stringBuilder::append);
+        return stringBuilder.toString();
+    }
 }

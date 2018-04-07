@@ -18,21 +18,23 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.food;
+package cc.lasmgratel.foodcraftreloaded.api.food.material;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
 import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+import com.google.common.util.concurrent.AtomicDouble;
 
-/**
- * How food effect the player and the amplifier.
- * For instance, spice is a category of property of food.
- */
-public interface FoodProperty extends NamedProperty {
+import java.util.Map;
+
+public interface Material extends NamedProperty {
     /**
-     * Multiplier between 0.0~1.0.
-     * Usually represents the multiplier of this property effected,
-     * but it is possible to treat it for other usages.
-     * The amount of property is given by {@link Material#getPropertyMap()}.
+     * Includes key and amount of a property.
      */
-    double getMultiplier();
+    Map<FoodProperty, Integer> getPropertyMap();
+
+    default double calcMultiplier() {
+        AtomicDouble multiplier = new AtomicDouble();
+        getPropertyMap().forEach((foodProperty, integer) -> multiplier.getAndAdd(foodProperty.getMultiplier() * integer));
+        return multiplier.get();
+    }
 }
