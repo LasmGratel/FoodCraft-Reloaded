@@ -20,6 +20,9 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.util.builder;
 
+import javax.annotation.Nonnull;
+
 public interface ObjectBuilder<T> {
+    @Nonnull
     T build();
 }

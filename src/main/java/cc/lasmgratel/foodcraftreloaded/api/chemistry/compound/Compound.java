@@ -21,20 +21,10 @@
 package cc.lasmgratel.foodcraftreloaded.api.chemistry.compound;
 
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecule.Molecule;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecular.Molecular;
 
-import java.util.List;
+import java.util.Map;
 
 public interface Compound extends Matter {
-    /**
-     * Molecules contained in this compound.
-     */
-    List<Molecule> getMolecules();
-
-    @Override
-    default String getFormula() {
-        StringBuilder stringBuilder = new StringBuilder();
-        getMolecules().stream().map(Matter::getFormula).forEach(stringBuilder::append);
-        return stringBuilder.toString();
-    }
+    Map<Molecular, Integer> getComponents();
 }

@@ -18,10 +18,26 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.builder;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecular.Molecular;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.compound.FCRCompound;
 
-public interface OrganicMatter extends Matter, EnergyDensely {
+import java.util.Map;
+
+public class CompoundBuilder extends MatterBuilder<FCRCompound, CompoundBuilder> {
+    @Override
+    protected FCRCompound newInstance() {
+        return new FCRCompound();
+    }
+
+    public CompoundBuilder withCompound(Molecular molecular, int size) {
+        matter.getComponents().put(molecular, size);
+        return this;
+    }
+
+    public CompoundBuilder withComponents(Map<? extends Molecular, ? extends Integer> components) {
+        matter.getComponents().putAll(components);
+        return this;
+    }
 }

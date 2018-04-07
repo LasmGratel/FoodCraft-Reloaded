@@ -22,12 +22,12 @@ package cc.lasmgratel.foodcraftreloaded.common.material;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
 import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
+import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class MaterialBase extends NamedPropertyBase implements Material {
+public class MaterialBase extends AbstractNamedProperty implements Material {
     private Map<FoodProperty, Integer> propertyMap = new HashMap<>();
 
     @Override

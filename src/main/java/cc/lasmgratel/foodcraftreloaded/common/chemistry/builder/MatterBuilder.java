@@ -18,29 +18,42 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.food;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.builder;
 
 import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.FCRMatter;
 
 import javax.annotation.Nonnull;
 
-public class FoodPropertyBuilder implements NamedBuilder<FoodPropertyBase> {
-    private FoodPropertyBase propertyBase = new FoodPropertyBase();
+public abstract class MatterBuilder<T extends FCRMatter, V extends MatterBuilder<T, V>> implements NamedBuilder<T> {
+    protected T matter = newInstance();
 
-    public FoodPropertyBuilder withMultiplier(double multiplier) {
-        propertyBase.setMultiplier(multiplier);
-        return this;
+    protected abstract T newInstance();
+
+    public V withDensity(double density) {
+        matter.setDensity(density);
+        return (V) this;
+    }
+
+    public V withFormula(@Nonnull String formula) {
+        matter.setChemicalFormula(formula);
+        return (V) this;
+    }
+
+    public V withMeltingPoint(double meltingPoint) {
+        matter.setMeltingPoint(meltingPoint);
+        return (V) this;
     }
 
     @Override
-    public FoodPropertyBuilder withName(@Nonnull String name) {
-        propertyBase.setName(name);
-        return this;
+    public V withName(@Nonnull String name) {
+        matter.setName(name);
+        return (V) this;
     }
 
     @Nonnull
     @Override
-    public FoodPropertyBase build() {
-        return propertyBase;
+    public T build() {
+        return matter;
     }
 }

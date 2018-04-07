@@ -18,10 +18,20 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.common.chemistry.organic.molecular;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.molecular.OrganicMolecular;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.molecular.FCRMolecular;
 
-public interface OrganicMatter extends Matter, EnergyDensely {
+public class FCROrganicMolecular extends FCRMolecular implements OrganicMolecular {
+    private double energyDensity;
+
+    @Override
+    public double getEnergyDensity() {
+        return energyDensity;
+    }
+
+    public void setEnergyDensity(double energyDensity) {
+        this.energyDensity = energyDensity;
+    }
 }

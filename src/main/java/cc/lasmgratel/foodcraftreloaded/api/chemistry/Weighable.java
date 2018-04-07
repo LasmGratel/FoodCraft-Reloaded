@@ -18,10 +18,11 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
-
-public interface OrganicMatter extends Matter, EnergyDensely {
+public interface Weighable {
+    /**
+     * Weight in kilograms(kg).
+     */
+    double getWeight();
 }

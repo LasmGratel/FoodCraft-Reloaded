@@ -20,5 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
-public interface Element {
+import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+
+public interface Element extends NamedProperty {
 }

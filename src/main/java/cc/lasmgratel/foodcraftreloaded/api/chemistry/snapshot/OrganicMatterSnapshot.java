@@ -18,10 +18,23 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.snapshot;
 
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyReleasable;
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.OrganicMatter;
 
-public interface OrganicMatter extends Matter, EnergyDensely {
+public class OrganicMatterSnapshot extends MatterSnapshot implements EnergyReleasable {
+    @Override
+    public void setMatter(Matter matter) {
+        if (!(matter instanceof OrganicMatter))
+            throw new IllegalArgumentException("Matter " + matter + " is not a organic matter!");
+        super.setMatter(matter);
+    }
+
+    @Override
+    public double getEnergy() {
+        return ((EnergyDensely) getMatter()).getEnergyDensity() * getWeight();
+    }
 }

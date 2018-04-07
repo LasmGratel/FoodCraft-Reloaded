@@ -23,5 +23,5 @@ package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.compound;
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.compound.Compound;
 import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.OrganicMatter;
 
-public interface OrganicCompound extends Compound, OrganicMatter {
+public interface OrganicCompound extends OrganicMatter, Compound {
 }

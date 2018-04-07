@@ -20,15 +20,11 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
-public interface Matter {
-    /**
-     * Weight in kilograms(KG).
-     */
-    double getWeight();
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.state.Meltable;
 
+public interface Matter extends Meltable, ChemicalFormulated {
     /**
-     * Formula.
-     * e.g. CO2
+     * Density in kg/m².
      */
-    String getFormula();
+    double getDensity();
 }

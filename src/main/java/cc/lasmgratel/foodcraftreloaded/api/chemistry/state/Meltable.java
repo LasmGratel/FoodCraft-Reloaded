@@ -18,10 +18,18 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.state;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+public interface Meltable {
+    default boolean isMeltingPointFixed() {
+        return false;
+    }
 
-public interface OrganicMatter extends Matter, EnergyDensely {
+    /**
+     * Melting point in Kelvin(K).
+     * @return Melting point, or -1 if it's not fixed.
+     */
+    default double getMeltingPoint() {
+        return -1;
+    }
 }

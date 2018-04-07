@@ -18,10 +18,10 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.molecular;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.molecular.Molecular;
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.organic.OrganicMatter;
 
-public interface OrganicMatter extends Matter, EnergyDensely {
+public interface OrganicMolecular extends OrganicMatter, Molecular {
 }

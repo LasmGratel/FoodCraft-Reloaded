@@ -21,9 +21,9 @@
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
-import cc.lasmgratel.foodcraftreloaded.common.util.NamedPropertyBase;
+import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
 
-public class FoodPropertyBase extends NamedPropertyBase implements FoodProperty {
+public class FoodPropertyBase extends AbstractNamedProperty implements FoodProperty {
     private double multiplier;
 
     @Override

@@ -18,10 +18,15 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.api.chemistry.organic;
+package cc.lasmgratel.foodcraftreloaded.api.chemistry;
 
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyDensely;
-import cc.lasmgratel.foodcraftreloaded.api.chemistry.Matter;
-
-public interface OrganicMatter extends Matter, EnergyDensely {
+/**
+ * Releasable energy in respiration.
+ */
+public interface EnergyDensely {
+    /**
+     * Theoretically energy density.
+     * Unit: J/kg
+     */
+    double getEnergyDensity();
 }
