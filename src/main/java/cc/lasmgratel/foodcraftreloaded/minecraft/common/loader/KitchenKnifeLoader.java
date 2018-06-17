@@ -21,15 +21,17 @@
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.tool.ItemKitchenKnife;
-import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.tool.KitchenKnifeType;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.tool.KitchenKnifeWrapper;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.annotation.Load;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class KitchenKnifeLoader extends EnumLoader<KitchenKnifeType> {
+public class KitchenKnifeLoader extends IterableLoader<KitchenKnifeWrapper> {
     @Load
     public void loadKitchenKnifes() {
-        putValue(ItemKitchenKnife.class);
+        for (Item.ToolMaterial toolMaterial : Item.ToolMaterial.values())
+            putValue(new KitchenKnifeWrapper(toolMaterial), ItemKitchenKnife.class);
         register();
     }
 

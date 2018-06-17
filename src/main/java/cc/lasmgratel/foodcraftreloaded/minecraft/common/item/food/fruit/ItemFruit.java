@@ -64,8 +64,6 @@ public class ItemFruit extends FCRItemFood implements FruitTyped, CustomModelMas
         return new ModelResourceLocation(new ResourceLocation(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName("fruit", fruitType.toString())), "inventory");
     }
 
-
-
     @Nullable
     @Override
     public String[] getOreDictNames() {

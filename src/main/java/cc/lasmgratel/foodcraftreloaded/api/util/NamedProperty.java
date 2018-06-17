@@ -28,4 +28,9 @@ public interface NamedProperty {
      */
     @Nonnull
     String getName();
+
+    @Nonnull
+    default String getLocalizedName() {
+        return getName();
+    }
 }

@@ -40,17 +40,6 @@ repositories {
 	}
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java']
-        }
-
-        resources {
-            srcDir 'src/resources'
-        }
-    }
-}
 
 minecraft {
     version = minecraft_version + "-" + forge_version

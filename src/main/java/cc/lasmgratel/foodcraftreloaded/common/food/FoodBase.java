@@ -33,14 +33,7 @@ public class FoodBase extends AbstractNamedProperty implements Food {
 
     @Override
     public int getHealAmount() {
-        if (healAmount != -1)
-            return healAmount;
-        else {
-            int healAmount = getWeight();
-            for (Map.Entry<Material, Integer> entry : getMaterialMap().entrySet())
-                healAmount += entry.getKey().calcMultiplier() * entry.getValue();
-            return healAmount;
-        }
+        return healAmount == -1 ? (int) (getEnergy() / ENERGY_PER_HEAL_AMOUNT) : healAmount;
     }
 
     public void setHealAmount(int healAmount) {
@@ -50,9 +43,5 @@ public class FoodBase extends AbstractNamedProperty implements Food {
     @Override
     public Map<Material, Integer> getMaterialMap() {
         return materialMap;
-    }
-
-    public void setMaterialMap(Map<Material, Integer> materialMap) {
-        this.materialMap = materialMap;
     }
 }

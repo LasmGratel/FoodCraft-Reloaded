@@ -37,7 +37,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Arrays;
 
-public class FruitEnumLoader extends EnumLoader<FruitType> {
+public class FruitEnumLoader extends IterableLoader<FruitType> {
     public FruitEnumLoader() {
         Class[] values = new Class[] {
             FluidFruitJuice.class,

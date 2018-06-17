@@ -18,27 +18,22 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.material;
+package cc.lasmgratel.foodcraftreloaded.common.util;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.Path;
 
-public class MaterialBase extends AbstractNamedProperty implements Material {
-    private double energy;
-
-    @Override
-    public double getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(double energy) {
-        this.energy = energy;
-    }
-
-    @Override
-    public String toString() {
-        return "MaterialBase{" +
-            "energy=" + energy +
-            "} " + super.toString();
+public interface JarUtil {
+    /**
+     * Extract file from a Zip.
+     * @param zipFile Zip file to extract
+     * @param targetDirectory Directory as extracted root
+     * @param content Content name, empty to extract all files, add "/" suffix to extract directory, otherwise extract single file.
+     */
+    static void extractFromZip(Path zipFile, Path targetDirectory, String content) throws IOException {
+        try (FileSystem fileSystem = zipFile.getFileSystem()) {
+            System.out.println(fileSystem.getFileStores());
+        }
     }
 }

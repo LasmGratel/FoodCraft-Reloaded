@@ -20,7 +20,6 @@
 
 package cc.lasmgratel.foodcraftreloaded.common.material;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
 import cc.lasmgratel.foodcraftreloaded.api.util.builder.NamedBuilder;
 
 import javax.annotation.Nonnull;
@@ -31,11 +30,6 @@ public class MaterialBuilder implements NamedBuilder<MaterialBase> {
     @Override
     public MaterialBuilder withName(@Nonnull String name) {
         materialBase.setName(name);
-        return this;
-    }
-
-    public MaterialBuilder withProperty(FoodProperty property, int value) {
-        materialBase.getPropertyMap().put(property, value);
         return this;
     }
 

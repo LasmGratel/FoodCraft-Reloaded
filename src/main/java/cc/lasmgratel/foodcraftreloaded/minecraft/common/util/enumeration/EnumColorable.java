@@ -21,14 +21,23 @@
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration;
 
 import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking.Colorable;
+import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking.CustomModelMasking;
+import net.minecraft.client.renderer.color.IItemColor;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 
-public interface EnumColorable<T extends Enum<T>> extends EnumTyped<T> {
+public interface EnumColorable<T extends Enum<T> & Colorable> extends CustomModelMasking, EnumTyped<T> {
     default Color getColor(int tintIndex) {
-        if (getType() instanceof Colorable)
-            return ((Colorable) getType()).getColor();
+        if (getType() != null)
+            return getType().getColor();
         else
             return Color.black;
+    }
+
+    @Nullable
+    @Override
+    default IItemColor getItemColorMultiplier() {
+        return (stack, tintIndex) -> getColor(tintIndex).getRGB();
     }
 }

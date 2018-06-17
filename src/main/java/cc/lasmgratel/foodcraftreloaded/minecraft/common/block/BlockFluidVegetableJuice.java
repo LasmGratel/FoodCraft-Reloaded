@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.minecraft.common.block;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.Translator;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration.VegetableTyped;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -31,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 
-public class BlockFluidVegetableJuice extends BlockFluidClassic {
+public class BlockFluidVegetableJuice extends BlockFluidClassic implements VegetableTyped {
     private VegetableType vegetableType;
 
     public BlockFluidVegetableJuice(VegetableType vegetableType) {
@@ -41,7 +42,8 @@ public class BlockFluidVegetableJuice extends BlockFluidClassic {
         setRegistryName(NameBuilder.buildRegistryName(vegetableType.toString(), "juice"));
     }
 
-    public VegetableType getVegetableType() {
+    @Override
+    public VegetableType getType() {
         return vegetableType;
     }
 

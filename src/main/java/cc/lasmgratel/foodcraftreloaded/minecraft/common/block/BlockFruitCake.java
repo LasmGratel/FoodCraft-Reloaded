@@ -26,6 +26,7 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.fruit.FruitTyp
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.fruit.ItemFruitCake;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.loader.FruitEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration.FruitTyped;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -38,7 +39,7 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockFruitCake extends BlockCake implements CustomModelMasking {
+public class BlockFruitCake extends BlockCake implements CustomModelMasking, FruitTyped {
     private FruitType fruitType;
 
     public BlockFruitCake(FruitType fruitType) {
@@ -47,7 +48,8 @@ public class BlockFruitCake extends BlockCake implements CustomModelMasking {
         this.fruitType = fruitType;
     }
 
-    public FruitType getFruitType() {
+    @Override
+    public FruitType getType() {
         return fruitType;
     }
 

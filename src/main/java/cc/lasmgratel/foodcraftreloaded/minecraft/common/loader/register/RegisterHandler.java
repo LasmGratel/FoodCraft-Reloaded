@@ -26,7 +26,6 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.OreDictated;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
@@ -72,10 +71,10 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
     public void registerRender() {
         if (value instanceof Item) {
             if (value instanceof CustomModelMasking) {
-                registerRender((Item) value, 0, ((CustomModelMasking) value).getModelLocation());
+                registerRender((Item) value, ((CustomModelMasking) value).getModelLocation());
                 FoodCraftReloaded.getLogger().debug("Registered custom model " + value.getClass() + " as " + ((CustomModelMasking) value).getModelLocation());
             } else if (value.getRegistryName() != null) {
-                registerRender((Item) value, 0, new ModelResourceLocation(value.getRegistryName(), "inventory"));
+                registerRender((Item) value, new ModelResourceLocation(value.getRegistryName(), "inventory"));
             }
         } else if (value instanceof BlockFluidBase) {
             registerFluidRender((BlockFluidBase) value, value.getRegistryName().getResourcePath());
@@ -83,7 +82,7 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
             if (value instanceof CustomModelMasking) {
                 ModelLoader.setCustomStateMapper((Block) value, block -> ((CustomModelMasking) value).getStateModelLocations());
                 if (((CustomModelMasking) value).getModelLocation() != null)
-                    registerRender(Item.getItemFromBlock((Block) value), 0, ((CustomModelMasking) value).getModelLocation());
+                    registerRender(Item.getItemFromBlock((Block) value), ((CustomModelMasking) value).getModelLocation());
             }
         }
     }
@@ -100,7 +99,7 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
     }
 
     public void registerOre(String... names) {
-        Arrays.asList(names).parallelStream().forEach(s -> {
+        Arrays.asList(names).forEach(s -> {
             if (value instanceof Block)
                 OreDictionary.registerOre(s, (Block) value);
             else if (value instanceof Item)
@@ -109,9 +108,8 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
     }
 
     @SideOnly(Side.CLIENT)
-    private void registerRender(Item item, int meta, ModelResourceLocation location) {
-        ModelBakery.registerItemVariants(item, location);
-        ModelLoader.setCustomModelResourceLocation(item, meta, location);
+    private void registerRender(Item item, ModelResourceLocation location) {
+        ModelLoader.setCustomModelResourceLocation(item, 0, location);
         if (item instanceof CustomModelMasking && ((CustomModelMasking) item).getItemMeshDefinition() != null)
             ModelLoader.setCustomMeshDefinition(item, ((CustomModelMasking) item).getItemMeshDefinition());
         else

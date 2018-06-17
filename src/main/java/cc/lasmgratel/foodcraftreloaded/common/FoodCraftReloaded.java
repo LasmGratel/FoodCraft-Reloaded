@@ -20,11 +20,17 @@
 
 package cc.lasmgratel.foodcraftreloaded.common;
 
+import cc.lasmgratel.foodcraftreloaded.api.config.ConfigManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FoodCraftReloaded {
-    public static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+    private static final Logger LOGGER = LogManager.getLogger("foodcraftreloaded");
+    private static final ConfigManager CONFIG_MANAGER = new ConfigManager();
+
+    public static ConfigManager getConfigManager() {
+        return CONFIG_MANAGER;
+    }
 
     public static Logger getLogger() {
         return LOGGER;

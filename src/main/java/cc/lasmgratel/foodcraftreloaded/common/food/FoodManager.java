@@ -21,10 +21,20 @@
 package cc.lasmgratel.foodcraftreloaded.common.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.Food;
+import cc.lasmgratel.foodcraftreloaded.api.food.FoodProperty;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class FoodManager {
     public Map<String, Food> foodMap = new HashMap<>();
+    public Map<String, FoodProperty> propertyMap = new HashMap<>();
+
+    public void extractDefaultProperty() {
+
+    }
+
+    public void loadProperty() {
+
+    }
 }

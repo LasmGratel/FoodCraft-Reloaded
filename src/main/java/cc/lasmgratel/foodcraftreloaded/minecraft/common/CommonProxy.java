@@ -40,6 +40,7 @@ public class CommonProxy {
             RegisterLoader.class,
             CapabilityLoader.class,
             BlockLoader.class, ItemLoader.class,
+            FoodLoader.class,
             FruitEnumLoader.class, VegetableEnumLoader.class,
             LiqueurLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,

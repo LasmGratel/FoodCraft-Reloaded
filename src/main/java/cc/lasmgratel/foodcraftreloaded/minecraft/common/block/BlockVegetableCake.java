@@ -26,6 +26,7 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.vegetable.Item
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.vegetable.VegetableType;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.loader.VegetableEnumLoader;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.NameBuilder;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration.VegetableTyped;
 import net.minecraft.block.BlockCake;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -38,7 +39,7 @@ import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlockVegetableCake extends BlockCake implements CustomModelMasking {
+public class BlockVegetableCake extends BlockCake implements VegetableTyped, CustomModelMasking {
     private VegetableType vegetableType;
 
     public BlockVegetableCake(VegetableType vegetableType) {
@@ -68,7 +69,8 @@ public class BlockVegetableCake extends BlockCake implements CustomModelMasking 
         return 0;
     }
 
-    public VegetableType getVegetableType() {
+    @Override
+    public VegetableType getType() {
         return vegetableType;
     }
 

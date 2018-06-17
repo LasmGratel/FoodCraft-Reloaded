@@ -18,27 +18,27 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.material;
+package cc.lasmgratel.foodcraftreloaded.api.util.selection;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
 
-public class MaterialBase extends AbstractNamedProperty implements Material {
-    private double energy;
+import javax.annotation.Nonnull;
 
-    @Override
-    public double getEnergy() {
-        return energy;
+public class StringNamedWrapper implements NamedProperty {
+    private String name;
+
+    public StringNamedWrapper(String name) {
+        this.name = name;
     }
 
-    public void setEnergy(double energy) {
-        this.energy = energy;
+    @Nonnull
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "MaterialBase{" +
-            "energy=" + energy +
-            "} " + super.toString();
+        return name;
     }
 }

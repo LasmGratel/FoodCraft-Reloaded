@@ -21,10 +21,68 @@
 package cc.lasmgratel.foodcraftreloaded.minecraft.api.capability;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.Food;
+import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
+import cc.lasmgratel.foodcraftreloaded.common.material.MaterialBase;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
+import javax.annotation.Nullable;
+import java.util.concurrent.TimeUnit;
+
 public interface CapabilityFood {
+    @CapabilityInject(Material.class)
+    Capability<Material> MATERIAL_CAPABILITY = null;
+
     @CapabilityInject(Food.class)
     Capability<Food> FOOD_CAPABILITY = null;
+
+    class MaterialStorage implements Capability.IStorage<Material> {
+        @Nullable
+        @Override
+        public NBTBase writeNBT(Capability<Material> capability, Material instance, EnumFacing side) {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            tagCompound.setString("name", instance.getName());
+            tagCompound.setDouble("energy", instance.getEnergy());
+            return tagCompound;
+        }
+
+        @Override
+        public void readNBT(Capability<Material> capability, Material instance, EnumFacing side, NBTBase nbt) {
+            NBTTagCompound tagCompound = (NBTTagCompound) nbt;
+            if (instance instanceof MaterialBase) {
+                ((MaterialBase) instance).setName(tagCompound.getString("name"));
+                ((MaterialBase) instance).setEnergy(tagCompound.getDouble("energy"));
+            }
+        }
+    }
+
+    class FoodStorage implements Capability.IStorage<Food> {
+        @Nullable
+        @Override
+        public NBTBase writeNBT(Capability<Food> capability, Food instance, EnumFacing side) {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            tagCompound.setString("name", instance.getName());
+            tagCompound.setDouble("energy", instance.getEnergy());
+            tagCompound.setInteger("healAmount", instance.getHealAmount());
+            tagCompound.setInteger("weight", instance.getWeight());
+            tagCompound.setInteger("duration", (int) (instance.getDuration(TimeUnit.MILLISECONDS) / 50));
+            NBTTagList materials = new NBTTagList();
+            instance.getMaterialMap().forEach((material, weight) -> {
+                NBTTagCompound compound = (NBTTagCompound) MATERIAL_CAPABILITY.writeNBT(material, null);
+                compound.setInteger("weight", weight);
+                materials.appendTag(compound);
+            });
+            tagCompound.setTag("materials", materials);
+            return tagCompound;
+        }
+
+        @Override
+        public void readNBT(Capability<Food> capability, Food instance, EnumFacing side, NBTBase nbt) {
+
+        }
+    }
 }

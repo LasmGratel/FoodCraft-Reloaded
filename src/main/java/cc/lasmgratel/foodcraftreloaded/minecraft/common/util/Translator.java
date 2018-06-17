@@ -27,6 +27,7 @@ import java.util.Locale;
 
 public interface Translator {
     @Nonnull
+    @SuppressWarnings("deprecation")
     static String format(String key, Object... params) {
         return I18n.canTranslate(key) ? I18n.translateToLocalFormatted(key, params) : String.format(Locale.US, I18n.translateToFallback(key), params);
     }

@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Arrays;
 
-public class VegetableEnumLoader extends EnumLoader<VegetableType> {
+public class VegetableEnumLoader extends IterableLoader<VegetableType> {
     public VegetableEnumLoader() {
         Class[] values = new Class[] {
             FluidVegetableJuice.class,

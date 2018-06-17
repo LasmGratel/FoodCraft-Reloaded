@@ -20,8 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.api.food;
 
+import cc.lasmgratel.foodcraftreloaded.api.chemistry.EnergyReleasable;
 import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
 import cc.lasmgratel.foodcraftreloaded.api.util.NamedProperty;
+import com.google.common.util.concurrent.AtomicDouble;
 
 import javax.annotation.Nonnegative;
 import java.util.Map;
@@ -30,17 +32,25 @@ import java.util.concurrent.TimeUnit;
 /**
  * A food which can be eaten by players.
  */
-public interface Food extends NamedProperty {
+public interface Food extends NamedProperty, EnergyReleasable {
+    /**
+     * Unit in Joules(J)
+     */
+    double ENERGY_PER_HEAL_AMOUNT = 39451790.8512;
+
     /**
      * The amount food heals player.
      * In Minecraft, this is represented by "chicken leg" located in the right side of HUD.
      * Calculated from material and weight by default.
      */
     default int getHealAmount() {
-        int healAmount = getWeight();
-        for (Map.Entry<Material, Integer> entry : getMaterialMap().entrySet())
-            healAmount += entry.getKey().calcMultiplier() * entry.getValue();
-        return healAmount;
+        return (int) (getEnergy() / ENERGY_PER_HEAL_AMOUNT);
+    }
+
+    default double getEnergy() {
+        AtomicDouble totalEnergy = new AtomicDouble();
+        getMaterialMap().forEach((material, weight) -> totalEnergy.addAndGet(material.getEnergy() * weight));
+        return totalEnergy.get();
     }
 
     /**

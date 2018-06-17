@@ -25,31 +25,29 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking.CustomModel
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.NameBuilder;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.OreDictated;
-import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration.EnumColorable;
-import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.enumeration.EnumTyped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class ItemKitchenKnife extends Item implements CustomModelMasking, EnumTyped<KitchenKnifeType>, EnumColorable<KitchenKnifeType>, OreDictated {
-    private KitchenKnifeType type;
+public class ItemKitchenKnife extends Item implements CustomModelMasking, OreDictated {
+    private KitchenKnifeWrapper type;
 
-    public ItemKitchenKnife(KitchenKnifeType type) {
+    public ItemKitchenKnife(KitchenKnifeWrapper type) {
         this.type = type;
-        setMaxDamage(type.getMaxDamage());
+        setMaxDamage(type.getMaterial().getMaxUses() * 10);
         setMaxStackSize(1);
-        setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName("kitchen", "knife", type.toString()));
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName("kitchen", "knife", type.toString()));
+        setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName("kitchen", "knife", type.getMaterial().name().toLowerCase()));
+        setUnlocalizedName(NameBuilder.buildUnlocalizedName("kitchen", "knife", type.getMaterial().name().toLowerCase()));
         setCreativeTab(FCRCreativeTabs.BASE);
     }
 
-    public KitchenKnifeType getType() {
+    public KitchenKnifeWrapper getType() {
         return type;
     }
 
-    public void setType(KitchenKnifeType type) {
+    public void setType(KitchenKnifeWrapper type) {
         this.type = type;
     }
 

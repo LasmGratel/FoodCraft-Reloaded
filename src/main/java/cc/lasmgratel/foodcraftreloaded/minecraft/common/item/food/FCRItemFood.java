@@ -49,6 +49,10 @@ public class FCRItemFood extends ItemFood implements OreDictated {
     private boolean alwaysEdible = false;
     private Map<PotionEffect, Float> effectMap = new HashMap<>();
 
+    public FCRItemFood() {
+        super(0, false);
+    }
+
     public FCRItemFood(int amount, boolean isWolfFood) {
         super(amount, isWolfFood);
         this.healAmount = amount;

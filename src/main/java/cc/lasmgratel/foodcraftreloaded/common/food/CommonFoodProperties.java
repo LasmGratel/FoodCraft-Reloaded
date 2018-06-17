@@ -17,8 +17,9 @@
  * You should have received a copy of the GNU General Public License
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
-/**
- * Custom recipe in 1.12+.
- * Finding replacement.
- */
-package cc.lasmgratel.foodcraftreloaded.minecraft.common.recipe;
+
+package cc.lasmgratel.foodcraftreloaded.common.food;
+
+public interface CommonFoodProperties {
+
+}

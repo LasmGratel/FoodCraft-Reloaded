@@ -69,7 +69,7 @@ public class RegisterManager {
         FoodCraftReloaded.getLogger().debug("[FoodCraft Reloaded] Registering type " + type);
         for (Map.Entry<Type, Set<RegisterHandler<? extends IForgeRegistryEntry<?>>>> entry : registerMap.entrySet())
             if (((Class<?>) type).isAssignableFrom((Class<?>) entry.getKey()))
-                entry.getValue().forEach(handler -> ((RegisterHandler<T>) handler).register(registry));
+                entry.getValue().forEach(handler -> ((RegisterHandler) handler).register(registry));
     }
 
     @SideOnly(Side.CLIENT)

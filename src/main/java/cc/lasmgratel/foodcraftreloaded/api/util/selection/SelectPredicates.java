@@ -18,27 +18,20 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.material;
+package cc.lasmgratel.foodcraftreloaded.api.util.selection;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import java.util.Objects;
+import java.util.function.BiPredicate;
+import java.util.regex.Pattern;
 
-public class MaterialBase extends AbstractNamedProperty implements Material {
-    private double energy;
+public interface SelectPredicates {
+    BiPredicate<String, String> REGEX = (s, regex) -> {
+        Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
+        return pattern.matcher(s).find();
+    };
 
-    @Override
-    public double getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(double energy) {
-        this.energy = energy;
-    }
-
-    @Override
-    public String toString() {
-        return "MaterialBase{" +
-            "energy=" + energy +
-            "} " + super.toString();
-    }
+    BiPredicate<String, String> CONTAINS = String::contains;
+    BiPredicate<String, String> STARTS = String::startsWith;
+    BiPredicate<String, String> ENDS = String::endsWith;
+    BiPredicate<String, String> EQUAL = Objects::equals;
 }

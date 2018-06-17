@@ -18,27 +18,22 @@
  * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package cc.lasmgratel.foodcraftreloaded.common.material;
+package cc.lasmgratel.foodcraftreloaded.common.util.reflect;
 
-import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import sun.misc.Unsafe;
 
-public class MaterialBase extends AbstractNamedProperty implements Material {
-    private double energy;
+import java.lang.reflect.Field;
 
-    @Override
-    public double getEnergy() {
-        return energy;
-    }
+public class AccessibleEntry {
 
-    public void setEnergy(double energy) {
-        this.energy = energy;
-    }
 
-    @Override
-    public String toString() {
-        return "MaterialBase{" +
-            "energy=" + energy +
-            "} " + super.toString();
+    static {
+        Unsafe unsafe;
+        try {
+            Field field = Unsafe.class.getDeclaredField("theUnsafe");
+            field.setAccessible(true);
+            unsafe = (Unsafe) field.get(null);
+        } catch (Exception e){
+        }
     }
 }

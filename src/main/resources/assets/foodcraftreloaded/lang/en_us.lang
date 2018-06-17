@@ -74,3 +74,6 @@ tooltip.fcrfood.liqueur.type=Type: %s
 tooltip.fcrfood.liqueur.type.normal=Normal
 tooltip.fcrfood.liqueur.type.aged=Aged
 tooltip.fcrfood.liqueur.type.cocktail=Cocktail
+
+# Energy
+tooltip.fcr.energy=Energy: %sJ

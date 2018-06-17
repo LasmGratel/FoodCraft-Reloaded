@@ -1,23 +1,3 @@
-/*
- * FoodCraft Mod - Add more food to your Minecraft.
- * Copyright (C) 2017 Lasm Gratel
- *
- * This file is part of FoodCraft Mod.
- *
- * FoodCraft Mod is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * FoodCraft Mod is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with FoodCraft Mod.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.loader;
 
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
@@ -52,22 +32,21 @@ import java.lang.reflect.Constructor;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unchecked")
-public class EnumLoader<T extends Enum<T>> {
-    private final Map<Class<?>, Map<T, ?>> enumInstanceMap = new HashMap<>();
+public class IterableLoader<T> {
+    private final Map<Class<?>, Map<T, ?>> instanceMap = new HashMap<>();
 
     /**
-     * Attempt to register all entries from {@link #enumInstanceMap} to {@link ForgeRegistries}.
+     * Attempt to register all entries from {@link #instanceMap} to {@link ForgeRegistries}.
      * @see ForgeRegistries
      */
     public void register() {
-        enumInstanceMap.forEach((instanceClass, enumMap) -> {
+        instanceMap.forEach((instanceClass, map) -> {
             if (IForgeRegistryEntry.class.isAssignableFrom(instanceClass))
-                enumMap.entrySet().parallelStream()
+                map.entrySet().parallelStream()
                     .forEach(o -> {
                         if (o.getValue() instanceof FCRItemFood && o.getKey() instanceof EffectiveItem) {
                             if (((EffectiveItem) o.getKey()).getEffects() != null)
-                            ((EffectiveItem) o.getKey()).getEffects().forEach(((FCRItemFood) o.getValue())::addEffect);
+                                ((EffectiveItem) o.getKey()).getEffects().forEach(((FCRItemFood) o.getValue())::addEffect);
                         }
                     });
         });
@@ -78,32 +57,37 @@ public class EnumLoader<T extends Enum<T>> {
     }
 
     public <V> Map<T, V> getInstanceMap(Class<V> containerClass) {
-        if (!enumInstanceMap.containsKey(containerClass))
-            enumInstanceMap.put(containerClass, new EnumMap<T, V>(getType()));
-        return (Map<T, V>) enumInstanceMap.get(containerClass);
+        if (!instanceMap.containsKey(containerClass))
+            instanceMap.put(containerClass, new HashMap<T, V>());
+        return (Map<T, V>) instanceMap.get(containerClass);
     }
 
-    public <V> V getValue(T enumInstance) {
+    public <V> V getValue(T key) {
         Class<V> valueClass = (Class<V>) new TypeToken<V>(){}.getRawType();
-        return (V) enumInstanceMap.get(valueClass).get(enumInstance);
+        return (V) instanceMap.get(valueClass).get(key);
     }
 
     public <V> List<V> getValue() {
         Class<V> valueClass = (Class<V>) new TypeToken<V>(){}.getRawType();
-        return enumInstanceMap.get(valueClass).values().stream().map(value -> (V) value).collect(Collectors.toList());
+        return instanceMap.get(valueClass).values().stream().map(value -> (V) value).collect(Collectors.toList());
     }
 
-    public <V> void putValue(T enumInstance, Class<V> valueClass) {
+    public <V> void putValue(T key, Class<V> valueClass) {
         V instance = null;
         try {
             for (Constructor<?> constructor : valueClass.getConstructors()) {
                 if (constructor.getParameterCount() == 0)
                     instance = (V) constructor.newInstance();
-                else if (constructor.getParameterTypes()[0].isAssignableFrom(enumInstance.getDeclaringClass()))
-                    instance = (V) constructor.newInstance(enumInstance);
+                else if (constructor.getParameterTypes()[0].isAssignableFrom(key.getClass()))
+                    instance = (V) constructor.newInstance(key);
+                else if (key instanceof Enum)
+                    if (constructor.getParameterTypes()[0].isAssignableFrom(((Enum) key).getDeclaringClass()))
+                        instance = (V) constructor.newInstance(key);
             }
             if (instance != null)
-                putValue(enumInstance, instance);
+                putValue(key, instance);
+            else
+                System.out.printf("Cannot create instance for %s and %s as no constructor available in %s\n", key, valueClass, Arrays.deepToString(valueClass.getConstructors()));
         } catch (Exception e) {
             FoodCraftReloaded.getLogger().error("Un-able to create a instance", e);
         }
@@ -113,7 +97,7 @@ public class EnumLoader<T extends Enum<T>> {
         for (T e : getType().getEnumConstants()) putValue(e, valueClass);
     }
 
-    public <V> void putValue(T enumInstance, V value) {
+    public <V> void putValue(T key, V value) {
         if (value instanceof Fluid) {
             FluidRegistry.registerFluid((Fluid) value);
             FluidRegistry.addBucketForFluid((Fluid) value);
@@ -122,25 +106,26 @@ public class EnumLoader<T extends Enum<T>> {
             RegisterManager.getInstance().putRegister((IForgeRegistryEntry) value);
         }
         Map enumMap;
-        if (enumInstanceMap.containsKey(value.getClass())) enumMap = enumInstanceMap.get(value.getClass());
-        else enumMap = new EnumMap<>(getType());
-        enumMap.put(enumInstance, value);
-        enumInstanceMap.put(value.getClass(), enumMap);
+        if (instanceMap.containsKey(value.getClass())) enumMap = instanceMap.get(value.getClass());
+        else enumMap = new HashMap<>();
+        enumMap.put(key, value);
+        instanceMap.put(value.getClass(), enumMap);
     }
 
-    public <V> V getInstance(T enumType) {
-        return getInstance((Class<V>) new TypeToken<V>(getClass()){}.getRawType(), enumType);
+    public <V> V getInstance(T key) {
+        return getInstance((Class<V>) new TypeToken<V>(getClass()){}.getRawType(), key);
     }
 
-    public <V> V getInstance(Class<V> vClass, T enumType) {
-        return getInstanceMap(vClass).get(enumType);
+    public <V> V getInstance(Class<V> vClass, T key) {
+        return getInstanceMap(vClass).get(key);
     }
 
     @SideOnly(Side.CLIENT)
     public void registerColors() {
-        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
+        instanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
             if (entry.getValue() instanceof Item) {
-                FoodCraftReloaded.getLogger().debug("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
+//                FoodCraftReloaded.getLogger().debug("Registering custom item color for " + ((Item) entry.getValue()).getClass().getSimpleName() + ":" + ((Item) entry.getValue()).getRegistryName());
+
                 Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
                     try {
                         if (((CustomModelMasking) entry.getValue()).getTintIndex() != -1)
@@ -187,7 +172,7 @@ public class EnumLoader<T extends Enum<T>> {
 
     @SideOnly(Side.CLIENT)
     public void registerRenders() {/*
-        enumInstanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
+        instanceMap.values().stream().map(Map::entrySet).map(Collection::stream).forEach(entries -> entries.forEach(entry -> {
             if (Item.class.isAssignableFrom(entry.getValue().getClass())) {
                 if (entry.getValue() instanceof CustomModelMasking) {
                     registerRender((Item) entry.getValue(), 0, ((CustomModelMasking) entry.getValue()).getModelLocation());
