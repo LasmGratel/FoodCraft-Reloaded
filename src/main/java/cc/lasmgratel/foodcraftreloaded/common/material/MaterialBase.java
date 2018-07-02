@@ -23,6 +23,8 @@ package cc.lasmgratel.foodcraftreloaded.common.material;
 import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
 import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
 
+import java.util.Objects;
+
 public class MaterialBase extends AbstractNamedProperty implements Material {
     private double energy;
 
@@ -33,6 +35,20 @@ public class MaterialBase extends AbstractNamedProperty implements Material {
 
     public void setEnergy(double energy) {
         this.energy = energy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MaterialBase)) return false;
+        if (!super.equals(o)) return false;
+        MaterialBase that = (MaterialBase) o;
+        return Double.compare(that.getEnergy(), getEnergy()) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getEnergy());
     }
 
     @Override

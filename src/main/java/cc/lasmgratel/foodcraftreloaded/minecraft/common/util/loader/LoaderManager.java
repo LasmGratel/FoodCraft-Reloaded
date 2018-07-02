@@ -40,7 +40,7 @@ public class LoaderManager {
             for (Method method : loaderClass.getMethods())
                 for (Annotation annotation : method.getDeclaredAnnotations())
                     if (annotation.annotationType().equals(Load.class))
-                        if (method.getParameterCount() == 0 || (FMLStateEvent.class.isAssignableFrom(method.getParameterTypes()[0]) && method.getParameterTypes()[0].equals(((Load) annotation).value().getEvent().getClass()))) {
+                        if (method.getParameterCount() == 0 || (FMLStateEvent.class.isAssignableFrom(method.getParameterTypes()[0]))) {
                             Collection<Method> methods = stateLoaderMap.getOrDefault(((Load) annotation).value(), new ArrayList<>());
                             if (!methods.contains(method))
                                 methods.add(method);
@@ -61,7 +61,7 @@ public class LoaderManager {
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         FoodCraftReloaded.getLogger().warn("Un-able to invoke method " + method.getName(), e);
                     }
-                else if (method.getParameterCount() == 1 && method.getParameterTypes()[1].equals(event.getClass()))
+                else if (method.getParameterCount() == 1 && method.getParameterTypes()[0].equals(event.getClass()))
                     try {
                         method.invoke(loaderInstanceMap.get(method.getDeclaringClass()), event);
                     } catch (IllegalAccessException | InvocationTargetException e) {

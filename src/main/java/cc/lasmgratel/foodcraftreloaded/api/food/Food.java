@@ -47,6 +47,11 @@ public interface Food extends NamedProperty, EnergyReleasable {
         return (int) (getEnergy() / ENERGY_PER_HEAL_AMOUNT);
     }
 
+    /**
+     * Total energy released from this food.
+     * Material energy are used as Joules per gram(J/g).
+     */
+    @Override
     default double getEnergy() {
         AtomicDouble totalEnergy = new AtomicDouble();
         getMaterialMap().forEach((material, weight) -> totalEnergy.addAndGet(material.getEnergy() * weight));

@@ -22,12 +22,13 @@ package cc.lasmgratel.foodcraftreloaded.common.food;
 
 import cc.lasmgratel.foodcraftreloaded.api.food.Food;
 import cc.lasmgratel.foodcraftreloaded.api.food.material.Material;
-import cc.lasmgratel.foodcraftreloaded.common.util.AbstractNamedProperty;
+import cc.lasmgratel.foodcraftreloaded.common.chemistry.AbstractEnergyReleasable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class FoodBase extends AbstractNamedProperty implements Food {
+public class FoodBase extends AbstractEnergyReleasable implements Food {
     private Map<Material, Integer> materialMap = new HashMap<>();
     private int healAmount = -1;
 
@@ -43,5 +44,28 @@ public class FoodBase extends AbstractNamedProperty implements Food {
     @Override
     public Map<Material, Integer> getMaterialMap() {
         return materialMap;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FoodBase)) return false;
+        if (!super.equals(o)) return false;
+        FoodBase foodBase = (FoodBase) o;
+        return getHealAmount() == foodBase.getHealAmount() &&
+            Objects.equals(getMaterialMap(), foodBase.getMaterialMap());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getMaterialMap(), getHealAmount());
+    }
+
+    @Override
+    public String toString() {
+        return "FoodBase{" +
+            "materialMap=" + materialMap +
+            ", healAmount=" + healAmount +
+            "} " + super.toString();
     }
 }

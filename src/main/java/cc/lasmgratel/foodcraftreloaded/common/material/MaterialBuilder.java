@@ -33,6 +33,11 @@ public class MaterialBuilder implements NamedBuilder<MaterialBase> {
         return this;
     }
 
+    public MaterialBuilder withEnergy(double energy) {
+        materialBase.setEnergy(energy);
+        return this;
+    }
+
     @Nonnull
     @Override
     public MaterialBase build() {
