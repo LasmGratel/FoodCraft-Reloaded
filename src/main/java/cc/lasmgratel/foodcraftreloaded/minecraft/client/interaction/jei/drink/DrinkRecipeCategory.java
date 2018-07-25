@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.client.interaction.jei.drink;
 
+import cc.lasmgratel.foodcraftreloaded.minecraft.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.minecraft.client.interaction.jei.FCRRecipeCategory;
 import cc.lasmgratel.foodcraftreloaded.minecraft.client.interaction.jei.RecipeUIDs;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
@@ -32,20 +33,24 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class DrinkRecipeCategory implements FCRRecipeCategory<DrinkRecipeWrapper> {
     private static final String TITLE = Translator.format("container.drink_machine");
     private static final ResourceLocation LOCATION = new ResourceLocation(FoodCraftReloadedMod.MODID, "textures/gui/container/drink_machine.png");
     private final IDrawable background;
     private final IDrawableAnimated arrow;
+    private final IDrawable icon;
 
     public DrinkRecipeCategory(IGuiHelper helper) {
         background = helper.createDrawable(LOCATION, 25, 10, 121, 60);
         IDrawableStatic arrowStatic = helper.createDrawable(LOCATION, 176, 0, 24, 17);
         arrow = helper.createAnimatedDrawable(arrowStatic, 200, IDrawableAnimated.StartDirection.LEFT, false);
+        icon = helper.createDrawableIngredient(new ItemStack(FCRBlocks.DRINK_MACHINE));
     }
 
     @Nonnull
@@ -58,6 +63,12 @@ public class DrinkRecipeCategory implements FCRRecipeCategory<DrinkRecipeWrapper
     @Override
     public String getTitle() {
         return TITLE;
+    }
+
+    @Nullable
+    @Override
+    public IDrawable getIcon() {
+        return icon;
     }
 
     @Nonnull

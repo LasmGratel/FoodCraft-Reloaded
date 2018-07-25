@@ -39,7 +39,7 @@ public enum LiqueurTypes implements LiqueurType {
     }
 
     @Override
-    public void setUnlocalizedName(String unlocalizedName) {
+    public void setTranslationKey(String unlocalizedName) {
         this.unlocalizedName = unlocalizedName;
     }
 

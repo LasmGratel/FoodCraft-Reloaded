@@ -187,6 +187,7 @@ public interface GuiUtils {
             graphics2D.drawImage(image, 0, 0, null);
             graphics2D.dispose();
 
+            FoodCraftReloaded.getLogger().info("Got " + resourceLocation + " " + new Color(image1.getRGB(0, 0)));
             return Optional.of(new Color(image1.getRGB(0, 0)));
         } catch (IOException e) {
             FoodCraftReloaded.getLogger().info("Cannot read image " + resourceLocation, e);

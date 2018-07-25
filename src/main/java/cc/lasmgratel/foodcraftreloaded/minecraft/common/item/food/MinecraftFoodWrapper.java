@@ -42,7 +42,7 @@ public class MinecraftFoodWrapper extends FCRItemFood {
     public MinecraftFoodWrapper(Food food) {
         this.food = food;
         setRegistryName(food.getName());
-        setUnlocalizedName(food.getName());
+        setTranslationKey(food.getName());
         setHealAmount(food.getHealAmount());
         setItemUseDuration((int) (food.getDuration(TimeUnit.MILLISECONDS) / 50));
     }

@@ -87,7 +87,10 @@ public class RecipeLoader {
             );
         }
         for (VegetableType vegetableType : VegetableType.values()) {
-            RecipeManager.getInstance().addRecipe(new DrinkRecipe(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType), new FluidStack(vegetableLoader.getInstance(FluidVegetableJuice.class, vegetableType), 1000)));
+            RecipeManager.getInstance().addRecipe(
+                new DrinkRecipe(vegetableLoader.getInstanceMap(ItemVegetable.class).get(vegetableType),
+                    new FluidStack(vegetableLoader.getInstance(FluidVegetableJuice.class, vegetableType), 1000))
+            );
             GameRegistry.addShapelessRecipe(
                 new ResourceLocation(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(vegetableType.toString(), "icecream")),
                 new ResourceLocation(FoodCraftReloadedMod.MODID, "icecream"),

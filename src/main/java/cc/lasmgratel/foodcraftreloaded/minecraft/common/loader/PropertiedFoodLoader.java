@@ -61,7 +61,7 @@ public class PropertiedFoodLoader {
                 else
                     item.setHealAmount(anno.amount());
 
-                RegisterManager.getInstance().putRegister(item.setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(anno.name())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.name())));
+                RegisterManager.getInstance().putRegister(item.setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(anno.name())).setTranslationKey(NameBuilder.buildUnlocalizedName(anno.name())));
             } catch (IllegalAccessException | NullPointerException e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register food " + field.toGenericString(), e);
             }

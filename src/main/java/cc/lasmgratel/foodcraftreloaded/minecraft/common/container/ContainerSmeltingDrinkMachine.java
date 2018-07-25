@@ -25,9 +25,6 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.slot.SlotHandl
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -35,22 +32,17 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerSmeltingDrinkMachine extends Container implements AutomatedGui {
+public class ContainerSmeltingDrinkMachine extends ContainerFCR implements AutomatedGui {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 
     public ContainerSmeltingDrinkMachine(InventoryPlayer playerInventory, TileEntity tileEntity) {
+        super(playerInventory);
         this.inventoryPlayer = playerInventory;
         this.itemHandler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         addSlotToContainer(new SlotItemHandler(itemHandler, 0, 68, 17));
         addSlotToContainer(new SlotHandlerFuel(itemHandler, 2, 68, 53));
         addSlotToContainer(new SlotDrinkMachineOutput(playerInventory.player, itemHandler, 1, 124 + 4, 31 + 4));
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 9; ++j)
-                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-
-        for (int k = 0; k < 9; ++k)
-            this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
     }
 
     @Override
@@ -58,9 +50,19 @@ public class ContainerSmeltingDrinkMachine extends Container implements Automate
         return true;
     }
 
-    @Nonnull
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
+    public int getPlayerSlotStart() {
+        return 3;
     }
+
+    @Override
+    public int getPlayerInvX() {
+        return 8;
+    }
+
+    @Override
+    public int getPlayerInvY() {
+        return 84;
+    }
+
 }

@@ -71,7 +71,6 @@ public abstract class TileEntityProgressiveMachine<T extends TileEntityProgressi
     @Override
     @OverridingMethodsMustInvokeSuper
     public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
         NBTTagList list = compound.getTagList("processes", 10);
         for (int i = 0; i < list.tagCount(); i++) {
             Process<T> process = getProcesses().get(i);
@@ -81,13 +80,14 @@ public abstract class TileEntityProgressiveMachine<T extends TileEntityProgressi
             process.setStarted(processNbt.getBoolean("started"));
             process.setCompleted(processNbt.getBoolean("completed"));
         }
+        super.markDirty();
+        super.readFromNBT(compound);
     }
 
     @Nonnull
     @Override
     @OverridingMethodsMustInvokeSuper
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
         NBTTagList list = new NBTTagList();
         for (Process<T> process : getProcesses()) {
             NBTTagCompound processNbt = new NBTTagCompound();
@@ -97,7 +97,7 @@ public abstract class TileEntityProgressiveMachine<T extends TileEntityProgressi
             processNbt.setBoolean("started", process.isStarted());
             list.appendTag(processNbt);
         }
-        return compound;
+        return super.writeToNBT(compound);
     }
 
     public int getMaxProgress() {

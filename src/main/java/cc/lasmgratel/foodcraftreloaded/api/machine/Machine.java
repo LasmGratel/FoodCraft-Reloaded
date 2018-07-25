@@ -79,4 +79,12 @@ public interface Machine<T extends Machine<T>> {
     default void resetProgress() {
         getProcesses().forEach(Process::reset);
     }
+
+    default void pauseProgress() {
+        getProcesses().forEach(Process::pause);
+    }
+
+    default void unpauseProgress() {
+        getProcesses().forEach(Process::unpause);
+    }
 }

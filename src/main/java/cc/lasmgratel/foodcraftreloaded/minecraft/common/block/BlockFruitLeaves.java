@@ -86,7 +86,7 @@ public class BlockFruitLeaves extends Block implements FruitTyped, IShearable, C
 
     @Override
     @Nonnull
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
 

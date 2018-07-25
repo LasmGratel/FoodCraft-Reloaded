@@ -38,7 +38,7 @@ public class BlockFluidVegetableJuice extends BlockFluidClassic implements Veget
     public BlockFluidVegetableJuice(VegetableType vegetableType) {
         super(FluidRegistry.getFluid(NameBuilder.buildRegistryName(vegetableType.toString(), "juice")), Material.WATER);
         this.vegetableType = vegetableType;
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(vegetableType.toString(), "juice"));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(vegetableType.toString(), "juice"));
         setRegistryName(NameBuilder.buildRegistryName(vegetableType.toString(), "juice"));
     }
 

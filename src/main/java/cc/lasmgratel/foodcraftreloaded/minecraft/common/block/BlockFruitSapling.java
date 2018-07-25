@@ -48,7 +48,7 @@ public class BlockFruitSapling extends BlockSapling implements FruitTyped, Custo
     public BlockFruitSapling(FruitType fruitType) {
         this.fruitType = fruitType;
         setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(fruitType.toString(), "sapling"));
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(fruitType.toString(), "sapling"));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(fruitType.toString(), "sapling"));
     }
 
     @Override

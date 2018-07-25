@@ -26,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface LiqueurType {
     String getUnlocalizedName();
-    void setUnlocalizedName(String unlocalizedName);
+    void setTranslationKey(String unlocalizedName);
 
     float getHealModifier();
     void setHealModifier(float healModifier);

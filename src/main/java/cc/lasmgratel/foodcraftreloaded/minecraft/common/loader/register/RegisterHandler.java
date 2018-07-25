@@ -77,7 +77,7 @@ public final class RegisterHandler<T extends IForgeRegistryEntry<T>> {
                 registerRender((Item) value, new ModelResourceLocation(value.getRegistryName(), "inventory"));
             }
         } else if (value instanceof BlockFluidBase) {
-            registerFluidRender((BlockFluidBase) value, value.getRegistryName().getResourcePath());
+            registerFluidRender((BlockFluidBase) value, value.getRegistryName().getPath());
         } else if (value instanceof Block) {
             if (value instanceof CustomModelMasking) {
                 ModelLoader.setCustomStateMapper((Block) value, block -> ((CustomModelMasking) value).getStateModelLocations());

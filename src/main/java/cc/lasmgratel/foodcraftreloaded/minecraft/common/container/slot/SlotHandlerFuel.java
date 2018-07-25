@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 
 import static net.minecraft.inventory.SlotFurnaceFuel.isBucket;
 
-public class SlotHandlerFuel extends SlotItemHandler {
+public class SlotHandlerFuel extends SlotItemHandler implements ExtendedSlot {
     public SlotHandlerFuel(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }
@@ -40,5 +40,10 @@ public class SlotHandlerFuel extends SlotItemHandler {
 
     public int getItemStackLimit(@Nonnull ItemStack stack) {
         return isBucket(stack) ? 1 : super.getItemStackLimit(stack);
+    }
+
+    @Override
+    public boolean isOutputSlot() {
+        return false;
     }
 }

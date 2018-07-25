@@ -125,8 +125,8 @@ public interface FCRFoods {
     ItemPFood SUGAR_CANE_JUICE = new ItemPFood();
 
     // Liqueur
-    Item BEER = new ItemLiqueur(5).setUnlocalizedName("beer").setRegistryName(FoodCraftReloadedMod.MODID, "beer_liqueur");
-    Item WHITE_WINE = new ItemLiqueur(5).setUnlocalizedName("whiteWine").setRegistryName(FoodCraftReloadedMod.MODID, "white_wine_liqueur");
+    Item BEER = new ItemLiqueur(5).setTranslationKey("beer").setRegistryName(FoodCraftReloadedMod.MODID, "beer_liqueur");
+    Item WHITE_WINE = new ItemLiqueur(5).setTranslationKey("whiteWine").setRegistryName(FoodCraftReloadedMod.MODID, "white_wine_liqueur");
 
     // Extra
     ItemCY CY = new ItemCY();

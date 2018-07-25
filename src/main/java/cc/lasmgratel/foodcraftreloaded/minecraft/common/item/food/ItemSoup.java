@@ -31,7 +31,7 @@ public class ItemSoup extends ItemPFood {
         setHealAmount(healAmount);
         setProperties(0f, 0.3f, 0f, 0f, 0.2f);
         setRegistryName(NameBuilder.buildRegistryName(ArrayUtils.add(name, "soup")));
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "soup")));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "soup")));
         setCreativeTab(FCRCreativeTabs.DRINK);
         this.name = name;
     }

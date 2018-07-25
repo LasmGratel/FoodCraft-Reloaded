@@ -31,7 +31,7 @@ public class ItemPorridge extends ItemPFood {
         setHealAmount(healAmount);
         setProperties(0f, 0.7f, 0f, 0f, 0.2f);
         setRegistryName(NameBuilder.buildRegistryName(ArrayUtils.add(name, "porridge")));
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "porridge")));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(ArrayUtils.add(name, "porridge")));
         setCreativeTab(FCRCreativeTabs.DRINK);
         this.name = name;
     }

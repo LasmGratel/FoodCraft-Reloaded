@@ -69,23 +69,22 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
 
     @Override
     public void readFromNBT(NBTTagCompound tag) {
-        super.readFromNBT(tag);
         tank.readFromNBT(tag.getCompoundTag("tank"));
         CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(itemStackHandler, null, tag.getTag("items"));
         output = new ItemStack(tag.getCompoundTag("output"));
         fluidOutput = FluidStack.loadFluidStackFromNBT(tag.getCompoundTag("fluidOutput"));
+        super.readFromNBT(tag);
     }
 
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
         tag.setTag("items", CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.writeNBT(itemStackHandler, null));
         tag.setTag("output", output.serializeNBT());
         if (fluidOutput != null)
             tag.setTag("fluidOutput", fluidOutput.writeToNBT(new NBTTagCompound()));
         tag.setTag("tank", tank.writeToNBT(new NBTTagCompound()));
-        return tag;
+        return super.writeToNBT(tag);
     }
 
     @Override
@@ -101,7 +100,7 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
             FoodCraftReloaded.getLogger().debug("Smelting drink machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
             fluidOutput = recipe.getOutput().first();
             output = recipe.getOutput().second();
-            itemStackHandler.getStackInSlot(0).splitStack(1);
+            itemStackHandler.getStackInSlot(0).setCount(itemStackHandler.getStackInSlot(0).getCount() - 1);
         }
     }
 
@@ -111,6 +110,7 @@ public class TileEntitySmeltingDrinkMachine extends TileEntitySmeltingMachine im
         tank.fill(fluidOutput, true);
         output = ItemStack.EMPTY;
         fluidOutput = null;
+        resetProgress();
     }
 
     @Override

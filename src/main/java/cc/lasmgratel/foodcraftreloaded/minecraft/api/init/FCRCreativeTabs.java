@@ -33,7 +33,7 @@ public interface FCRCreativeTabs {
     CreativeTabs BASE = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".base") {
         @Nonnull
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(Items.GOLDEN_APPLE);
         }
     };
@@ -41,7 +41,7 @@ public interface FCRCreativeTabs {
     CreativeTabs INGREDIENTS = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".ingredient") {
         @Nonnull
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(Items.POTATO);
         }
     };
@@ -49,28 +49,28 @@ public interface FCRCreativeTabs {
     CreativeTabs DRINK = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".drink") {
         @Nonnull
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(FoodCraftReloadedMod.MODID, "lemon_juice")));
         }
     };
 
     CreativeTabs SNACK = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".snack") {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(FoodCraftReloadedMod.MODID, "banana_cake")));
         }
     };
 
     CreativeTabs MEAL = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".meal") {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(FCRFoods.WHITE_RICE);
         }
     };
 
     CreativeTabs EXTRA = new CreativeTabs(CreativeTabs.getNextID(), FoodCraftReloadedMod.MODID + ".extra") {
         @Override
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return ItemStack.EMPTY;
         }
     };

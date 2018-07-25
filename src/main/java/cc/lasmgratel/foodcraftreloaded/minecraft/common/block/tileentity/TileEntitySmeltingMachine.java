@@ -80,11 +80,14 @@ public abstract class TileEntitySmeltingMachine<T extends TileEntitySmeltingMach
         if (fuel <= 0 && isStarted()) {
             int progressed = progressFuel();
             if (progressed == 0)
-                resetProgress();
+                pauseProgress();
             else
                 fuel = progressed;
-        } else
+        } else {
+            if (getProgress() > 0)
+                unpauseProgress();
             --fuel;
+        }
     }
 
     public int getFuel() {
@@ -106,18 +109,17 @@ public abstract class TileEntitySmeltingMachine<T extends TileEntitySmeltingMach
     @Override
     @OverridingMethodsMustInvokeSuper
     public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
         setFuel(compound.getInteger("fuel"));
         setCurrentFuelAmount(compound.getInteger("currentFuelAmount"));
+        super.readFromNBT(compound);
     }
 
     @Nonnull
     @Override
     @OverridingMethodsMustInvokeSuper
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
         compound.setInteger("fuel", getFuel());
         compound.setInteger("currentFuelAmount", getCurrentFuelAmount());
-        return compound;
+        return super.writeToNBT(compound);
     }
 }

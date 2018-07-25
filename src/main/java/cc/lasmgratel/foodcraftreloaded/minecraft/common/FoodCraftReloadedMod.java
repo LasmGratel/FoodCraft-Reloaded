@@ -28,13 +28,12 @@ import net.minecraftforge.fml.common.event.*;
 
 import java.util.Optional;
 
-@Mod(modid = FoodCraftReloadedMod.MODID, name = FoodCraftReloadedMod.NAME, version = FoodCraftReloadedMod.VERSION,
-acceptedMinecraftVersions = "[1.12.2,)",
-updateJSON = "https://lasmgratel.github.io/FoodCraft-Reloaded/update.json")
+@Mod(modid = FoodCraftReloadedMod.MODID,
+updateJSON = "https://lasmgratel.github.io/FoodCraft-Reloaded/update.json",
+useMetadata = true)
 public class FoodCraftReloadedMod {
     public static final String MODID = "foodcraftreloaded";
     public static final String NAME = "FoodCraft Reloaded";
-    public static final String VERSION = "@version@";
     public static final String GROUP = "cc.lasmgratel.foodcraftreloaded.minecraft";
 
     @Instance(MODID)

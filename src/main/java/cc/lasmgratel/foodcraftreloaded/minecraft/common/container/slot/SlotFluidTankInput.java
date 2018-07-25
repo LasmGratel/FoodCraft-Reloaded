@@ -20,11 +20,25 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.common.container.slot;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class SlotFluidTankInput extends SlotItemHandler {
+import javax.annotation.Nonnull;
+
+public class SlotFluidTankInput extends SlotItemHandler implements ExtendedSlot {
     public SlotFluidTankInput(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
+    }
+
+    @Override
+    public boolean isItemValid(@Nonnull ItemStack stack) {
+        return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+    }
+
+    @Override
+    public boolean isOutputSlot() {
+        return false;
     }
 }

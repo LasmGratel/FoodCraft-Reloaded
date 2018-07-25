@@ -43,7 +43,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.util.Rectangle;
 
-public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements AutomatedGui  {
+public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements AutomatedGui {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloadedMod.MODID, "textures/gui/container/drink_machine_furnace.png");
 
     private InventoryPlayer inventoryPlayer;

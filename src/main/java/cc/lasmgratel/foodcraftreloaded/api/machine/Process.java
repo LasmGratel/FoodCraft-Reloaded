@@ -153,6 +153,14 @@ public class Process<T> {
         setStarted(false);
     }
 
+    public void pause() {
+        setStarted(false);
+    }
+
+    public void unpause() {
+        setStarted(true);
+    }
+
     public static class Builder<T> {
         private Process<T> process;
 

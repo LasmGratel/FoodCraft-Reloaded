@@ -17,7 +17,7 @@ public class MinecraftMaterialWrapper extends ItemBase {
     public MinecraftMaterialWrapper(Material material) {
         this.material = material;
         setRegistryName(material.getName());
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(material.getName()));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(material.getName()));
     }
 
     public Material getMaterial() {

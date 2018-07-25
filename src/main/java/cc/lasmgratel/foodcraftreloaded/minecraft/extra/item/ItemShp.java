@@ -43,7 +43,7 @@ public class ItemShp extends FCRItemFood {
     public ItemShp() {
         super(6, false);
         setRegistryName(FoodCraftReloadedMod.MODID, "shp241");
-        setUnlocalizedName("shp241");
+        setTranslationKey("shp241");
         setCreativeTab(FCRCreativeTabs.EXTRA);
         setMaxStackSize(1);
         addEffect(new PotionEffect(MobEffects.JUMP_BOOST, 10 * 20, 10));

@@ -24,7 +24,6 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.slot.SlotDrink
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -33,11 +32,12 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerDrinkMachine extends Container implements AutomatedGui {
+public class ContainerDrinkMachine extends ContainerFCR implements AutomatedGui {
     private InventoryPlayer inventoryPlayer;
     private IItemHandlerModifiable itemHandler;
 
     public ContainerDrinkMachine(InventoryPlayer playerInventory, TileEntity tileEntity) {
+        super(playerInventory);
         this.inventoryPlayer = playerInventory;
         this.itemHandler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         addSlotToContainer(new SlotItemHandler(itemHandler, 0, 65, 31));
@@ -53,5 +53,20 @@ public class ContainerDrinkMachine extends Container implements AutomatedGui {
     @Override
     public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
         return true;
+    }
+
+    @Override
+    public int getPlayerSlotStart() {
+        return 2;
+    }
+
+    @Override
+    public int getPlayerInvX() {
+        return 8;
+    }
+
+    @Override
+    public int getPlayerInvY() {
+        return 84;
     }
 }

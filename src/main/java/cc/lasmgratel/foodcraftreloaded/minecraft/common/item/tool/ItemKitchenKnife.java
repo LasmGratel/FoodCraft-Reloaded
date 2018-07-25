@@ -39,7 +39,7 @@ public class ItemKitchenKnife extends Item implements CustomModelMasking, OreDic
         setMaxDamage(type.getMaterial().getMaxUses() * 10);
         setMaxStackSize(1);
         setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName("kitchen", "knife", type.getMaterial().name().toLowerCase()));
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName("kitchen", "knife", type.getMaterial().name().toLowerCase()));
+        setTranslationKey(NameBuilder.buildUnlocalizedName("kitchen", "knife", type.getMaterial().name().toLowerCase()));
         setCreativeTab(FCRCreativeTabs.BASE);
     }
 

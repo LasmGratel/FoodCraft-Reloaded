@@ -20,6 +20,7 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.client.interaction.jei;
 
+import cc.lasmgratel.foodcraftreloaded.minecraft.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe.DrinkRecipe;
 import cc.lasmgratel.foodcraftreloaded.minecraft.api.recipe.RecipeManager;
 import cc.lasmgratel.foodcraftreloaded.minecraft.client.gui.GuiContainerDrinkMachine;
@@ -30,6 +31,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 
 import java.util.stream.Collectors;
 
@@ -41,6 +43,9 @@ public class FoodCraftPlugin implements IModPlugin {
         registry.handleRecipes(DrinkRecipeWrapper.class, recipe -> recipe, RecipeUIDs.DRINK);
         registry.addRecipeClickArea(GuiContainerDrinkMachine.class, 87, 27, 27, 25, RecipeUIDs.DRINK);
         registry.addRecipeClickArea(GuiContainerSmeltingDrinkMachine.class, 87, 27, 27, 25, RecipeUIDs.DRINK);
+
+        registry.addRecipeCatalyst(new ItemStack(FCRBlocks.DRINK_MACHINE), RecipeUIDs.DRINK);
+        registry.addRecipeCatalyst(new ItemStack(FCRBlocks.SMELTING_DRINK_MACHINE), RecipeUIDs.DRINK);
     }
 
     @Override

@@ -29,7 +29,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class SlotDrinkMachineOutput extends SlotItemHandler {
+public class SlotDrinkMachineOutput extends SlotItemHandler implements ExtendedSlot {
     /** The player that is using the GUI where this slot resides. */
     private final EntityPlayer player;
     private int removeCount;
@@ -103,5 +103,10 @@ public class SlotDrinkMachineOutput extends SlotItemHandler {
         this.removeCount = 0;
 
         MinecraftForge.EVENT_BUS.post(new DrinkMadeEvent(player, stack));
+    }
+
+    @Override
+    public boolean isOutputSlot() {
+        return true;
     }
 }

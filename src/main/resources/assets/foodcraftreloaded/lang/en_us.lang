@@ -55,6 +55,8 @@ item.fruitYogurt=%s Yogurt
 
 # Blocks
 tile.rice.name=Rice Block
+tile.drinkMachine.name=Drink Machine
+tile.smeltingDrinkMachine.name=Smelting Drink Machine
 
 # Gui
 container.drink_machine=Drink Machine

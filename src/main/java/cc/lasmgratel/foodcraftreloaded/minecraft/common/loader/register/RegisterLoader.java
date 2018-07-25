@@ -63,15 +63,15 @@ public class RegisterLoader {
     }
 
     public void detectAndRegisterLiqueur(RegistryEvent.Register<Item> event) {
-        event.getRegistry().getKeys().stream().filter(s -> s.getResourcePath().contains("liqueur")).map(ForgeRegistries.ITEMS::getValue).collect(Collectors.toList()).forEach(liqueur -> {
+        event.getRegistry().getKeys().stream().filter(s -> s.getPath().contains("liqueur")).map(ForgeRegistries.ITEMS::getValue).collect(Collectors.toList()).forEach(liqueur -> {
             for (LiqueurType liqueurType : LiqueurTypes.values()) {
                 if (liqueurType == LiqueurTypes.NORMAL)
                     continue;
                 ItemGeneratedLiqueur typedLiqueur = new ItemGeneratedLiqueur(MathHelper.floor(liqueurType.getHealModifier() * ((ItemFood) liqueur).getHealAmount(new ItemStack(liqueur))));
                 typedLiqueur.setLiqueurType(liqueurType);
                 typedLiqueur.setItemStackDisplayNameCallback(liqueur::getItemStackDisplayName);
-                typedLiqueur.setRegistryName(liqueur.getRegistryName().getResourceDomain(), liqueurType.getUnlocalizedName() + "_" + liqueur.getRegistryName().getResourcePath());
-                typedLiqueur.setUnlocalizedName(liqueur.getUnlocalizedName());
+                typedLiqueur.setRegistryName(liqueur.getRegistryName().getNamespace(), liqueurType.getUnlocalizedName() + "_" + liqueur.getRegistryName().getPath());
+                typedLiqueur.setTranslationKey(liqueur.getTranslationKey());
                 event.getRegistry().register(typedLiqueur);
                 OreDictionary.registerOre("listAll" + StringUtils.capitalize(liqueurType.getUnlocalizedName()) + "liqueur", typedLiqueur);
                 OreDictionary.registerOre("listAllliqueur", typedLiqueur);

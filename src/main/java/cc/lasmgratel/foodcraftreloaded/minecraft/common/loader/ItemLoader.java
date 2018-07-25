@@ -49,7 +49,7 @@ public class ItemLoader {
                     continue;
 
                 Item item = (Item) field.get(null);
-                RegisterManager.getInstance().putRegister(item.setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(annoItem.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(annoItem.value())));
+                RegisterManager.getInstance().putRegister(item.setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(annoItem.value())).setTranslationKey(NameBuilder.buildUnlocalizedName(annoItem.value())));
             } catch (Throwable e) {
                 FoodCraftReloaded.getLogger().warn("Un-able to register item " + field.toGenericString(), e);
             }

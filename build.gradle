@@ -27,6 +27,10 @@ group= mod_group // http://maven.apache.org/guides/mini/guide-naming-conventions
 archivesBaseName = mod_id
 
 repositories {
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
     jcenter()
 	maven {
 		// location of the maven that hosts JEI files
@@ -48,6 +52,7 @@ minecraft {
     replace "@version@", mod_version
 
     mappings = mcp_mapping_version
+    useDepAts = true
 }
 
 dependencies {

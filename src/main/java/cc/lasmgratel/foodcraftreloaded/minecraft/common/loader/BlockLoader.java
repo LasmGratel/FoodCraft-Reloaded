@@ -23,6 +23,7 @@ package cc.lasmgratel.foodcraftreloaded.minecraft.common.loader;
 import cc.lasmgratel.foodcraftreloaded.common.FoodCraftReloaded;
 import cc.lasmgratel.foodcraftreloaded.minecraft.api.init.FCRBlocks;
 import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.masking.CustomModelMasking;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity.TileEntityDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity.TileEntityPressureCooker;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity.TileEntitySmeltingDrinkMachine;
@@ -54,13 +55,13 @@ public class BlockLoader {
 
             try {
                 Block block = (Block) field.get(null);
-                RegisterManager.getInstance().putRegister(block.setRegistryName(NameBuilder.buildRegistryName(anno.value())).setUnlocalizedName(NameBuilder.buildUnlocalizedName(anno.value())));
+                RegisterManager.getInstance().putRegister(block.setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(anno.value())).setTranslationKey(NameBuilder.buildUnlocalizedName(anno.value())));
 
                 // Register item block.
                 Class<? extends ItemBlock> itemClass = anno.itemClass();
                 Constructor<? extends ItemBlock> con = itemClass.getConstructor(Block.class);
                 con.setAccessible(true);
-                RegisterManager.getInstance().putRegister(con.newInstance(block).setRegistryName(block.getRegistryName()).setUnlocalizedName(block.getUnlocalizedName()));
+                RegisterManager.getInstance().putRegister(con.newInstance(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey()));
 
                 Arrays.asList(anno.oreDict()).forEach(s -> OreDictionary.registerOre(s, block));
             } catch (Exception e) {

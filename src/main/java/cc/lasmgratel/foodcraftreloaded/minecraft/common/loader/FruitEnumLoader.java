@@ -51,7 +51,7 @@ public class FruitEnumLoader extends IterableLoader<FruitType> {
     @Load
     public void loadFruits() {
         register();
-        getInstanceMap(BlockFruitSapling.class).values().forEach(sapling -> ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setUnlocalizedName(NameBuilder.buildUnlocalizedName(sapling.getType().toString(), "sapling")).setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(sapling.getType().toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE)));
+        getInstanceMap(BlockFruitSapling.class).values().forEach(sapling -> ForgeRegistries.ITEMS.register(new ItemBlock(sapling).setTranslationKey(NameBuilder.buildUnlocalizedName(sapling.getType().toString(), "sapling")).setRegistryName(FoodCraftReloadedMod.MODID, NameBuilder.buildRegistryName(sapling.getType().toString(), "sapling")).setCreativeTab(FCRCreativeTabs.BASE)));
     }
 
     @Load(side = Side.CLIENT)

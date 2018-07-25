@@ -88,16 +88,15 @@ public abstract class TileEntityEnergizedMachine<T extends TileEntityEnergizedMa
     @Override
     @OverridingMethodsMustInvokeSuper
     public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
         CapabilityEnergy.ENERGY.readNBT(energyStorage, null, compound.getTag("energyStorage"));
+        super.readFromNBT(compound);
     }
 
     @Nonnull
     @Override
     @OverridingMethodsMustInvokeSuper
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
         compound.setTag("energyStorage", CapabilityEnergy.ENERGY.writeNBT(energyStorage, null));
-        return compound;
+        return super.writeToNBT(compound);
     }
 }

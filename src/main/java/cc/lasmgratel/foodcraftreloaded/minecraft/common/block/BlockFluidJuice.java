@@ -38,7 +38,7 @@ public class BlockFluidJuice extends BlockFluidClassic implements FruitTyped {
     public BlockFluidJuice(FruitType fruitType) {
         super(FluidRegistry.getFluid(NameBuilder.buildRegistryName(fruitType.toString(), "juice")), Material.WATER);
         this.fruitType = fruitType;
-        setUnlocalizedName(NameBuilder.buildUnlocalizedName(fruitType.toString(), "juice"));
+        setTranslationKey(NameBuilder.buildUnlocalizedName(fruitType.toString(), "juice"));
         setRegistryName(NameBuilder.buildRegistryName(fruitType.toString(), "juice"));
     }
 

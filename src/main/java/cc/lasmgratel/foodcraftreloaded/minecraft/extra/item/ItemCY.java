@@ -48,7 +48,7 @@ public class ItemCY extends FCRItemFood implements CustomModelMasking {
     public ItemCY() {
         super(4, false);
         setRegistryName(FoodCraftReloadedMod.MODID, "cyl18");
-        setUnlocalizedName("cyl18");
+        setTranslationKey("cyl18");
         setCreativeTab(FCRCreativeTabs.EXTRA);
         setMaxStackSize(1);
     }
