@@ -10,17 +10,17 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.fruit.ItemFrui
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.vegetable.ItemVegetableJuice;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@Mod.EventBusSubscriber(modid = FoodCraftReloadedMod.MODID)
 public class CapabilityLoader {
     public CapabilityLoader() {
 //        CapabilityLiqueur.register();
         CapabilityManager.INSTANCE.register(MachineInfo.class, new CapabilityMachine.BaseStorage(), CapabilityMachine.BaseInfo::new);
         CapabilityManager.INSTANCE.register(SmeltingMachineInfo.class, new CapabilityMachine.SmeltingStorage(), CapabilityMachine.SmeltingInfo::new);
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent

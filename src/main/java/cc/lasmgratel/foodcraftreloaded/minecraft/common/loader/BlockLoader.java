@@ -35,6 +35,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -72,9 +74,13 @@ public class BlockLoader {
 
     @Load
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityDrinkMachine.class, "drink_machine");
-        GameRegistry.registerTileEntity(TileEntityPressureCooker.class, "pressure_cooker");
-        GameRegistry.registerTileEntity(TileEntitySmeltingDrinkMachine.class, "smelting_drink_machine");
+        registerTileEntity(TileEntityDrinkMachine.class, "drink_machine");
+        registerTileEntity(TileEntityPressureCooker.class, "pressure_cooker");
+        registerTileEntity(TileEntitySmeltingDrinkMachine.class, "smelting_drink_machine");
+    }
+
+    private void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) {
+        GameRegistry.registerTileEntity(tileEntityClass, new ResourceLocation(FoodCraftReloadedMod.MODID, name));
     }
 
     @Load(side = Side.CLIENT)

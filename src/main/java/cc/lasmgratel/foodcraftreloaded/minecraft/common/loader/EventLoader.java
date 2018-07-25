@@ -26,21 +26,16 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.fruit.ItemFrui
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.item.food.vegetable.ItemVegetableCake;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.recipe.CakeRecipe;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.recipe.KitchenKnifeRecipe;
-import cc.lasmgratel.foodcraftreloaded.minecraft.extra.ExtraEventLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
+@Mod.EventBusSubscriber(modid = FoodCraftReloadedMod.MODID)
 public class EventLoader {
-    public EventLoader() {
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ExtraEventLoader());
-    }
-
     @SubscribeEvent
     public void onNeighborNotify(BlockEvent.NeighborNotifyEvent event) {
 //        if (event.getWorld().getBlockState(event.getPos().up()).getBlock() == FCRBlocks.RICE_PLANT &&

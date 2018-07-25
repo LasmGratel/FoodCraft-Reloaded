@@ -24,6 +24,7 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.loader.*;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.loader.register.RegisterLoader;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.loader.LoaderManager;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.worldgen.FruitTreeGenerator;
+import cc.lasmgratel.foodcraftreloaded.minecraft.extra.ExtraEventLoader;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.event.*;
@@ -38,14 +39,13 @@ public class CommonProxy {
     public CommonProxy() {
         Arrays.asList(
             RegisterLoader.class,
-            CapabilityLoader.class,
+            EventLoader.class, CapabilityLoader.class, ExtraEventLoader.class,
             BlockLoader.class, ItemLoader.class,
             FoodLoader.class,
             FruitEnumLoader.class, VegetableEnumLoader.class,
             LiqueurLoader.class,
             KitchenKnifeLoader.class, PropertiedFoodLoader.class,
             AdvancementLoader.class, RecipeLoader.class,
-            EventLoader.class,
             PotionLoader.class
         ).forEach(loaderManager::addLoader);
     }
