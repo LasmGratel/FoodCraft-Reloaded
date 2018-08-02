@@ -61,10 +61,10 @@ public class TileEntityDrinkMachine extends TileEntityEnergizedMachine<TileEntit
     public void startProgress() {
         DrinkRecipe recipe = RecipeManager.getInstance().getRecipeNullable(DrinkRecipe.class, new RecipeInput(itemStackHandler.getStackInSlot(0).getItem()));
         if (recipe != null) {
-            FoodCraftReloaded.getLogger().debug("Drink machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
+            FoodCraftReloaded.getLogger().debug("Smelting drink machine: Found recipe " + recipe.getOutput().<FluidStack>first().getFluid().getName());
             fluidOutput = recipe.getOutput().first();
             output = recipe.getOutput().second();
-            itemStackHandler.getStackInSlot(0).splitStack(1);
+            itemStackHandler.getStackInSlot(0).setCount(itemStackHandler.getStackInSlot(0).getCount() - 1);
         }
     }
 
@@ -74,6 +74,8 @@ public class TileEntityDrinkMachine extends TileEntityEnergizedMachine<TileEntit
         tank.fill(fluidOutput, true);
         output = ItemStack.EMPTY;
         fluidOutput = null;
+        resetProgress();
+        FoodCraftReloaded.getLogger().info("Progressed!");
     }
 
     @Override

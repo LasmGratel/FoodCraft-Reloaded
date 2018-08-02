@@ -20,26 +20,29 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.client.gui;
 
+import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.FluidStackRenderer;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity.TileEntityProgressiveMachine;
+import cc.lasmgratel.foodcraftreloaded.minecraft.common.block.tileentity.TileEntitySmeltingDrinkMachine;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.ContainerDrinkMachine;
-import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.GuiUtils;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.lwjgl.util.Rectangle;
 
-import java.util.Optional;
-
-public class GuiContainerDrinkMachine extends GuiContainer implements AutomatedGui {
+public class GuiContainerDrinkMachine extends GuiContainerFCR implements AutomatedGui {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloadedMod.MODID, "textures/gui/container/drink_machine.png");
     protected Rectangle fluidBar = new Rectangle(26, 11, 16, 58);
 
@@ -48,31 +51,31 @@ public class GuiContainerDrinkMachine extends GuiContainer implements AutomatedG
      */
     private final InventoryPlayer playerInventory;
     private final IItemHandlerModifiable handler;
+    private final TileEntity tileEntity;
     private final IFluidTank fluidTank;
+    private final Rectangle rectangle = new Rectangle(26, 11, 16, 58);
+    private final FluidStackRenderer renderer;
 
-    public GuiContainerDrinkMachine(InventoryPlayer playerInventory, TileEntity entity) {
-        super(new ContainerDrinkMachine(playerInventory, entity));
+    public GuiContainerDrinkMachine(InventoryPlayer playerInventory, TileEntity tileEntity) {
+        super(new ContainerDrinkMachine(playerInventory, tileEntity));
+        this.tileEntity = tileEntity;
         this.playerInventory = playerInventory;
-        this.handler = (IItemHandlerModifiable) entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        this.fluidTank = (IFluidTank) entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+        this.handler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        this.fluidTank = (IFluidTank) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        this.renderer = new FluidStackRenderer(fluidTank.getCapacity(), true, 16, 58);
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = I18n.format("container.drink_machine");
-        Optional.ofNullable(fluidTank.getFluid()).ifPresent(fluidStack -> {
-            int fluidHeight = MathHelper.ceil(((float) fluidTank.getFluidAmount() / (float) fluidTank.getCapacity()) * (float) fluidBar.getHeight());
-            GuiUtils.renderTiledFluid(fluidBar.getX() + guiLeft, fluidBar.getY() + guiTop + (fluidBar.getHeight() - fluidHeight), fluidBar.getWidth(), fluidHeight, this.zLevel, fluidStack);
-        });
         this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
+
+        renderer.render(Minecraft.getMinecraft(), 26, 11, fluidTank.getFluid());
+        if (rectangle.contains(mouseX - guiLeft, mouseY - guiTop) && fluidTank.getFluidAmount() != 0) {
+            ScaledResolution scaledresolution = new ScaledResolution(mc);
+            GuiUtils.drawHoveringText(ItemStack.EMPTY, renderer.getTooltip(mc, fluidTank.getFluid(), ITooltipFlag.TooltipFlags.NORMAL), mouseX - guiLeft, mouseY - guiTop, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight(), -1, fontRenderer);
+        }
     }
 
     @Override
@@ -82,5 +85,14 @@ public class GuiContainerDrinkMachine extends GuiContainer implements AutomatedG
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
+
+        int l = this.getCookProgressScaled(24);
+        this.drawTexturedModalRect(i + 88, j + 31, 176, 0, l + 1, 16);
+    }
+
+    private int getCookProgressScaled(int pixels) {
+        int i = TileEntityProgressiveMachine.getProgress(tileEntity);
+        int j = TileEntitySmeltingDrinkMachine.BURN_TIME;
+        return i != 0 ? i * pixels / j : 0;
     }
 }

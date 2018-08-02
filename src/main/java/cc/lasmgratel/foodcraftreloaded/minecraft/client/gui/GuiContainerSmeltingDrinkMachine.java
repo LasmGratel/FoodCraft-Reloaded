@@ -29,7 +29,6 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.ContainerSmelt
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,7 +42,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.util.Rectangle;
 
-public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements AutomatedGui {
+public class GuiContainerSmeltingDrinkMachine extends GuiContainerFCR implements AutomatedGui {
     private static final ResourceLocation DRINK_MACHINE_TEXTURE = new ResourceLocation(FoodCraftReloadedMod.MODID, "textures/gui/container/drink_machine_furnace.png");
 
     private InventoryPlayer inventoryPlayer;
@@ -64,13 +63,6 @@ public class GuiContainerSmeltingDrinkMachine extends GuiContainer implements Au
         rectangle = new Rectangle(22, 14, 16, 58);
 
         renderer = new FluidStackRenderer(fluidTank.getCapacity(), true, 16, 58);
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override

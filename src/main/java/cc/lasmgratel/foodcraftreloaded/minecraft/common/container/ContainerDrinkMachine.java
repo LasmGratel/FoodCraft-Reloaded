@@ -24,7 +24,6 @@ import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.slot.SlotDrink
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -42,12 +41,6 @@ public class ContainerDrinkMachine extends ContainerFCR implements AutomatedGui 
         this.itemHandler = (IItemHandlerModifiable) tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         addSlotToContainer(new SlotItemHandler(itemHandler, 0, 65, 31));
         addSlotToContainer(new SlotDrinkMachineOutput(playerInventory.player, itemHandler, 1, 121 + 4, 28 + 4));
-        for (int i = 0; i < 3; ++i)
-            for (int j = 0; j < 9; ++j)
-                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-
-        for (int k = 0; k < 9; ++k)
-            this.addSlotToContainer(new Slot(playerInventory, k, 8 + k * 18, 142));
     }
 
     @Override

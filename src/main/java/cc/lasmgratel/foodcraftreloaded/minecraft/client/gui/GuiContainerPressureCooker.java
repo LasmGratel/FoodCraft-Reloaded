@@ -20,11 +20,10 @@
 
 package cc.lasmgratel.foodcraftreloaded.minecraft.client.gui;
 
+import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.GuiUtils;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.FoodCraftReloadedMod;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.container.ContainerPressureCooker;
-import cc.lasmgratel.foodcraftreloaded.minecraft.client.util.GuiUtils;
 import cc.lasmgratel.foodcraftreloaded.minecraft.common.util.AutomatedGui;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -39,7 +38,7 @@ import org.lwjgl.util.Rectangle;
 
 import java.util.Optional;
 
-public class GuiContainerPressureCooker extends GuiContainer implements AutomatedGui  {
+public class GuiContainerPressureCooker extends GuiContainerFCR implements AutomatedGui  {
     private static final ResourceLocation PRESSURE_COOKER_TEXTURE = new ResourceLocation(FoodCraftReloadedMod.MODID, "textures/gui/container/pressure_cooker.png");
     protected Rectangle fluidBar = new Rectangle(11, 11, 16, 58);
 
@@ -55,13 +54,6 @@ public class GuiContainerPressureCooker extends GuiContainer implements Automate
         this.playerInventory = playerInventory;
         this.handler = (IItemHandlerModifiable) entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         this.fluidTank = (IFluidTank) entity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
